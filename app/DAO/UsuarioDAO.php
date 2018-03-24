@@ -8,10 +8,10 @@
 
 namespace App\DAO;
 
+use App\Entities\Usuario;
 use Doctrine\ORM\NoResultException;
-use LaravelDoctrine\ORM\Facades\EntityManager;
 
-/*
+
 class UsuarioDAO extends GenericDAO {
 
     public function __construct() {
@@ -39,29 +39,6 @@ class UsuarioDAO extends GenericDAO {
 
 }
 
-*/
 
 
 
-class UsuarioDAO  {
-
- 
-    
-    public function autenticarUsuario($login, $senha) {
-        try {
-            $query = EntityManager::createQuery('SELECT u FROM App\Entities\Usuario u WHERE u.login = ?1 AND u.senha=?2');
-            $query->setParameter(1, $login);
-            $query->setParameter(2, $senha);
-            $usuario = $query->getSingleResult();
-            
-            return $usuario;
-        } catch (NoResultException $ex) {
-             return null;
-        }
-
-
-       
-       
-    }
-
-}
