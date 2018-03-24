@@ -480,7 +480,7 @@ btnAddProduto.addEventListener("click",function (event){
                                         "<td>" + data.descricao + "</td>" +
                                         "<td>"+ tipo + "</td>" +
                                         "<td>" + quantidade + "</td>" +
-                                        "<td><button type='button' class='btn btn-cancel fa fa-edit'></button></td>" +
+                                        "<td><button type='button' class='btn btn-save fa fa-edit'></button></td>" +
                                         "<td><button type='button' class='btn btn-cancel fa fa-remove' onclick='removeComponente(" + components + ")'></button></td>" +
                                       "</tr>");
                               
@@ -536,7 +536,7 @@ btnAddOperacao.addEventListener("click",function (event){
                                         "<td>"+ tempoSetup + "</td>" +
                                         "<td>" + tempoProducao + "</td>" +
                                         "<td>" + tempoFinalizacao + "</td>" +
-                                        "<td><button type='button' class='btn btn-cancel fa fa-edit'></button></td>" +
+                                        "<td><button type='button' class='btn btn-save fa fa-edit'></button></td>" +
                                         "<td><button type='button' class='btn btn-cancel fa fa-remove' onclick='removeOperacao(" + operacoes + ")'></button></td>" +
                                       "</tr>");
                               

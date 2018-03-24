@@ -12,7 +12,35 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-        <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"><div class="dataTables_length" id="example1_length"><label>Show <select name="example1_length" aria-controls="example1" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-6"><div id="example1_filter" class="dataTables_filter"><label>Pesquisar:<input class="form-control input-sm" placeholder="" aria-controls="example1" type="search"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+        <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+            <div class="row">
+                <div class="col-sm-6">
+                        <label>Pesquisar por: </label>
+                        <form method="post" action="{{ action('MaterialController@pesquisarPorCriterio') }}">
+                          <select class="form-control input-sm" name="criterio">
+                            <option value="id">ID</option>
+                            <option value="descricao">Descrição</option>
+                            <option value="codigoInterno">Código Interno</option>
+                        </select>
+                            <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                             <input class="form-control input-sm" placeholder=""  type="search" name="valor">
+                             <button class="btn btn-save fa fa-search" type="submit"></button>
+                        </form>   
+                </div>
+                <div class="col-sm-6">
+                    <div class="pull-right">
+                        <label>Exibir </label>
+                        <select name="example1_length" aria-controls="example1" class="form-control input-sm">
+                                <option value="10">10</option><option value="25">25</option>
+                                <option value="50">50</option><option value="100">100</option>
+                        </select> 
+                        <label>Registros</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                         <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="data-table-simple" rowspan="1" colspan="1" style="width: 50px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>

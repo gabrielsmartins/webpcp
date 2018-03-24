@@ -114,6 +114,13 @@ class MaterialController extends Controller {
         return view('material.lista')->with('materiais', $materiais);
     }
     
+    public function pesquisarPorCriterio(Request $request){
+        $criterio = $request->input('criterio');
+        $valor = $request->input('valor');
+        $materiais = $this->materialDAO->pesquisarPorCriterio($criterio, $valor);
+        return view('material.lista')->with('materiais', $materiais);
+    }
+    
     
 
 }

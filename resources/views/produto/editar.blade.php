@@ -48,7 +48,8 @@
 
 
 
-
+                        <input id="id" class="form-control" type="hidden"
+                               name="id" value="{{$produto->getId()}}">
 
                         <div class="form-group row">
                             <label for="descricao" class="col-sm-1 control-label">Código Interno:</label>
@@ -80,19 +81,19 @@
                             </div>
 
                             <div class="col-sm-6">
-                  <label for="ATIVO" class="radio-inline">
-                      <input name="situacao" type="radio" id="ATIVO" value="ATIVO" @if ($produto->getSituacao() == 'ATIVO') checked @endif> Ativo
-                  </label>
-                  		
-                  		<label for="INATIVO" class="radio-inline">
-                 			 <input name="situacao" type="radio" id="INATIVO" VALUE="INATIVO" @if ($produto->getSituacao() == 'INATIVO') checked @endif> Inativo
-                  		  </label>
-                       
-                       <label for="FORA_DE_LINHA" class="radio-inline">
-							<input name="situacao" type="radio" id="FORA_DE_LINHA" VALUE="FORA_DE_LINHA" @if ($produto->getSituacao() == 'FORA_DE_LINHA') checked @endif> Fora de Linha
-					  </label>
+                                <label for="ATIVO" class="radio-inline">
+                                    <input name="situacao" type="radio" id="ATIVO" value="ATIVO" @if ($produto->getSituacao() == 'ATIVO') checked @endif> Ativo
+                                </label>
 
-                </div>
+                                <label for="INATIVO" class="radio-inline">
+                                    <input name="situacao" type="radio" id="INATIVO" VALUE="INATIVO" @if ($produto->getSituacao() == 'INATIVO') checked @endif> Inativo
+                                </label>
+
+                                <label for="FORA_DE_LINHA" class="radio-inline">
+                                    <input name="situacao" type="radio" id="FORA_DE_LINHA" VALUE="FORA_DE_LINHA" @if ($produto->getSituacao() == 'FORA_DE_LINHA') checked @endif> Fora de Linha
+                                </label>
+
+                            </div>
                         </div>
 
 
@@ -110,21 +111,21 @@
                                 de Medida:</label>
 
                             <div class="col-sm-3">
-                   		<select name="unidadeMedida" class="form-control">
-                                    
-                                    
-									<option value="" disabled selected>Escolha uma unidade</option>
+                                <select name="unidadeMedida" class="form-control">
 
-                        @foreach($unidades as $unidade)
-                              <option value="{{$unidade->getId()}}"
-                                      @if ($produto->getUnidadeMedida()->getId() == $unidade->getId()) 
-                                        selected 
-                                      @endif
-                                      
-                                      >{{$unidade->getDescricao()}} - {{$unidade->getSigla()}}</option>
-                        @endforeach
-									</select>
-                   </div>
+
+                                    <option value="" disabled selected>Escolha uma unidade</option>
+
+                                    @foreach($unidades as $unidade)
+                                    <option value="{{$unidade->getId()}}"
+                                            @if ($produto->getUnidadeMedida()->getId() == $unidade->getId()) 
+                                            selected 
+                                            @endif
+
+                                            >{{$unidade->getDescricao()}} - {{$unidade->getSigla()}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
 
                             <label for="peso" class="col-sm-1 control-label">Peso
@@ -298,21 +299,29 @@
                                 </thead>
                                 <tbody id="tabela_materiais">
 
-                                    
+
                                     @foreach($produto->getItens() as $item)
-                                    
+
+
+                                    @if($item->getComponente() instanceof App\Entities\Material)
+                                        @php
+                                        $tipo = 'material'
+                                        @endphp
+                                    @endif
+
+
                                     <tr id='comp_'>
-                                       <input type='hidden' name='item[]' value='" + {{$item->getComponente()->getId()}}";"{{$item->getQuantidade()}}";" + tipo + "'/>
-                                       <td> </td>
-                                        <td>{{$item->getComponente()->getId()}}</td>
-                                        <td>{{$item->getComponente()->getDescricao()}}</td>
-                                        <td></td>
-                                        <td>{{$item->getQuantidade()}} </td>
-                                        <td><button type='button' class='btn btn-cancel fa fa-edit'></button></td>
-                                        <td><button type='button' class='btn btn-cancel fa fa-remove' onclick='removeComponente(" + components + ")'></button></td>
-                                      </tr>
-                                    @endforeach
-                                    
+                                <input type='hidden' name='item[]' value="{{$item->getComponente()->getId()}};{{$item->getQuantidade()}};{{$tipo}}"/>
+                                <td> </td>
+                                <td>{{$item->getComponente()->getId()}}</td>
+                                <td>{{$item->getComponente()->getDescricao()}}</td>
+                                <td></td>
+                                <td>{{$item->getQuantidade()}} </td>
+                                <td><button type='button' class='btn btn-save fa fa-edit'></button></td>
+                                <td><button type='button' class='btn btn-cancel fa fa-remove' onclick='removeComponente(" + components + ")'></button></td>
+                                </tr>
+                                @endforeach
+
 
                                 </tbody>
 
@@ -379,6 +388,21 @@
                                 </thead>
                                 <tbody id="tabela_operacoes">
 
+                                    @foreach($produto->getRoteiros() as $roteiro)
+                                    <tr id="{{'oper_'. $roteiro->getSequencia()}}">
+                                <input type='hidden' name='operacao[]' value="{{$roteiro->getOperacao()->getId()}};{{$roteiro->getTempoSetup()}};{{$roteiro->getTempoProducao()}};{{$roteiro->getTempoFinalizacao()}}"/>
+                                <td> {{$roteiro->getSequencia()}} </td>
+                                <td> {{$roteiro->getOperacao()->getId()}} </td>
+                                <td> {{$roteiro->getOperacao()->getDescricao()}} </td>
+                                <td> {{$roteiro->getOperacao()->getSetor()->getDescricao()}} </td>
+                                <td>{{$roteiro->getTempoSetup()}} </td>
+                                <td> {{$roteiro->getTempoProducao()}} </td>
+                                <td> {{$roteiro->getTempoFinalizacao()}} </td>
+                                <td><button type='button' class='btn btn-save fa fa-edit'></button></td>
+                                <td><button type='button' class='btn btn-cancel fa fa-remove' onclick='removeOperacao(" {{$roteiro->getSequencia()}}")'></button></td>
+                                </tr>
+                                @endforeach
+
                                 </tbody>
 
                             </table>
@@ -395,10 +419,10 @@
         </div>
 
         <div class="box-footer">
-                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button type="reset" class="btn btn-cancel pull-right fa fa-ban"> Cancelar</button>
-                <button type="submit" class="btn btn-save pull-right fa fa-save"> Salvar</button>
-              </div>
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <button type="reset" class="btn btn-cancel pull-right fa fa-ban"> Cancelar</button>
+            <button type="submit" class="btn btn-save pull-right fa fa-save"> Salvar</button>
+        </div>
     </form>
 </div>
 <!-- /.box-footer -->
@@ -423,92 +447,78 @@
 @section('js')
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#busca_operacao").select2({
-            placeholder: "Selecione uma Operação",
+    $("#busca_operacao").select2({
+    placeholder: "Selecione uma Operação",
             minimumInputLength: 1
-        });
-
-
-        $("#busca_produto").select2({
-            placeholder: "Selecione um Produto",
-            minimumInputLength: 1
-        });
-
-
-        $("#busca_material").select2({
-            placeholder: "Selecione um Material",
-            minimumInputLength: 1
-        });
     });
-</script>
+    $("#busca_produto").select2({
+    placeholder: "Selecione um Produto",
+            minimumInputLength: 1
+    });
+    $("#busca_material").select2({
+    placeholder: "Selecione um Material",
+            minimumInputLength: 1
+    });
+    });</script>
 
 <script type="text/javascript">
-var components = 0;
-var btnAddMaterial = document.querySelector("#btnAddMaterial");
-var btAddProduto = document.querySelector("#btnAddProduto");
-var CSRF_TOKEN = "{{ csrf_token() }}";
-
-
-btnAddMaterial.addEventListener("click",function (event){
+    var components = 0;
+    var btnAddMaterial = document.querySelector("#btnAddMaterial");
+    var btAddProduto = document.querySelector("#btnAddProduto");
+    var CSRF_TOKEN = "{{ csrf_token() }}";
+    btnAddMaterial.addEventListener("click", function (event){
     event.preventDefault();
-   
     $.ajax({
     url: "{{url('produto/search_comp')}}",
-    type: 'POST',
-    data: {_token: CSRF_TOKEN,
-           tipo: 'material',
-           id: $("#busca_material").val()},
-    dataType: 'JSON',
-    success: function (data) {
-         var quantidade = $("#quantidadeMaterialAdd").val();
-        adicionaComponente(data,quantidade,'material');
-    },
-     error: function(e) {
-    console.log(e.responseText);
-    }
-  });     
-});
-
-
-
-btnAddProduto.addEventListener("click",function (event){
+            type: 'POST',
+            data: {_token: CSRF_TOKEN,
+                    tipo: 'material',
+                    id: $("#busca_material").val()},
+            dataType: 'JSON',
+            success: function (data) {
+            var quantidade = $("#quantidadeMaterialAdd").val();
+            adicionaComponente(data, quantidade, 'material');
+            },
+            error: function(e) {
+            console.log(e.responseText);
+            }
+    });
+    });
+    btnAddProduto.addEventListener("click", function (event){
     event.preventDefault();
-   
     $.ajax({
     url: "{{url('produto/search_comp')}}",
-    type: 'POST',
-    data: {_token: CSRF_TOKEN,
-           tipo: 'produto',
-           id: $("#busca_produto").val()},
-    dataType: 'JSON',
-    success: function (data) {
-         var quantidade = $("#quantidadeProdutoAdd").val();
-        adicionaComponente(data,quantidade,'produto');
-    },
-     error: function(e) {
-    console.log(e.responseText);
-    }
-  });     
-});
-
- function adicionaComponente(data,quantidade,tipo) {
-        components++;
-        $('#tabela_materiais').append("<tr id='comp_"+ components +"'>" +
-                                       "<input type='hidden' name='item[]' value='" + data.id +";"+ quantidade + ";" + tipo + "'/>"+
-                                       "<td>" + components + "</td>" +
-                                        "<td>" + data.id + "</td>" +
-                                        "<td>" + data.descricao + "</td>" +
-                                        "<td>"+ tipo + "</td>" +
-                                        "<td>" + quantidade + "</td>" +
-                                        "<td><button type='button' class='btn btn-cancel fa fa-edit'></button></td>" +
-                                        "<td><button type='button' class='btn btn-cancel fa fa-remove' onclick='removeComponente(" + components + ")'></button></td>" +
-                                      "</tr>");
-                              
+            type: 'POST',
+            data: {_token: CSRF_TOKEN,
+                    tipo: 'produto',
+                    id: $("#busca_produto").val()},
+            dataType: 'JSON',
+            success: function (data) {
+            var quantidade = $("#quantidadeProdutoAdd").val();
+            adicionaComponente(data, quantidade, 'produto');
+            },
+            error: function(e) {
+            console.log(e.responseText);
+            }
+    });
+    });
+    function adicionaComponente(data, quantidade, tipo) {
+    components++;
+    $('#tabela_materiais').append("<tr id='comp_" + components + "'>" +
+            "<input type='hidden' name='item[]' value='" + data.id + ";" + quantidade + ";" + tipo + "'/>" +
+            "<td>" + components + "</td>" +
+            "<td>" + data.id + "</td>" +
+            "<td>" + data.descricao + "</td>" +
+            "<td>" + tipo + "</td>" +
+            "<td>" + quantidade + "</td>" +
+            "<td><button type='button' class='btn btn-cancel fa fa-edit'></button></td>" +
+            "<td><button type='button' class='btn btn-cancel fa fa-remove' onclick='removeComponente(" + components + ")'></button></td>" +
+            "</tr>");
     }
 
     function removeComponente(id) {
-     document.getElementById('comp_' + id ).remove();
-     components--;
+    document.getElementById('comp_' + id).remove();
+    components--;
     }
 </script>
 
@@ -517,54 +527,47 @@ btnAddProduto.addEventListener("click",function (event){
 
 
 <script type="text/javascript">
-var operacoes = 0;
-var btnAddOperacao = document.querySelector("#btnAddOperacao");
-var CSRF_TOKEN = "{{ csrf_token() }}";
-
-
-btnAddOperacao.addEventListener("click",function (event){
+    var operacoes = 0;
+    var btnAddOperacao = document.querySelector("#btnAddOperacao");
+    var CSRF_TOKEN = "{{ csrf_token() }}";
+    btnAddOperacao.addEventListener("click", function (event){
     event.preventDefault();
-   
     $.ajax({
     url: "{{url('produto/search_oper')}}",
-    type: 'POST',
-    data: {_token: CSRF_TOKEN,
-           id: $("#busca_operacao").val()},
-    dataType: 'JSON',
-    success: function (data) {
-        var tempoSetup = $("#tempoSetup").val();
-        var tempoProducao = $("#tempoProducao").val();
-        var tempoFinalizacao = $("#tempoFinalizacao").val();
-        adicionaOperacao(data,tempoSetup,tempoProducao,tempoFinalizacao);
-    },
-     error: function(e) {
-    console.log(e.responseText);
-    }
-  });     
-});
-
-
-
- function adicionaOperacao(data,tempoSetup,tempoProducao,tempoFinalizacao) {
-        operacoes++;
-        $('#tabela_operacoes').append("<tr id='oper_"+ operacoes +"'>" +
-                                        "<input type='hidden' name='operacao[]' value='" + data.id +";"+ tempoSetup + ";" + tempoProducao + ";"+ tempoFinalizacao + "'/>" +
-                                        "<td>" + operacoes + "</td>" +
-                                        "<td>" + data.id + "</td>" +
-                                        "<td>" + data.descricao + "</td>" +
-                                        "<td>"+ data.setor + "</td>" +
-                                        "<td>"+ tempoSetup + "</td>" +
-                                        "<td>" + tempoProducao + "</td>" +
-                                        "<td>" + tempoFinalizacao + "</td>" +
-                                        "<td><button type='button' class='btn btn-cancel fa fa-edit'></button></td>" +
-                                        "<td><button type='button' class='btn btn-cancel fa fa-remove' onclick='removeOperacao(" + operacoes + ")'></button></td>" +
-                                      "</tr>");
-                              
+            type: 'POST',
+            data: {_token: CSRF_TOKEN,
+                    id: $("#busca_operacao").val()},
+            dataType: 'JSON',
+            success: function (data) {
+            var tempoSetup = $("#tempoSetup").val();
+            var tempoProducao = $("#tempoProducao").val();
+            var tempoFinalizacao = $("#tempoFinalizacao").val();
+            adicionaOperacao(data, tempoSetup, tempoProducao, tempoFinalizacao);
+            },
+            error: function(e) {
+            console.log(e.responseText);
+            }
+    });
+    });
+    function adicionaOperacao(data, tempoSetup, tempoProducao, tempoFinalizacao) {
+    operacoes++;
+    $('#tabela_operacoes').append("<tr id='oper_" + operacoes + "'>" +
+            "<input type='hidden' name='operacao[]' value='" + data.id + ";" + tempoSetup + ";" + tempoProducao + ";" + tempoFinalizacao + "'/>" +
+            "<td>" + operacoes + "</td>" +
+            "<td>" + data.id + "</td>" +
+            "<td>" + data.descricao + "</td>" +
+            "<td>" + data.setor + "</td>" +
+            "<td>" + tempoSetup + "</td>" +
+            "<td>" + tempoProducao + "</td>" +
+            "<td>" + tempoFinalizacao + "</td>" +
+            "<td><button type='button' class='btn btn-cancel fa fa-edit'></button></td>" +
+            "<td><button type='button' class='btn btn-cancel fa fa-remove' onclick='removeOperacao(" + operacoes + ")'></button></td>" +
+            "</tr>");
     }
 
     function removeOperacao(id) {
-     document.getElementById('oper_' + id ).remove();
-     operacoes--;
+    document.getElementById('oper_' + id).remove();
+    operacoes--;
     }
 </script>
 @stop

@@ -16,6 +16,7 @@ use App\Entities\ItemEstrutura;
 use App\Entities\Produto;
 use App\Entities\Roteiro;
 use App\Http\Controllers\Controller;
+use Doctrine\Common\Collections\ArrayCollection;
 use Exception;
 use Illuminate\Http\Request;
 use function redirect;
@@ -122,19 +123,31 @@ class ProdutoController extends Controller {
         $largura = $request->input('largura');
         $altura = $request->input('altura');
         
-        $produto = new Produto($descricao, $unidadeMedida, $valorUnitario, $leadTime, $quantidadeEstoque, $quantidadeMinima);
+        $produto = $this->produtoDAO->pesquisar($id);
         
         $produto->setId($id);
+        $produto->setDescricao($descricao);
+        $produto->setUnidadeMedida($unidadeMedida);
         $produto->setCodigoInterno($codigoInterno);
         $produto->setSituacao($situacao);
+        $produto->setValorUnitario($valorUnitario);
         $produto->setPeso($peso);
         $produto->setComprimento($comprimento);
         $produto->setLargura($largura);
         $produto->setAltura($altura);
+        $produto->setLeadTime($leadTime);
+        $produto->setQuantidadeEstoque($quantidadeEstoque);
+        $produto->setQuantidadeMinima($quantidadeMinima);
+        
+        $produto->setItens(new ArrayCollection());
+        $produto->setRoteiros(new ArrayCollection());
+        
         
         
         $componentes = $request->input('item');
         $operacoes = $request->input('operacao');
+        
+   
         
         foreach ($componentes as $comp){
             list($idComp,$quantidade,$tipo) = explode(';',$comp);
@@ -150,7 +163,7 @@ class ProdutoController extends Controller {
         }
         
         
-        $sequencia = 0;
+       $sequencia = 0;
         foreach($operacoes as $oper){
             $sequencia++;
             list($idOper,$tempoSetup,$tempoProducao,$tempoFinalizacao) = explode(';',$oper);

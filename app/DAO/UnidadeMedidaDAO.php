@@ -13,11 +13,16 @@ use Doctrine\ORM\NoResultException;
 
 
 class UnidadeMedidaDAO extends GenericDAO{
+    
+
 
     public function __construct() {
         parent::__construct();
         $this->className = UnidadeMedida::class;        
     }
+    
+    
+
     
     
     public function pesquisarPorCriterio($criterio, $valor) {
@@ -33,7 +38,6 @@ class UnidadeMedidaDAO extends GenericDAO{
         }
     }
 
-
-   
+    
 
 }

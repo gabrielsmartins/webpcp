@@ -19,13 +19,13 @@ class Produto extends Componente {
     
 
     /**
-     * @ORM\OneToMany(targetEntity="ItemEstrutura", mappedBy="produto",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="ItemEstrutura", mappedBy="produto",cascade={"all"})
      */
     private $itens;
     
 
     /**
-     * @ORM\OneToMany(targetEntity="Roteiro", mappedBy="produto",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Roteiro", mappedBy="produto",cascade={"all"})
      */
     private $roteiros;
     
@@ -36,7 +36,7 @@ class Produto extends Componente {
     }
     
        public function adicionarComponente(ItemEstrutura $itemEstrutura) {
-		$this->itens->add($itemEstrutura);
+               $this->itens->add($itemEstrutura);
 	}
 
         public function removerComponente($key) {

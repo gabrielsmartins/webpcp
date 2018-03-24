@@ -57,6 +57,7 @@ Route::post('material/store', 'MaterialController@store');
 Route::post('material/update', 'MaterialController@update');
 Route::get('material/show', 'MaterialController@show');
 Route::get('material/edit/{id}', 'MaterialController@edit');
+Route::post('material/pesquisa', 'MaterialController@pesquisarPorCriterio');
 
 
 Route::get('produto/form', 'ProdutoController@form');
