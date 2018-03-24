@@ -9,6 +9,7 @@
 namespace App\DAO;
 
 use App\Entities\UnidadeMedida;
+use Doctrine\ORM\NoResultException;
 
 
 class UnidadeMedidaDAO extends GenericDAO{
