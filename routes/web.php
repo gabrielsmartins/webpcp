@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('usuario.login');
-});
+
+
+Route::get('/', 'MainController@index');
 
 Route::post('login', 'LoginController@login');
 Route::get('logout', 'LoginController@logout');
