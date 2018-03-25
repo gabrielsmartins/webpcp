@@ -321,15 +321,58 @@
                         </div>
                         <label class="col-sm-1 control-label">Tempo Setup:</label>
                         <div class="col-sm-1">
-                            <input class="form-control" type="time" id="tempoSetup" name="tempoSetup" step="1" id="tempo_setup" pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$">
+
+                            <div class="bootstrap-timepicker">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control timepicker" id="tempoSetup" name="tempoSetup">
+
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
+                                <!-- /.form group -->
+                            </div>
                         </div>
+                        
+                        
+                        
                         <label class="col-sm-1 control-label">Tempo Produção:</label>
                         <div class="col-sm-1">
-                            <input class="form-control" type="time" id="tempoProducao" name="tempoProducao" step="1" id="tempo_setup" pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$">
+                            
+                            <div class="bootstrap-timepicker">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control timepicker" id="tempoProducao" name="tempoProducao">
+
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
+                                <!-- /.form group -->
+                            </div>
+                            
                         </div>
                         <label class="col-sm-1 control-label">Tempo Finalização:</label>
                         <div class="col-sm-1">
-                            <input class="form-control" type="time" id="tempoFinalizacao" name="tempoFinalizacao" step="1" id="tempo_setup" pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$">
+                            <div class="bootstrap-timepicker">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control timepicker" id="tempoFinalizacao" name="tempoFinalizacao">
+
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
+                                <!-- /.form group -->
+                            </div>
+     
                         </div>
                         <div class="col-sm-1">
                             <button type="button" class="btn btn-cancel fa fa-plus" id="btnAddOperacao"></button>
@@ -375,10 +418,10 @@
         </div>
 
         <div class="box-footer">
-                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button type="reset" class="btn btn-cancel pull-right fa fa-ban"> Cancelar</button>
-                <button type="submit" class="btn btn-save pull-right fa fa-save"> Salvar</button>
-              </div>
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <button type="reset" class="btn btn-cancel pull-right fa fa-ban"> Cancelar</button>
+            <button type="submit" class="btn btn-save pull-right fa fa-save"> Salvar</button>
+        </div>
     </form>
 </div>
 <!-- /.box-footer -->
@@ -402,6 +445,19 @@
 
 @section('js')
 <script type="text/javascript">
+
+    //Timepicker
+    $('.timepicker').timepicker({
+        minuteStep: 1,
+        template: 'modal',
+        appendWidgetTo: 'body',
+        showSeconds: true,
+        showMeridian: false,
+        defaultTime: false
+    });
+
+
+
     $(document).ready(function () {
         $("#busca_operacao").select2({
             placeholder: "Selecione uma Operação",
@@ -423,72 +479,72 @@
 </script>
 
 <script type="text/javascript">
-var components = 0;
-var btnAddMaterial = document.querySelector("#btnAddMaterial");
-var btAddProduto = document.querySelector("#btnAddProduto");
-var CSRF_TOKEN = "{{ csrf_token() }}";
+    var components = 0;
+    var btnAddMaterial = document.querySelector("#btnAddMaterial");
+    var btAddProduto = document.querySelector("#btnAddProduto");
+    var CSRF_TOKEN = "{{ csrf_token() }}";
 
 
-btnAddMaterial.addEventListener("click",function (event){
-    event.preventDefault();
-   
-    $.ajax({
-    url: "{{url('produto/search_comp')}}",
-    type: 'POST',
-    data: {_token: CSRF_TOKEN,
-           tipo: 'material',
-           id: $("#busca_material").val()},
-    dataType: 'JSON',
-    success: function (data) {
-         var quantidade = $("#quantidadeMaterialAdd").val();
-        adicionaComponente(data,quantidade,'material');
-    },
-     error: function(e) {
-    console.log(e.responseText);
-    }
-  });     
-});
+    btnAddMaterial.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        $.ajax({
+            url: "{{url('produto/search_comp')}}",
+            type: 'POST',
+            data: {_token: CSRF_TOKEN,
+                tipo: 'material',
+                id: $("#busca_material").val()},
+            dataType: 'JSON',
+            success: function (data) {
+                var quantidade = $("#quantidadeMaterialAdd").val();
+                adicionaComponente(data, quantidade, 'material');
+            },
+            error: function (e) {
+                console.log(e.responseText);
+            }
+        });
+    });
 
 
 
-btnAddProduto.addEventListener("click",function (event){
-    event.preventDefault();
-   
-    $.ajax({
-    url: "{{url('produto/search_comp')}}",
-    type: 'POST',
-    data: {_token: CSRF_TOKEN,
-           tipo: 'produto',
-           id: $("#busca_produto").val()},
-    dataType: 'JSON',
-    success: function (data) {
-         var quantidade = $("#quantidadeProdutoAdd").val();
-        adicionaComponente(data,quantidade,'produto');
-    },
-     error: function(e) {
-    console.log(e.responseText);
-    }
-  });     
-});
+    btnAddProduto.addEventListener("click", function (event) {
+        event.preventDefault();
 
- function adicionaComponente(data,quantidade,tipo) {
+        $.ajax({
+            url: "{{url('produto/search_comp')}}",
+            type: 'POST',
+            data: {_token: CSRF_TOKEN,
+                tipo: 'produto',
+                id: $("#busca_produto").val()},
+            dataType: 'JSON',
+            success: function (data) {
+                var quantidade = $("#quantidadeProdutoAdd").val();
+                adicionaComponente(data, quantidade, 'produto');
+            },
+            error: function (e) {
+                console.log(e.responseText);
+            }
+        });
+    });
+
+    function adicionaComponente(data, quantidade, tipo) {
         components++;
-        $('#tabela_materiais').append("<tr id='comp_"+ components +"'>" +
-                                       "<input type='hidden' name='item[]' value='" + data.id +";"+ quantidade + ";" + tipo + "'/>"+
-                                       "<td>" + components + "</td>" +
-                                        "<td>" + data.id + "</td>" +
-                                        "<td>" + data.descricao + "</td>" +
-                                        "<td>"+ tipo + "</td>" +
-                                        "<td>" + quantidade + "</td>" +
-                                        "<td><button type='button' class='btn btn-save fa fa-edit'></button></td>" +
-                                        "<td><button type='button' class='btn btn-cancel fa fa-remove' onclick='removeComponente(" + components + ")'></button></td>" +
-                                      "</tr>");
-                              
+        $('#tabela_materiais').append("<tr id='comp_" + components + "'>" +
+                "<input type='hidden' name='item[]' value='" + data.id + ";" + quantidade + ";" + tipo + "'/>" +
+                "<td>" + components + "</td>" +
+                "<td>" + data.id + "</td>" +
+                "<td>" + data.descricao + "</td>" +
+                "<td>" + tipo + "</td>" +
+                "<td>" + quantidade + "</td>" +
+                "<td><button type='button' class='btn btn-save fa fa-edit'></button></td>" +
+                "<td><button type='button' class='btn btn-cancel fa fa-remove' onclick='removeComponente(" + components + ")'></button></td>" +
+                "</tr>");
+
     }
 
     function removeComponente(id) {
-     document.getElementById('comp_' + id ).remove();
-     components--;
+        document.getElementById('comp_' + id).remove();
+        components--;
     }
 </script>
 
@@ -497,54 +553,54 @@ btnAddProduto.addEventListener("click",function (event){
 
 
 <script type="text/javascript">
-var operacoes = 0;
-var btnAddOperacao = document.querySelector("#btnAddOperacao");
-var CSRF_TOKEN = "{{ csrf_token() }}";
+    var operacoes = 0;
+    var btnAddOperacao = document.querySelector("#btnAddOperacao");
+    var CSRF_TOKEN = "{{ csrf_token() }}";
 
 
-btnAddOperacao.addEventListener("click",function (event){
-    event.preventDefault();
-   
-    $.ajax({
-    url: "{{url('produto/search_oper')}}",
-    type: 'POST',
-    data: {_token: CSRF_TOKEN,
-           id: $("#busca_operacao").val()},
-    dataType: 'JSON',
-    success: function (data) {
-        var tempoSetup = $("#tempoSetup").val();
-        var tempoProducao = $("#tempoProducao").val();
-        var tempoFinalizacao = $("#tempoFinalizacao").val();
-        adicionaOperacao(data,tempoSetup,tempoProducao,tempoFinalizacao);
-    },
-     error: function(e) {
-    console.log(e.responseText);
-    }
-  });     
-});
+    btnAddOperacao.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        $.ajax({
+            url: "{{url('produto/search_oper')}}",
+            type: 'POST',
+            data: {_token: CSRF_TOKEN,
+                id: $("#busca_operacao").val()},
+            dataType: 'JSON',
+            success: function (data) {
+                var tempoSetup = $("#tempoSetup").val();
+                var tempoProducao = $("#tempoProducao").val();
+                var tempoFinalizacao = $("#tempoFinalizacao").val();
+                adicionaOperacao(data, tempoSetup, tempoProducao, tempoFinalizacao);
+            },
+            error: function (e) {
+                console.log(e.responseText);
+            }
+        });
+    });
 
 
 
- function adicionaOperacao(data,tempoSetup,tempoProducao,tempoFinalizacao) {
+    function adicionaOperacao(data, tempoSetup, tempoProducao, tempoFinalizacao) {
         operacoes++;
-        $('#tabela_operacoes').append("<tr id='oper_"+ operacoes +"'>" +
-                                        "<input type='hidden' name='operacao[]' value='" + data.id +";"+ tempoSetup + ";" + tempoProducao + ";"+ tempoFinalizacao + "'/>" +
-                                        "<td>" + operacoes + "</td>" +
-                                        "<td>" + data.id + "</td>" +
-                                        "<td>" + data.descricao + "</td>" +
-                                        "<td>"+ data.setor + "</td>" +
-                                        "<td>"+ tempoSetup + "</td>" +
-                                        "<td>" + tempoProducao + "</td>" +
-                                        "<td>" + tempoFinalizacao + "</td>" +
-                                        "<td><button type='button' class='btn btn-save fa fa-edit'></button></td>" +
-                                        "<td><button type='button' class='btn btn-cancel fa fa-remove' onclick='removeOperacao(" + operacoes + ")'></button></td>" +
-                                      "</tr>");
-                              
+        $('#tabela_operacoes').append("<tr id='oper_" + operacoes + "'>" +
+                "<input type='hidden' name='operacao[]' value='" + data.id + ";" + tempoSetup + ";" + tempoProducao + ";" + tempoFinalizacao + "'/>" +
+                "<td>" + operacoes + "</td>" +
+                "<td>" + data.id + "</td>" +
+                "<td>" + data.descricao + "</td>" +
+                "<td>" + data.setor + "</td>" +
+                "<td>" + tempoSetup + "</td>" +
+                "<td>" + tempoProducao + "</td>" +
+                "<td>" + tempoFinalizacao + "</td>" +
+                "<td><button type='button' class='btn btn-save fa fa-edit'></button></td>" +
+                "<td><button type='button' class='btn btn-cancel fa fa-remove' onclick='removeOperacao(" + operacoes + ")'></button></td>" +
+                "</tr>");
+
     }
 
     function removeOperacao(id) {
-     document.getElementById('oper_' + id ).remove();
-     operacoes--;
+        document.getElementById('oper_' + id).remove();
+        operacoes--;
     }
 </script>
 @stop

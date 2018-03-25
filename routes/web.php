@@ -27,6 +27,7 @@ Route::post('unidade/store', 'UnidadeMedidaController@store');
 Route::post('unidade/update', 'UnidadeMedidaController@update');
 Route::get('unidade/show', 'UnidadeMedidaController@show');
 Route::get('unidade/edit/{id}', 'UnidadeMedidaController@edit');
+Route::post('unidade/delete', 'UnidadeMedidaController@delete');
 Route::get('unidade/pesquisa', 'UnidadeMedidaController@pesquisarPorCriterio');
 
 

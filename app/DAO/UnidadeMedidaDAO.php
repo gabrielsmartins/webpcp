@@ -24,7 +24,7 @@ class UnidadeMedidaDAO extends GenericDAO{
     }
     
     
-    public function listar() : LengthAwarePaginator{
+    public function listarComPaginacao() : LengthAwarePaginator{
         try{
 
         
