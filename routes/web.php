@@ -27,7 +27,7 @@ Route::post('unidade/store', 'UnidadeMedidaController@store');
 Route::post('unidade/update', 'UnidadeMedidaController@update');
 Route::get('unidade/show', 'UnidadeMedidaController@show');
 Route::get('unidade/edit/{id}', 'UnidadeMedidaController@edit');
-Route::post('unidade/pesquisa', 'UnidadeMedidaController@pesquisarPorCriterio');
+Route::get('unidade/pesquisa', 'UnidadeMedidaController@pesquisarPorCriterio');
 
 
 Route::get('setor/form', 'SetorController@form');
@@ -35,7 +35,7 @@ Route::post('setor/store', 'SetorController@store');
 Route::post('setor/update', 'SetorController@update');
 Route::get('setor/show', 'SetorController@show');
 Route::get('setor/edit/{id}', 'SetorController@edit');
-Route::post('setor/pesquisa', 'SetorController@pesquisarPorCriterio');
+Route::get('setor/pesquisa', 'SetorController@pesquisarPorCriterio');
 
 
 Route::get('recurso/form', 'RecursoController@form');
@@ -57,7 +57,7 @@ Route::post('material/store', 'MaterialController@store');
 Route::post('material/update', 'MaterialController@update');
 Route::get('material/show', 'MaterialController@show');
 Route::get('material/edit/{id}', 'MaterialController@edit');
-Route::post('material/pesquisa', 'MaterialController@pesquisarPorCriterio');
+Route::get('material/pesquisa', 'MaterialController@pesquisarPorCriterio');
 
 
 Route::get('produto/form', 'ProdutoController@form');
@@ -68,4 +68,19 @@ Route::get('produto/edit/{id}', 'ProdutoController@edit');
 Route::post('produto/search_comp', 'ProdutoController@searchComponente');
 Route::post('produto/search_oper', 'ProdutoController@searchOperacao');
 
+
+Route::get('requisicao/form', 'RequisicaoMaterialController@form');
+Route::post('requisicao/store', 'RequisicaoMaterialController@store');
+Route::post('requisicao/cancel', 'RequisicaoMaterialController@cancel');
+Route::get('requisicao/show', 'RequisicaoMaterialController@show');
+Route::get('requisicao/edit/{id}', 'RequisicaoMaterialController@edit');
+Route::post('requisicao/search_material', 'RequisicaoMaterialController@searchMaterial');
+Route::get('requisicao/pesquisa', 'RequisicaoMaterialController@pesquisarPorCriterio');
+
+
+Route::get('ordem/form', 'RequisicaoMaterialController@form');
+Route::post('ordem/store', 'RequisicaoMaterialController@store');
+Route::post('ordem/cancel', 'RequisicaoMaterialController@cancel');
+Route::get('ordem/show', 'RequisicaoMaterialController@show');
+Route::get('ordem/edit/{id}', 'RequisicaoMaterialController@edit');
 

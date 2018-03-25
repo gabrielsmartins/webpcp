@@ -74,8 +74,12 @@ class UnidadeMedidaController extends Controller {
     public function pesquisarPorCriterio(Request $request){
         $criterio = $request->input('criterio');
         $valor = $request->input('valor');
-        $unidades = $this->unidadeDAO->pesquisarPorCriterio($criterio, $valor);
-        return view('unidade.lista')->with('unidades', $unidades);
+        $limit = (int) $request->input('limit');
+        $page = (int) $request->input('page');
+        $unidades = $this->unidadeDAO->pesquisarPorCriterio($criterio,$valor,$limit,$page);
+        
+        $data = array('unidades'=>$unidades,'criterio'=>$criterio,'valor'=>$valor,'limit'=>$limit,'page'=>$page);
+        return view('unidade.lista')->with($data);
     }
     
     

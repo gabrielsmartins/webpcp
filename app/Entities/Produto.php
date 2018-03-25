@@ -36,6 +36,9 @@ class Produto extends Componente {
     }
     
        public function adicionarComponente(ItemEstrutura $itemEstrutura) {
+           if($this->itens->contains($itemEstrutura)){
+               return;
+           }
                $this->itens->add($itemEstrutura);
 	}
 
@@ -44,6 +47,9 @@ class Produto extends Componente {
 	}
 	
 	public function adicionarRoteiro(Roteiro $roteiro) {
+            if($this->roteiros->contains($roteiro)){
+               return;
+           }
 		$this->roteiros->add($roteiro);
 	}
         

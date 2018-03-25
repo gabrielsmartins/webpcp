@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-sm-6">
                         <label>Pesquisar por: </label>
-                        <form method="post" action="{{ action('MaterialController@pesquisarPorCriterio') }}">
+                        <form method="get" action="{{ action('MaterialController@pesquisarPorCriterio') }}">
                           <select class="form-control input-sm" name="criterio">
                             <option value="id">ID</option>
                             <option value="descricao">Descrição</option>

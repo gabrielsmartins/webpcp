@@ -23,6 +23,8 @@ class LoginController extends Controller {
 
         if ($usuario != null) {
             $request->session()->put('usuarioLogado', $usuario->getNome());
+            $request->session()->put('idUsuarioLogado', $usuario->getId());
+            
             return redirect('home');
         } else {
             return redirect("/")->with('error', 'Usuario ou Senha Inválidos !!!');

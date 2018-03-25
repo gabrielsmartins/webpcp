@@ -13,7 +13,7 @@
 
 
                 @if(Session::has('usuarioLogado'))
-                <p>{{Session::get('usuarioLogado')}}</p>
+                <p>{{Session::get('usuarioLogado')}}   </p>
                 @endif
 
                 <!-- Status -->
@@ -106,8 +106,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#">Emitir</a></li>
-                    <li><a href="#">Consulta</a></li>
+                    <li><a href="{{url('ordem/form')}}">Novo</a></li>
+                    <li><a href="{{url('ordem/show')}}">Consulta</a></li>
                     <li><a href="#">Relatórios</a></li>
                 </ul>
             </li>
@@ -120,8 +120,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#">Emitir</a></li>
-                    <li><a href="#">Consulta</a></li>
+                    <li><a href="{{url('requisicao/form')}}">Novo</a></li>
+                    <li><a href="{{url('requisicao/show')}}">Consulta</a></li>
                     <li><a href="#">Relatórios</a></li>
                 </ul>
             </li>

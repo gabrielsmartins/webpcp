@@ -8,11 +8,12 @@
 
 namespace App\DAO;
 
+use Doctrine\ORM\EntityRepository;
 use Illuminate\Support\Facades\App;
 
 
 
-abstract class GenericDAO {
+abstract class GenericDAO extends EntityRepository{
     
     protected $em;
     protected $className;

@@ -52,7 +52,7 @@ class RequisicaoMaterial extends Documento  {
         $this->prazo = $prazo;
         $this->responsavel = $responsavel;
         $this->itens = new ArrayCollection();
-       // $this->dataEmissao = new DateTime('now');
+        $this->dataEmissao = new DateTime('now');
     }
     
     

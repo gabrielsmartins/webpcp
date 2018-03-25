@@ -23,6 +23,12 @@
 
 <link rel="stylesheet" href="{{ asset('adminlte/dist/css/custom.css') }} ">
 
+<!-- DatePicker -->
+<link rel="stylesheet" href="{{ asset('adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}">
+
+<!-- TimePicker -->
+<link rel="stylesheet" href="{{ asset('adminlte/plugins/timepicker/bootstrap-timepicker.min.css') }}">
+
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
