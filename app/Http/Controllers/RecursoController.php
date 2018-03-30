@@ -72,9 +72,37 @@ class RecursoController extends Controller {
     }
     
     
-    public function show(){
-        $recursos = $this->recursoDAO->listar();
+    public function show(Request $request){
+        $page = (int)  $request->input('page');
+        if($page!=0){
+            $recursos = $this->recursoDAO->listarComPaginacao(10,$page);
+        }else{
+            $recursos = $this->recursoDAO->listarComPaginacao();
+        }
         return view('recurso.lista')->with('recursos', $recursos);
+    }
+    
+    
+    public function delete(Request $request){
+        $recurso = $this->recursoDAO->pesquisar($request->input('id'));
+
+       try{
+             $this->recursoDAO->remover($recurso);
+             return redirect()->action('RecursoController@show')->with('success', 'Recurso Excluído com Sucesso !!!');
+        } catch (Exception $ex) {
+             return redirect()->action('RecursoController@show')->with('error', 'Falha Ao Excluir Recurso. Recurso já é utilizado por algum Roteiro de Fabricação');
+        }
+    }
+    
+    public function pesquisarPorCriterio(Request $request){
+        $criterio = $request->input('criterio');
+        $valor = $request->input('valor');
+        $limit = (int) $request->input('limit');
+        $page = (int) $request->input('page');
+        $recursos = $this->recursoDAO->pesquisarPorCriterio($criterio,$valor,$limit,$page);
+        
+        $data = array('recursos'=>$recursos,'criterio'=>$criterio,'valor'=>$valor,'limit'=>$limit,'page'=>$page);
+        return view('recurso.lista')->with($data);
     }
     
     

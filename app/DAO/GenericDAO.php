@@ -9,14 +9,22 @@
 namespace App\DAO;
 
 use Doctrine\ORM\EntityRepository;
+use Illuminate\Database\QueryException;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\App;
+use LaravelDoctrine\ORM\Pagination\PaginatesFromParams;
 
 
 
 abstract class GenericDAO extends EntityRepository{
     
+    use PaginatesFromParams;
+    
+    
     protected $em;
     protected $className;
+    
+     
     
     public function __construct() {
         $this->em = App::make('Doctrine\ORM\EntityManagerInterface');
@@ -47,6 +55,45 @@ abstract class GenericDAO extends EntityRepository{
     public function pesquisar($id) {
         $object = $this->em->getRepository($this->className)->find($id);
         return $object;
+    }
+    
+    
+    
+    public function listarComPaginacao(int $limit = 10, int $page = 1) : LengthAwarePaginator{
+        try{
+
+        
+         $query = $this->em->getRepository($this->className)->createQueryBuilder('u')
+                ->getQuery();
+        
+        
+        
+         return $this->paginate($query, $limit, $page);
+        
+        
+        } catch (QueryException $ex) {
+             return $ex->getMessage() . $ex->getTrace();
+        }
+    }
+
+    
+    
+    public function pesquisarPorCriterio($criterio, $valor,int $limit = 10, int $page = 1) : LengthAwarePaginator {
+        try{
+
+        
+        $query = $this->em->getRepository($this->className)->createQueryBuilder('u')
+                ->where('UPPER(u.'.$criterio.') LIKE UPPER(:'.$criterio.')')
+               ->orderBy('u.'.$criterio, 'asc')
+                ->setParameter($criterio, $valor.'%')
+                ->getQuery();
+        
+         return $this->paginate($query, $limit, $page);
+        
+        
+        } catch (QueryException $ex) {
+             return $ex->getMessage() . $ex->getTrace();
+        }
     }
     
 }

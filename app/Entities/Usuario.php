@@ -45,6 +45,11 @@ class Usuario {
      */
     private $perfil;
     
+    /**
+     * @ORM\Column(type="boolean",name="usr_ativo")
+     */
+    private $ativo=true;
+    
     function __construct($nome, $login, $senha, $perfil) {
         $this->nome = $nome;
         $this->login = $login;
@@ -91,6 +96,15 @@ class Usuario {
 
     function setPerfil($perfil) {
         $this->perfil = $perfil;
+    }
+
+
+    function getAtivo() {
+        return $this->ativo;
+    }
+
+    function setAtivo($ativo) {
+        $this->ativo = $ativo;
     }
 
 

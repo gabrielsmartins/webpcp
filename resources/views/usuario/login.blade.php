@@ -15,7 +15,7 @@
         <!-- /.login-logo -->
         <div class="login-box-body">
             <p class="login-box-msg">Autentique-se para entrar</p>
-            <form action="{{ action('LoginController@login') }}" method="post">
+            <form action="{{ action('UsuarioController@login') }}" method="post">
                 <div class="form-group has-feedback ">
                     <input type="text" name="login" class="form-control" value="" placeholder="Login">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>

@@ -14,73 +14,130 @@
     <div class="box-body">
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
             <div class="row">
-                <div class="col-sm-6">
+                <form method="get" action="{{ action('SetorController@pesquisarPorCriterio') }}">
+                    <div class="col-sm-6">
                         <label>Pesquisar por: </label>
-                        <form method="get" action="{{ action('SetorController@pesquisarPorCriterio') }}">
-                          <select class="form-control input-sm" name="criterio">
-                            <option value="id">ID</option>
-                            <option value="descricao">Descrição</option>
+
+                        <select class="form-control input-sm" name="criterio">
+                            <option value="id" @if(! empty($criterio)) {{ $criterio == 'id' ? 'selected' : '' }} @endif>ID</option>
+                            <option value="descricao" @if(! empty($criterio)) {{  $criterio == 'descricao' ? 'selected' : '' }}@endif>Descrição</option>
                         </select>
-                            <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                             <input class="form-control input-sm" placeholder=""  type="search" name="valor">
-                             <button class="btn btn-save fa fa-search" type="submit"></button>
-                        </form>   
-                </div>
-                <div class="col-sm-6">
-                    <div class="pull-right">
-                        <label>Exibir </label>
-                        <select name="example1_length" aria-controls="example1" class="form-control input-sm">
-                                <option value="10">10</option><option value="25">25</option>
-                                <option value="50">50</option><option value="100">100</option>
-                        </select> 
-                        <label>Registros</label>
+                        <input class="form-control input-sm" placeholder=""  type="search" name="valor" @if(! empty($valor)) value=" {{ $valor }}" @endif>
+                               <button class="btn btn-save fa fa-search" type="submit"></button>
                     </div>
-                </div>
+                    <div class="col-sm-6">
+                        <div class="pull-right">
+                            <label>Exibir </label>
+                            <select name="limit" aria-controls="example1" class="form-control input-sm" >
+                                <option value="10" @if(! empty($limit)) {{ $limit == 10 ? 'selected' : '' }} @endif>10</option>
+                                <option value="25" @if(! empty($limit))  {{ $limit == 25 ? 'selected' : '' }} @endif>25</option>
+                                <option value="50" @if(! empty($limit))  {{ $limit == 50 ? 'selected' : '' }} @endif>50</option>
+                                <option value="100" @if(! empty($limit))  {{ $limit == 100 ? 'selected' : '' }} @endif>100</option>
+                            </select> 
+                            <label>Registros</label>
+                        </div>
+                    </div>
+
+                </form> 
             </div>
+
+            @if (session('success'))
+            <br>
+            <div class="alert alert-success" role="alert"> 
+                {{ session('success') }}
+            </div>
+            <br>
+            @endif
+
+
+          @if (session('error'))
+            <br>
+            <div class="alert alert-danger" role="alert"> 
+                {{ session('error') }}
+            </div>
+            <br>
+            @endif
+
+
+
             <div class="row">
                 <div class="col-sm-12">
-                      <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                    <table class="table table-bordered table-striped table-responsive">
                         <thead>
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 297.45px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 362.1px;" aria-label="Browser: activate to sort column ascending">Descrição</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 257.083px;">Editar</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 257.083px;">Excluir</th>
+                                <th class="sorting_asc"  rowspan="1" colspan="1" >ID</th>
+                                <th class="sorting"  rowspan="1" colspan="1" >Descrição</th>
+                                <th class="sorting"  rowspan="1" colspan="2" style="width: 10px;">Ação</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @foreach ($setores as $setor)
+                           @foreach ($setores as $setor)
                             <tr>
-                                <td>{{$setor->getId() }}</td>
+                               <td>{{$setor->getId() }}</td>
                                 <td>{{$setor->getDescricao() }}</td>
-                                <td>
+                                <td  style="width: 10px;">
                                     <a href="{{ URL::to('/setor/edit/'.$setor->getId()) }}"
-                                       class="btn btn-save"><i class="fa fa-edit"></i>
+                                       class="btn btn-save"><i class="fa fa-edit fa-sm"></i>
                                     </a> 
                                 </td>
-                                <td>
-                                    <form action="<c:url value='/unidades/${unidade.id}'/>" method="post">
-                                        <button type="submit"class="btn btn-cancel"><i class="fa fa-remove"></i></button>
-                                    </form>
+                                <td  style="width: 10px;">
+                                    <button type="button"class="btn btn-cancel" data-toggle="modal" data-target="#myModal{{$setor->getId()}}"><i class="fa fa-remove fa-sm"></i></button>
                                 </td>
                             </tr>
 
-                            @endforeach
+                            <!-- Modal -->
+                        <div class="modal fade" id="myModal{{$setor->getId()}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Atenção</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Deseja realmente excluir?
+                                    </div>
+                                   
+                                        <div class="modal-footer">
+                                            <form action="{{ action('SetorController@delete') }}" method="post">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <button type="button" class="btn btn-save" data-dismiss="modal">Fechar</button>
+                                            <input type="hidden" name="id" value="{{$setor->getId() }}"/>
+                                            <button type="submit" class="btn btn-cancel">Confirmar</button>
+                                               </form>
+                                        </div>
+                                 
+
+                                </div>
+                            </div>
+                        </div>
+
+                        @endforeach
 
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th rowspan="1" colspan="1">ID</th>
-                                <th rowspan="1" colspan="1">Descrição</th>
-                                <th rowspan="1" colspan="1">Editar</th>
-                                <th rowspan="1" colspan="1">Excluir</th>
-                            </tr>
-                        </tfoot>
-                    </table></div></div><div class="row"><div class="col-sm-5"><div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div></div></div>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+
+                </div>
+                <div class="col-sm-7">
+                    @if(! empty($criterio))
+                    {{ $setores->appends(['criterio'=>$criterio,'valor'=>$valor,'limit'=>$limit])->links() }}
+                    @else
+                    {{ $setores->links() }}
+                    @endif
+
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /.box-body -->
 </div>
 @stop
 
 
+@section('js')
+
+@stop

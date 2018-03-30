@@ -1,27 +1,28 @@
 @extends('layouts.master')
 
-@section('page', 'Material - Consulta')
+@section('page', 'Usuário - Consulta')
 
-@section('title','Consultar - Material')
+@section('title','Consultar - Usuário')
 
 
 @section('content')
 <div class="box">
     <div class="box-header">
-        <h3 class="box-title">Material</h3>
+        <h3 class="box-title">Usuário</h3>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
             <div class="row">
-                <form method="get" action="{{ action('MaterialController@pesquisarPorCriterio') }}">
+                <form method="get" action="{{ action('UsuarioController@pesquisarPorCriterio') }}">
                     <div class="col-sm-6">
                         <label>Pesquisar por: </label>
 
                         <select class="form-control input-sm" name="criterio">
                             <option value="id" @if(! empty($criterio)) {{ $criterio == 'id' ? 'selected' : '' }} @endif>ID</option>
-                            <option value="descricao" @if(! empty($criterio)) {{  $criterio == 'descricao' ? 'selected' : '' }}@endif>Descrição</option>
-                            <option value="codigoInterno" @if(! empty($criterio)) {{  $criterio == 'codigoInterno' ? 'selected' : '' }}@endif>Código Interno</option>
+                            <option value="nome" @if(! empty($criterio)) {{  $criterio == 'nome' ? 'selected' : '' }}@endif>Nome</option>
+                            <option value="login" @if(! empty($criterio)) {{  $criterio == 'login' ? 'selected' : '' }}@endif>Login</option>
+                            <option value="perfil" @if(! empty($criterio)) {{  $criterio == 'perfil' ? 'selected' : '' }} @endif>Perfil</option>
                         </select>
                         <input class="form-control input-sm" placeholder=""  type="search" name="valor" @if(! empty($valor)) value=" {{ $valor }}" @endif>
                                <button class="btn btn-save fa fa-search" type="submit"></button>
@@ -67,56 +68,40 @@
                         <thead>
                             <tr role="row">
                                 <th class="sorting_asc"  rowspan="1" colspan="1" >ID</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Descrição</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Código Interno</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >U.M</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Qntd Estq.</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Qntd Min.</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Valor Unit.</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Peso</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Comp.</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Larg.</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Alt.</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Status.</th>
+                                <th class="sorting"  rowspan="1" colspan="1" >Nome</th>
+                                <th class="sorting"  rowspan="1" colspan="1">Login</th>
+                                <th class="sorting"  rowspan="1" colspan="1">Perfil</th>
+                                <th class="sorting"  rowspan="1" colspan="1">Ativo</th>
                                 <th class="sorting"  rowspan="1" colspan="2" style="width: 10px;">Ação</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                          @foreach($materiais as $material)
+                            @foreach ($usuarios as $usuario)
                             <tr>
-                                <td>{{$material->getId()}}</td>
-                                <td>{{$material->getDescricao()}}</td>
-                                <td>{{$material->getCodigoInterno()}}</td>
-                                <td>{{$material->getUnidadeMedida()->getSigla()}}</td>
-                                <td>{{$material->getQuantidadeEstoque()}}</td>
-                                <td>{{$material->getQuantidadeMinima()}}</td>
-                                <td>{{$material->getValorUnitario()}}</td>
-                                <td>{{$material->getPeso()}}</td>
-                                <td>{{$material->getComprimento()}}</td>
-                                <td>{{$material->getLargura()}}</td>
-                                <td>{{$material->getAltura()}}</td>
-
-                                @if ($material->getSituacao() == 'ATIVO')
-                                <td><span class="badge bg-green">{{str_replace('_',' ',$material->getSituacao())}}</span></td>
-                                @elseif ($material->getSituacao() == 'INATIVO')
-                                <td><span class="badge bg-gray">{{str_replace('_',' ',$material->getSituacao())}}</span></td>
-                                @else
-                                <td><span class="badge bg-yellow">{{str_replace('_',' ',$material->getSituacao())}}</span></td>
-                                @endif
-
+                                <td>{{$usuario->getId() }}</td>
+                                <td>{{$usuario->getNome() }}</td>
+                                <td>{{$usuario->getLogin()}}</td>
+                                <td>{{$usuario->getPerfil()->getDescricao()}}</td>
+                                 <td>{{$usuario->getAtivo()? 'Sim':'Não'}}</td>
                                 <td  style="width: 10px;">
-                                    <a href="{{ URL::to('/material/edit/'.$material->getId()) }}"
+                                    <a href="{{ URL::to('/usuario/edit/'.$usuario->getId()) }}"
                                        class="btn btn-save"><i class="fa fa-edit fa-sm"></i>
                                     </a> 
                                 </td>
                                 <td  style="width: 10px;">
-                                    <button type="button"class="btn btn-cancel" data-toggle="modal" data-target="#myModal{{$material->getId()}}"><i class="fa fa-remove fa-sm"></i></button>
+                                    @if ($usuario->getAtivo())
+                                       <button type="button"class="btn btn-cancel" data-toggle="modal" data-target="#myModal{{$usuario->getId()}}"><i class="fa fa-ban fa-sm"></i></button>
+                                    @else
+                                       <button type="button"class="btn btn-cancel" data-toggle="modal" data-target="#myModal{{$usuario->getId()}}"><i class="fa fa-check fa-sm"></i></button>
+                                    @endif
+                                    
+                                   
                                 </td>
                             </tr>
 
                             <!-- Modal -->
-                        <div class="modal fade" id="myModal{{$material->getId()}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal fade" id="myModal{{$usuario->getId()}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -124,18 +109,36 @@
                                         <h4 class="modal-title" id="myModalLabel">Atenção</h4>
                                     </div>
                                     <div class="modal-body">
-                                        Deseja realmente excluir?
+                                        @if ($usuario->getAtivo())
+                                        
+                                          Deseja realmente desativar este usuário?
+                                     
+                                        @else
+                                        Deseja realmente ativar este usuário?
+                                        @endif
                                     </div>
-                                   
+                                     @if ($usuario->getAtivo())
+                                     <form action="{{ action('UsuarioController@disable') }}" method="post">
                                         <div class="modal-footer">
-                                            <form action="{{ action('MaterialController@delete') }}" method="post">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <button type="button" class="btn btn-save" data-dismiss="modal">Fechar</button>
-                                            <input type="hidden" name="id" value="{{$material->getId() }}"/>
+                                            <input type="hidden" name="id" value="{{$usuario->getId() }}"/>
                                             <button type="submit" class="btn btn-cancel">Confirmar</button>
-                                               </form>
                                         </div>
-                                 
+                                    </form>
+                                     
+                                     @else
+                                     <form action="{{ action('UsuarioController@enable') }}" method="post">
+                                        <div class="modal-footer">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <button type="button" class="btn btn-save" data-dismiss="modal">Fechar</button>
+                                            <input type="hidden" name="id" value="{{$usuario->getId() }}"/>
+                                            <button type="submit" class="btn btn-cancel">Confirmar</button>
+                                        </div>
+                                    </form>
+                                     @endif
+                                     
+                                    
 
                                 </div>
                             </div>
@@ -153,9 +156,9 @@
                 </div>
                 <div class="col-sm-7">
                     @if(! empty($criterio))
-                    {{ $materiais->appends(['criterio'=>$criterio,'valor'=>$valor,'limit'=>$limit])->links() }}
+                    {{ $usuarios->appends(['criterio'=>$criterio,'valor'=>$valor,'limit'=>$limit])->links() }}
                     @else
-                    {{ $materiais->links() }}
+                    {{ $usuarios->links() }}
                     @endif
 
                 </div>
@@ -168,5 +171,5 @@
 
 
 @section('js')
-
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 @stop

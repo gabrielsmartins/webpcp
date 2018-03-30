@@ -109,18 +109,37 @@ class MaterialController extends Controller {
     }
     
     
-    public function show(){
-        $materiais = $this->materialDAO->listar();
+    public function show(Request $request){
+        $page = (int)  $request->input('page');
+        if($page!=0){
+            $materiais = $this->materialDAO->listarComPaginacao(10,$page);
+        }else{
+            $materiais = $this->materialDAO->listarComPaginacao();
+        }
         return view('material.lista')->with('materiais', $materiais);
+    }
+    
+    
+    public function delete(Request $request){
+        $material = $this->materialDAO->pesquisar($request->input('id'));
+
+       try{
+             $this->materialDAO->remover($material);
+             return redirect()->action('MaterialController@show')->with('success', 'Material Excluído com Sucesso !!!');
+        } catch (Exception $ex) {
+             return redirect()->action('MaterialController@show')->with('error', 'Falha Ao Excluir Material. Material já é utilizado por algum Produto');
+        }
     }
     
     public function pesquisarPorCriterio(Request $request){
         $criterio = $request->input('criterio');
         $valor = $request->input('valor');
-        $materiais = $this->materialDAO->pesquisarPorCriterio($criterio, $valor);
-        return view('material.lista')->with('materiais', $materiais);
+        $limit = (int) $request->input('limit');
+        $page = (int) $request->input('page');
+        $materiais = $this->materialDAO->pesquisarPorCriterio($criterio,$valor,$limit,$page);
+        
+        $data = array('materiais'=>$materiais,'criterio'=>$criterio,'valor'=>$valor,'limit'=>$limit,'page'=>$page);
+        return view('material.lista')->with($data);
     }
-    
-    
 
 }

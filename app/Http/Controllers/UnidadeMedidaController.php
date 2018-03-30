@@ -66,8 +66,14 @@ class UnidadeMedidaController extends Controller {
     }
     
     
-    public function show(){
-        $unidades = $this->unidadeDAO->listarComPaginacao();
+    public function show(Request $request){
+        $page = (int)  $request->input('page');
+        if($page!=0){
+            $unidades = $this->unidadeDAO->listarComPaginacao(10,$page);
+        }else{
+            $unidades = $this->unidadeDAO->listarComPaginacao();
+        }
+        
         return view('unidade.lista')->with('unidades', $unidades);
     }
     
@@ -78,7 +84,7 @@ class UnidadeMedidaController extends Controller {
              $this->unidadeDAO->remover($unidade);
              return redirect()->action('UnidadeMedidaController@show')->with('success', 'Unidade de Medida Excluída com Sucesso !!!');
         } catch (Exception $ex) {
-             return redirect()->action('UnidadeMedidaController@show')->with('error', 'Falha Ao Excluir Unidade de Medida. Undiade já é utilizada por algum Produto ou Material');
+             return redirect()->action('UnidadeMedidaController@show')->with('error', 'Falha Ao Excluir Unidade de Medida. Unidade já é utilizada por algum Produto ou Material');
         }
     }
     

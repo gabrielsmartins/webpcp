@@ -18,6 +18,7 @@ CREATE TABLE usuario(
        usr_nome VARCHAR(200) NOT NULL,
        usr_login VARCHAR(200) NOT NULL,
        usr_pwd VARCHAR(200) NOT NULL,
+       usr_ativo BOOLEAN DEFAULT 1 NOT NULL,
        CONSTRAINT PK_usuario PRIMARY KEY(usr_id),
        CONSTRAINT FK_usuario_perfil FOREIGN KEY(usr_perf_id) REFERENCES perfil(perf_id) ON DELETE CASCADE,
        CONSTRAINT UNQ_usuario_nome UNIQUE(usr_nome)
@@ -175,6 +176,7 @@ INSERT INTO perfil(perf_desc)VALUES('GERENTE PCP');
 INSERT INTO perfil(perf_desc)VALUES('PRODUCAO');
 INSERT INTO perfil(perf_desc)VALUES('ALMOXARIFADO');
 INSERT INTO perfil(perf_desc)VALUES('ENGENHARIA');
+INSERT INTO perfil(perf_desc)VALUES('ADMINISTRADOR');
 
 INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(1,'PCP - User','admin',MD5('12345'));
 
@@ -252,4 +254,8 @@ INSERT INTO setor (setr_desc) VALUES
 ('FERRAMENTARIA'),
 ('MONTAGEM'),
 ('USINAGEM');
+
+
+
+
 

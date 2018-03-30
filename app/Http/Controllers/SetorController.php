@@ -64,16 +64,37 @@ class SetorController extends Controller {
     }
     
     
-    public function show(){
-        $setores = $this->setorDAO->listar();
+    public function show(Request $request){
+        $page = (int)  $request->input('page');
+        if($page!=0){
+            $setores = $this->setorDAO->listarComPaginacao(10,$page);
+        }else{
+            $setores = $this->setorDAO->listarComPaginacao();
+        }
         return view('setor.lista')->with('setores', $setores);
     }
     
-     public function pesquisarPorCriterio(Request $request){
+    
+    public function delete(Request $request){
+        $setor = $this->setorDAO->pesquisar($request->input('id'));
+
+       try{
+             $this->setorDAO->remover($setor);
+             return redirect()->action('SetorController@show')->with('success', 'Setor Excluído com Sucesso !!!');
+        } catch (Exception $ex) {
+             return redirect()->action('SetorController@show')->with('error', 'Falha Ao Excluir Setor. Setor já é utilizado por alguma Operação ou Recurso');
+        }
+    }
+    
+    public function pesquisarPorCriterio(Request $request){
         $criterio = $request->input('criterio');
         $valor = $request->input('valor');
-        $setores = $this->setorDAO->pesquisarPorCriterio($criterio, $valor);
-        return view('setor.lista')->with('setores', $setores);
+        $limit = (int) $request->input('limit');
+        $page = (int) $request->input('page');
+        $setores = $this->setorDAO->pesquisarPorCriterio($criterio,$valor,$limit,$page);
+        
+        $data = array('setores'=>$setores,'criterio'=>$criterio,'valor'=>$valor,'limit'=>$limit,'page'=>$page);
+        return view('setor.lista')->with($data);
     }
 
 }

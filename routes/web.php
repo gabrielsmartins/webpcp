@@ -15,8 +15,17 @@
 
 Route::get('/', 'MainController@index');
 
-Route::post('login', 'LoginController@login');
-Route::get('logout', 'LoginController@logout');
+
+Route::get('usuario/form', 'UsuarioController@form');
+Route::post('usuario/store', 'UsuarioController@store');
+Route::post('usuario/update', 'UsuarioController@update');
+Route::get('usuario/show', 'UsuarioController@show');
+Route::get('usuario/edit/{id}', 'UsuarioController@edit');
+Route::post('usuario/disable', 'UsuarioController@disable');
+Route::post('usuario/enable', 'UsuarioController@enable');
+Route::get('usuario/pesquisa', 'UsuarioController@pesquisarPorCriterio');
+Route::post('login', 'UsuarioController@login');
+Route::get('logout', 'UsuarioController@logout');
 
 Route::get('home', 'MainController@home');
 
@@ -36,6 +45,7 @@ Route::post('setor/store', 'SetorController@store');
 Route::post('setor/update', 'SetorController@update');
 Route::get('setor/show', 'SetorController@show');
 Route::get('setor/edit/{id}', 'SetorController@edit');
+Route::post('setor/delete', 'SetorController@delete');
 Route::get('setor/pesquisa', 'SetorController@pesquisarPorCriterio');
 
 
@@ -44,6 +54,8 @@ Route::post('recurso/store', 'RecursoController@store');
 Route::post('recurso/update', 'RecursoController@update');
 Route::get('recurso/show', 'RecursoController@show');
 Route::get('recurso/edit/{id}', 'RecursoController@edit');
+Route::post('recurso/delete', 'RecursoController@delete');
+Route::get('recurso/pesquisa', 'RecursoController@pesquisarPorCriterio');
 
 
 Route::get('operacao/form', 'OperacaoController@form');
@@ -51,6 +63,9 @@ Route::post('operacao/store', 'OperacaoController@store');
 Route::post('operacao/update', 'OperacaoController@update');
 Route::get('operacao/show', 'OperacaoController@show');
 Route::get('operacao/edit/{id}', 'OperacaoController@edit');
+Route::post('operacao/delete', 'OperacaoController@delete');
+Route::get('operacao/pesquisa', 'OperacaoController@pesquisarPorCriterio');
+
 
 
 Route::get('material/form', 'MaterialController@form');
@@ -58,6 +73,7 @@ Route::post('material/store', 'MaterialController@store');
 Route::post('material/update', 'MaterialController@update');
 Route::get('material/show', 'MaterialController@show');
 Route::get('material/edit/{id}', 'MaterialController@edit');
+Route::post('material/delete', 'MaterialController@delete');
 Route::get('material/pesquisa', 'MaterialController@pesquisarPorCriterio');
 
 

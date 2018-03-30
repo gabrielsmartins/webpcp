@@ -76,10 +76,39 @@ class OperacaoController extends Controller {
     }
     
     
-    public function show(){
-        $operacoes = $this->operacaoDAO->listar();
+     public function show(Request $request){
+        $page = (int)  $request->input('page');
+        if($page!=0){
+            $operacoes = $this->operacaoDAO->listarComPaginacao(10,$page);
+        }else{
+            $operacoes = $this->operacaoDAO->listarComPaginacao();
+        }
         return view('operacao.lista')->with('operacoes', $operacoes);
     }
+    
+    
+    public function delete(Request $request){
+        $recurso = $this->operacaoDAO->pesquisar($request->input('id'));
+
+       try{
+             $this->operacaoDAO->remover($recurso);
+             return redirect()->action('OperacaoController@show')->with('success', 'Operação Excluída com Sucesso !!!');
+        } catch (Exception $ex) {
+             return redirect()->action('OperacaoController@show')->with('error', 'Falha Ao Excluir Operação. Operação já é utilizado por algum Roteiro de Fabricação');
+        }
+    }
+    
+    public function pesquisarPorCriterio(Request $request){
+        $criterio = $request->input('criterio');
+        $valor = $request->input('valor');
+        $limit = (int) $request->input('limit');
+        $page = (int) $request->input('page');
+        $operacoes = $this->operacaoDAO->pesquisarPorCriterio($criterio,$valor,$limit,$page);
+        
+        $data = array('operacoes'=>$operacoes,'criterio'=>$criterio,'valor'=>$valor,'limit'=>$limit,'page'=>$page);
+        return view('operacao.lista')->with($data);
+    }
+    
     
     
 

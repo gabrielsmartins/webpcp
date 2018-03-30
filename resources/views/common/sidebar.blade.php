@@ -137,8 +137,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<c:url value='/recursos/form'/>">Novo</a></li>
-                    <li><a href="<c:url value='/recursos'/>">Consulta</a></li>
+                    <li><a href="{{url('recurso/form')}}">Novo</a></li>
+                    <li><a href="{{url('recurso/show')}}">Consulta</a></li>
                     <li><a href="#">Relatórios</a></li>
                 </ul>
             </li>
@@ -217,8 +217,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#">Novo</a></li>
-                    <li><a href="#">Consulta</a></li>
+                    <li><a href="{{url('usuario/form')}}">Novo</a></li>
+                    <li><a href="{{url('usuario/show')}}">Consulta</a></li>
                 </ul>
             </li>
 
