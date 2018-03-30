@@ -23,24 +23,18 @@ class RecursoDAO extends GenericDAO{
         }
 
         try{
-
-        
          $query = $this->em->getRepository($this->className)->createQueryBuilder('r')
                 ->innerJoin('r.setor', 's')
                 ->where('UPPER(s.descricao) LIKE UPPER(:descricao)')
                 ->setParameter('descricao',$valor.'%')
                 ->getQuery();
 
-
-   
          return $this->paginate($query, $limit, $page);
-        
-        
+
         } catch (QueryException $ex) {
              return $ex->getMessage() . $ex->getTrace();
         }
-        
-        
+
     }
     
    

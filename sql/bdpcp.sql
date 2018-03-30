@@ -155,6 +155,23 @@ CREATE TABLE requisicao_material_detalhe(
 );
 
 
+CREATE TABLE retirada_produto(
+	retr_id BIGINT AUTO_INCREMENT NOT NULL,
+    retr_dt TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
+    retr_usr_id BIGINT NOT NULL,
+    CONSTRAINT PK_retirada_produto PRIMARY KEY(retr_id),
+    CONSTRAINT FK_retirada_produto_usuario FOREIGN KEY(retr_usr_id) REFERENCES usuario(usr_id)
+);
+
+CREATE TABLE retirada_produto_detalhe(
+    retr_id BIGINT NOT NULL,
+    retr_prod_id BIGINT NOT NULL,
+    retr_prod_qntd NUMERIC(15,2) NOT NULL, 
+    CONSTRAINT PK_retirada_produto_detalhe PRIMARY KEY(retr_id,retr_prod_id),
+	CONSTRAINT FK_retirada_produto_detalhe_retirada FOREIGN KEY(retr_id) REFERENCES retirada_produto(retr_id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT FK_retirada_produto_detalhe_produto FOREIGN KEY(retr_prod_id) REFERENCES produto(prod_id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
 
 
 
@@ -175,6 +192,7 @@ INSERT INTO perfil(perf_desc)VALUES('PROGRAMADOR PCP');
 INSERT INTO perfil(perf_desc)VALUES('GERENTE PCP');
 INSERT INTO perfil(perf_desc)VALUES('PRODUCAO');
 INSERT INTO perfil(perf_desc)VALUES('ALMOXARIFADO');
+INSERT INTO perfil(perf_desc)VALUES('EXPEDICAO');
 INSERT INTO perfil(perf_desc)VALUES('ENGENHARIA');
 INSERT INTO perfil(perf_desc)VALUES('ADMINISTRADOR');
 

@@ -10,6 +10,8 @@ namespace App\DAO;
 
 use App\Entities\Usuario;
 use Doctrine\ORM\NoResultException;
+use Illuminate\Database\QueryException;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 class UsuarioDAO extends GenericDAO {
@@ -31,12 +33,33 @@ class UsuarioDAO extends GenericDAO {
         } catch (NoResultException $ex) {
              return null;
         }
-
-
-       
-       
     }
+    
+    public function pesquisarPorCriterio($criterio, $valor,int $limit = 10, int $page = 1) : LengthAwarePaginator {
+  
+        if ($criterio != 'perfil') {
+            return parent::pesquisarPorCriterio($criterio, $valor, $limit, $page);
+        }
 
+        try{
+         $query = $this->em->getRepository($this->className)->createQueryBuilder('u')
+                ->innerJoin('u.perfil', 'p')
+                ->where('UPPER(p.descricao) LIKE UPPER(:descricao)')
+                ->setParameter('descricao',$valor.'%')
+                ->getQuery();
+
+         return $this->paginate($query, $limit, $page);
+
+        } catch (QueryException $ex) {
+             return $ex->getMessage() . $ex->getTrace();
+        }
+
+    }
+    
+    
+
+    
+    
 }
 
 
