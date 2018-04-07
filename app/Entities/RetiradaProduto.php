@@ -1,26 +1,45 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 namespace App\Entities;
 
+use App\Util\SaldoInsuficienteException;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+
 
 /**
- * Description of RetiradaProduto
- *
- * @author HOME-PC
+ * @ORM\Entity
+ * @ORM\Table(name="retirada_produto")
  */
 class RetiradaProduto {
     
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer",name="retr_id")
+     */
     private $id;
+    
+    
+    /**
+     * @ORM\Column(type="datetime",name="retr_dt")
+     */
     private $data;
+    
+    /**
+     *@ORM\ManyToOne(targetEntity="Usuario")
+     *@ORM\JoinColumn(name="retr_usr_id", referencedColumnName="usr_id")
+     */
     private $responsavel;
+    
+    
+    /**
+     * @ORM\OneToMany(targetEntity="ItemRetirada", mappedBy="retirada",cascade={"persist"})
+     */
     private $itens;
 
     
@@ -65,7 +84,14 @@ class RetiradaProduto {
 
 
     function adicionarItem(ItemRetirada $item){
+        if($item->getQuantidade() > $item->getProduto()->getQuantidadeEstoque()){
+              throw new SaldoInsuficienteException("Quantidade solicitada é maior que o saldo do produto");
+        }
+        $valor = $item->getProduto()->getQuantidadeEstoque();
+        $valor-=$item->getQuantidade();
+        $item->getProduto()->setQuantidadeEstoque($valor);
         $this->itens->add($item);
+        
     }
     
     function removerItem(ItemRetirada $item){

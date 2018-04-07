@@ -1,10 +1,6 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 namespace App\DAO;
 
@@ -29,6 +25,8 @@ abstract class GenericDAO extends EntityRepository{
     public function __construct() {
         $this->em = App::make('Doctrine\ORM\EntityManagerInterface');
     }
+    
+  
     
     public function salvar($entity){
         $this->em->persist($entity);

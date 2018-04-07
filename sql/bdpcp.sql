@@ -174,7 +174,7 @@ CREATE TABLE retirada_produto_detalhe(
 
 
 
-
+SELECT * FROM usuario;
 SELECT * FROM roteiro;
 SELECT * FROM produto;
 SELECT * FROM estrutura_produto;

@@ -183,8 +183,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#">Registrar</a></li>
-                    <li><a href="#">Consulta</a></li>
+                    <li><a href="{{url('retirada/form')}}">Registrar</a></li>
+                    <li><a href="{{url('retirada/show')}}">Consulta</a></li>
                     <li><a href="#">Relatórios</a></li>
                 </ul>
             </li>

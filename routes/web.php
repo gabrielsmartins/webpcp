@@ -95,6 +95,16 @@ Route::post('requisicao/search_material', 'RequisicaoMaterialController@searchMa
 Route::get('requisicao/pesquisa', 'RequisicaoMaterialController@pesquisarPorCriterio');
 
 
+
+Route::get('retirada/form', 'RetiradaProdutoController@form');
+Route::post('retirada/store', 'RetiradaProdutoController@store');
+Route::post('retirada/cancel', 'RetiradaProdutoController@cancel');
+Route::get('retirada/show', 'RetiradaProdutoController@show');
+Route::get('retirada/edit/{id}', 'RetiradaProdutoController@edit');
+Route::post('retirada/search_produto', 'RetiradaProdutoController@searchProduto');
+Route::get('retirada/pesquisa', 'RetiradaProdutoController@pesquisarPorCriterio');
+
+
 Route::get('ordem/form', 'RequisicaoMaterialController@form');
 Route::post('ordem/store', 'RequisicaoMaterialController@store');
 Route::post('ordem/cancel', 'RequisicaoMaterialController@cancel');

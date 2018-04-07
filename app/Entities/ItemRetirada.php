@@ -41,7 +41,7 @@ class ItemRetirada {
     }
 
     function getProduto() {
-        return $this->material;
+        return $this->produto;
     }
 
     function getQuantidade() {
