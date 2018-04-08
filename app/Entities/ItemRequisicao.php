@@ -11,15 +11,20 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ItemRequisicao {
     
+      /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer",name="rm_det_id")
+     */
+    private $id;
+    
     /**
-     * @ORM\Id 
      * @ORM\ManyToOne(targetEntity="RequisicaoMaterial")
      * @ORM\JoinColumn(name="rm_id", referencedColumnName="rm_id")
      **/
     private $requisicao;
     
     /** 
-      * @ORM\Id 
       * @ORM\ManyToOne(targetEntity="Material") 
       * @ORM\JoinColumn(name="rm_prod_id", referencedColumnName="prod_id")
       */
@@ -36,6 +41,16 @@ class ItemRequisicao {
         $this->quantidade = $quantidade;
     }
     
+    
+    function getId() {
+        return $this->id;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+        
     function getRequisicao() {
         return $this->requisicao;
     }

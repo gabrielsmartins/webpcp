@@ -146,10 +146,12 @@ CREATE TABLE requisicao_material(
 
 
 CREATE TABLE requisicao_material_detalhe(
+         rm_det_id BIGINT AUTO_INCREMENT NOT NULL,
 	     rm_id BIGINT NOT NULL,
 	     rm_prod_id BIGINT NOT NULL,
 	     rm_prod_qntd NUMERIC(15,2) NOT NULL,
-	     CONSTRAINT PK_requisicao_material_detalhe PRIMARY KEY(rm_id,rm_prod_id),
+         CONSTRAINT PRIMARY KEY(rm_det_id),
+	     CONSTRAINT UNQ_requisicao_material_detalhe UNIQUE(rm_id,rm_prod_id),
 	     CONSTRAINT FK_requisicao_material_detalhe_requisicao FOREIGN KEY(rm_id) REFERENCES requisicao_material(rm_id) ON UPDATE CASCADE ON DELETE CASCADE,
 	     CONSTRAINT FK_requisicao_material_detalhe_produto FOREIGN KEY(rm_prod_id) REFERENCES produto(prod_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -173,6 +175,26 @@ CREATE TABLE retirada_produto_detalhe(
 );
 
 
+CREATE TABLE recebimento_material(
+	receb_id BIGINT AUTO_INCREMENT NOT NULL,
+    receb_dt TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
+    receb_usr_id BIGINT NOT NULL,
+    CONSTRAINT PK_recebimento_produto PRIMARY KEY(receb_id),
+    CONSTRAINT FK_recebimento_produto_usuario FOREIGN KEY(receb_usr_id) REFERENCES usuario(usr_id)
+);
+
+
+CREATE TABLE recebimento_material_detalhe(
+    receb_id BIGINT NOT NULL,
+    receb_rm_det_id BIGINT NOT NULL,
+    receb_prod_qntd NUMERIC(15,2) NOT NULL, 
+    CONSTRAINT PK_recebimento_produto_detalhe PRIMARY KEY(receb_id,receb_rm_det_id),
+	CONSTRAINT FK_recebimento_produto_detalhe_retirada FOREIGN KEY(receb_id) REFERENCES recebimento_material(receb_id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT FK_recebimento_produto_detalhe_requisicao_detalhe FOREIGN KEY(receb_rm_det_id) REFERENCES requisicao_material_detalhe(rm_det_id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+
 
 SELECT * FROM usuario;
 SELECT * FROM roteiro;
@@ -184,6 +206,10 @@ SELECT * FROM unidade;
 SELECT * FROM recurso;
 SELECT * FROM requisicao_material;
 SELECT * FROM requisicao_material_detalhe;
+SELECT * FROM retirada_produto;
+SELECT * FROM retirada_produto_detalhe;
+SELECT * FROM recebimento_material;
+SELECT * FROM recebimento_material_detalhe;
 SELECT * FROM ordem_producao;
 
 
@@ -272,6 +298,7 @@ INSERT INTO setor (setr_desc) VALUES
 ('FERRAMENTARIA'),
 ('MONTAGEM'),
 ('USINAGEM');
+
 
 
 

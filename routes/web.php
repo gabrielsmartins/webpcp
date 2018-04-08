@@ -105,6 +105,15 @@ Route::post('retirada/search_produto', 'RetiradaProdutoController@searchProduto'
 Route::get('retirada/pesquisa', 'RetiradaProdutoController@pesquisarPorCriterio');
 
 
+Route::get('recebimento/form', 'RecebimentoMaterialController@form');
+Route::post('recebimento/store', 'RecebimentoMaterialController@store');
+Route::post('recebimento/cancel', 'RecebimentoMaterialController@cancel');
+Route::get('recebimento/show', 'RecebimentoMaterialController@show');
+Route::get('recebimento/edit/{id}', 'RecebimentoMaterialController@edit');
+Route::post('recebimento/search_produto', 'RecebimentoMaterialController@searchMaterial');
+Route::get('recebimento/pesquisa', 'RecebimentoMaterialController@pesquisarPorCriterio');
+
+
 Route::get('ordem/form', 'RequisicaoMaterialController@form');
 Route::post('ordem/store', 'RequisicaoMaterialController@store');
 Route::post('ordem/cancel', 'RequisicaoMaterialController@cancel');
