@@ -1,6 +1,6 @@
 <header class="main-header">
                         <!-- Logo -->
-            <a href="http://localhost/webpcp/public/home" class="logo">
+            <a href="{{url('/')}}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>PCP</b>WEB</span>
                 <!-- logo for regular state and mobile devices -->
@@ -54,10 +54,10 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="#" class="btn btn-default btn-flat">Configurações</a>
                 </div>
                 <div class="pull-right">
-                  <a href="{{url('/logout')}}" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="{{url('/logout')}}" class="btn btn-default btn-flat">Sair</a>
                 </div>
               </li>
             </ul>

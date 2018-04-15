@@ -8,11 +8,13 @@
 
 namespace App\Http\Controllers;
 
+use App\DAO\MaterialDAO;
+use App\DAO\ProdutoDAO;
 use App\DAO\RecebimentoMaterialDAO;
 use App\DAO\RequisicaoMaterialDAO;
 use App\DAO\UsuarioDAO;
-use App\Entities\ItemRetirada;
-use App\Entities\RetiradaProduto;
+use App\Entities\ItemRecebimento;
+use App\Entities\RecebimentoMaterial;
 use App\Entities\UnidadeMedida;
 use App\Http\Controllers\Controller;
 use DateTime;
@@ -28,45 +30,56 @@ class RecebimentoMaterialController extends Controller {
     private $recebimentoDAO;
     private $requisicaoDAO;
     private $materialDAO;
+    private $produtoDAO;
     private $usuarioDAO;
     
     public function __construct() {
         $this->recebimentoDAO = new RecebimentoMaterialDAO();
-         $this->requisicaoDAO = new RequisicaoMaterialDAO();
+        $this->requisicaoDAO = new RequisicaoMaterialDAO();
         $this->materialDAO = new MaterialDAO();
+        $this->produtoDAO = new ProdutoDAO();
         $this->usuarioDAO = new UsuarioDAO();
     }
 
     public function form() {
-        $produtos = $this->materialDAO->listar();
-        $data = array('requisicoes' => $produtos);
-        return view('recebimento.cadastro')->with($data);
+        $requisicoes = $this->requisicaoDAO->listar();
+        return view('recebimento.cadastro')->with('requisicoes',$requisicoes);
     }
     
 
     public function store(Request $request) {
-        $dataRetirada = new DateTime(date( 'Y-m-d',  strtotime(str_replace("/", "-",$request->input('dataRetirada')) )));
+        $dataRecebimento = new DateTime(date( 'Y-m-d',  strtotime(str_replace("/", "-",$request->input('dataRetirada')) )));
         $responsavel = $this->usuarioDAO->pesquisar(Session::get('idUsuarioLogado'));
-        $itens = $request->input('item');
+        $itens = $request->input('itens');
         
-     
+
         
-        $retirada = new RetiradaProduto($responsavel);
-        $retirada->setData($dataRetirada);
+        $recebimento = new RecebimentoMaterial($responsavel);
+        $recebimento->setData($dataRecebimento);
         
+
         foreach ($itens as $item) {
-           list($idProduto, $quantidade) = explode(';', $item);
-           $produto = $this->materialDAO->pesquisar($idProduto);
-           $itemRetirada = new ItemRetirada($retirada, $produto, $quantidade);
-           $retirada->adicionarItem($itemRetirada);
+           list($idRequisicao,$reqItem, $quantidade) = explode(';', $item);
+           $requisicao = $this->requisicaoDAO->pesquisar($idRequisicao);
+           $key = explode(".",$reqItem);
+           
+           $itemRequisicao = $requisicao->getItens()->get(($key[1]-1));
+           
+  
+           $itemRecebimento = new ItemRecebimento($recebimento, $itemRequisicao, $quantidade);
+           $recebimento->adicionarItem($itemRecebimento);
         }
         
 
+       
+        
+        
+
         try{
-             $this->recebimentoDAO->salvar($retirada);
-             return redirect('retirada/form')->with('success', 'Retirada de Produto nº' . $retirada->getId() . ' Registrada com Sucesso !!!');
+             $this->recebimentoDAO->salvar($recebimento);
+             return redirect('recebimento/form')->with('success', 'Recebimento de Material nº' . $recebimento->getId() . ' Registrado com Sucesso !!!');
         } catch (Exception $ex) {
-              return redirect('retirada/form')->with('error', 'Erro ao Registrar Retirada do Estoque ' . $ex->getMessage());
+              return redirect('recebimento/form')->with('error', 'Erro ao Registrar Recebimento de Material ' . $ex->getMessage());
         }
     }
     

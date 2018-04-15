@@ -189,10 +189,40 @@ class ProdutoController extends Controller {
         return view('produto.editar')->with($data);
     }
 
-    public function show() {
-        $produtos = $this->produtoDAO->listar();
-        return view('produto.lista')->with('produtos', $produtos);
+    public function show(Request $request){
+        $page = (int)  $request->input('page');
+        if($page!=0){
+            $materiais = $this->produtoDAO->listarComPaginacao(10,$page);
+        }else{
+            $materiais = $this->produtoDAO->listarComPaginacao();
+        }
+        return view('produto.lista')->with('produtos', $materiais);
     }
+    
+    
+    public function delete(Request $request){
+        $material = $this->produtoDAO->pesquisar($request->input('id'));
+
+       try{
+             $this->produtoDAO->remover($material);
+             return redirect()->action('ProdutoController@show')->with('success', 'Produto Excluído com Sucesso !!!');
+        } catch (Exception $ex) {
+             return redirect()->action('ProdutoController@show')->with('error', 'Falha Ao Excluir Produto. Produto já está sendo utilizado');
+        }
+    }
+    
+    public function pesquisarPorCriterio(Request $request){
+        $criterio = $request->input('criterio');
+        $valor = $request->input('valor');
+        $limit = (int) $request->input('limit');
+        $page = (int) $request->input('page');
+        $produtos = $this->produtoDAO->pesquisarPorCriterio($criterio,$valor,$limit,$page);
+        
+        $data = array('produtos'=>$produtos,'criterio'=>$criterio,'valor'=>$valor,'limit'=>$limit,'page'=>$page);
+        return view('produto.lista')->with($data);
+    }
+    
+    
 
     public function searchComponente(Request $request) {
         $id = $request->input('id');

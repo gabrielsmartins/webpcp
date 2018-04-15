@@ -63,6 +63,7 @@
 
             <div class="row">
                 <div class="col-sm-12">
+                     <div class="table-responsive">
                     <table class="table table-bordered table-striped table-responsive">
                         <thead>
                             <tr role="row">
@@ -119,6 +120,7 @@
 
                         </tbody>
                     </table>
+                     </div>
                 </div>
             </div>
             <div class="row">

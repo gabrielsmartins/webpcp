@@ -39,7 +39,7 @@ class RequisicaoMaterial extends Documento  {
     
     
     /**
-     * @ORM\OneToMany(targetEntity="ItemRequisicao", mappedBy="requisicao",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="ItemRequisicao", mappedBy="requisicao",cascade={"persist"},fetch="EAGER")
      */
     private $itens;
     
@@ -77,7 +77,8 @@ class RequisicaoMaterial extends Documento  {
     function setItens($itens) {
         $this->itens = $itens;
     }
-
+    
+    
     function setStatus($status) {
         $this->status = $status;
     }
@@ -92,12 +93,6 @@ class RequisicaoMaterial extends Documento  {
            $this->itens->remove($item);
         }
     }
-    
-    
-    
-    
-
-    
     
     
     

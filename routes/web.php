@@ -82,6 +82,8 @@ Route::post('produto/store', 'ProdutoController@store');
 Route::post('produto/update', 'ProdutoController@update');
 Route::get('produto/show', 'ProdutoController@show');
 Route::get('produto/edit/{id}', 'ProdutoController@edit');
+Route::post('produto/delete', 'ProdutoController@delete');
+Route::get('produto/pesquisa', 'ProdutoController@pesquisarPorCriterio');
 Route::post('produto/search_comp', 'ProdutoController@searchComponente');
 Route::post('produto/search_oper', 'ProdutoController@searchOperacao');
 

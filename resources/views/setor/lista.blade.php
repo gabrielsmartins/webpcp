@@ -62,7 +62,8 @@
 
             <div class="row">
                 <div class="col-sm-12">
-                    <table class="table table-bordered table-striped table-responsive">
+                    <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
                         <thead>
                             <tr role="row">
                                 <th class="sorting_asc"  rowspan="1" colspan="1" >ID</th>
@@ -116,6 +117,7 @@
 
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
             <div class="row">

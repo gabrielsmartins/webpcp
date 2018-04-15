@@ -19,7 +19,7 @@ class ItemRequisicao {
     private $id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="RequisicaoMaterial")
+     * @ORM\ManyToOne(targetEntity="RequisicaoMaterial",inversedBy="itens")
      * @ORM\JoinColumn(name="rm_id", referencedColumnName="rm_id")
      **/
     private $requisicao;
