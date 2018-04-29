@@ -6,40 +6,15 @@
 
 
 @section('content')
-<div class="box">
-    <div class="box-header">
-        <h3 class="box-title">Setor</h3>
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body">
-        <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-            <div class="row">
-                <form method="get" action="{{ action('SetorController@pesquisarPorCriterio') }}">
-                    <div class="col-sm-6">
-                        <label>Pesquisar por: </label>
 
-                        <select class="form-control input-sm" name="criterio">
-                            <option value="id" @if(! empty($criterio)) {{ $criterio == 'id' ? 'selected' : '' }} @endif>ID</option>
-                            <option value="descricao" @if(! empty($criterio)) {{  $criterio == 'descricao' ? 'selected' : '' }}@endif>Descrição</option>
-                        </select>
-                        <input class="form-control input-sm" placeholder=""  type="search" name="valor" @if(! empty($valor)) value=" {{ $valor }}" @endif>
-                               <button class="btn btn-save fa fa-search" type="submit"></button>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="pull-right">
-                            <label>Exibir </label>
-                            <select name="limit" aria-controls="example1" class="form-control input-sm" >
-                                <option value="10" @if(! empty($limit)) {{ $limit == 10 ? 'selected' : '' }} @endif>10</option>
-                                <option value="25" @if(! empty($limit))  {{ $limit == 25 ? 'selected' : '' }} @endif>25</option>
-                                <option value="50" @if(! empty($limit))  {{ $limit == 50 ? 'selected' : '' }} @endif>50</option>
-                                <option value="100" @if(! empty($limit))  {{ $limit == 100 ? 'selected' : '' }} @endif>100</option>
-                            </select> 
-                            <label>Registros</label>
-                        </div>
-                    </div>
 
-                </form> 
-            </div>
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h4>Basic Table</h4>
+        </div>
+        <div class="card-body">
+
 
             @if (session('success'))
             <br>
@@ -50,7 +25,7 @@
             @endif
 
 
-          @if (session('error'))
+            @if (session('error'))
             <br>
             <div class="alert alert-danger" role="alert"> 
                 {{ session('error') }}
@@ -61,29 +36,65 @@
 
 
             <div class="row">
-                <div class="col-sm-12">
-                    <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
-                        <thead>
+
+
+
+                <div class="card-body">
+                       <form method="get" action="{{ action('SetorController@pesquisarPorCriterio') }}">
+                        <div class="form-group">
+                            <label for="inlineFormInput" class="sr-only">Pesquisar por:</label>
+                            <select class="form-control input-sm" name="criterio">
+                            <option value="id" @if(! empty($criterio)) {{ $criterio == 'id' ? 'selected' : '' }} @endif>ID</option>
+                            <option value="descricao" @if(! empty($criterio)) {{  $criterio == 'descricao' ? 'selected' : '' }}@endif>Descrição</option>
+                        </select>
+                        <input class="form-control input-sm" placeholder=""  type="search" name="valor" @if(! empty($valor)) value=" {{ $valor }}" @endif>
+                               <button class="btn btn-primary fa fa-search" type="submit"></button>
+                            <div class="form-group pull-right">
+                                <label>Exibir </label>
+                                <select name="limit" aria-controls="example1" class="form-control input-sm" >
+                                <option value="10" @if(! empty($limit)) {{ $limit == 10 ? 'selected' : '' }} @endif>10</option>
+                                <option value="25" @if(! empty($limit))  {{ $limit == 25 ? 'selected' : '' }} @endif>25</option>
+                                <option value="50" @if(! empty($limit))  {{ $limit == 50 ? 'selected' : '' }} @endif>50</option>
+                                <option value="100" @if(! empty($limit))  {{ $limit == 100 ? 'selected' : '' }} @endif>100</option>
+                            </select> 
+                            <label>Registros</label>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+
+
+
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table">
+                         <thead>
                             <tr role="row">
-                                <th class="sorting_asc"  rowspan="1" colspan="1" >ID</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Descrição</th>
-                                <th class="sorting"  rowspan="1" colspan="2" style="width: 10px;">Ação</th>
+                                <th>ID</th>
+                                <th>Descrição</th>
+                                <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                           @foreach ($setores as $setor)
+                            @foreach ($setores as $setor)
                             <tr>
                                <td>{{$setor->getId() }}</td>
                                 <td>{{$setor->getDescricao() }}</td>
                                 <td  style="width: 10px;">
                                     <a href="{{ URL::to('/setor/edit/'.$setor->getId()) }}"
-                                       class="btn btn-save"><i class="fa fa-edit fa-sm"></i>
+                                       class="btn btn-primary"><i class="fa fa-edit fa-sm"></i>
                                     </a> 
                                 </td>
                                 <td  style="width: 10px;">
-                                    <button type="button"class="btn btn-cancel" data-toggle="modal" data-target="#myModal{{$setor->getId()}}"><i class="fa fa-remove fa-sm"></i></button>
+                                    <button type="button"class="btn btn-danger" data-toggle="modal" data-target="#myModal{{$setor->getId()}}"><i class="fa fa-remove fa-sm"></i></button>
                                 </td>
                             </tr>
 
@@ -117,9 +128,10 @@
 
                         </tbody>
                     </table>
-                    </div>
                 </div>
             </div>
+
+
             <div class="row">
                 <div class="col-sm-5">
 
@@ -133,13 +145,26 @@
 
                 </div>
             </div>
+
         </div>
     </div>
-    <!-- /.box-body -->
 </div>
+
+
+
 @stop
 
 
 @section('js')
 
 @stop
+
+
+
+
+
+
+
+
+
+

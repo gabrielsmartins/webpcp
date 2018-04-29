@@ -29,6 +29,7 @@ class UsuarioController extends Controller {
 
         if ($usuario != null) {
             $request->session()->put('usuarioLogado', $usuario->getNome());
+            $request->session()->put('usuarioLogadoPerfil', $usuario->getPerfil()->getDescricao());
             $request->session()->put('idUsuarioLogado', $usuario->getId());
             
             return redirect('home');

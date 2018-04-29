@@ -106,7 +106,7 @@
 
 
                         <div class="form-group row">
-                            <label for="unidadeMedida" class="col-sm-1 control-label">Unidade
+                            <label for="unidadeMedida" class="col-sm-2 control-label">Unidade
                                 de Medida:</label>
 
                             <div class="col-sm-3">
@@ -325,7 +325,7 @@
                             <div class="bootstrap-timepicker">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input type="text" class="form-control timepicker" id="tempoSetup" name="tempoSetup">
+                                        <input type="text" class="form-control timepicker" id="tempoSetup" name="tempoSetup" placeholder="00:00:00">
 
                                         <div class="input-group-addon">
                                             <i class="fa fa-clock-o"></i>
@@ -345,7 +345,7 @@
                             <div class="bootstrap-timepicker">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input type="text" class="form-control timepicker" id="tempoProducao" name="tempoProducao">
+                                        <input type="text" class="form-control timepicker" id="tempoProducao" name="tempoProducao" placeholder="00:00:00">
 
                                         <div class="input-group-addon">
                                             <i class="fa fa-clock-o"></i>
@@ -362,7 +362,7 @@
                             <div class="bootstrap-timepicker">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input type="text" class="form-control timepicker" id="tempoFinalizacao" name="tempoFinalizacao">
+                                        <input type="text" class="form-control timepicker" id="tempoFinalizacao" name="tempoFinalizacao" placeholder="00:00:00">
 
                                         <div class="input-group-addon">
                                             <i class="fa fa-clock-o"></i>

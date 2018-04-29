@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page', 'Requisição Material - Cadastro')
+@section('page', 'Requisição Material - Emitir')
 
 @section('title','Novo - Requisição Material')
 
@@ -103,7 +103,7 @@
         <div class="box-footer">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <button type="reset" class="btn btn-cancel pull-right fa fa-ban"> Cancelar</button>
-            <button type="submit" class="btn btn-save pull-right fa fa-save"> Salvar</button>
+            <button type="submit" class="btn btn-save pull-right fa fa-save"> Emitir</button>
         </div>
         
         

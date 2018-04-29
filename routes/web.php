@@ -12,7 +12,6 @@
 */
 
 
-
 Route::get('/', 'MainController@index');
 
 

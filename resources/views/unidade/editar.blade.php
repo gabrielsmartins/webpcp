@@ -6,39 +6,35 @@
  
 
 @section('content')
-      <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Cadastro</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form class="form-horizontal" action="{{ action('UnidadeMedidaController@update') }}"
-								method="POST" accept-charset="UTF-8">
-              <div class="box-body">
-                <div class="form-group row">
-                    <input type="hidden" name="id" value="{{ $unidade->getId()}}">
-                  <label for="descricao" class="col-sm-1 control-label">Descrição:</label>
-
-                  <div class="col-sm-6">
-                    <input type="text" class="form-control" id="descricao" placeholder="Descrição" name="descricao" required="required" value="{{ $unidade->getDescricao()}}">
-                  </div>
+     
+  <div class="container-fluid">
+    <div class="row">
+        
+        <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header d-flex align-items-center">
+                  <h4>{{ $unidade->getDescricao()}} - {{ $unidade->getSigla()}}</h4>
                 </div>
-                <div class="form-group row">
-                  <label for="sigla" class="col-sm-1 control-label">Sigla:</label>
-
-                  <div class="col-sm-3">
-                    <input type="text" class="form-control" id="sigla" placeholder="Sigla" name="sigla" required="required" value="{{ $unidade->getSigla()}}">
-                  </div>
+                <div class="card-body">
+                   <form class="form-horizontal" action="{{ action('UnidadeMedidaController@update') }}" method="POST" accept-charset="UTF-8">
+                    <div class="form-group">
+                      <label>Descrição:</label>
+                       <input type="hidden" name="id" value="{{ $unidade->getId()}}">
+                      <input placeholder="Descrição" class="form-control" type="text" name="descricao" value="{{ $unidade->getDescricao()}}">
+                    </div>
+                    <div class="form-group">       
+                      <label>Sigla:</label>
+                      <input placeholder="Sigla" class="form-control" type="text" name="sigla" value="{{ $unidade->getSigla()}}">
+                    </div>
+                    <div class="form-group">       
+                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                      <input value="Salvar" class="btn btn-primary" type="submit">
+                    </div>
+                  </form>
                 </div>
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button type="reset" class="btn btn-cancel pull-right fa fa-ban"> Cancelar</button>
-                <button type="submit" class="btn btn-save pull-right fa fa-save"> Salvar</button>
-              </div>
-              
-              @if (session('success'))
+                  
+                  
+                    @if (session('success'))
                         <div class="alert alert-success" role="alert"> 
                              {{ session('success') }}
                         </div>
@@ -50,9 +46,19 @@
                              {{ session('error') }}
                         </div>
                         @endif
-              <!-- /.box-footer -->
-            </form>
-          </div>
+                  
+              </div>
+            </div>
+        
+    </div>
+</div>
 @stop
+
+
+
+
+
+
+
 
 

@@ -40,3 +40,10 @@
   float: left;
   border-bottom-width: 0;
 }
+
+
+thead,tr,tbody{
+display:block;
+}
+
+

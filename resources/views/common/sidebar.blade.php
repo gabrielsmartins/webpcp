@@ -1,242 +1,171 @@
-<aside class="main-sidebar">
+<nav class="side-navbar">
+    <div class="side-navbar-wrapper">
+        <!-- Sidebar Header    -->
+        <div class="sidenav-header d-flex align-items-center justify-content-center">
+            <!-- User Info-->
 
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel">
-            <div class="pull-left image">
-                
-                <img src="{{ asset('adminlte/img/user.png') }}" class="img-circle" alt="User Image">
+            <div class="sidenav-header-inner text-center"><img src=" {{ asset('dashboard/img/avatar-1.jpg') }}" alt="person" class="img-fluid rounded-circle">
+                <h2 class="h5">@if(Session::has('usuarioLogado')){{Session::get('usuarioLogado')}} @endif</h2><span>@if(Session::has('usuarioLogadoPerfil')){{Session::get('usuarioLogadoPerfil')}} @endif</span>
             </div>
-            <div class="pull-left info">
-
-
-                @if(Session::has('usuarioLogado'))
-                <p>{{Session::get('usuarioLogado')}}   </p>
-                @endif
-
-                <!-- Status -->
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-            </div>
+            <!-- Small Brand information, appears on minimized sidebar-->
+            <div class="sidenav-header-logo"><a href="index.html" class="brand-small text-center"> <strong>P</strong><strong class="text-primary">W</strong></a></div>
         </div>
+        <!-- Sidebar Navigation Menus-->
 
-        <!-- search form (Optional) -->
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                    </button>
-                </span>
-            </div>
-        </form>
-        <!-- /.search form -->
 
-        <!-- Sidebar Menu -->
-        <ul class="sidebar-menu" data-widget="tree">
-            <!-- ENGENHARIA -->
-            <li class="header">ENGENHARIA</li>
-            <!-- Optionally, you can add icons to the links -->
-            <li class="treeview">
-                <a href="#"><i class="fa fa-cubes"></i> <span>Produtos</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{url('produto/form')}}">Novo</a></li>
+        <!--ENGENHARIA INICIO -->
+        <div class="main-menu">
+            <h5 class="sidenav-heading">ENGENHARIA</h5>
+            <ul id="side-main-menu" class="side-menu list-unstyled">                  
+                <li><a href="#produtos" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Produtos </a>
+                    <ul id="produtos" class="collapse list-unstyled ">
+                        <li><a href="{{url('produto/form')}}">Novo</a></li>
                     <li><a href="{{url('produto/show')}}">Consulta</a></li>
                     <li><a href="#">Relatórios</a></li>
-                </ul>
-            </li>
-
-
-            <li class="treeview">
-                <a href="#"><i class="fa fa-cube"></i> <span>Materiais</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{url('material/form')}}">Novo</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="#materiais" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Materiais </a>
+                    <ul id="materiais" class="collapse list-unstyled ">
+                        <li><a href="{{url('material/form')}}">Novo</a></li>
                     <li><a href="{{url('material/show')}}">Consulta</a></li>
                     <li><a href="#">Relatórios</a></li>
-                </ul>
-            </li>
-
-
-            <li class="treeview">
-                <a href="#"><i class="fa fa-calculator"></i> <span>Unidades de Medida</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{url('unidade/form')}}">Novo</a></li>
+                    </ul>
+                </li>
+                
+                
+                
+                <li><a href="#unidades" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Unidades </a>
+                    <ul id="unidades" class="collapse list-unstyled ">
+                         <li><a href="{{url('unidade/form')}}">Novo</a></li>
                     <li><a href="{{url('unidade/show')}}">Consulta</a></li>
                     <li><a href="#">Relatórios</a></li>
-                </ul>
-            </li>
-
-
-
-            <li class="treeview">
-                <a href="#"><i class="fa fa-square-o"></i> <span>Operações</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{url('operacao/form')}}">Novo</a></li>
+                    </ul>
+                </li>
+                
+                
+                
+                <li><a href="#operacoes" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Operações </a>
+                    <ul id="operacoes" class="collapse list-unstyled ">
+                        <li><a href="{{url('operacao/form')}}">Novo</a></li>
                     <li><a href="{{url('operacao/show')}}">Consulta</a></li>
                     <li><a href="#">Relatórios</a></li>
-                </ul>
-            </li>
+                    </ul>
+                </li>
 
+            </ul>
+        </div>
+        <!-- ENGENHARIA FIM-->
 
-            <!-- PCP -->
-            <li class="header">PCP</li>
-
-
-            <li class="treeview">
-                <a href="#"><i class="fa fa-pencil-square-o"></i> <span>Ordem de Produção</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{url('ordem/form')}}">Novo</a></li>
+        <!--PCP INICIO -->
+        <div class="admin-menu">
+            <h5 class="sidenav-heading">PCP</h5>
+            <ul id="side-main-menu" class="side-menu list-unstyled">                  
+                <li><a href="#op" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Ordem de Produção </a>
+                    <ul id="op" class="collapse list-unstyled ">
+                         <li><a href="{{url('ordem/form')}}">Novo</a></li>
                     <li><a href="{{url('ordem/show')}}">Consulta</a></li>
                     <li><a href="#">Relatórios</a></li>
-                </ul>
-            </li>
-
-
-            <li class="treeview">
-                <a href="#"><i class="fa fa-file-text-o"></i> <span>Requisição de Material</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{url('requisicao/form')}}">Novo</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="#rm" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Requisição Material </a>
+                    <ul id="rm" class="collapse list-unstyled ">
+                         <li><a href="{{url('requisicao/form')}}">Novo</a></li>
                     <li><a href="{{url('requisicao/show')}}">Consulta</a></li>
                     <li><a href="#">Relatórios</a></li>
-                </ul>
-            </li>
+                    </ul>
+                </li>
+                
+
+            </ul>
+        </div>
+        <!--PCP FIM -->
 
 
-            <!-- PRODUÇÃO -->
-            <li class="header">PRODUÇÃO</li>
-
-            <li class="treeview">
-                <a href="#"><i class="fa fa-wrench"></i> <span>Recursos</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{url('recurso/form')}}">Novo</a></li>
+        <!--PRODUÇÃO INICIO -->
+        <div class="admin-menu">
+            <h5 class="sidenav-heading">PRODUÇÃO</h5>
+            <ul id="side-main-menu" class="side-menu list-unstyled">                  
+                <li><a href="#recursos" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Recursos </a>
+                    <ul id="recursos" class="collapse list-unstyled ">
+                         <li><a href="{{url('recurso/form')}}">Novo</a></li>
                     <li><a href="{{url('recurso/show')}}">Consulta</a></li>
                     <li><a href="#">Relatórios</a></li>
-                </ul>
-            </li>
-
-
-            <li class="treeview">
-                <a href="#"><i class="fa fa-sitemap"></i> <span>Setores</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{url('setor/form')}}">Novo</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="#setores" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Setores </a>
+                    <ul id="setores" class="collapse list-unstyled ">
+                          <li><a href="{{url('setor/form')}}">Novo</a></li>
                     <li><a href="{{url('setor/show')}}">Consulta</a></li>
                     <li><a href="#">Relatórios</a></li>
-                </ul>
-            </li>
-
-
-            <li class="treeview">
-                <a href="#"><i class="fa fa-clock-o"></i> <span>Apontamentos</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="#">Registrar</a></li>
+                    </ul>
+                </li>
+                
+                
+                
+                <li><a href="#apontamentos" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Apontamentos </a>
+                    <ul id="apontamentos" class="collapse list-unstyled ">
+                          <li><a href="#">Registrar</a></li>
                     <li><a href="#">Consulta</a></li>
                     <li><a href="#">Relatórios</a></li>
-                </ul>
-            </li>
+                    </ul>
+                </li>
+               
+
+            </ul>
+        </div>
+        <!--PRODUÇÃO FIM -->
 
 
-
-            <!-- EXPEDIÇÃO -->
-            <li class="header">EXPEDIÇÃO</li>
-
-            <li class="treeview">
-                <a href="#"><i class="fa fa-arrow-circle-left "></i> <span>Saídas</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{url('retirada/form')}}">Registrar</a></li>
+        <!--EXPEDIÇÃO INICIO -->
+        <div class="admin-menu">
+            <h5 class="sidenav-heading">EXPEDIÇÃO</h5>
+             <ul id="side-main-menu" class="side-menu list-unstyled">                  
+                <li><a href="#saidas" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Saídas </a>
+                    <ul id="saidas" class="collapse list-unstyled ">
+                      <li><a href="{{url('retirada/form')}}">Registrar</a></li>
                     <li><a href="{{url('retirada/show')}}">Consulta</a></li>
                     <li><a href="#">Relatórios</a></li>
-                </ul>
-            </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!--EXPEDIÇÃO FIM -->
 
 
-            <!-- ALMOXARIFADO -->
-            <li class="header">ALMOXARIFADO</li>
-
-            <li class="treeview">
-                <a href="#"><i class="fa fa-arrow-circle-right"></i> <span>Entradas</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{url('recebimento/form')}}">Registrar</a></li>
+        <!--ALMOXARIFADO INICIO -->
+        <div class="admin-menu">
+            <h5 class="sidenav-heading">ALMOXARIFADO</h5>
+           <ul id="side-main-menu" class="side-menu list-unstyled">                  
+                <li><a href="#entradas" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Entradas </a>
+                    <ul id="entradas" class="collapse list-unstyled ">
+                       <li><a href="{{url('recebimento/form')}}">Registrar</a></li>
                     <li><a href="{{url('recebimento/show')}}">Consulta</a></li>
                     <li><a href="#">Relatórios</a></li>
-                </ul>
-            </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!--ALMOXARIFADO FIM -->
 
 
-            <!-- ADMIN -->
-            <li class="header">ADMINISTRADOR</li>
 
-            <li class="treeview">
-                <a href="#"><i class="fa fa-user"></i> <span>Usuários</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{url('usuario/form')}}">Novo</a></li>
+        <!--ADMINISTRADOR INICIO -->
+        <div class="admin-menu">
+            <h5 class="sidenav-heading">ADMINISTRADOR</h5>
+            <ul id="side-main-menu" class="side-menu list-unstyled">                  
+                <li><a href="#usuarios" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Usuários </a>
+                    <ul id="usuarios" class="collapse list-unstyled ">
+                          <li><a href="{{url('usuario/form')}}">Novo</a></li>
                     <li><a href="{{url('usuario/show')}}">Consulta</a></li>
-                </ul>
-            </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!--ADMINISTRADOR FIM -->
 
 
-            <li class="treeview">
-                <a href="#"><i class="fa fa-users"></i> <span>Perfis</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="#">Novo</a></li>
-                    <li><a href="#">Consulta</a></li>
-                </ul>
-            </li>
-
-        </ul>
-        <!-- /.sidebar-menu -->
-    </section>
-    <!-- /.sidebar -->
-</aside>
+    </div>
+</nav>

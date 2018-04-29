@@ -8,18 +8,19 @@
 @section('content')
 
 
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header d-flex align-items-center">
+                    <h4>{{$material->getCodigoInterno()}} - {{$material->getDescricao()}}</h4>
+                </div>
+                <div class="card-body">
+                   <form class="form-horizontal" action="{{ action('MaterialController@update') }} "method="POST" accept-charset="UTF-8">
 
 
-
-
-<div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Cadastro</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-             <form class="form-horizontal" action="{{ action('MaterialController@update') }} "method="POST" accept-charset="UTF-8">
-             <div class="box-body">
+<div class="box-body">
             
 								
 								  <div class="box-header with-border">
@@ -169,29 +170,43 @@
              
               <!-- /.box-body -->
               </div>
-              <div class="box-footer">
-                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button type="reset" class="btn btn-cancel pull-right fa fa-ban"> Cancelar</button>
-                <button type="submit" class="btn btn-save pull-right fa fa-save"> Salvar</button>
-              </div>
-              <!-- /.box-footer -->
-              
-              @if (session('success'))
-        <div class="alert alert-success" role="alert"> 
-            {{ session('success') }}
-        </div>
-        @endif
 
 
-        @if (session('error'))
-        <div class="alert alert-danger" role="alert"> 
-            {{ session('error') }}
+
+
+                        <div class="form-group">       
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input value="Salvar" class="btn btn-primary" type="submit">
+                        </div>
+                    </form>
+                </div>
+
+
+                @if (session('success'))
+                <div class="alert alert-success" role="alert"> 
+                    {{ session('success') }}
+                </div>
+                @endif
+
+
+                @if (session('error'))
+                <div class="alert alert-danger" role="alert"> 
+                    {{ session('error') }}
+                </div>
+                @endif
+
+            </div>
         </div>
-        @endif
-              
-            </form>
-          </div>
+
+    </div>
+</div>
+
 
 @stop
+
+
+
+
+
 
 

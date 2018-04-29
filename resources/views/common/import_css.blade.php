@@ -1,41 +1,34 @@
-<!-- Tell the browser to be responsive to screen width -->
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<!-- Bootstrap 3.3.7 -->
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="{{ asset('dashboard/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="{{ asset('dashboard/vendor/font-awesome/css/font-awesome.min.css') }}">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="{{ asset('dashboard/css/fontastic.css') }}">
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <!-- jQuery Circle-->
+    <link rel="stylesheet" href="{{ asset('dashboard/css/grasp_mobile_progress_circle-1.0.0.min.css') }}">
+    <!-- Custom Scrollbar-->
+    <link rel="stylesheet" href="{{ asset('dashboard/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css') }}">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{{ asset('dashboard/css/style.default.css') }}" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="{{ asset('dashboard/css/custom.css') }}">
+  
+    
+<!-- DatePicker -->
+<link rel="stylesheet" href="{{ asset('dashboard/vendor/select2/css/select2.min.css') }}">
 
-
-<link rel="stylesheet" href="{{ asset('adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
-
-<!-- Font Awesome -->
-<link rel="stylesheet" href="{{ asset('adminlte/bower_components/font-awesome/css/font-awesome.min.css') }}">
-<!-- Ionicons -->
-<link rel="stylesheet" href="{{ asset('adminlte/bower_components/Ionicons/css/ionicons.min.css') }}">
 
 <!-- Select2 -->
+<link rel="stylesheet" href="{{ asset('dashboard/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{{ asset('dashboard/img/favicon.icos') }}">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    
+    
+    
+<!-- Select2 -->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css">
-
-<!-- Theme style -->
-<link rel="stylesheet" href="{{ asset('adminlte/dist/css/AdminLTE.css') }}"/>
-
-<!-- DataTables -->
-<link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-
-<link rel="stylesheet" href="{{ asset('adminlte/dist/css/skins/skin-red.css') }} ">
-
-<link rel="stylesheet" href="{{ asset('adminlte/dist/css/custom.css') }} ">
-
-<!-- DatePicker -->
-<link rel="stylesheet" href="{{ asset('adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}">
-
-<!-- TimePicker -->
-<link rel="stylesheet" href="{{ asset('adminlte/plugins/timepicker/bootstrap-timepicker.min.css') }}">
-
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
-
-<!-- Google Font -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
-
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">

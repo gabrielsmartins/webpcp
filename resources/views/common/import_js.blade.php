@@ -1,32 +1,21 @@
-<!-- Jquery -->
-<script src="{{ asset('adminlte/bower_components/jquery/dist/jquery.min.js') }}" type="text/javascript"></script>
 
-<!-- SlimScroll -->
-<script src="{{ asset('adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
-
-<!-- Bootstrap -->
-<script src="{{ asset('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}" type="text/javascript"></script>
-
+<!-- JavaScript files-->
+<script src="{{ asset('dashboard/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('dashboard/vendor/popper.js/umd/popper.min.js') }}"></script>
+<script src="{{ asset('dashboard/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('dashboard/js/grasp_mobile_progress_circle-1.0.0.min.js') }}"></script>
+<script src="{{ asset('dashboard/vendor/jquery.cookie/jquery.cookie.js') }}"></script>
+<script src="{{ asset('dashboard/vendor/chart.js/Chart.min.js') }}"></script>
+<script src="{{ asset('dashboard/vendor/jquery-validation/jquery.validate.min.js') }}"></script>
+<!-- Select2 -->
+<script src="{{ asset('dashboard/vendor/select2/dist/js/select2.min.js') }}"></script>
 <!-- DatePicker -->
-<script src="{{ asset('adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
-<script src="{{ asset('adminlte/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.pt-BR.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('dashboard/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+<script src="{{ asset('dashboard/vendor/bootstrap-datepicker/dist/locales/bootstrap-datepicker.pt-BR.min.js') }}" type="text/javascript"></script>
 
-<!-- TimePicker -->
-<script src="{{ asset('adminlte/plugins/timepicker/bootstrap-timepicker.js') }}" type="text/javascript"></script>
+<script src="{{ asset('dashboard/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+<!-- Main File-->
+<script src="{{ asset('dashboard/js/front.js') }}"></script>
 
-    <!-- Select2 -->
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js" type="text/javascript"></script>
-
-    <!-- DataTables -->
-<script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js" type="text/javascript"></script>
-
-    <!-- ChartJS -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js" type="text/javascript"></script>
-
-
-<!-- AdminLTE -->
-<script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}" type="text/javascript"></script>
-
-            
-            
-           
