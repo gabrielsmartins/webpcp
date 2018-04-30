@@ -6,41 +6,15 @@
 
 
 @section('content')
-<div class="box">
-    <div class="box-header">
-        <h3 class="box-title">Produto</h3>
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body">
-        <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-            <div class="row">
-                <form method="get" action="{{ action('ProdutoController@pesquisarPorCriterio') }}">
-                    <div class="col-sm-6">
-                        <label>Pesquisar por: </label>
 
-                        <select class="form-control input-sm" name="criterio">
-                            <option value="id" @if(! empty($criterio)) {{ $criterio == 'id' ? 'selected' : '' }} @endif>ID</option>
-                            <option value="descricao" @if(! empty($criterio)) {{  $criterio == 'descricao' ? 'selected' : '' }}@endif>Descrição</option>
-                            <option value="codigoInterno" @if(! empty($criterio)) {{  $criterio == 'codigoInterno' ? 'selected' : '' }}@endif>Código Interno</option>
-                        </select>
-                        <input class="form-control input-sm" placeholder=""  type="search" name="valor" @if(! empty($valor)) value=" {{ $valor }}" @endif>
-                               <button class="btn btn-save fa fa-search" type="submit"></button>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="pull-right">
-                            <label>Exibir </label>
-                            <select name="limit" aria-controls="example1" class="form-control input-sm" >
-                                <option value="10" @if(! empty($limit)) {{ $limit == 10 ? 'selected' : '' }} @endif>10</option>
-                                <option value="25" @if(! empty($limit))  {{ $limit == 25 ? 'selected' : '' }} @endif>25</option>
-                                <option value="50" @if(! empty($limit))  {{ $limit == 50 ? 'selected' : '' }} @endif>50</option>
-                                <option value="100" @if(! empty($limit))  {{ $limit == 100 ? 'selected' : '' }} @endif>100</option>
-                            </select> 
-                            <label>Registros</label>
-                        </div>
-                    </div>
 
-                </form> 
-            </div>
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h4>Basic Table</h4>
+        </div>
+        <div class="card-body">
+
 
             @if (session('success'))
             <br>
@@ -51,7 +25,7 @@
             @endif
 
 
-          @if (session('error'))
+            @if (session('error'))
             <br>
             <div class="alert alert-danger" role="alert"> 
                 {{ session('error') }}
@@ -62,29 +36,66 @@
 
 
             <div class="row">
-                <div class="col-sm-12">
-                    <div class="table-responsive">
-                    <table class="table table-bordered table-stripe">
+
+
+
+                <div class="card-body">
+                     <form method="get" action="{{ action('ProdutoController@pesquisarPorCriterio') }}">
+                        <div class="form-group">
+                            <label for="inlineFormInput" class="sr-only">Pesquisar por:</label>
+                             <select class="form-control input-sm" name="criterio">
+                            <option value="id" @if(! empty($criterio)) {{ $criterio == 'id' ? 'selected' : '' }} @endif>ID</option>
+                            <option value="descricao" @if(! empty($criterio)) {{  $criterio == 'descricao' ? 'selected' : '' }}@endif>Descrição</option>
+                            <option value="codigoInterno" @if(! empty($criterio)) {{  $criterio == 'codigoInterno' ? 'selected' : '' }}@endif>Código Interno</option>
+                        </select>
+                        <input class="form-control input-sm" placeholder=""  type="search" name="valor" @if(! empty($valor)) value=" {{ $valor }}" @endif>
+                               <button class="btn btn-save fa fa-search" type="submit"></button>
+                            <div class="form-group pull-right">
+                                <label>Exibir </label>
+                                 <select name="limit" aria-controls="example1" class="form-control input-sm" >
+                                <option value="10" @if(! empty($limit)) {{ $limit == 10 ? 'selected' : '' }} @endif>10</option>
+                                <option value="25" @if(! empty($limit))  {{ $limit == 25 ? 'selected' : '' }} @endif>25</option>
+                                <option value="50" @if(! empty($limit))  {{ $limit == 50 ? 'selected' : '' }} @endif>50</option>
+                                <option value="100" @if(! empty($limit))  {{ $limit == 100 ? 'selected' : '' }} @endif>100</option>
+                            </select> 
+                                <label>Registros</label>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+
+
+
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table">
                         <thead>
-                            <tr role="row">
-                                <th class="sorting_asc"  rowspan="1" colspan="1" >ID</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Descrição</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Código Interno</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >U.M</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Qntd Estq.</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Qntd Min.</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Valor Unit.</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Peso</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Comp.</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Larg.</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Alt.</th>
-                                <th class="sorting"  rowspan="1" colspan="1" >Status.</th>
-                                <th class="sorting"  rowspan="1" colspan="2" style="width: 10px;">Ação</th>
+                             <tr>
+                                <th>ID</th>
+                                <th>Descrição</th>
+                                <th>Código Interno</th>
+                                <th>U.M</th>
+                                <th>Qntd Estq.</th>
+                                <th>Qntd Min.</th>
+                                <th>Valor Unit.</th>
+                                <th>Peso</th>
+                                <th>Comp.</th>
+                                <th>Larg.</th>
+                                <th>Alt.</th>
+                                <th>Status.</th>
+                                <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                          @foreach($produtos as $produto)
+                            @foreach($produtos as $produto)
                             <tr>
                                 <td>{{$produto->getId()}}</td>
                                 <td>{{$produto->getDescricao()}}</td>
@@ -100,7 +111,7 @@
 
                                 @if ($produto->getSituacao() == 'ATIVO')
                                 <td><span class="badge bg-green">{{str_replace('_',' ',$produto->getSituacao())}}</span></td>
-                                @elseif ($material->getSituacao() == 'INATIVO')
+                                @elseif ($produto->getSituacao() == 'INATIVO')
                                 <td><span class="badge bg-gray">{{str_replace('_',' ',$produto->getSituacao())}}</span></td>
                                 @else
                                 <td><span class="badge bg-yellow">{{str_replace('_',' ',$produto->getSituacao())}}</span></td>
@@ -108,16 +119,16 @@
 
                                 <td  style="width: 10px;">
                                     <a href="{{ URL::to('/produto/edit/'.$produto->getId()) }}"
-                                       class="btn btn-save"><i class="fa fa-edit fa-sm"></i>
+                                       class="btn btn-primary"><i class="fa fa-edit fa-sm"></i>
                                     </a> 
                                 </td>
                                 <td  style="width: 10px;">
-                                    <button type="button"class="btn btn-cancel" data-toggle="modal" data-target="#myModal{{$produto->getId()}}"><i class="fa fa-remove fa-sm"></i></button>
+                                    <button type="button"class="btn btn-danger" data-toggle="modal" data-target="#myModal{{$produto->getId()}}"><i class="fa fa-remove fa-sm"></i></button>
                                 </td>
                             </tr>
 
                             <!-- Modal -->
-                        <div class="modal fade" id="myModal{{$produto->getId()}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                          <div class="modal fade" id="myModal{{$produto->getId()}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -146,14 +157,15 @@
 
                         </tbody>
                     </table>
-                    </div>
                 </div>
             </div>
+
+
             <div class="row">
                 <div class="col-sm-5">
 
                 </div>
-                <div class="col-sm-7">
+                 <div class="col-sm-7">
                     @if(! empty($criterio))
                     {{ $produtos->appends(['criterio'=>$criterio,'valor'=>$valor,'limit'=>$limit])->links() }}
                     @else
@@ -162,9 +174,9 @@
 
                 </div>
             </div>
+
         </div>
     </div>
-    <!-- /.box-body -->
 </div>
 @stop
 
@@ -172,7 +184,6 @@
 @section('js')
 
 @stop
-
 
 
 

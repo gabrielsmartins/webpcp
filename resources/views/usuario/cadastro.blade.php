@@ -60,15 +60,16 @@
                                 <input type="password" class="form-control" id="confirmacao_senha" placeholder="Confirmação Senha" name="confirmacao_senha" required="required">
                             </div>
                         </div>
-                        
-                         <div class="form-group">       
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input value="Salvar" class="btn btn-primary" type="submit">
-                </div>
+
+                        <div class="form-group">       
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <button type="reset" class="btn btn-secondary pull-right fa fa-ban"> Cancelar</button>
+                            <button type="submit" class="btn btn-primary pull-right fa fa-save"> Salvar</button>
+                        </div>
                 </div>
 
 
-               
+
                 </form>
             </div>
 

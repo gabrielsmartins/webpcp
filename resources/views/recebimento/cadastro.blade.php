@@ -29,8 +29,8 @@
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" disabled="true" value="{{Session::get('usuarioLogado')}}"/>
                                 </div>
-         
-                                    <label for="descricao" class="col-sm-2 control-label">Data:</label>
+
+                                <label for="descricao" class="col-sm-2 control-label">Data:</label>
 
                                 <div class="col-sm-3">
                                     <div class="input-group date">
@@ -44,33 +44,34 @@
                         </div>
 
 
-                        <div class="table-responsive">
-                            <table class="table table-fixed table-striped" id="myTable">
-                                <thead>
-                                    <tr>
-                                        <th class="col-xs-1">ID Req</th>
-                                        <th class="col-xs-1">Item Nº</th>
-                                        <th class="col-xs-1">Data Emissão</th>
-                                        <th class="col-xs-3">Descrição</th>
-                                        <th class="col-xs-1">Qntd Solic.</th>
-                                        <th class="col-xs-1">Prazo</th>
-                                        <th class="col-xs-1">Status</th>
-                                        <th class="col-xs-2">Qntd Solic.</th>
-                                        <th class="col-xs-1">Ação</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tabelaDestino">
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table class="table header-fixed table-striped" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Req</th>
+                                            <th>Item Nº</th>
+                                            <th>Data Emissão</th>
+                                            <th>Descrição</th>
+                                            <th>Qntd Solic.</th>
+                                            <th>Prazo</th>
+                                            <th>Status</th>
+                                            <th>Qntd Solic.</th>
+                                            <th>Ação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabelaDestino">
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-
 
 
                         <!-- /.box-body -->
                         <div class="box-footer">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <button type="reset" class="btn btn-danger pull-right fa fa-ban"> Cancelar</button>
+                            <button type="reset" class="btn btn-secondary pull-right fa fa-ban"> Cancelar</button>
                             <button type="submit" class="btn btn-primary pull-right fa fa-save"> Registrar</button>
                         </div>
 
@@ -114,33 +115,33 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-fixed table-striped" id="tabelaOrigem">
+                        <table class="table header-fixed table-striped" id="tabelaOrigem">
                             <thead>
                                 <tr>
-                                    <th class="col-xs-1">ID Req</th>
-                                    <th class="col-xs-1">Item Nº</th>
-                                    <th class="col-xs-1">Data Emissão</th>
-                                    <th class="col-xs-3">Descrição</th>
-                                    <th class="col-xs-1">Qntd Solic.</th>
-                                    <th class="col-xs-1">Prazo</th>
-                                    <th class="col-xs-1">Status</th>
-                                    <th class="col-xs-2">Qntd Solic.</th>
-                                    <th class="col-xs-1">Ação</th>
+                                    <th>ID Req</th>
+                                    <th>Item Nº</th>
+                                    <th>Data Emissão</th>
+                                    <th>Descrição</th>
+                                    <th>Qntd Solic.</th>
+                                    <th>Prazo</th>
+                                    <th>Status</th>
+                                    <th>Qntd Solic.</th>
+                                    <th>Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($requisicoes as $requisicao)
                                 @foreach($requisicao->getItens() as $item)
                                 <tr>
-                                    <td class="col-xs-1"><span id="req_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getId()}}</span></td>
-                                    <td class="col-xs-1"><span id="req_item_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getId()}}.{{ $loop->iteration }}</span></td>
-                                    <td class="col-xs-1"><span id="data_emissao_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getDataEmissao()->format('d/m/Y') }}</span></td>
-                                    <td class="col-xs-3"><span id="material_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getMaterial()->getDescricao()}}</span></td>
-                                    <td class="col-xs-1"><span id="quantidade_solicitada_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getQuantidade()}}</span></td>
-                                    <td class="col-xs-1"><span id="prazo_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getPrazo()->format('d/m/Y')}}</span></td>
-                                    <td class="col-xs-1"><span id="status_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getStatus()}}</span></td>
-                                    <td class="col-xs-2"><input type="number"  id="quantidade_recebida_{{ $loop->parent->iteration }}.{{ $loop->iteration }}" /></td>
-                                    <th class="col-xs-1"><button class="btn btn-primary fa fa-plus" onclick="adicionaItem({{ $loop->parent->iteration }}.{{ $loop->iteration }})"></button></th>
+                                    <td><span id="req_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getId()}}</span></td>
+                                    <td><span id="req_item_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getId()}}.{{ $loop->iteration }}</span></td>
+                                    <td><span id="data_emissao_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getDataEmissao()->format('d/m/Y') }}</span></td>
+                                    <td><span id="material_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getMaterial()->getDescricao()}}</span></td>
+                                    <td><span id="quantidade_solicitada_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getQuantidade()}}</span></td>
+                                    <td><span id="prazo_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getPrazo()->format('d/m/Y')}}</span></td>
+                                    <td><span id="status_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getStatus()}}</span></td>
+                                    <td><input type="number"  id="quantidade_recebida_{{ $loop->parent->iteration }}.{{ $loop->iteration }}" /></td>
+                                    <td><button class="btn btn-primary fa fa-plus" onclick="adicionaItem({{ $loop->parent->iteration }}.{{ $loop->iteration }})"></button></td>
                                 </tr>
                                 @endforeach
                                 @endforeach
@@ -223,15 +224,15 @@
     var quantidade_recebida = document.getElementById("quantidade_recebida_" + id).value;
     var row = "<tr id='row_" + id + "'>" +
             "<input type='hidden' value='" + req + ";" + req_item + ";" + quantidade_recebida + "' name='itens[]'/>" +
-            "<td class='col-xs-1'>" + req + "</td>" +
-            "<td class='col-xs-1'>" + req_item + "</td>" +
-            "<td class='col-xs-1'>" + data_emissao + "</td>" +
-            "<td class='col-xs-3'>" + material + "</td>" +
-            "<td class='col-xs-1'>" + quantidade_solicitada + "</td>" +
-            "<td class='col-xs-1'>" + prazo + "</td>" +
-            "<td class='col-xs-1'>" + status + "</td>" +
-            "<td class='col-xs-2'><input type='number'  value='" + quantidade_recebida + "' disabled='true' /></td>" +
-            "<td class='col-xs-1'><button class='btn btn-danger fa fa-remove' onclick='removeItem(" + id + ")'></button></td>" +
+            "<td>" + req + "</td>" +
+            "<td>" + req_item + "</td>" +
+            "<td>" + data_emissao + "</td>" +
+            "<td>" + material + "</td>" +
+            "<td>" + quantidade_solicitada + "</td>" +
+            "<td>" + prazo + "</td>" +
+            "<td>" + status + "</td>" +
+            "<td><input type='number'  value='" + quantidade_recebida + "' disabled='true' /></td>" +
+            "<td><button class='btn btn-danger fa fa-remove' onclick='removeItem(" + id + ")'></button></td>" +
             "</tr>";
     $("#tabelaDestino").append(row);
     }

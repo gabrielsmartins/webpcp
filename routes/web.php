@@ -115,9 +115,9 @@ Route::post('recebimento/search_produto', 'RecebimentoMaterialController@searchM
 Route::get('recebimento/pesquisa', 'RecebimentoMaterialController@pesquisarPorCriterio');
 
 
-Route::get('ordem/form', 'RequisicaoMaterialController@form');
-Route::post('ordem/store', 'RequisicaoMaterialController@store');
-Route::post('ordem/cancel', 'RequisicaoMaterialController@cancel');
-Route::get('ordem/show', 'RequisicaoMaterialController@show');
-Route::get('ordem/edit/{id}', 'RequisicaoMaterialController@edit');
+Route::get('ordem/form', 'OrdemProducaoController@form');
+Route::post('ordem/store', 'OrdemProducaoController@store');
+Route::post('ordem/cancel', 'OrdemProducaoController@cancel');
+Route::get('ordem/show', 'OrdemProducaoController@show');
+Route::get('ordem/edit/{id}', 'OrdemProducaoController@edit');
 

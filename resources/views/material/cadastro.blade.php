@@ -169,7 +169,8 @@
 
                         <div class="form-group">       
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input value="Salvar" class="btn btn-primary" type="submit">
+                            <button type="reset" class="btn btn-secondary pull-right fa fa-ban"> Cancelar</button>
+                            <button type="submit" class="btn btn-primary pull-right fa fa-save"> Salvar</button>
                         </div>
                     </form>
                 </div>

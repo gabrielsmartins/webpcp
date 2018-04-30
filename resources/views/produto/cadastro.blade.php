@@ -2,41 +2,39 @@
 
 @section('page', 'Produto - Cadastro')
 
-@section('title','Novo - Produto')
+@section('title','Cadastro')
 
 
 @section('content')
 
 
 
+<div class="container-fluid">
+    <div class="row">
 
-
-<div class="box box-info">
+        <div class="col-lg-12">
     <form class="form-horizontal" action="{{ action('ProdutoController@store') }}" method="POST" accept-charset="UTF-8">
         <div class="box-header with-border">
-            <h3 class="box-title">Cadastro</h3>
+            <h3 class="box-title">Novo Produto</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-
-
-
-
-        <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab_cadastro"
-                                      data-toggle="tab" aria-expanded="true">Cadastro</a></li>
-                <li class=""><a href="#tab_estrutura" data-toggle="tab"
-                                aria-expanded="false">Estrutura</a></li>
-                <li class=""><a href="#tab_roteiro" data-toggle="tab"
-                                aria-expanded="false">Roteiro</a></li>
-                <li class="pull-right"><a href="#" class="text-muted"><i
-                            class="fa fa-gear"></i></a></li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane active" id="tab_cadastro">
-
-                    <!-- CADASTRO -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Cadastro</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Estrutura</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Roteiro</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        
+        
+         <!-- CADASTRO -->
 
                     <div class="box-body">
 
@@ -213,14 +211,13 @@
 
 
                     <!-- FIM CADASTRO -->
-
-
-
-
-                </div>
-                <!-- /.tab-pane -->
-                <div class="tab-pane" id="tab_estrutura">
-
+        
+        
+        
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        
+        
                     <!--  ESTRUTURA  -->
                     <div class="form-group row">
                         <label class="col-sm-1 control-label">Produto:</label>
@@ -241,7 +238,7 @@
 
 
                         <div class="col-sm-1">
-                            <button type="button" class="btn btn-cancel fa fa-plus" id="btnAddProduto"></button>
+                            <button type="button" class="btn btn-primary fa fa-plus" id="btnAddProduto"></button>
                         </div>
 
                     </div>
@@ -267,7 +264,7 @@
 
 
                         <div class="col-sm-1">
-                            <button type="button" class="btn btn-cancel fa fa-plus" id="btnAddMaterial" ></button>
+                            <button type="button" class="btn btn-primary fa fa-plus" id="btnAddMaterial" ></button>
                         </div>
                     </div>
 
@@ -301,11 +298,13 @@
                     </div>
 
                     <!--  FIM ESTRUTURA  -->
-                </div>
-                <!-- /.tab-pane -->
-                <div class="tab-pane" id="tab_roteiro">
-
-                    <!-- ROTEIRO -->
+        
+        
+    </div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        
+        
+         <!-- ROTEIRO -->
 
                     <div class="form-group row">
                         <label class="col-sm-1 control-label">Operação:</label>
@@ -325,7 +324,7 @@
                             <div class="bootstrap-timepicker">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input type="text" class="form-control timepicker" id="tempoSetup" name="tempoSetup" placeholder="00:00:00">
+                                        <input type="text" class="form-control" id="tempoSetup" name="tempoSetup" placeholder="00:00:00">
 
                                         <div class="input-group-addon">
                                             <i class="fa fa-clock-o"></i>
@@ -345,7 +344,7 @@
                             <div class="bootstrap-timepicker">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input type="text" class="form-control timepicker" id="tempoProducao" name="tempoProducao" placeholder="00:00:00">
+                                        <input type="text" class="form-control" id="tempoProducao" name="tempoProducao" placeholder="00:00:00">
 
                                         <div class="input-group-addon">
                                             <i class="fa fa-clock-o"></i>
@@ -362,7 +361,7 @@
                             <div class="bootstrap-timepicker">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input type="text" class="form-control timepicker" id="tempoFinalizacao" name="tempoFinalizacao" placeholder="00:00:00">
+                                        <input type="text" class="form-control" id="tempoFinalizacao" name="tempoFinalizacao" placeholder="00:00:00">
 
                                         <div class="input-group-addon">
                                             <i class="fa fa-clock-o"></i>
@@ -375,7 +374,7 @@
      
                         </div>
                         <div class="col-sm-1">
-                            <button type="button" class="btn btn-cancel fa fa-plus" id="btnAddOperacao"></button>
+                            <button type="button" class="btn btn-primary fa fa-plus" id="btnAddOperacao"></button>
                         </div>
                     </div>
 
@@ -409,24 +408,24 @@
                     </div>
 
                     <!-- FIM ROTEIRO -->
+        
+    </div>
+</div>
 
 
-                </div>
-                <!-- /.tab-pane -->
-            </div>
-            <!-- /.tab-content -->
-        </div>
+
+  
 
         <div class="box-footer">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <button type="reset" class="btn btn-cancel pull-right fa fa-ban"> Cancelar</button>
-            <button type="submit" class="btn btn-save pull-right fa fa-save"> Salvar</button>
+            <button type="reset" class="btn btn-secondary pull-right fa fa-ban"> Cancelar</button>
+            <button type="submit" class="btn btn-primary pull-right fa fa-save"> Salvar</button>
         </div>
     </form>
-</div>
-<!-- /.box-footer -->
-
-@if (session('success'))
+        </div>
+    </div>
+    
+    @if (session('success'))
 <div class="alert alert-success" role="alert"> 
     {{ session('success') }}
 </div>
@@ -438,27 +437,28 @@
     {{ session('error') }}
 </div>
 @endif
+</div>
+<!-- /.box-footer -->
+
+
 
 
 @stop
 
 
 @section('js')
+
+
+
+
+
 <script type="text/javascript">
 
-    //Timepicker
-    $('.timepicker').timepicker({
-        minuteStep: 1,
-        template: 'modal',
-        appendWidgetTo: 'body',
-        showSeconds: true,
-        showMeridian: false,
-        defaultTime: false
-    });
-
-
-
     $(document).ready(function () {
+        $('#tempoSetup').mask('00:00:00');
+        $('#tempoProducao').mask('00:00:00');
+        $('#tempoFinalizacao').mask('00:00:00');
+        
         $("#busca_operacao").select2({
             placeholder: "Selecione uma Operação",
             minimumInputLength: 1
@@ -535,9 +535,9 @@
                 "<td>" + data.id + "</td>" +
                 "<td>" + data.descricao + "</td>" +
                 "<td>" + tipo + "</td>" +
-                "<td>" + quantidade + "</td>" +
-                "<td><button type='button' class='btn btn-save fa fa-edit'></button></td>" +
-                "<td><button type='button' class='btn btn-cancel fa fa-remove' onclick='removeComponente(" + components + ")'></button></td>" +
+                "<td><input type='number' pattern='[0-9]+([\.,][0-9]+)?' step='0.01' class='form-control' value='" + quantidade + "'/></td>" +
+                "<td><button type='button' class='btn btn-primary fa fa-edit'></button></td>" +
+                "<td><button type='button' class='btn btn-secondary fa fa-remove' onclick='removeComponente(" + components + ")'></button></td>" +
                 "</tr>");
 
     }
@@ -592,8 +592,8 @@
                 "<td>" + tempoSetup + "</td>" +
                 "<td>" + tempoProducao + "</td>" +
                 "<td>" + tempoFinalizacao + "</td>" +
-                "<td><button type='button' class='btn btn-save fa fa-edit'></button></td>" +
-                "<td><button type='button' class='btn btn-cancel fa fa-remove' onclick='removeOperacao(" + operacoes + ")'></button></td>" +
+                "<td><button type='button' class='btn btn-primary fa fa-edit'></button></td>" +
+                "<td><button type='button' class='btn btn-secondary fa fa-remove' onclick='removeOperacao(" + operacoes + ")'></button></td>" +
                 "</tr>");
 
     }

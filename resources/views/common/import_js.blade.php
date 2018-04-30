@@ -18,4 +18,7 @@
 <script src="{{ asset('dashboard/js/front.js') }}"></script>
 
 
+<!-- TimePicker -->
+<script src="{{ asset('dashboard/vendor/jquery-mask/jquery.mask.js') }}" type="text/javascript"></script>
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js" type="text/javascript"></script>

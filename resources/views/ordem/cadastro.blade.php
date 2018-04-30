@@ -1,166 +1,161 @@
 @extends('layouts.master')
 
-@section('page', 'Ordem de Produção - Emitir')
+@section('page', 'Ordem de Produção')
 
-@section('title','Novo - Ordem de Produção')
+@section('title','Ordem de Produção')
 
 
 @section('content')
 
-    <!-- /.box-header -->
-
-
-
-
-    
-    
-     <div class="box box-info">
-    <div class="box-header with-border">
-        <h3 class="box-title">Itens Selecionados</h3>
-    </div>
-       <!-- form start -->
-    <form class="form-horizontal" action="{{ action('RecebimentoMaterialController@store') }}" method="POST" accept-charset="UTF-8">
-        <div class="box-body">
-
-            <div class="form-group row">
-                <label for="responsavel" class="col-sm-1 control-label">Responsável:</label>
-                <div class="col-sm-3">
-                    <input type="text" class="form-control" disabled="true" value="{{Session::get('usuarioLogado')}}"/>
-                </div>
-                <div class="col-sm-1">
-                    <label for="descricao" class="col-sm-1 control-label">Data:</label>
-                </div>
-                <div class="col-sm-3">
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        <input class="form-control pull-right" id="datepicker" type="text" name="dataRetirada" value="{{date('d/m/Y')}}">
-                    </div>
-                </div>
-                </div>
-            </div>
-     
-        
-        
-        <table class="table table-fixed table-striped" id="myTable">
-        <thead>
-            <tr>
-                <th class="col-xs-1">ID Produto</th>
-                <th class="col-xs-1">Item Nº</th>
-                <th class="col-xs-1">Data Emissão</th>
-                <th class="col-xs-3">Descrição</th>
-                <th class="col-xs-1">Qntd Solic.</th>
-                <th class="col-xs-1">Prazo</th>
-                <th class="col-xs-1">Status</th>
-                <th class="col-xs-2">Qntd Solic.</th>
-                <th class="col-xs-1">Ação</th>
-            </tr>
-        </thead>
-        <tbody id="tabelaDestino">
-           
-        </tbody>
-    </table>
-        
-        
-
-        <!-- /.box-body -->
-        <div class="box-footer">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <button type="reset" class="btn btn-cancel pull-right fa fa-ban"> Cancelar</button>
-            <button type="submit" class="btn btn-save pull-right fa fa-save"> Salvar</button>
-        </div>
-
-
-
-
-        @if (session('success'))
-        <div class="alert alert-success" role="alert"> 
-            {{ session('success') }}
-        </div>
-        @endif
-
-
-        @if (session('error'))
-        <div class="alert alert-danger" role="alert"> 
-            {{ session('error') }}
-        </div>
-        @endif
-        <!-- /.box-footer -->
-    </form>
-     </div>
-    
-    
-    
-    
-         <div class="box box-info">
-    <div class="box-header with-border">
-        <h3 class="box-title">Produtos</h3>
-    </div>
+<div class="container-fluid">
     <div class="row">
-        <div class="col-sm-1">
-            <label>Critério:</label>
+
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header d-flex align-items-center">
+                    <h4>Nova Ordem de Produção</h4>
+                </div>
+                <div class="card-body">
+                    <form class="form-horizontal" action="{{ action('OrdemProducaoController@store') }}"
+                          method="POST" accept-charset="UTF-8">
+                        <div class="box-body">
+
+                            <div class="form-group row">
+                                <label for="responsavel" class="col-sm-1 control-label">Responsável:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" disabled="true" value="{{Session::get('usuarioLogado')}}"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="descricao" class="col-sm-1 control-label">Prazo:</label>
+                                <div class="col-sm-3">
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input class="form-control pull-right" id="datepicker" type="text" name="prazo" value="{{date('d/m/Y')}}">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group row">
+                                <label class="col-sm-1 control-label">Produto:</label>
+                                <div class="col-sm-6">
+                                    <select class="js-data-example-ajax" id="busca_material" name="material.id"
+                                            style="width: 100%">
+                                        <option value="" disabled selected>Escolha um Produto</option>
+
+                                        @foreach($produtos as $produto)
+                                        <option value="{{$produto->getId()}}">{{$produto->getId()}} - {{$produto->getDescricao()}} - {{$produto->getSituacao()}} - Qntd ({{$produto->getQuantidadeEstoque()}})</option>
+                                        @endforeach
+
+
+                                    </select>
+                                </div>
+                                <label class="col-sm-1 control-label">Quantidade:</label>
+                                <div class="col-sm-1">
+                                    <input id="quantidadeProdutoAdd" type="number"  pattern="[0-9]+([\.,][0-9]+)?" step="0.01" class="form-control">
+                                </div>
+
+
+                                <div class="col-sm-1">
+                                    <button type="button" class="btn btn-primary fa fa-plus" id="btnAddProduto" ></button>
+                                </div>
+                                <div class="col-sm-1">
+                                    <button type="button" class="btn btn-primary" id="btnImportarRoteiro" >Importar Roteiro</button>
+                                </div>
+                            </div>
+
+
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title">Programação</h3>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body no-padding">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 10px">#</th>
+                                                <th style="width: 20px">ID</th>
+                                                <th>Descrição</th>
+                                                <th style="width: 150px">Tempo Setup</th>
+                                                <th style="width: 150px">Tempo Produção</th>
+                                                <th style="width: 150px">Tempo Finalização</th>
+                                                <th style="width: 50px">Remover</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tabela_materiais">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td><select class="select2" name="param">
+                                            <option value="AK">
+                                                Alaska
+                                            </option>
+                                            <option value="HI">
+                                                Hawaii
+                                            </option>
+                                            <option value="CA">
+                                                California
+                                            </option>
+                                        </select></td>
+                                        <td><input type="text"/></td>
+                                         <td><input type="text"/></td>
+                                          <td><input type="text"/></td>
+                                          <td><input data-repeater-delete type="button" value="Delete"/></td>
+                                          <td><input data-repeater-create type="button" id="repeater-button" value="Add"/></td>
+                                        </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <button type="reset" class="btn btn-secondary pull-right fa fa-ban"> Cancelar</button>
+                            <button type="submit" class="btn btn-primary pull-right fa fa-save"> Registrar</button>
+                        </div>
+
+
+
+
+
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
+
+
+                @if (session('success'))
+                <div class="alert alert-success" role="alert"> 
+                    {{ session('success') }}
+                </div>
+                @endif
+
+
+                @if (session('error'))
+                <div class="alert alert-danger" role="alert"> 
+                    {{ session('error') }}
+                </div>
+                @endif
+
+            </div>
         </div>
-        <div class="col-sm-3">
-            <select id="field" class="form-control">
-                <option value="0">ID</option>
-                <option value="1">Item Nº</option>
-                <option value="3">Descrição</option>
-            </select>
-        </div>
-        <div class="col-sm-6">
-        <input type="text" id="myInput" onkeyup="pesquisar()" placeholder="Pesquisar..." class="form-control">
-        </div>
+
     </div>
-
-    <table class="table table-fixed table-striped" id="tabelaOrigem">
-        <thead>
-            <tr>
-                <th class="col-xs-1">ID Req</th>
-                <th class="col-xs-1">Item Nº</th>
-                <th class="col-xs-1">Data Emissão</th>
-                <th class="col-xs-3">Descrição</th>
-                <th class="col-xs-1">Qntd Solic.</th>
-                <th class="col-xs-1">Prazo</th>
-                <th class="col-xs-1">Status</th>
-                <th class="col-xs-2">Qntd Solic.</th>
-                <th class="col-xs-1">Ação</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($requisicoes as $requisicao)
-                @foreach($requisicao->getItens() as $item)
-            <tr>
-                <td class="col-xs-1"><span id="req_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getId()}}</span></td>
-                <td class="col-xs-1"><span id="req_item_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getId()}}.{{ $loop->iteration }}</span></td>
-                <td class="col-xs-1"><span id="data_emissao_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getDataEmissao()->format('d/m/Y') }}</span></td>
-                <td class="col-xs-3"><span id="material_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getMaterial()->getDescricao()}}</span></td>
-                <td class="col-xs-1"><span id="quantidade_solicitada_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getQuantidade()}}</span></td>
-                <td class="col-xs-1"><span id="prazo_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getPrazo()->format('d/m/Y')}}</span></td>
-                <td class="col-xs-1"><span id="status_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getStatus()}}</span></td>
-                <td class="col-xs-2"><input type="number"  id="quantidade_recebida_{{ $loop->parent->iteration }}.{{ $loop->iteration }}" /></td>
-                <th class="col-xs-1"><button class="btn btn-cancel fa fa-plus" onclick="adicionaItem({{ $loop->parent->iteration }}.{{ $loop->iteration }})"></button></th>
-            </tr>
-                @endforeach
-            @endforeach
-        </tbody>
-    </table>
 </div>
-  
-    
 
-    
-   
-     
+@stop
 
 
-
-    @stop
-
-
-    @section('js')
-    
-    <script type="text/javascript">
+@section('js')
+<script type="text/javascript">
 //Date picker
     $('#datepicker').datepicker({
         autoclose: true,
@@ -174,68 +169,85 @@
         showInputs: false
     });
 </script>
-    <script type="text/javascript">
-function pesquisar() {
-  // Declare variables
-  var input, filter, table, tr, td, i,select,field;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("tabelaOrigem");
-  tr = table.getElementsByTagName("tr");
- select = document.getElementById("field");
- field = parseInt(select.options[select.selectedIndex].value);
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[field];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-</script>
 
 <script type="text/javascript">
- function adicionaItem(id) {
-     
-     var req = document.getElementById("req_" + id).textContent;
-     var req_item = document.getElementById("req_item_" + id).textContent;
-      var data_emissao = document.getElementById("data_emissao_" + id).textContent;
-      var material = document.getElementById("material_" + id).textContent;
-      var quantidade_solicitada = document.getElementById("quantidade_solicitada_" + id).textContent;
-      var prazo = document.getElementById("prazo_" + id).textContent;
-      var status = document.getElementById("status_" + id).textContent;
-      var quantidade_recebida = document.getElementById("quantidade_recebida_" + id).value;
+    $(document).ready(function () {
+
+        $("#busca_material").select2({
+            placeholder: "Selecione um Produto",
+            minimumInputLength: 1
+        });
+    });
+</script>
 
 
- 
-      var row = "<tr id='row_"+id+"'>" +
-                "<input type='hidden' value='"+req+";"+req_item+";"+quantidade_recebida+"' name='itens[]'/>" +
-                "<td class='col-xs-1'>"+req+"</td>" +
-                "<td class='col-xs-1'>"+req_item+"</td>" +
-                "<td class='col-xs-1'>"+data_emissao+"</td>" +
-                "<td class='col-xs-3'>"+material+"</td>" +
-                "<td class='col-xs-1'>"+quantidade_solicitada+"</td>" +
-                "<td class='col-xs-1'>"+prazo+"</td>" +
-                "<td class='col-xs-1'>"+status+"</td>" +
-                "<td class='col-xs-2'><input type='number'  value='"+quantidade_recebida+"' disabled='true' /></td>" +
-                "<td class='col-xs-1'><button class='btn btn-cancel fa fa-remove' onclick='removeItem("+id+")'></button></td>"+
-            "</tr>";
-    
-    $("#tabelaDestino").append(row);
-     
-        
-                              
+<script type="text/javascript">
+    var components = 0;
+    var btnAddProduto = document.querySelector("#btnAddProduto");
+    var CSRF_TOKEN = "{{ csrf_token() }}";
+
+
+    btnAddProduto.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        $.ajax({
+            url: "{{url('retirada/search_produto')}}",
+            type: 'POST',
+            data: {_token: CSRF_TOKEN,
+                tipo: 'material',
+                id: $("#busca_material").val()},
+            dataType: 'JSON',
+            success: function (data) {
+                var quantidade = $("#quantidadeProdutoAdd").val();
+                console.log(data);
+                adicionaProduto(data, quantidade);
+            },
+            error: function (e) {
+                console.log(e.responseText);
+            }
+        });
+    });
+
+
+    function adicionaProduto(data, quantidade) {
+        components++;
+        $('#tabela_materiais').append("<tr id='comp_" + components + "'>" +
+                "<input type='hidden' name='item[]' value='" + data.id + ";" + quantidade + "'/>" +
+                "<td>" + components + "</td>" +
+                "<td>" + data.id + "</td>" +
+                "<td>" + data.descricao + "</td>" +
+                "<td>" + quantidade + "</td>" +
+                "<td><button type='button' class='btn btn-primary fa fa-edit'></button></td>" +
+                "<td><button type='button' class='btn btn-secondary fa fa-remove' onclick='removeMaterial(" + components + ")'></button></td>" +
+                "</tr>");
+
     }
 
-    function removeItem(id) {
-     document.getElementById('row_' + id ).remove();
-     components--;
+    function removeMaterial(id) {
+        document.getElementById('comp_' + id).remove();
+        components--;
     }
 </script>
-    @stop
+
+
+<script type="text/javascript">
+ 
+    $("#repeater-button").click(function(){
+        setTimeout(function(){
+ 
+            $(".select2").select2({
+                placeholder: "Select a state",
+                allowClear: true
+            });    
+                  
+        }, 100);
+    });    
+ 
+</script>
+ 
+@stop
+
+
+
+
 
