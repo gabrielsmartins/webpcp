@@ -43,8 +43,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-1 control-label">Produto:</label>
                                 <div class="col-sm-6">
-                                    <select class="js-data-example-ajax" id="busca_material" name="material.id"
-                                            style="width: 100%">
+                                    <select  class="select2" id="busca_produto" name="produto.id">
                                         <option value="" disabled selected>Escolha um Produto</option>
 
                                         @foreach($produtos as $produto)
@@ -75,7 +74,7 @@
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body no-padding">
-                                    <table class="table table-striped">
+                                    <table class="table table-striped repeater">
                                         <thead>
                                             <tr>
                                                 <th style="width: 10px">#</th>
@@ -88,26 +87,27 @@
                                             </tr>
                                         </thead>
                                         <tbody id="tabela_materiais">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>1</td>
-                                                <td><select class="select2" name="param">
-                                            <option value="AK">
-                                                Alaska
-                                            </option>
-                                            <option value="HI">
-                                                Hawaii
-                                            </option>
-                                            <option value="CA">
-                                                California
-                                            </option>
-                                        </select></td>
-                                        <td><input type="text"/></td>
-                                         <td><input type="text"/></td>
-                                          <td><input type="text"/></td>
-                                          <td><input data-repeater-delete type="button" value="Delete"/></td>
-                                          <td><input data-repeater-create type="button" id="repeater-button" value="Add"/></td>
-                                        </tr>
+                                            <tr data-repeater-list="group-a">
+                                                <td data-repeater-item>1</td>
+                                                <td data-repeater-item>1</td>
+                                                <td data-repeater-item>
+                                                    <select class="select2" name="param">
+                                                        <option value="AK">
+                                                            Alaska
+                                                        </option>
+                                                        <option value="HI">
+                                                            Hawaii
+                                                        </option>
+                                                        <option value="CA">
+                                                            California
+                                                        </option>
+                                                    </select></td>
+                                                <td data-repeater-item><input type="text"/></td>
+                                                <td data-repeater-item><input type="text"/></td>
+                                                <td data-repeater-item><input type="text"/></td>
+                                                <td data-repeater-item><input data-repeater-delete type="button" value="Delete"/></td>
+                                                <td data-repeater-item><input data-repeater-create type="button" id="repeater-button" value="Add"/></td>
+                                            </tr>
 
                                         </tbody>
 
@@ -122,6 +122,9 @@
                             <button type="reset" class="btn btn-secondary pull-right fa fa-ban"> Cancelar</button>
                             <button type="submit" class="btn btn-primary pull-right fa fa-save"> Registrar</button>
                         </div>
+                        
+                        
+                        
 
 
 
@@ -129,6 +132,39 @@
 
                         <!-- /.box-footer -->
                     </form>
+                    
+                    
+               <form class="repeater">
+    <div data-repeater-list="group-a">
+      <div data-repeater-item>
+        <input type="text" name="text-input" value="A"/>
+        <input data-repeater-delete type="button" value="Delete"/>
+      </div>
+      <div data-repeater-item>
+        <input type="text" name="text-input" value="B"/>
+        //select input with class select-2
+        <select class="select2" name="param">
+            <option value="AK">
+            Alaska
+            </option>
+            <option value="HI">
+            Hawaii
+            </option>
+            <option value="CA">
+            California
+            </option>
+        </select>
+        <input data-repeater-delete type="button" value="Delete"/>
+      </div>
+    </div>
+    <input data-repeater-create type="button" id="repeater-button" value="Add"/>
+</form>     
+                  
+
+
+  
+                    
+                    
                 </div>
 
 
@@ -164,18 +200,19 @@
     });
 
 
-    //Timepicker
-    $('.timepicker').timepicker({
-        showInputs: false
-    });
+
 </script>
 
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $("#busca_material").select2({
+        $("#busca_produto").select2({
             placeholder: "Selecione um Produto",
-            minimumInputLength: 1
+            allowClear: true
+        });
+
+        $(".select2").select2({
+            allowClear: true
         });
     });
 </script>
@@ -231,20 +268,25 @@
 
 
 <script type="text/javascript">
- 
-    $("#repeater-button").click(function(){
-        setTimeout(function(){
- 
+
+    $("#repeater-button").click(function () {
+        
+        alert("xx");
+        setTimeout(function () {
+
             $(".select2").select2({
                 placeholder: "Select a state",
                 allowClear: true
-            });    
-                  
+            });
+
         }, 100);
-    });    
- 
+    });
+
 </script>
- 
+
+
+                  
+
 @stop
 
 

@@ -21,4 +21,7 @@
 <!-- TimePicker -->
 <script src="{{ asset('dashboard/vendor/jquery-mask/jquery.mask.js') }}" type="text/javascript"></script>
 
+<!-- JQuery Repeater -->
+<script src="{{ asset('dashboard/vendor/jquery-repeater/jquery.repeater.js') }}" type="text/javascript"></script>
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js" type="text/javascript"></script>
