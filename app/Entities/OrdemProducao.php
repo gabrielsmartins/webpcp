@@ -1,10 +1,9 @@
 <?php
 
-
-
 namespace App\Entities;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,33 +22,37 @@ use Doctrine\ORM\Mapping as ORM;
  * })
  */
 class OrdemProducao extends Documento {
-    
-      /**
+
+    /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer",name="ord_id")
      */
     private $id;
-    
+
     /**
-     *@ORM\ManyToOne(targetEntity="Produto")
-     *@ORM\JoinColumn(name="ord_prod_id", referencedColumnName="prod_id")
+     * @ORM\ManyToOne(targetEntity="Produto")
+     * @ORM\JoinColumn(name="ord_prod_id", referencedColumnName="prod_id")
      */
     private $produto;
-    
-    
-     /**
+
+    /**
      * @ORM\Column(type="integer",name="ord_prod_qntd")
      */
     private $quantidade;
-    
-    
-    function __construct($produto,$quantidade,$prazo,$responsavel) {
+
+    /**
+     * @ORM\OneToMany(targetEntity="Programacao", mappedBy="ordemProducao",cascade={"all"})
+     */
+    private $programacoes;
+
+    function __construct($produto, $quantidade, $prazo, $responsavel) {
         $this->produto = $produto;
         $this->quantidade = $quantidade;
         $this->prazo = $prazo;
         $this->responsavel = $responsavel;
         $this->dataEmissao = new DateTime('now');
+        $this->programacoes = new ArrayCollection();
     }
 
     function getId() {
@@ -67,7 +70,7 @@ class OrdemProducao extends Documento {
     function setProduto($produto) {
         $this->produto = $produto;
     }
-    
+
     function getQuantidade() {
         return $this->quantidade;
     }
@@ -76,8 +79,26 @@ class OrdemProducao extends Documento {
         $this->quantidade = $quantidade;
     }
 
+    function getProgramacoes() {
+        return $this->programacoes;
+    }
 
+    function setProgramacoes($programacoes) {
+        $this->programacoes = $programacoes;
+    }
 
+    function adicionarProgramacao(Programacao $programacao) {
+        if (!$this->programacoes->contains($programacao)) {
+            $this->programacoes->add($programacao);
+        }
 
+        return $this->programacoes;
+    }
+    
+    
+    function removerProgramacao(Programacao $programacao) {
+         $this->programacoes->removeElement($programacao);
+        return $this->programacoes;
+    }
 
 }

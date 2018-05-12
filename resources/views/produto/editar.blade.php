@@ -232,7 +232,7 @@
                         <div class="form-group row">
                             <label class="col-sm-1 control-label">Produto:</label>
                             <div class="col-sm-6">
-                                <select class="js-data-example-ajax" id="busca_produto" name="produto.id"
+                                <select class="js-data-example-ajax select2" id="busca_produto" name="produto.id"
                                         style="width: 100%">
                                     <option value="" disabled selected>Escolha um Produto</option>
                                     @foreach($produtos as $produto)
@@ -256,7 +256,7 @@
                         <div class="form-group row">
                             <label class="col-sm-1 control-label">Material:</label>
                             <div class="col-sm-6">
-                                <select class="js-data-example-ajax" id="busca_material" name="material.id"
+                                <select class="js-data-example-ajax select2" id="busca_material" name="material.id"
                                         style="width: 100%">
                                     <option value="" disabled selected>Escolha um Material</option>
 
@@ -286,7 +286,8 @@
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body no-padding">
-                                <table class="table table-striped">
+                                <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 10px">#</th>
@@ -305,13 +306,13 @@
 
 
                                         @if($item->getComponente() instanceof App\Entities\Material)
-                                            @php
-                                            $tipo = 'material'
-                                            @endphp
+                                        @php
+                                        $tipo = 'material'
+                                        @endphp
                                         @else
-                                            @php
-                                            $tipo = 'produto'
-                                            @endphp
+                                        @php
+                                        $tipo = 'produto'
+                                        @endphp
                                         @endif
 
 
@@ -322,8 +323,8 @@
                                     <td>{{$item->getComponente()->getDescricao()}}</td>
                                     <td>{{$tipo}}</td>
                                     <td><input type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" class="form-control" value="{{$item->getQuantidade()}}"></td>
-                                    
-                                    
+
+
                                     <td><button type='button' class='btn btn-primary fa fa-edit'></button></td>
                                     <td><button type='button' class='btn btn-secondary fa fa-remove' onclick='removeComponente(" + components + ")'></button></td>
                                     </tr>
@@ -333,6 +334,7 @@
                                     </tbody>
 
                                 </table>
+                                </div>
                             </div>
                         </div>
 
@@ -348,7 +350,7 @@
                         <div class="form-group row">
                             <label class="col-sm-1 control-label">Operação:</label>
                             <div class="col-sm-3">
-                                <select class="js-data-example-ajax" id="busca_operacao"
+                                <select class="js-data-example-ajax select2" id="busca_operacao"
                                         style="width: 100%" name="roteiro.operacao.id">
                                     <option value="" disabled selected>Escolha uma operação</option>
 
@@ -381,7 +383,8 @@
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body no-padding">
-                                <table class="table table-striped">
+                                <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 10px">#</th>
@@ -415,6 +418,7 @@
                                     </tbody>
 
                                 </table>
+                                </div>
                             </div>
                         </div>
 
@@ -476,6 +480,13 @@
     placeholder: "Selecione um Material",
             minimumInputLength: 1
     });
+    
+    
+    $(".select2").select2({
+    allowClear: true
+    });
+    
+    
     });</script>
 
 <script type="text/javascript">

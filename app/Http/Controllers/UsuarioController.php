@@ -102,7 +102,9 @@ class UsuarioController extends Controller {
     
     public function edit($id){
         $usuario = $this->usuarioDAO->pesquisar($id);
-        return view('usuario.editar')->with('usuario', $usuario);
+        $perfis = $this->perfilDAO->listar();
+        $data = array('usuario'=>$usuario,'perfis'=>$perfis);
+        return view('usuario.editar')->with($data);
     }
     
     

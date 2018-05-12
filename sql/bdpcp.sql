@@ -129,6 +129,34 @@ CREATE TABLE ordem_producao(
 );
 
 
+CREATE TABLE programacao(
+			 prog_id BIGINT NOT NULL AUTO_INCREMENT,
+			 prog_ord_id BIGINT NOT NULL,
+             prog_dt_ini_prev DATETIME NOT NULL,
+             prog_dt_fim_prev DATETIME NOT NULL,
+             prog_tot_hrs TIMESTAMP NOT NULL,
+             prog_oper_id BIGINT NOT NULL,
+             prog_rec_id BIGINT NOT NULL,
+             CONSTRAINT PK_programacao PRIMARY KEY(prog_id),
+			 CONSTRAINT FK_programacao_ordem FOREIGN KEY(prog_ord_id) REFERENCES ordem_producao(ord_id),
+             CONSTRAINT FK_programacao_operacao FOREIGN KEY(prog_oper_id) REFERENCES operacao(oper_id),
+             CONSTRAINT FK_programacao_recurso FOREIGN KEY(prog_rec_id) REFERENCES recurso(recr_id)
+);
+
+
+CREATE TABLE apontamento(
+			 apont_id BIGINT NOT NULL AUTO_INCREMENT,
+			 apont_prog_id BIGINT NOT NULL,
+             apont_tipo VARCHAR(50) NOT NULL,
+             apont_qntd DOUBLE NOT NULL,
+             apont_dt_ini DATETIME NOT NULL,
+             apont_dt_fim DATETIME NOT NULL,
+             CONSTRAINT PK_apontamento PRIMARY KEY(apont_id),
+             CONSTRAINT FK_apontamento_programacao FOREIGN KEY(apont_prog_id) REFERENCES programacao(prog_id),
+			 CONSTRAINT CHK_apontamento_tipo CHECK(apont_tipo IN('PRODUCAO','MANUTENCAO','PARADA','DESCARTE'))    
+);
+
+
 
 CREATE TABLE requisicao_material(
 	     rm_id BIGINT AUTO_INCREMENT NOT NULL,

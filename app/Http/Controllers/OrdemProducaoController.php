@@ -109,4 +109,9 @@ class OrdemProducaoController extends Controller {
         return view('ordem.lista')->with('ordens', $ordens);
     }
     
+    public function importarRoteiro(Request $request){
+        $produto = $this->produtoDAO->pesquisar($request->input('id'));
+        
+         return response()->json($produto);
+    }
 }

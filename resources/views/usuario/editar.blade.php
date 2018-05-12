@@ -15,12 +15,18 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header d-flex align-items-center">
-                    <h4>{{$usuario->getNome()}}</h4>
+                    <h4>{{$usuario->getId()}} - {{$usuario->getNome()}}</h4>
                 </div>
                 <div class="card-body">
                     <form class="form-horizontal" action="{{ action('UsuarioController@store') }}" method="POST" accept-charset="UTF-8">
 
-
+ <div class="form-group row">
+                            <label for="descricao" class="col-sm-1 control-label">ID:</label>
+                              <div class="col-sm-2">
+                                  <input type="text" class="form-control" id="nome" placeholder="Nome" name="nome" required="required" disabled="true" value="{{$usuario->getId()}}">
+                            </div>
+ </div>
+                        
                         <div class="form-group row">
                             <label for="descricao" class="col-sm-1 control-label">Nome:</label>
 
@@ -55,14 +61,14 @@
                             <label for="descricao" class="col-sm-1 control-label">Senha:</label>
 
                             <div class="col-sm-3">
-                                <input type="password" class="form-control" id="senha" placeholder="Senha" name="senha" required="required" value="{{$usuario->getSenha()}}">
+                                <input type="password" class="form-control" id="senha" placeholder="Senha" name="senha" required="required">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="descricao" class="col-sm-1 control-label">Confirmação Senha:</label>
 
                             <div class="col-sm-3">
-                                <input type="password" class="form-control" id="confirmacao_senha" placeholder="Confirmação Senha" name="confirmacao_senha" required="required" value="{{$usuario->getSenha()}}">
+                                <input type="password" class="form-control" id="confirmacao_senha" placeholder="Confirmação Senha" name="confirmacao_senha" required="required">
                             </div>
                         </div>
 

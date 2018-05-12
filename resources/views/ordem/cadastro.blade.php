@@ -27,16 +27,30 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+
                                 <label for="descricao" class="col-sm-1 control-label">Prazo:</label>
-                                <div class="col-sm-3">
+
+                                <div class="col-sm-2">
                                     <div class="input-group date">
+                                        <input class="form-control pull-right" id="datepicker" type="text" name="prazo">
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input class="form-control pull-right" id="datepicker" type="text" name="prazo" value="{{date('d/m/Y')}}">
+                                    </div>
+                                </div>
+
+
+                                <label for="descricao" class="col-sm-1 control-label">Data Início:</label>
+                                <div class="col-sm-2">
+                                    <div class="input-group date">
+                                        <input class="form-control pull-right" id="datepicker" type="text" name="dataInicio">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
 
 
 
@@ -53,18 +67,17 @@
 
                                     </select>
                                 </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label class="col-sm-1 control-label">Quantidade:</label>
                                 <div class="col-sm-1">
-                                    <input id="quantidadeProdutoAdd" type="number"  pattern="[0-9]+([\.,][0-9]+)?" step="0.01" class="form-control">
+                                    <input id="quantidadeProdutoAdd" type="number"  pattern="[0-9]+([\.,][0-9]+)?" step="0.01" class="form-control" id="quantidade">
                                 </div>
-
-
-                                <div class="col-sm-1">
-                                    <button type="button" class="btn btn-primary fa fa-plus" id="btnAddProduto" ></button>
-                                </div>
-                                <div class="col-sm-1">
+                                 <div class="col-sm-1">
                                     <button type="button" class="btn btn-primary" id="btnImportarRoteiro" >Importar Roteiro</button>
                                 </div>
+
                             </div>
 
 
@@ -86,28 +99,8 @@
                                                 <th style="width: 50px">Remover</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tabela_materiais">
-                                            <tr data-repeater-list="group-a">
-                                                <td data-repeater-item>1</td>
-                                                <td data-repeater-item>1</td>
-                                                <td data-repeater-item>
-                                                    <select class="select2" name="param">
-                                                        <option value="AK">
-                                                            Alaska
-                                                        </option>
-                                                        <option value="HI">
-                                                            Hawaii
-                                                        </option>
-                                                        <option value="CA">
-                                                            California
-                                                        </option>
-                                                    </select></td>
-                                                <td data-repeater-item><input type="text"/></td>
-                                                <td data-repeater-item><input type="text"/></td>
-                                                <td data-repeater-item><input type="text"/></td>
-                                                <td data-repeater-item><input data-repeater-delete type="button" value="Delete"/></td>
-                                                <td data-repeater-item><input data-repeater-create type="button" id="repeater-button" value="Add"/></td>
-                                            </tr>
+                                        <tbody id="tabela_roteiro">
+
 
                                         </tbody>
 
@@ -120,11 +113,11 @@
                         <div class="box-footer">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <button type="reset" class="btn btn-secondary pull-right fa fa-ban"> Cancelar</button>
-                            <button type="submit" class="btn btn-primary pull-right fa fa-save"> Registrar</button>
+                            <button type="submit" class="btn btn-primary pull-right fa fa-save"> Emitir</button>
                         </div>
-                        
-                        
-                        
+
+
+
 
 
 
@@ -132,39 +125,15 @@
 
                         <!-- /.box-footer -->
                     </form>
-                    
-                    
-               <form class="repeater">
-    <div data-repeater-list="group-a">
-      <div data-repeater-item>
-        <input type="text" name="text-input" value="A"/>
-        <input data-repeater-delete type="button" value="Delete"/>
-      </div>
-      <div data-repeater-item>
-        <input type="text" name="text-input" value="B"/>
-        //select input with class select-2
-        <select class="select2" name="param">
-            <option value="AK">
-            Alaska
-            </option>
-            <option value="HI">
-            Hawaii
-            </option>
-            <option value="CA">
-            California
-            </option>
-        </select>
-        <input data-repeater-delete type="button" value="Delete"/>
-      </div>
-    </div>
-    <input data-repeater-create type="button" id="repeater-button" value="Add"/>
-</form>     
-                  
 
 
-  
-                    
-                    
+
+
+
+
+
+
+
                 </div>
 
 
@@ -191,6 +160,8 @@
 
 
 @section('js')
+
+
 <script type="text/javascript">
 //Date picker
     $('#datepicker').datepicker({
@@ -220,7 +191,7 @@
 
 <script type="text/javascript">
     var components = 0;
-    var btnAddProduto = document.querySelector("#btnAddProduto");
+    var btnAddProduto = document.querySelector("#btnImportarRoteiro");
     var CSRF_TOKEN = "{{ csrf_token() }}";
 
 
@@ -228,14 +199,13 @@
         event.preventDefault();
 
         $.ajax({
-            url: "{{url('retirada/search_produto')}}",
+            url: "{{url('ordem/importar_roteiro')}}",
             type: 'POST',
             data: {_token: CSRF_TOKEN,
-                tipo: 'material',
-                id: $("#busca_material").val()},
+                id: $("#busca_produto").val()},
             dataType: 'JSON',
             success: function (data) {
-                var quantidade = $("#quantidadeProdutoAdd").val();
+                var quantidade = $("#quantidade").val();
                 console.log(data);
                 adicionaProduto(data, quantidade);
             },
@@ -267,25 +237,10 @@
 </script>
 
 
-<script type="text/javascript">
-
-    $("#repeater-button").click(function () {
-        
-        alert("xx");
-        setTimeout(function () {
-
-            $(".select2").select2({
-                placeholder: "Select a state",
-                allowClear: true
-            });
-
-        }, 100);
-    });
-
-</script>
 
 
-                  
+
+
 
 @stop
 
