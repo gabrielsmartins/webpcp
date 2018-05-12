@@ -15,6 +15,7 @@
                 <div class="card-header d-flex align-items-center">
                     <h4>Nova Ordem de Produção</h4>
                 </div>
+                <div id="loader"></div>
                 <div class="card-body">
                     <form class="form-horizontal" action="{{ action('OrdemProducaoController@store') }}"
                           method="POST" accept-charset="UTF-8">
@@ -28,11 +29,23 @@
                             </div>
                             <div class="form-group row">
 
+
+                                <label for="descricao" class="col-sm-1 control-label">Data Emissão:</label>
+
+                                <div class="col-sm-2">
+                                    <div class="input-group date">
+                                        <input class="form-control pull-right" id="dataEmissao" type="text" name="dataEmissao" value="{{date('d/m/Y')}}" disabled="true">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <label for="descricao" class="col-sm-1 control-label">Prazo:</label>
 
                                 <div class="col-sm-2">
                                     <div class="input-group date">
-                                        <input class="form-control pull-right" id="datepicker" type="text" name="prazo">
+                                        <input class="form-control pull-right" id="prazo" type="text" name="prazo">
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
@@ -40,15 +53,7 @@
                                 </div>
 
 
-                                <label for="descricao" class="col-sm-1 control-label">Data Início:</label>
-                                <div class="col-sm-2">
-                                    <div class="input-group date">
-                                        <input class="form-control pull-right" id="datepicker" type="text" name="dataInicio">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
 
 
@@ -57,11 +62,11 @@
                             <div class="form-group row">
                                 <label class="col-sm-1 control-label">Produto:</label>
                                 <div class="col-sm-6">
-                                    <select  class="select2" id="busca_produto" name="produto.id">
+                                    <select  class="select2" id="busca_produto" name="produto.id" style="width: 100%">
                                         <option value="" disabled selected>Escolha um Produto</option>
 
                                         @foreach($produtos as $produto)
-                                        <option value="{{$produto->getId()}}">{{$produto->getId()}} - {{$produto->getDescricao()}} - {{$produto->getSituacao()}} - Qntd ({{$produto->getQuantidadeEstoque()}})</option>
+                                        <option value="{{$produto->getId()}}">{{$produto->getId()}} - {{$produto->getCodigoInterno()}} - {{$produto->getDescricao()}} - {{$produto->getSituacao()}} - Qntd ({{$produto->getQuantidadeEstoque()}})</option>
                                         @endforeach
 
 
@@ -72,9 +77,9 @@
                             <div class="form-group row">
                                 <label class="col-sm-1 control-label">Quantidade:</label>
                                 <div class="col-sm-1">
-                                    <input id="quantidadeProdutoAdd" type="number"  pattern="[0-9]+([\.,][0-9]+)?" step="0.01" class="form-control" id="quantidade">
+                                    <input id="quantidade" type="number"  pattern="[0-9]+([\.,][0-9]+)?" step="0.01" class="form-control">
                                 </div>
-                                 <div class="col-sm-1">
+                                <div class="col-sm-1">
                                     <button type="button" class="btn btn-primary" id="btnImportarRoteiro" >Importar Roteiro</button>
                                 </div>
 
@@ -87,26 +92,67 @@
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body no-padding">
-                                    <table class="table table-striped repeater">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 10px">#</th>
-                                                <th style="width: 20px">ID</th>
-                                                <th>Descrição</th>
-                                                <th style="width: 150px">Tempo Setup</th>
-                                                <th style="width: 150px">Tempo Produção</th>
-                                                <th style="width: 150px">Tempo Finalização</th>
-                                                <th style="width: 50px">Remover</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tabela_roteiro">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 10px">#</th>
+                                                    <th style="width: 20px">ID</th>
+                                                    <th>Descrição</th>
+                                                    <th>Setor</th>
+                                                    <th>Recurso</th>
+                                                    <th style="width: 150px">Tempo Setup</th>
+                                                    <th style="width: 150px">Tempo Produção</th>
+                                                    <th style="width: 150px">Tempo Finalização</th>
+                                                    <th style="width: 50px">Qntd</th>
+                                                    <th style="width: 150px">Tempo Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tabela_roteiro">
 
 
-                                        </tbody>
+                                            </tbody>
 
-                                    </table>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
+
+
+
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title">Estrutura</h3>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body no-padding">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 10px">#</th>
+                                                    <th style="width: 20px">ID</th>
+                                                    <th>Código Interno</th>
+                                                    <th>Descrição</th>
+                                                    <th>Situação</th>
+                                                    <th>Quantidade Estoque</th>
+                                                    <th>Quantidade Unitária</th>
+                                                    <th>Quantidade Solicitada</th>
+                                                    <th>Quantidade Total</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tabela_estrutura">
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
 
                         <!-- /.box-body -->
@@ -162,17 +208,6 @@
 @section('js')
 
 
-<script type="text/javascript">
-//Date picker
-    $('#datepicker').datepicker({
-        autoclose: true,
-        format: 'dd/mm/yyyy',
-        language: 'pt-BR'
-    });
-
-
-
-</script>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -185,17 +220,30 @@
         $(".select2").select2({
             allowClear: true
         });
+        
+         $('#prazo').datepicker({
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+        language: 'pt-BR'
+    });
+    
+    $('#dataEmissao').datepicker({
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+        language: 'pt-BR'
+    });
+
     });
 </script>
 
 
 <script type="text/javascript">
     var components = 0;
-    var btnAddProduto = document.querySelector("#btnImportarRoteiro");
+    var btnImportarRoteiro = document.querySelector("#btnImportarRoteiro");
     var CSRF_TOKEN = "{{ csrf_token() }}";
 
 
-    btnAddProduto.addEventListener("click", function (event) {
+    btnImportarRoteiro.addEventListener("click", function (event) {
         event.preventDefault();
 
         $.ajax({
@@ -204,36 +252,157 @@
             data: {_token: CSRF_TOKEN,
                 id: $("#busca_produto").val()},
             dataType: 'JSON',
+            beforeSend: function () {
+                HoldOn.open({
+                    theme: 'sk-rect',
+                    message: "<h4>Carregando... Aguarde</h4>"
+                });
+            },
             success: function (data) {
                 var quantidade = $("#quantidade").val();
                 console.log(data);
-                adicionaProduto(data, quantidade);
+                adicionaRoteiro(data, quantidade);
+                HoldOn.close();
             },
             error: function (e) {
                 console.log(e.responseText);
+                HoldOn.close();
             }
         });
+
+
+
+        $.ajax({
+            url: "{{url('ordem/importar_estrutura')}}",
+            type: 'POST',
+            data: {_token: CSRF_TOKEN,
+                id: $("#busca_produto").val()},
+            dataType: 'JSON',
+            beforeSend: function () {
+                HoldOn.open({
+                    theme: 'sk-rect',
+                    message: "<h4>Carregando... Aguarde</h4>"
+                });
+            },
+            success: function (data) {
+                var quantidade = $("#quantidade").val();
+                console.log(data);
+                exibeEstrutura(data, quantidade);
+                HoldOn.close();
+            },
+            error: function (e) {
+                console.log(e.responseText);
+                HoldOn.close();
+            }
+        });
+
+
+
     });
 
 
-    function adicionaProduto(data, quantidade) {
-        components++;
-        $('#tabela_materiais').append("<tr id='comp_" + components + "'>" +
-                "<input type='hidden' name='item[]' value='" + data.id + ";" + quantidade + "'/>" +
-                "<td>" + components + "</td>" +
-                "<td>" + data.id + "</td>" +
-                "<td>" + data.descricao + "</td>" +
-                "<td>" + quantidade + "</td>" +
-                "<td><button type='button' class='btn btn-primary fa fa-edit'></button></td>" +
-                "<td><button type='button' class='btn btn-secondary fa fa-remove' onclick='removeMaterial(" + components + ")'></button></td>" +
-                "</tr>");
+    function adicionaRoteiro(data, quantidade) {
+        components = 0;
+        $('#tabela_roteiro').html("");
+        for (var i = 0; i < data.length; i++) {
+            components++;
+            var total = calculaTempoTotal(data[i].tempoSetup, data[i].tempoProducao, data[i].tempoFinalizacao, quantidade);
+            $('#tabela_roteiro').append("<tr id='prog_" + components + "'>" +
+                    "<input type='hidden' name='operacao[]' value='" + data[i].operacaoID + "'/>" +
+                    "<td>" + components + "</td>" +
+                    "<td>" + data[i].operacaoID + "</td>" +
+                    "<td>" + data[i].operacao + "</td>" +
+                    "<td>" + data[i].setor + "</td>" +
+                    "<td><select name='recurso[]' class='form-control' id='rec_" + data[i].setorID + "'></select></td>" +
+                    "<td>" + data[i].tempoSetup + "</td>" +
+                    "<td>" + data[i].tempoProducao + "</td>" +
+                    "<td>" + data[i].tempoFinalizacao + "</td>" +
+                    "<td>" + quantidade + "</td>" +
+                    "<td>" + total + "</td>" +
+                    "</tr>");
+
+            carregaRecursos(data[i].setorID);
+        }
+    }
+
+
+    function exibeEstrutura(data, quantidade) {
+        components = 0;
+        $('#tabela_estrutura').html("");
+        for (var i = 0; i < data.length; i++) {
+            components++;
+            var status = (data[i].quantidade * quantidade) <= data[i].quantidadeEstoque ? "<span class='text-success'>Disponível</span>" : "<span class='text-danger'>Indisponível</span>";
+            $('#tabela_estrutura').append("<tr>" +
+                    "<td>" + components + "</td>" +
+                    "<td>" + data[i].id + "</td>" +
+                    "<td>" + data[i].codigo + "</td>" +
+                    "<td>" + data[i].componente + "</td>" +
+                    "<td>" + data[i].situacao + "</td>" +
+                    "<td>" + data[i].quantidadeEstoque + "</td>" +
+                    "<td>" + data[i].quantidade + "</td>" +
+                    "<td>" + quantidade + "</td>" +
+                    "<td>" + (data[i].quantidade * quantidade) + "</td>" +
+                    "<td>" + status + "</td>" +
+                    "</tr>");
+        }
+    }
+
+
+    function carregaRecursos(setorID) {
+        $.ajax({
+            url: "{{url('ordem/carrega_recursos')}}",
+            type: 'POST',
+            data: {_token: CSRF_TOKEN,
+                id: setorID},
+            dataType: 'JSON',
+            beforeSend: function () {
+                HoldOn.open({
+                    theme: 'sk-rect',
+                    message: "<h4>Carregando... Aguarde</h4>"
+                });
+            },
+            success: function (data) {
+                console.log(data);
+                var options = "";
+                for (var j = 0; j < data.length; j++) {
+                    options += "<option value='" + data[j].id + "'>" + data[j].id + "-" + data[j].descricao + "</option>";
+                }
+
+                $('#rec_' + setorID).append(options);
+                HoldOn.close();
+            },
+            error: function (e) {
+                console.log(e.responseText);
+                HoldOn.close();
+            }
+        });
+    }
+
+
+
+
+
+    function calculaTempoTotal(tempoSetup, tempoProducao, tempoFinalizacao, quantidade) {
+        var hour = 0;
+        var minute = 0;
+        var second = 0;
+
+        var splitTime1 = tempoSetup.split(':');
+        var splitTime2 = tempoProducao.split(':');
+        var splitTime3 = tempoFinalizacao.split(':');
+
+        hour = (parseInt(splitTime1[0]) + (parseInt(splitTime2[0]) * quantidade) + parseInt(splitTime3[0]));
+        minute = (parseInt(splitTime1[1]) + (parseInt(splitTime2[1]) * quantidade) + parseInt(splitTime3[1]));
+        hour = parseInt(hour + minute / 60);
+        minute = minute % 60;
+        second = (parseInt(splitTime1[2]) + (parseInt(splitTime2[2]) * quantidade) + parseInt(splitTime3[2]));
+        minute = parseInt(minute + second / 60);
+        second = parseInt(second % 60);
+        return hour + ":" + minute + ":" + second;
 
     }
 
-    function removeMaterial(id) {
-        document.getElementById('comp_' + id).remove();
-        components--;
-    }
+
 </script>
 
 

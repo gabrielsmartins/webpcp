@@ -9,11 +9,12 @@
 namespace App\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 /**
  * @ORM\Entity
  * @ORM\Table(name="recurso")
  */
-class Recurso {
+class Recurso implements JsonSerializable {
     
     
     /**
@@ -65,5 +66,13 @@ class Recurso {
         $this->setor = $setor;
     }
 
+    public function jsonSerialize() {
+        return array(
+            'id' => $this->id,
+            'descricao' => $this->descricao,
+            'setorID' => $this->setor->getId(),
+            'setor' => $this->setor->getDescricao(),
+        );
+    }
 
 }

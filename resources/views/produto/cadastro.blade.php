@@ -506,12 +506,20 @@
                 tipo: 'material',
                 id: $("#busca_material").val()},
             dataType: 'JSON',
+            beforeSend: function(){
+                HoldOn.open({
+                                    theme:'sk-rect',
+                                    message:"<h4>Carregando... Aguarde</h4>"
+                                });
+            },
             success: function (data) {
                 var quantidade = $("#quantidadeMaterialAdd").val();
                 adicionaComponente(data, quantidade, 'material');
+                 HoldOn.close();
             },
             error: function (e) {
                 console.log(e.responseText);
+                 HoldOn.close();
             }
         });
     });
@@ -528,12 +536,20 @@
                 tipo: 'produto',
                 id: $("#busca_produto").val()},
             dataType: 'JSON',
+            beforeSend: function(){
+                HoldOn.open({
+                                    theme:'sk-rect',
+                                    message:"<h4>Carregando... Aguarde</h4>"
+                                });
+            },
             success: function (data) {
                 var quantidade = $("#quantidadeProdutoAdd").val();
                 adicionaComponente(data, quantidade, 'produto');
+                  HoldOn.close();
             },
             error: function (e) {
                 console.log(e.responseText);
+                  HoldOn.close();
             }
         });
     });
@@ -578,14 +594,22 @@
             data: {_token: CSRF_TOKEN,
                 id: $("#busca_operacao").val()},
             dataType: 'JSON',
+            beforeSend: function(){
+                HoldOn.open({
+                                    theme:'sk-rect',
+                                    message:"<h4>Carregando... Aguarde</h4>"
+                                });
+            },
             success: function (data) {
                 var tempoSetup = $("#tempoSetup").val();
                 var tempoProducao = $("#tempoProducao").val();
                 var tempoFinalizacao = $("#tempoFinalizacao").val();
                 adicionaOperacao(data, tempoSetup, tempoProducao, tempoFinalizacao);
+                 HoldOn.close();
             },
             error: function (e) {
                 console.log(e.responseText);
+                 HoldOn.close();
             }
         });
     });

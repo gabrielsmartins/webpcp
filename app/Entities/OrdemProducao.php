@@ -45,6 +45,7 @@ class OrdemProducao extends Documento {
      * @ORM\OneToMany(targetEntity="Programacao", mappedBy="ordemProducao",cascade={"all"})
      */
     private $programacoes;
+    
 
     function __construct($produto, $quantidade, $prazo, $responsavel) {
         $this->produto = $produto;

@@ -4,13 +4,14 @@
 
 namespace App\Entities;
 
-use Doctrine\ORM\Mapping AS ORM;
+use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="estrutura_produto")
  */
-class ItemEstrutura {
+class ItemEstrutura implements JsonSerializable {
     
     
     /**
@@ -67,4 +68,17 @@ class ItemEstrutura {
     }
 
 
+     public function jsonSerialize() {
+        return array(
+            'produto' => $this->produto->getDescricao(),
+            'id' => $this->componente->getId(),
+            'codigo' => $this->componente->getCodigoInterno(),
+            'componente' => $this->componente->getDescricao(),
+            'situacao' => $this->componente->getSituacao(),
+            'quantidadeEstoque' => $this->componente->getQuantidadeEstoque(),
+            'quantidade' => $this->quantidade,
+        );
+    }
+    
+    
 }

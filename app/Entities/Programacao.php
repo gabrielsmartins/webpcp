@@ -24,15 +24,6 @@ class Programacao {
      * */
     private $ordemProducao;
 
-    /**
-     * @ORM\Column(type="datetime",name="prog_dt_ini_prev")
-     */
-    private $dataInicioPrevista;
-
-    /**
-     * @ORM\Column(type="datetime",name="prog_dt_fim_prev")
-     */
-    private $dataFimPrevista;
 
     /**
      * @ORM\Column(type="time",name="prog_tot_hrs")
@@ -50,19 +41,21 @@ class Programacao {
      * @ORM\JoinColumn(name="prog_oper_id", referencedColumnName="oper_id")
      * */
     private $operacao;
-
-    /**
+    
+    
+        /**
      * @ORM\ManyToOne(targetEntity="Recurso")
      * @ORM\JoinColumn(name="prog_rec_id", referencedColumnName="recr_id")
      * */
     private $recurso;
 
-    function __construct($ordemProducao, $operacao, $recurso, $dataInicioPrevista, $dataFimPrevista) {
+  
+
+    function __construct($ordemProducao, $operacao,$recurso,$totalHoras) {
         $this->ordemProducao = $ordemProducao;
         $this->operacao = $operacao;
         $this->recurso = $recurso;
-        $this->dataInicioPrevista = $dataInicioPrevista;
-        $this->dataFimPrevista = $dataFimPrevista;
+        $this->totalHorasPrevista = $totalHoras;
         $this->apontamentos = new ArrayCollection();
     }
 
@@ -74,13 +67,7 @@ class Programacao {
         $this->id = $id;
     }
 
-    function getDataInicioPrevista() {
-        return $this->dataInicioPrevista;
-    }
-
-    function getDataFimPrevista() {
-        return $this->dataFimPrevista;
-    }
+  
 
     function getTotalHorasPrevista() {
         return $this->totalHorasPrevista;
@@ -94,21 +81,13 @@ class Programacao {
         return $this->operacao;
     }
 
-    function getRecurso() {
-        return $this->recurso;
-    }
+
 
     function getOrdemProducao() {
         return $this->ordemProducao;
     }
 
-    function setDataInicioPrevista($dataInicioPrevista) {
-        $this->dataInicioPrevista = $dataInicioPrevista;
-    }
-
-    function setDataFimPrevista($dataFimPrevista) {
-        $this->dataFimPrevista = $dataFimPrevista;
-    }
+  
 
     function setTotalHorasPrevista($totalHorasPrevista) {
         $this->totalHorasPrevista = $totalHorasPrevista;
@@ -122,9 +101,7 @@ class Programacao {
         $this->operacao = $operacao;
     }
 
-    function setRecurso($recurso) {
-        $this->recurso = $recurso;
-    }
+ 
 
     function setOrdemProducao($ordemProducao) {
         $this->ordemProducao = $ordemProducao;

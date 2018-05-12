@@ -132,8 +132,6 @@ CREATE TABLE ordem_producao(
 CREATE TABLE programacao(
 			 prog_id BIGINT NOT NULL AUTO_INCREMENT,
 			 prog_ord_id BIGINT NOT NULL,
-             prog_dt_ini_prev DATETIME NOT NULL,
-             prog_dt_fim_prev DATETIME NOT NULL,
              prog_tot_hrs TIMESTAMP NOT NULL,
              prog_oper_id BIGINT NOT NULL,
              prog_rec_id BIGINT NOT NULL,
@@ -142,6 +140,8 @@ CREATE TABLE programacao(
              CONSTRAINT FK_programacao_operacao FOREIGN KEY(prog_oper_id) REFERENCES operacao(oper_id),
              CONSTRAINT FK_programacao_recurso FOREIGN KEY(prog_rec_id) REFERENCES recurso(recr_id)
 );
+
+
 
 
 CREATE TABLE apontamento(

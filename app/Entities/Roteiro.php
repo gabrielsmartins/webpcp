@@ -8,35 +8,32 @@
 
 namespace App\Entities;
 
-use Doctrine\ORM\Mapping AS ORM;
-
+use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="roteiro")
  */
-class Roteiro {
+class Roteiro implements JsonSerializable {
 
-    
     /**
      * @ORM\Id 
      * @ORM\ManyToOne(targetEntity="Produto")
      * @ORM\JoinColumn(name="rot_prod_id", referencedColumnName="prod_id")
-     **/
+     * */
     private $produto;
 
-    
-    
     /**
      * @ORM\Column(type="integer",name="rot_seq")
      */
     private $sequencia;
 
-    /** 
-      * @ORM\Id 
-      * @ORM\ManyToOne(targetEntity="Operacao") 
-      * @ORM\JoinColumn(name="rot_oper_id", referencedColumnName="oper_id")
-      */
+    /**
+     * @ORM\Id 
+     * @ORM\ManyToOne(targetEntity="Operacao") 
+     * @ORM\JoinColumn(name="rot_oper_id", referencedColumnName="oper_id")
+     */
     private $operacao;
 
     /**
@@ -54,7 +51,7 @@ class Roteiro {
      */
     private $tempoFinalizacao;
 
-    function __construct($produto,$sequencia, $operacao, $tempoSetup, $tempoProducao, $tempoFinalizacao) {
+    function __construct(Produto $produto, $sequencia, $operacao, $tempoSetup, $tempoProducao, $tempoFinalizacao) {
         $this->produto = $produto;
         $this->sequencia = $sequencia;
         $this->operacao = $operacao;
@@ -62,7 +59,7 @@ class Roteiro {
         $this->tempoProducao = $tempoProducao;
         $this->tempoFinalizacao = $tempoFinalizacao;
     }
-    
+
     function getProduto() {
         return $this->produto;
     }
@@ -71,7 +68,6 @@ class Roteiro {
         $this->produto = $produto;
     }
 
-    
     function getSequencia() {
         return $this->sequencia;
     }
@@ -110,6 +106,20 @@ class Roteiro {
 
     function setTempoFinalizacao($tempoFinalizacao) {
         $this->tempoFinalizacao = $tempoFinalizacao;
+    }
+
+    public function jsonSerialize() {
+        return array(
+            'produto' => $this->produto->getDescricao(),
+            'sequencia' => $this->sequencia,
+            'operacaoID' => $this->operacao->getId(),
+            'operacao' => $this->operacao->getDescricao(),
+            'setorID' => $this->operacao->getSetor()->getId(),
+            'setor' => $this->operacao->getSetor()->getDescricao(),
+            'tempoSetup' => $this->tempoSetup,
+            'tempoProducao' => $this->tempoProducao,
+            'tempoFinalizacao' => $this->tempoFinalizacao,
+        );
     }
 
 }

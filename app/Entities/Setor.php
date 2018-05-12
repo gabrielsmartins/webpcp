@@ -65,5 +65,15 @@ class Setor {
         $this->operacoes = $operacoes;
     }
 
+    
+    function getRecursos() {
+        return $this->recursos;
+    }
+
+    function setRecursos($recursos) {
+        $this->recursos = $recursos;
+    }
+
+
 
 }

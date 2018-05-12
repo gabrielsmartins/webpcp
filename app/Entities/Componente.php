@@ -221,6 +221,7 @@ abstract class Componente implements JsonSerializable {
             'comprimento'=> $this->comprimento,
             'largura'=> $this->largura,
             'altura'=> $this->altura,
+           
             
         );
     }

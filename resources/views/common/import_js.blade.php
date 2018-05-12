@@ -25,3 +25,7 @@
 <script src="{{ asset('dashboard/vendor/jquery-repeater/jquery.repeater.js') }}" type="text/javascript"></script>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js" type="text/javascript"></script>
+
+
+<!-- Loader Ajax -->
+<script src="{{ asset('dashboard/vendor/holdOn/js/HoldOn.js') }}" type="text/javascript"></script>
