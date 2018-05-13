@@ -28,12 +28,12 @@
                             </div>
                             <div class="form-group row">
                                 <label for="descricao" class="col-sm-1 control-label">Data:</label>
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <div class="input-group date">
+                                        <input class="form-control pull-right" id="datepicker" type="text" name="dataRetirada" value="{{date('d/m/Y')}}">
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input class="form-control pull-right" id="datepicker" type="text" name="dataRetirada" value="{{date('d/m/Y')}}">
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +43,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-1 control-label">Produto:</label>
                                 <div class="col-sm-6">
-                                    <select class="js-data-example-ajax" id="busca_material" name="material.id"
+                                    <select class="js-data-example-ajax select2" id="busca_material" name="material.id"
                                             style="width: 100%">
                                         <option value="" disabled selected>Escolha um Produto</option>
 
@@ -72,14 +72,14 @@
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body no-padding">
-                                    <table class="table table-striped">
+                                    <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th style="width: 10px">#</th>
                                                 <th style="width: 20px">ID</th>
                                                 <th>Descrição</th>
                                                 <th style="width: 50px">Quantidade</th>
-                                                <th style="width: 50px">Alterar</th>
                                                 <th style="width: 50px">Remover</th>
                                             </tr>
                                         </thead>
@@ -89,6 +89,7 @@
                                         </tbody>
 
                                     </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -141,10 +142,7 @@
     });
 
 
-    //Timepicker
-    $('.timepicker').timepicker({
-        showInputs: false
-    });
+  
 </script>
 
 <script type="text/javascript">
@@ -153,6 +151,11 @@
         $("#busca_material").select2({
             placeholder: "Selecione um Produto",
             minimumInputLength: 1
+        });
+        
+        
+        $(".select2").select2({
+            allowClear: true
         });
     });
 </script>
@@ -170,6 +173,12 @@
         $.ajax({
             url: "{{url('retirada/search_produto')}}",
             type: 'POST',
+            beforeSend: function () {
+                HoldOn.open({
+                    theme: 'sk-rect',
+                    message: "<h4>Carregando... Aguarde</h4>"
+                });
+            },
             data: {_token: CSRF_TOKEN,
                 tipo: 'material',
                 id: $("#busca_material").val()},
@@ -178,9 +187,11 @@
                 var quantidade = $("#quantidadeProdutoAdd").val();
                 console.log(data);
                 adicionaProduto(data, quantidade);
+                HoldOn.close();
             },
             error: function (e) {
                 console.log(e.responseText);
+                HoldOn.close();
             }
         });
     });
@@ -194,7 +205,6 @@
                 "<td>" + data.id + "</td>" +
                 "<td>" + data.descricao + "</td>" +
                 "<td>" + quantidade + "</td>" +
-                "<td><button type='button' class='btn btn-primary fa fa-edit'></button></td>" +
                 "<td><button type='button' class='btn btn-secondary fa fa-remove' onclick='removeMaterial(" + components + ")'></button></td>" +
                 "</tr>");
 

@@ -89,9 +89,24 @@ class RequisicaoMaterialController extends Controller {
         return view('unidade.editar')->with('unidade', $unidade);
     }
     
+      public function delete(Request $request){
+        $setor = $this->requisicaoDAO->pesquisar($request->input('id'));
+
+       try{
+             $this->requisicaoDAO->remover($setor);
+             return redirect()->action('RequisicaoMaterialController@show')->with('success', 'Requisiçãod de Material Excluída com Sucesso !!!');
+        } catch (Exception $ex) {
+             return redirect()->action('RequisicaoMaterialController@show')->with('error', 'Falha Ao Excluir Requisição de Material. Já existe Recebimento cadastrado');
+        }
+    }
     
-    public function show(){
-        $requisicoes = $this->requisicaoDAO->listar();
+    public function show(Request $request){
+        $page = (int)  $request->input('page');
+        if($page!=0){
+            $requisicoes = $this->requisicaoDAO->listarComPaginacao(10,$page);
+        }else{
+            $requisicoes = $this->requisicaoDAO->listarComPaginacao();
+        }
         return view('requisicao.lista')->with('requisicoes', $requisicoes);
     }
     

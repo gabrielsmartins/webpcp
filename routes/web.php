@@ -94,6 +94,7 @@ Route::get('requisicao/show', 'RequisicaoMaterialController@show');
 Route::get('requisicao/edit/{id}', 'RequisicaoMaterialController@edit');
 Route::post('requisicao/search_material', 'RequisicaoMaterialController@searchMaterial');
 Route::get('requisicao/pesquisa', 'RequisicaoMaterialController@pesquisarPorCriterio');
+Route::post('requisicao/delete', 'RequisicaoMaterialController@delete');
 
 
 
