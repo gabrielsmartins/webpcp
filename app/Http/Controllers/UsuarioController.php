@@ -53,7 +53,7 @@ class UsuarioController extends Controller {
     
 
     public function store(Request $request) {
-        $nome = $request->input('nome');
+        $nome = mb_strtoupper($request->input('nome'),'UTF-8');
         $login = $request->input('login');
         $perfil = $this->perfilDAO->pesquisar($request->input('perfil'));
         $senha = md5($request->input('senha'));
@@ -77,7 +77,7 @@ class UsuarioController extends Controller {
     
     public function update(Request $request) {
         $id = $request->input('id');
-        $nome = $request->input('nome');
+        $nome = mb_strtoupper($request->input('nome'),'UTF-8');
         $login = $request->input('login');
         $perfil = $this->perfilDAO->pesquisar($request->input('perfil'));
         $senha = md5($request->input('senha'));

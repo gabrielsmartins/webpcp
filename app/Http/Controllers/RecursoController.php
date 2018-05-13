@@ -14,6 +14,7 @@ use App\Entities\Recurso;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
+use function mb_strtoupper;
 use function redirect;
 use function view;
 
@@ -34,7 +35,7 @@ class RecursoController extends Controller {
     
 
     public function store(Request $request) {
-        $descricao = $request->input('descricao');
+        $descricao = mb_strtoupper($request->input('descricao'),'UTF-8');
        $setor = $this->setorDAO->pesquisar($request->input('setor'));
         
         $recurso = new Recurso($descricao, $setor);
@@ -50,7 +51,7 @@ class RecursoController extends Controller {
     
     public function update(Request $request) {
         $id = $request->input('id');
-        $descricao = $request->input('descricao');
+        $descricao = mb_strtoupper($request->input('descricao'),'UTF-8');
         $setor = $this->setorDAO->pesquisar($request->input('setor'));
         
         $recurso = new Recurso($descricao, $setor);

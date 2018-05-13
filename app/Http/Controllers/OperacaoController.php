@@ -34,8 +34,8 @@ class OperacaoController extends Controller {
     
 
     public function store(Request $request) {
-        $descricao = $request->input('descricao');
-        $instrucao = $request->input('instrucao');
+        $descricao = mb_strtoupper($request->input('descricao'),'UTF-8');
+        $instrucao = mb_strtoupper($request->input('instrucao'),'UTF-8');
         $setor = $this->setorDAO->pesquisar($request->input('setor'));
         
         
@@ -52,8 +52,8 @@ class OperacaoController extends Controller {
     
     public function update(Request $request) {
         $id = $request->input('id');
-        $instrucao = $request->input('instrucao');
-        $descricao = $request->input('descricao');
+        $instrucao = mb_strtoupper($request->input('instrucao'),'UTF-8');
+        $descricao = mb_strtoupper($request->input('descricao'),'UTF-8');
         
         $setor = $this->setorDAO->pesquisar($request->input('setor'));
         

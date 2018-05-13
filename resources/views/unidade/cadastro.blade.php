@@ -17,15 +17,19 @@
                 </div>
                 <div class="card-body">
                     <form class="form-horizontal" action="{{ action('UnidadeMedidaController@store') }}" method="POST" accept-charset="UTF-8">
-                        <div class="form-group">
-                            <label>Descrição:</label>
-                            <input placeholder="Descrição" class="form-control" type="text" name="descricao">
+                        <div class="form-group row">
+                            <label class="col-sm-1 control-label">Descrição:</label>
+                             <div class="form-group col-sm-3">  
+                            <input placeholder="Descrição" class="form-control" type="text" name="descricao" required="true">
+                             </div>
                         </div>
-                        <div class="form-group">       
-                            <label>Sigla:</label>
-                            <input placeholder="Sigla" class="form-control" name="sigla" type="text">
+                        <div class="form-group row">       
+                            <label class="col-sm-1 control-label">Sigla:</label>
+                             <div class="form-group col-sm-1">  
+                                 <input placeholder="Sigla" class="form-control" name="sigla" type="text" required="true">
+                             </div>
                         </div>
-                        <div class="form-group">       
+                          <div class="box-footer">       
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <button type="reset" class="btn btn-secondary pull-right fa fa-ban"> Cancelar</button>
                             <button type="submit" class="btn btn-primary pull-right fa fa-save"> Salvar</button>

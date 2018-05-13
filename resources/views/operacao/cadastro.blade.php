@@ -18,30 +18,35 @@
                 </div>
                 <div class="card-body">
                     <form class="form-horizontal" action="{{ action('OperacaoController@store') }} "method="POST" accept-charset="UTF-8">
-                        <div class="form-group">
-                            <label>Descrição:</label>
-                            <input placeholder="Descrição" class="form-control" type="text" name="descricao">
+                        <div class="form-group row">
+                            <label class="col-sm-1 control-label">Descrição:</label>
+                            <div class="form-group col-sm-3">  
+                            <input placeholder="Descrição" class="form-control" type="text" name="descricao" required="true">
+                            </div>
                         </div>
-                        <div class="form-group">       
+                        
+                        <div class="form-group row">
                             <label for="descricao" class="col-sm-1 control-label">Instrução:</label>
-                            <textarea name="instrucao" placeholder="Instrução" class="form-control"></textarea>
-
+                            <div class="form-group col-sm-6">       
+                                <textarea name="instrucao" placeholder="Instrução" class="form-control" required="true"></textarea>
+                            </div>
                         </div>
 
 
-                        <div class="form-group">
-                            <label>Setor:</label>
+                        <div class="form-group row">
+                            <label class="col-sm-1 control-label">Setor:</label>
 
-
-                            <select name="setor" class="form-control">
-                                <option value="" disabled selected>Escolha um setor</option>
-                                @foreach($setores as $setor)
-                                <option value="{{$setor->getId()}}">{{$setor->getDescricao()}}</option>
-                                @endforeach
-                            </select>
+                            <div class="form-group col-sm-3">
+                                <select name="setor" class="form-control" required="true">
+                                    <option value="" disabled selected>Escolha um setor</option>
+                                    @foreach($setores as $setor)
+                                    <option value="{{$setor->getId()}}">{{$setor->getDescricao()}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="form-group">       
+                        <div class="box-footer">       
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <button type="reset" class="btn btn-secondary pull-right fa fa-ban"> Cancelar</button>
                             <button type="submit" class="btn btn-primary pull-right fa fa-save"> Salvar</button>

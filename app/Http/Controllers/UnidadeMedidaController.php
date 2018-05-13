@@ -30,8 +30,8 @@ class UnidadeMedidaController extends Controller {
     
 
     public function store(Request $request) {
-        $descricao = $request->input('descricao');
-        $sigla = $request->input('sigla');
+        $descricao = strtoupper($request->input('descricao'));
+        $sigla = strtoupper($request->input('sigla'));
 
         $unidade = new UnidadeMedida($descricao, $sigla);
 
@@ -46,8 +46,8 @@ class UnidadeMedidaController extends Controller {
     
     public function update(Request $request) {
         $id = $request->input('id');
-        $descricao = $request->input('descricao');
-        $sigla = $request->input('sigla');
+        $descricao = strtoupper($request->input('descricao'));
+        $sigla = strtoupper($request->input('sigla'));
 
         $unidade = new UnidadeMedida($descricao, $sigla);
         $unidade->setId($id);

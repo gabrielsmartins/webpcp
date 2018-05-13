@@ -20,29 +20,33 @@
                     <form class="form-horizontal" action="{{ action('RecursoController@store') }} "method="POST" accept-charset="UTF-8">
 
 
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label for="descricao" class="col-sm-1 control-label">Descrição:</label>
 
-                            <input type="text" class="form-control" id="descricao" placeholder="Descrição" name="descricao">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="descricao" placeholder="Descrição" name="descricao" required="true">
+                            </div>
+
 
                         </div>
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label for="setor" class="col-sm-1 control-label">Setor:</label>
 
-
-                            <select name="setor" class="form-control">
-                                <option value="" disabled selected>Escolha um setor</option>
-                                @foreach($setores as $setor)
-                                <option value="{{$setor->getId()}}">{{$setor->getDescricao()}}</option>
-                                @endforeach
-                            </select>
+                            <div class="col-md-3">
+                                <select name="setor" class="form-control" required="true">
+                                    <option value="" disabled selected>Escolha um setor</option>
+                                    @foreach($setores as $setor)
+                                    <option value="{{$setor->getId()}}">{{$setor->getDescricao()}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
                         </div>
 
 
 
 
-                        <div class="form-group">       
+                       <div class="box-footer">             
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <button type="reset" class="btn btn-secondary pull-right fa fa-ban"> Cancelar</button>
                             <button type="submit" class="btn btn-primary pull-right fa fa-save"> Salvar</button>

@@ -90,7 +90,7 @@
                             <tr role="row">
                                 <th>ID</th>
                                 <th>Descrição</th>
-                                <th>Ação</th>
+                                <th colspan="2">Ação</th>
                             </tr>
                         </thead>
                         <tbody>

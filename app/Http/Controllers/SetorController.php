@@ -30,7 +30,7 @@ class SetorController extends Controller {
     
 
     public function store(Request $request) {
-        $descricao = $request->input('descricao');
+        $descricao = mb_strtoupper($request->input('descricao'),'UTF-8');
 
         $setor = new Setor($descricao);
 
@@ -45,7 +45,7 @@ class SetorController extends Controller {
     
     public function update(Request $request) {
         $id = $request->input('id');
-        $descricao = $request->input('descricao');
+        $descricao = mb_strtoupper($request->input('descricao'),'UTF-8');
 
         $setor = new Setor($descricao);
         $setor->setId($id);

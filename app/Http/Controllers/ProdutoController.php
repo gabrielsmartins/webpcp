@@ -48,8 +48,8 @@ class ProdutoController extends Controller {
     }
 
     public function store(Request $request) {
-        $codigoInterno = $request->input('codigoInterno');
-        $descricao = $request->input('descricao');
+        $codigoInterno = mb_strtoupper($request->input('codigoInterno'),'UTF-8');
+        $descricao = mb_strtoupper($request->input('descricao'),'UTF-8');
         $situacao = $request->input('situacao');
         $unidadeMedida = $this->unidadeDAO->pesquisar($request->input('unidadeMedida'));
         $valorUnitario = $request->input('valorUnitario');
@@ -106,8 +106,8 @@ class ProdutoController extends Controller {
 
     public function update(Request $request) {
         $id = $request->input('id');
-        $codigoInterno = $request->input('codigoInterno');
-        $descricao = $request->input('descricao');
+        $codigoInterno = mb_strtoupper($request->input('codigoInterno'),'UTF-8');
+        $descricao = mb_strtoupper($request->input('descricao'),'UTF-8');
         $situacao = $request->input('situacao');
         $unidadeMedida = $this->unidadeDAO->pesquisar($request->input('unidadeMedida'));
         $valorUnitario = $request->input('valorUnitario');

@@ -94,7 +94,7 @@ class RequisicaoMaterialController extends Controller {
 
        try{
              $this->requisicaoDAO->remover($setor);
-             return redirect()->action('RequisicaoMaterialController@show')->with('success', 'Requisiçãod de Material Excluída com Sucesso !!!');
+             return redirect()->action('RequisicaoMaterialController@show')->with('success', 'Requisição de Material Excluída com Sucesso !!!');
         } catch (Exception $ex) {
              return redirect()->action('RequisicaoMaterialController@show')->with('error', 'Falha Ao Excluir Requisição de Material. Já existe Recebimento cadastrado');
         }

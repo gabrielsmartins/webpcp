@@ -17,14 +17,18 @@
                 </div>
                 <div class="card-body">
                     <form class="form-horizontal" action="{{ action('UnidadeMedidaController@update') }}" method="POST" accept-charset="UTF-8">
-                        <div class="form-group">
-                            <label>Descrição:</label>
+                        <div class="form-group row">
+                            <label class="col-sm-1 control-label">Descrição:</label>
                             <input type="hidden" name="id" value="{{ $unidade->getId()}}">
-                            <input placeholder="Descrição" class="form-control" type="text" name="descricao" value="{{ $unidade->getDescricao()}}">
+                            <div class="form-group col-sm-3">  
+                            <input placeholder="Descrição" class="form-control" type="text" name="descricao" value="{{ $unidade->getDescricao()}}" required="true">
+                            </div>
                         </div>
-                        <div class="form-group">       
-                            <label>Sigla:</label>
-                            <input placeholder="Sigla" class="form-control" type="text" name="sigla" value="{{ $unidade->getSigla()}}">
+                        <div class="form-group row">       
+                            <label class="col-sm-1 control-label">Sigla:</label>
+                            <div class="form-group col-sm-1">  
+                            <input placeholder="Sigla" class="form-control" type="text" name="sigla" value="{{ $unidade->getSigla()}}" required="true">
+                            </div>
                         </div>
                         <div class="form-group">       
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">

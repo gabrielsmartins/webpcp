@@ -27,6 +27,8 @@
                                     <input type="text" class="form-control" disabled="true" value="{{Session::get('usuarioLogado')}}"/>
                                 </div>
                             </div>
+                            
+                            
                             <div class="form-group row">
 
 

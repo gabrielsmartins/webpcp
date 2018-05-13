@@ -45,7 +45,7 @@
 
                                 <label for="descricao" class="col-sm-1 control-label">Descrição:</label>
                                 <div class="col-sm-6">
-                                    <input id="descricao" class="form-control" type="text" name="descricao">
+                                    <input id="descricao" class="form-control" type="text" name="descricao" required="true">
                                 </div>
                             </div>
 
@@ -56,7 +56,7 @@
                                 <label for="valorUnitario" class="col-sm-1 control-label">Valor Unitário:</label>
 
                                 <div class="col-sm-3">
-                                    <input id="valorUnitario" class="form-control" type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" name="valorUnitario"> 
+                                    <input id="valorUnitario" class="form-control" type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" name="valorUnitario" required="true"> 
                                 </div>
 
                                 <div class="col-sm-6">
@@ -89,7 +89,7 @@
                                 <label for="unidadeMedida" class="col-sm-1 control-label">Unidade de Medida:</label>
 
                                 <div class="col-sm-3">
-                                    <select name="unidadeMedida" class="form-control">
+                                    <select name="unidadeMedida" class="form-control" required="true">
 
 
                                         <option value="" disabled selected>Escolha uma unidade</option>

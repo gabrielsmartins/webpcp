@@ -22,11 +22,14 @@
                         <div class="form-group">
                             <label for="descricao" class="col-sm-1 control-label">Descrição:</label>
                             <input type="hidden" name="id" value="{{$recurso->getId()}}">
-                            <input type="text" class="form-control" id="descricao" placeholder="Descrição" name="descricao" value="{{$recurso->getDescricao()}}">
+                            <div class="col-md-6">
+                                  <input type="text" class="form-control" id="descricao" placeholder="Descrição" name="descricao" value="{{$recurso->getDescricao()}}" required="true"/>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="sigla" class="col-sm-1 control-label">Setor:</label>
-                            <select name="setor" class="form-control">
+                            <div class="col-md-3">
+                            <select name="setor" class="form-control" required="true">
                                 <option value="" disabled selected>Escolha um setor</option>
                                 @foreach($setores as $setor)
                                 <option value="{{$setor->getId()}}" 
@@ -36,6 +39,7 @@
                                         >{{$setor->getDescricao()}}</option>
                                 @endforeach
                             </select>
+                            </div>
 
                         </div>
 
