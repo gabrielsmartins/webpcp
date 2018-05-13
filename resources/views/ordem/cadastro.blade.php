@@ -64,7 +64,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-1 control-label">Produto:</label>
                                 <div class="col-sm-6">
-                                    <select  class="select2" id="busca_produto" name="produto.id" style="width: 100%">
+                                    <select  class="select2" id="busca_produto" name="produto" style="width: 100%" required="true">
                                         <option value="" disabled selected>Escolha um Produto</option>
 
                                         @foreach($produtos as $produto)
@@ -79,10 +79,10 @@
                             <div class="form-group row">
                                 <label class="col-sm-1 control-label">Quantidade:</label>
                                 <div class="col-sm-1">
-                                    <input id="quantidade" type="number"  pattern="[0-9]+([\.,][0-9]+)?" step="0.01" class="form-control">
+                                    <input id="quantidade" name="quantidade" type="number"  pattern="[0-9]+([\.,][0-9]+)?" step="0.01" class="form-control" required="true">
                                 </div>
                                 <div class="col-sm-1">
-                                    <button type="button" class="btn btn-primary" id="btnImportarRoteiro" >Importar Roteiro</button>
+                                    <button type="button" class="btn btn-primary" id="btnImportarRoteiro">Importar Roteiro</button>
                                 </div>
 
                             </div>

@@ -13,7 +13,7 @@ class ItemRecebimento {
     
     /**
      * @ORM\Id 
-     * @ORM\ManyToOne(targetEntity="RecebimentoMaterial")
+     * @ORM\ManyToOne(targetEntity="RecebimentoMaterial",inversedBy="itens")
      * @ORM\JoinColumn(name="receb_id", referencedColumnName="receb_id")
      **/
     private $recebimento;

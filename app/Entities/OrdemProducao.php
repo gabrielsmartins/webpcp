@@ -42,9 +42,14 @@ class OrdemProducao extends Documento {
     private $quantidade;
 
     /**
-     * @ORM\OneToMany(targetEntity="Programacao", mappedBy="ordemProducao",cascade={"all"})
+     * @ORM\OneToMany(targetEntity="Programacao", mappedBy="ordemProducao",cascade={"persist"})
      */
     private $programacoes;
+    
+    /**
+     * @ORM\Column(type="string",name="ord_status")
+     */
+    private $status = "EMITIDA";
     
 
     function __construct($produto, $quantidade, $prazo, $responsavel) {
@@ -87,7 +92,17 @@ class OrdemProducao extends Documento {
     function setProgramacoes($programacoes) {
         $this->programacoes = $programacoes;
     }
+    
+    
+    function getStatus() {
+        return $this->status;
+    }
 
+    function setStatus($status) {
+        $this->status = $status;
+    }
+
+    
     function adicionarProgramacao(Programacao $programacao) {
         if (!$this->programacoes->contains($programacao)) {
             $this->programacoes->add($programacao);

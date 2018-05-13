@@ -113,6 +113,7 @@ CREATE TABLE roteiro(
 );
 
 
+
 CREATE TABLE ordem_producao(
 	     ord_id BIGINT AUTO_INCREMENT NOT NULL,
 		 ord_prod_id BIGINT NOT NULL,
@@ -120,9 +121,9 @@ CREATE TABLE ordem_producao(
 	     ord_dt_emi TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
 	     ord_prazo  DATE NOT NULL,
 	     ord_usr_id BIGINT NOT NULL,
-	     ord_dt_concl TIMESTAMP ,
+	     ord_dt_concl TIMESTAMP NULL DEFAULT NULL ,
 	     ord_status VARCHAR(500) NOT NULL DEFAULT 'EMITIDA',
-	     CONSTRAINT PK_ordem_producao PRIMARY KEY(ord_prod_id),
+	     CONSTRAINT PK_ordem_producao PRIMARY KEY(ord_id),
 	     CONSTRAINT FK_ordem_producao_produto FOREIGN KEY(ord_id) REFERENCES produto(prod_id),
 	     CONSTRAINT FK_ordem_producao_usuario FOREIGN KEY(ord_usr_id) REFERENCES usuario(usr_id),
 	     CONSTRAINT CHK_ordem_producao_status CHECK(ord_status IN('EMITIDA','INICIADA','ENCERRADA','CANCELADA'))     
@@ -130,29 +131,33 @@ CREATE TABLE ordem_producao(
 
 
 CREATE TABLE programacao(
-			 prog_id BIGINT NOT NULL AUTO_INCREMENT,
 			 prog_ord_id BIGINT NOT NULL,
-             prog_tot_hrs TIMESTAMP NOT NULL,
-             prog_oper_id BIGINT NOT NULL,
+             prog_seq BIGINT NOT NULL,
+             prog_tmp_tot TIME NOT NULL,
+             prog_rot_prod_id BIGINT NOT NULL,
+             prog_rot_oper_id BIGINT NOT NULL,
+             prog_rot_seq INT NOT NULL,
              prog_rec_id BIGINT NOT NULL,
-             CONSTRAINT PK_programacao PRIMARY KEY(prog_id),
+             CONSTRAINT PK_programacao PRIMARY KEY(prog_ord_id,prog_seq),
 			 CONSTRAINT FK_programacao_ordem FOREIGN KEY(prog_ord_id) REFERENCES ordem_producao(ord_id),
-             CONSTRAINT FK_programacao_operacao FOREIGN KEY(prog_oper_id) REFERENCES operacao(oper_id),
+             CONSTRAINT FK_programacao_roteiro FOREIGN KEY(prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq) REFERENCES roteiro(rot_prod_id,rot_oper_id,rot_seq),
              CONSTRAINT FK_programacao_recurso FOREIGN KEY(prog_rec_id) REFERENCES recurso(recr_id)
 );
 
 
 
 
+
 CREATE TABLE apontamento(
 			 apont_id BIGINT NOT NULL AUTO_INCREMENT,
-			 apont_prog_id BIGINT NOT NULL,
+             apont_prog_ord_id BIGINT NOT NULL,
+			 apont_prog_seq BIGINT NOT NULL,
              apont_tipo VARCHAR(50) NOT NULL,
              apont_qntd DOUBLE NOT NULL,
              apont_dt_ini DATETIME NOT NULL,
              apont_dt_fim DATETIME NOT NULL,
              CONSTRAINT PK_apontamento PRIMARY KEY(apont_id),
-             CONSTRAINT FK_apontamento_programacao FOREIGN KEY(apont_prog_id) REFERENCES programacao(prog_id),
+             CONSTRAINT FK_apontamento_programacao FOREIGN KEY(apont_prog_ord_id,apont_prog_seq) REFERENCES programacao(prog_ord_id,prog_seq),
 			 CONSTRAINT CHK_apontamento_tipo CHECK(apont_tipo IN('PRODUCAO','MANUTENCAO','PARADA','DESCARTE'))    
 );
 
@@ -239,6 +244,7 @@ SELECT * FROM retirada_produto_detalhe;
 SELECT * FROM recebimento_material;
 SELECT * FROM recebimento_material_detalhe;
 SELECT * FROM ordem_producao;
+SELECT * FROM programacao;
 
 
 INSERT INTO perfil(perf_desc)VALUES('PCP');

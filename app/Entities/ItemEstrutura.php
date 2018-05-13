@@ -16,7 +16,7 @@ class ItemEstrutura implements JsonSerializable {
     
     /**
      * @ORM\Id 
-     * @ORM\ManyToOne(targetEntity="Produto")
+     * @ORM\ManyToOne(targetEntity="Produto",inversedBy="itens")
      * @ORM\JoinColumn(name="prod_id", referencedColumnName="prod_id")
      **/
     private $produto;

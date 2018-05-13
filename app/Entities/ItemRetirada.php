@@ -13,7 +13,7 @@ class ItemRetirada {
     
     /**
      * @ORM\Id 
-     * @ORM\ManyToOne(targetEntity="RetiradaProduto")
+     * @ORM\ManyToOne(targetEntity="RetiradaProduto",inversedBy="itens")
      * @ORM\JoinColumn(name="retr_id", referencedColumnName="retr_id")
      **/
     private $retirada;

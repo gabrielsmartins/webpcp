@@ -46,8 +46,8 @@ class ProgramacaoTest extends TestCase {
         
 
             
-        $programacao1 = new Programacao($ordemProducao, $operacao1, $recurso1);
-        $programacao2 = new Programacao($ordemProducao, $operacao2, $recurso2);
+        $programacao1 = new Programacao($ordemProducao,1, $roteiro1, $recurso1);
+        $programacao2 = new Programacao($ordemProducao,2, $roteiro2, $recurso2);
         $ordemProducao->adicionarProgramacao($programacao1); 
         $ordemProducao->adicionarProgramacao($programacao2); 
        
@@ -55,11 +55,11 @@ class ProgramacaoTest extends TestCase {
 
         $date = new DateTime('now');
         $date->format("Y-m-d");
-        $this->assertEquals($date , $ordemProducao->getDataEmissao());
         $this->assertEquals("26/02/2018", $ordemProducao->getPrazo());
-        $this->assertEquals(2, $ordemProducao->getItens()->count());
         $this->assertEquals($responsavel->getLogin(), $ordemProducao->getResponsavel()->getLogin());
         $this->assertEquals(2,$ordemProducao->getProgramacoes()->count());
+        echo "\nTempo Total" . $programacao1->getTempoTotal();
+        $this->assertEquals("38:28:20",$programacao1->getTempoTotal());
     }
 
 }

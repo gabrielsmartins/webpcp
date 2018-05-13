@@ -124,3 +124,4 @@ Route::get('ordem/edit/{id}', 'OrdemProducaoController@edit');
 Route::post('ordem/importar_roteiro', 'OrdemProducaoController@importarRoteiro');
 Route::post('ordem/importar_estrutura', 'OrdemProducaoController@importarEstrutura');
 Route::post('ordem/carrega_recursos', 'OrdemProducaoController@carregaRecursos');
+Route::post('ordem/delete', 'OrdemProducaoController@delete');

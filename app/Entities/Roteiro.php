@@ -19,12 +19,13 @@ class Roteiro implements JsonSerializable {
 
     /**
      * @ORM\Id 
-     * @ORM\ManyToOne(targetEntity="Produto")
+     * @ORM\ManyToOne(targetEntity="Produto",inversedBy="roteiros")
      * @ORM\JoinColumn(name="rot_prod_id", referencedColumnName="prod_id")
      * */
     private $produto;
 
     /**
+     * @ORM\Id 
      * @ORM\Column(type="integer",name="rot_seq")
      */
     private $sequencia;
