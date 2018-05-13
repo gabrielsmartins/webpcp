@@ -71,10 +71,6 @@ class RecebimentoMaterialController extends Controller {
         }
         
 
-       
-        
-        
-
         try{
              $this->recebimentoDAO->salvar($recebimento);
              return redirect('recebimento/form')->with('success', 'Recebimento de Material nº' . $recebimento->getId() . ' Registrado com Sucesso !!!');
@@ -106,9 +102,16 @@ class RecebimentoMaterialController extends Controller {
     }
     
     
-    public function show(){
-        $retiradas = $this->recebimentoDAO->listar();
-        return view('retirada.lista')->with('retiradas', $retiradas);
+    public function show(Request $request){
+         $page = (int)  $request->input('page');
+        if($page!=0){
+            $recebimentos = $this->recebimentoDAO->listarComPaginacao(10,$page);
+        }else{
+            $recebimentos = $this->recebimentoDAO->listarComPaginacao();
+        }
+        return view('recebimento.lista')->with('recebimentos', $recebimentos);
+        
+
     }
     
     

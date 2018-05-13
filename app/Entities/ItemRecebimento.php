@@ -40,7 +40,7 @@ class ItemRecebimento {
         return $this->recebimento;
     }
 
-    function getItemRequsicao() {
+    function getItemRequisicao() {
         return $this->itemRequisicao;
     }
 

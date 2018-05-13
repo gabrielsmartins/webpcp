@@ -91,8 +91,13 @@ class RetiradaProdutoController extends Controller {
     }
     
     
-    public function show(){
-        $retiradas = $this->retiradaDAO->listar();
+    public function show(Request $request){
+        $page = (int)  $request->input('page');
+        if($page!=0){
+            $retiradas = $this->retiradaDAO->listarComPaginacao(10,$page);
+        }else{
+            $retiradas = $this->retiradaDAO->listarComPaginacao();
+        }
         return view('retirada.lista')->with('retiradas', $retiradas);
     }
     

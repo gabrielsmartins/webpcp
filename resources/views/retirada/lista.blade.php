@@ -6,94 +6,169 @@
 
 
 @section('content')
-<div class="box">
-    <div class="box-header">
-        <h3 class="box-title">Retirada de Produto</h3>
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body">
-        <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h4>Retirada de Produto</h4>
+        </div>
+        <div class="card-body">
+
+
+            @if (session('success'))
+            <br>
+            <div class="alert alert-success" role="alert"> 
+                {{ session('success') }}
+            </div>
+            <br>
+            @endif
+
+
+            @if (session('error'))
+            <br>
+            <div class="alert alert-danger" role="alert"> 
+                {{ session('error') }}
+            </div>
+            <br>
+            @endif
+
+
+
             <div class="row">
-                <div class="col-sm-6">
-                        <label>Pesquisar por: </label>
-                        <form method="get" action="{{ action('RetiradaProdutoController@pesquisarPorCriterio') }}">
-                          <select class="form-control input-sm" name="criterio">
-                            <option value="id">ID</option>
-                            <option value="descricao">Data Retirada</option>
-                            <option value="sigla">Responsável</option>
-                             <option value="sigla">Status</option>
-                        </select>
-                             <input class="form-control input-sm" placeholder=""  type="search" name="valor">
-                             <button class="btn btn-save fa fa-search" type="submit"></button>
-                        </form>   
+
+
+
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <form method="get" action="{{ action('RetiradaProdutoController@pesquisarPorCriterio') }}" class="form-inline">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for="inlineFormInput" class="sr-only">Pesquisar por:</label>
+                                    <select class="form-control input-sm" name="criterio">
+                                        <option value="id" @if(! empty($criterio)) {{ $criterio == 'id' ? 'selected' : '' }} @endif>ID</option>
+                                        <option value="data" @if(! empty($criterio)) {{  $criterio == 'descricao' ? 'selected' : '' }}@endif>Data</option>
+                                        <option value="status" @if(! empty($criterio)) {{  $criterio == 'sigla' ? 'selected' : '' }} @endif>Status</option>
+                                    </select>
+                                    <input class="form-control input-sm" placeholder=""  type="search" name="valor" @if(! empty($valor)) value=" {{ $valor }}" @endif>
+                                           <button class="btn btn-primary fa fa-search" type="submit"></button>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group pull-right">
+                                    <label><strong>Exibir:</strong></label>
+                                    <select name="limit" aria-controls="example1" class="form-control input-sm" >
+                                        <option value="10" @if(! empty($limit)) {{ $limit == 10 ? 'selected' : '' }} @endif>10</option>
+                                        <option value="25" @if(! empty($limit))  {{ $limit == 25 ? 'selected' : '' }} @endif>25</option>
+                                        <option value="50" @if(! empty($limit))  {{ $limit == 50 ? 'selected' : '' }} @endif>50</option>
+                                        <option value="100" @if(! empty($limit))  {{ $limit == 100 ? 'selected' : '' }} @endif>100</option>
+                                    </select> 
+                                    <label><strong>Registros</strong></label>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="pull-right">
-                        <label>Exibir </label>
-                        <select name="example1_length" aria-controls="example1" class="form-control input-sm">
-                                <option value="10">10</option><option value="25">25</option>
-                                <option value="50">50</option><option value="100">100</option>
-                        </select> 
-                        <label>Registros</label>
+
+
+
+
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Item</th>
+                                    <th>Descrição</th>
+                                    <th>Quantidade</th>
+                                    <th>Data Retirada</th>
+                                    <th>Responsável</th>
+                                    <th>Status</th>
+                                    <th colspan="2">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach($retiradas as $retirada)
+                                @foreach($retirada->getItens() as $item)
+                                <tr>
+                                    <td>{{$item->getRetirada()->getId()}}</td>
+                                    <td>{{$item->getRetirada()->getId()}}.{{ $loop->iteration }}</td>
+                                    <td>{{$item->getProduto()->getDescricao()}}</td>
+                                    <td>{{$item->getQuantidade()}}</td>
+                                    <td>{{$item->getRetirada()->getData()->format('d/m/Y') }}</td>
+                                    <td>{{$item->getRetirada()->getResponsavel()->getNome()}}</td>
+                                    <td  style="width: 10px;">
+                                        <a href="{{ URL::to('/retirada/edit/'.$retirada->getId()) }}"
+                                           class="btn btn-primary"><i class="fa fa-edit fa-sm"></i>
+                                        </a> 
+                                    </td>
+                                    <td style="width: 10px;">
+                                        <button type="button"class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{$retirada->getId()}}"><i class="fa fa-remove fa-sm"></i></button>
+                                    </td>
+                                </tr>
+
+                                <!-- Modal -->
+                            <div class="modal fade" id="myModal{{$retirada->getId()}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="myModalLabel">Atenção</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Deseja realmente excluir?
+                                        </div>
+                                        <form>
+                                            <div class="modal-footer">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <input type="hidden" name="id" value="{{$retirada->getId() }}"/>
+                                                <button type="submit" class="btn btn-success">Confirmar</button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            @endforeach
+                            @endforeach
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
-                        <thead>
-                            <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 297.45px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 362.1px;" aria-label="Browser: activate to sort column ascending">Data Retirada</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 362.1px;" aria-label="Browser: activate to sort column ascending">Responsável</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 322.167px;" aria-label="Platform(s): activate to sort column ascending">Qntd Itens</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 257.083px;">Editar</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 257.083px;">Excluir</th>
-                            </tr>
-                        </thead>
-                        <tbody>
 
-                            @foreach ($retiradas as $retirada)
-                            <tr>
-                                <td>{{$retirada->getId() }}</td>
-                                <td>{{$retirada->getData()->format('d/m/Y') }}</td>
-                                <td>{{$retirada->getResponsavel()->getNome() }}</td>
-                                <td>{{$retirada->getItens()->count()}}</td>
-                                <td>
-                                    <a href="{{ URL::to('/retirada/edit/'.$retirada->getId()) }}"
-                                       class="btn btn-save"><i class="fa fa-edit"></i>
-                                    </a> 
-                                </td>
-                                <td>
-                                    <form action="<c:url value='/requisicao/${unidade.id}'/>" method="post">
-                                        <button type="submit"class="btn btn-cancel"><i class="fa fa-remove"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
 
-                            @endforeach
-
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th rowspan="1" colspan="1">ID</th>
-                                <th rowspan="1" colspan="1">Descrição</th>
-                                <th rowspan="1" colspan="1">Sigla</th>
-                                <th rowspan="1" colspan="1">Editar</th>
-                                <th rowspan="1" colspan="1">Excluir</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-sm-5">
-                    <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                        
-                </div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div></div></div>
+
+                </div>
+                <div class="col-sm-7">
+                    @if(! empty($criterio))
+                    {{ $retiradas->appends(['retiradas'=>$criterio,'valor'=>$valor,'limit'=>$limit])->links() }}
+                    @else
+                    {{ $retiradas->links() }}
+                    @endif
+                </div>
+            </div>
+
+        </div>
     </div>
-    <!-- /.box-body -->
 </div>
 @stop
+
 
 
