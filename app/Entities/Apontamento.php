@@ -20,9 +20,14 @@ class Apontamento {
     private $id;
     
     
+
+   
     /**
-     * @ORM\ManyToOne(targetEntity="Programacao",inversedBy="apontamentos")
-     * @ORM\JoinColumn(name="apont_prog_id", referencedColumnName="prog_id")
+     * @ORM\ManyToOne(targetEntity="Programacao")
+     * @ORM\JoinColumns({
+     * @ORM\JoinColumn(name="apont_prog_ord_id", referencedColumnName="prog_ord_id"),
+     * @ORM\JoinColumn(name="apont_prog_seq", referencedColumnName="prog_seq")
+     * })
      * */
     private $programacao;
     

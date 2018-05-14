@@ -245,6 +245,7 @@ SELECT * FROM recebimento_material;
 SELECT * FROM recebimento_material_detalhe;
 SELECT * FROM ordem_producao;
 SELECT * FROM programacao;
+SELECT * FROM apontamento;
 
 
 INSERT INTO perfil(perf_desc)VALUES('PCP');
