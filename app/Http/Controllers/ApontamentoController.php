@@ -8,17 +8,15 @@
 
 namespace App\Http\Controllers;
 
-use App\DAO\OperacaoDAO;
+use App\DAO\ApontamentoDAO;
 use App\DAO\OrdemProducaoDAO;
-use App\DAO\ProdutoDAO;
-use App\DAO\RecursoDAO;
-use App\DAO\SetorDAO;
 use App\DAO\UsuarioDAO;
 use App\Entities\OrdemProducao;
 use App\Entities\Programacao;
-use App\Entities\StatusOrdemProducao;
+use App\Entities\UnidadeMedida;
 use DateTime;
 use Exception;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Request;
 use function redirect;
@@ -30,28 +28,22 @@ use function view;
  *
  * @author HOME-PC
  */
-class OrdemProducaoController extends Controller {
+class ApontamentoController extends Controller {
 
     private $ordemProducaoDAO;
-    private $produtoDAO;
-    private $setorDAO;
-    private $operacaoDAO;
-    private $recursoDAO;
+    private $apontamentoDAO;
     private $usuarioDAO;
 
     public function __construct() {
         $this->ordemProducaoDAO = new OrdemProducaoDAO();
-        $this->produtoDAO = new ProdutoDAO();
         $this->usuarioDAO = new UsuarioDAO();
-        $this->setorDAO = new SetorDAO();
-        $this->operacaoDAO = new OperacaoDAO();
-        $this->recursoDAO = new RecursoDAO();
+        $this->apontamentoDAO = new ApontamentoDAO();
     }
 
     public function form() {
-        $produtos = $this->produtoDAO->listar();
-        $data = array('produtos' => $produtos);
-        return view('ordem.cadastro')->with($data);
+        $ordens = $this->ordemProducaoDAO->listar();
+        $data = array('ordens' => $ordens);
+        return view('apontamento.cadastro')->with($data);
     }
 
     public function store(Request $request) {
@@ -62,10 +54,10 @@ class OrdemProducaoController extends Controller {
         $recursos = $request->input('recurso');
 
         $ordemProducao = new OrdemProducao($produto, $quantidade, $prazo, $responsavel);
-        $roteiros = $produto->getRoteiros();
+         $roteiros = $produto->getRoteiros();
         for ($i = 0; $i < $roteiros->count(); $i++) {
             $recurso = $this->recursoDAO->pesquisar($recursos[$i]);
-            $programacao = new Programacao($ordemProducao, ($i + 1), $roteiros[$i], $recurso);
+            $programacao = new Programacao($ordemProducao,($i+1), $roteiros[$i], $recurso);
             $ordemProducao->adicionarProgramacao($programacao);
         }
 
@@ -79,13 +71,18 @@ class OrdemProducaoController extends Controller {
     }
 
     public function cancel(Request $request) {
-        $ordem = $this->ordemProducaoDAO->pesquisar($request->input('id'));
-        $ordem->setStatus(StatusOrdemProducao::CANCELADA);
+        $id = $request->input('id');
+        $descricao = $request->input('descricao');
+        $sigla = $request->input('sigla');
+
+        $unidade = new UnidadeMedida($descricao, $sigla);
+        $unidade->setId($id);
+
         try {
-            $this->ordemProducaoDAO->alterar($ordem );
-            return redirect()->action('OrdemProducaoController@edit', ['id' => $ordem ->getId()])->with('success', 'Ordem de Produção Cancelada com Sucesso !!!');
+            $this->ordemProducaoDAO->alterar($unidade);
+            return redirect()->action('OrdemProducaoController@edit', ['id' => $unidade->getId()])->with('success', 'Ordem de Produção Cancelada com Sucesso !!!');
         } catch (Exception $ex) {
-            return redirect()->action('OrdemProducaoController@edit', ['id' => $ordem ->getId()])->with('error', 'Falha Ao Cancelar Ordem de Produção !!!' . $ex->getMessage());
+            return redirect()->action('OrdemProducaoController@edit', ['id' => $unidade->getId()])->with('error', 'Falha Ao Cancelar Ordem de Produção !!!' . $ex->getMessage());
         }
     }
 
@@ -95,15 +92,26 @@ class OrdemProducaoController extends Controller {
     }
 
     public function show(Request $request) {
-        $page = (int) $request->input('page');
-        if ($page != 0) {
-            $requisicoes = $this->ordemProducaoDAO->listarComPaginacao(10, $page);
-        } else {
+         $page = (int)  $request->input('page');
+        if($page!=0){
+            $requisicoes = $this->ordemProducaoDAO->listarComPaginacao(10,$page);
+        }else{
             $requisicoes = $this->ordemProducaoDAO->listarComPaginacao();
         }
         return view('ordem.lista')->with('ordens', $requisicoes);
     }
 
+    public function delete(Request $request){
+        $setor = $this->ordemProducaoDAO->pesquisar($request->input('id'));
+
+       try{
+             $this->ordemProducaoDAO->remover($setor);
+             return redirect()->action('OrdemProducaoController@show')->with('success', 'Ordem de Produção Excluída com Sucesso !!!');
+        } catch (Exception $ex) {
+             return redirect()->action('OrdemProducaoController@show')->with('error', 'Não foi possível excluir, Ordem de Produção já Iniciada');
+        }
+    }
+    
     public function searchProduto(Request $request) {
         $id = $request->input('id');
 

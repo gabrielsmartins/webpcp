@@ -13,7 +13,7 @@ use App\DAO\RequisicaoMaterialDAO;
 use App\DAO\UsuarioDAO;
 use App\Entities\ItemRequisicao;
 use App\Entities\RequisicaoMaterial;
-use App\Entities\UnidadeMedida;
+use App\Entities\StatusRequisicaoMaterial;
 use App\Http\Controllers\Controller;
 use DateTime;
 use Exception;
@@ -69,36 +69,23 @@ class RequisicaoMaterialController extends Controller {
     
     
     public function cancel(Request $request) {
-        $id = $request->input('id');
-        $descricao = $request->input('descricao');
-        $sigla = $request->input('sigla');
-
-        $unidade = new UnidadeMedida($descricao, $sigla);
-        $unidade->setId($id);
+        $requisicao = $this->requisicaoDAO->pesquisar($request->input('id'));
+        $requisicao->setStatus(StatusRequisicaoMaterial::CANCELADA);
 
         try{
-             $this->requisicaoDAO->alterar($unidade);
-             return redirect()->action('RequisicaoMaterialController@edit', ['id' => $unidade->getId()])->with('success', 'Unidade Alterada com Sucesso !!!');
+             $this->requisicaoDAO->alterar($requisicao);
+             return redirect()->action('RequisicaoMaterialController@edit', ['id' => $requisicao->getId()])->with('success', 'Requisição de Material Cancelada com Sucesso !!!');
         } catch (Exception $ex) {
-             return redirect()->action('RequisicaoMaterialController@edit', ['id' => $unidade->getId()])->with('error', 'Falha Ao Alterar Unidade !!!' . $ex->getMessage());
+             return redirect()->action('RequisicaoMaterialController@edit', ['id' => $requisicao->getId()])->with('error', 'Falha Ao Cancelar Requisição de Material !!!' . $ex->getMessage());
         }
     }
     
     public function edit($id){
-        $unidade = $this->requisicaoDAO->pesquisar($id);
-        return view('unidade.editar')->with('unidade', $unidade);
+        $requisicao = $this->requisicaoDAO->pesquisar($id);
+        return view('requisicao.editar')->with('requisicao', $requisicao);
     }
     
-      public function delete(Request $request){
-        $setor = $this->requisicaoDAO->pesquisar($request->input('id'));
 
-       try{
-             $this->requisicaoDAO->remover($setor);
-             return redirect()->action('RequisicaoMaterialController@show')->with('success', 'Requisição de Material Excluída com Sucesso !!!');
-        } catch (Exception $ex) {
-             return redirect()->action('RequisicaoMaterialController@show')->with('error', 'Falha Ao Excluir Requisição de Material. Já existe Recebimento cadastrado');
-        }
-    }
     
     public function show(Request $request){
         $page = (int)  $request->input('page');

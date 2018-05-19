@@ -130,6 +130,8 @@ CREATE TABLE ordem_producao(
 );
 
 
+
+
 CREATE TABLE programacao(
 			 prog_ord_id BIGINT NOT NULL,
              prog_seq BIGINT NOT NULL,
@@ -260,6 +262,8 @@ INSERT INTO perfil(perf_desc)VALUES('ADMINISTRADOR');
 INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(1,'PCP - User','admin',MD5('12345'));
 
 
+
+
 INSERT INTO unidade (unid_id, unid_desc, unid_sig) VALUES
 (1, 'AMPOLA', 'AMP'),
 (2, 'BALDE', 'BAL'),
@@ -333,6 +337,102 @@ INSERT INTO setor (setr_desc) VALUES
 ('FERRAMENTARIA'),
 ('MONTAGEM'),
 ('USINAGEM');
+
+
+
+INSERT INTO operacao (oper_desc, oper_instr, oper_setr_id) VALUES
+('TORNEAR', 'TORNEAR CONFORME DESENHO', 7),
+('DOBRAR', 'DOBRAR CONFORME DESENHO', 4),
+('MONTAR', 'MONTAR', 6),
+('EMBALAR', 'EMBALAR', 3),
+('CORTE A LASER', 'Cortar conforme desenho', 2),
+('PINTAR', 'PINTAR CONFORME ESPECIFICAÇÃO', 15);
+
+
+
+INSERT INTO recurso (recr_id,recr_desc,recr_setr_id) VALUES
+('TORNO HORIZONTAL', 7),
+('PRENSA 500T', 4),
+('PRENSA 1000T', 4),
+('OPERADOR 1', 6),
+('MÁQUINA 1', 2),
+('MÁQUINA 2', 2),
+('MONTADOR 1', 6);
+
+
+
+
+
+INSERT INTO produto (prod_cod_intr, prod_unid_id, prod_desc,prod_sit,prod_peso_kg,prod_comp_mm, prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq, prod_qntd_min, prod_tipo) VALUES
+('CHI-500', 59, 'CHAPA ACO INOX 500MM', 'ATIVO', '5.7500', '500.0000', '500.0000', '0.2000', '500.75', 2, '10.0000', '5.0000', 'material'),
+('CHI-300', 59, 'CHAPA ACO INOX 300MM', 'ATIVO', '5.5000', '300.0000', '300.0000', '1.5000', '75.25', 5, '20.0000', '10.0000', 'material'),
+('CHI-200', 59, 'CHAPA ACO INOX 200MM', 'ATIVO', '2.5000', '200.0000', '200.0000', '0.5000', '25.75', 2, '15.0000', '5.0000', 'material'),
+('PTR-500', 59, 'PORTA REFRIGERADOR 500 MM', 'ATIVO', '50.0000', '500.0000', '500.0000', '2000.0000', '25.75', 5, '10.0000', '5.0000', 'produto'),
+('RFR-500', 59, 'REFRIGERADOR VERTICAL 500MM', 'ATIVO', '5.0000', '500.0000', '500.0000', '2000.0000', '2750.00', 10, '50.0000', '25.0000', 'produto');
+
+
+
+
+
+INSERT INTO estrutura_produto (prod_id,prod_sub_id,prod_sub_qntd) VALUES
+(4, 1, '5.0000'),
+(4, 3, '2.0000'),
+(5, 2, '2.0000'),
+(5, 4, '1.0000');
+
+
+INSERT INTO roteiro (rot_prod_id, rot_oper_id, rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES
+(4, 3, 2, '00:00:00', '02:10:00', '00:00:00'),
+(4, 5, 1, '00:00:00', '05:00:00', '00:00:00'),
+(5, 3, 1, '00:00:00', '03:00:00', '00:00:00'),
+(5, 4, 2, '00:00:00', '01:00:00', '00:00:00'),
+(5, 5, 3, '00:30:00', '01:20:00', '00:10:00');
+
+
+
+INSERT INTO ordem_producao (ord_prod_id,ord_prod_qntd,ord_dt_emi,ord_prazo,ord_usr_id,ord_dt_concl,ord_status) VALUES
+(4, '2.00', '2018-05-13 20:09:21', '2018-05-30', 1, NULL, 'EMITIDA');
+
+
+
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id) VALUES
+(1, 1, '04:20:00', 4, 3, 2, 4),
+(1, 2, '10:00:00', 4, 5, 1, 5);
+
+
+INSERT INTO recebimento_material (receb_id, receb_dt, receb_usr_id) VALUES
+(1, '2018-05-18 22:00:00', 1),
+(2, '2018-05-18 22:00:00', 1),
+(3, '2018-05-18 22:00:00', 1),
+(4, '2018-05-18 22:00:00', 1);
+
+
+
+INSERT INTO recebimento_material_detalhe (receb_id,receb_rm_det_id,receb_prod_qntd) VALUES
+(1, 1, '3.00'),
+(2, 1, '3.00'),
+(2, 2, '2.00'),
+(3, 1, '3.00'),
+(3, 2, '2.00'),
+(3, 3, '7.00'),
+(4, 4, '2.00');
+
+
+
+
+
+INSERT INTO requisicao_material (rm_id, rm_dt_emi, rm_prazo, rm_usr_id, rm_dt_concl, rm_status) VALUES
+(1, '2018-05-19 11:13:47', '2018-05-31', 1, NULL, 'EMITIDA'),
+(2, '2018-05-19 11:14:42', '2018-06-08', 1, NULL, 'EMITIDA');
+
+
+INSERT INTO requisicao_material_detalhe (rm_det_id, rm_id, rm_prod_id, rm_prod_qntd) VALUES
+(1, 1, 1, '5.00'),
+(2, 1, 2, '3.00'),
+(3, 1, 3, '10.00'),
+(4, 2, 2, '5.00'),
+(5, 2, 3, '7.00');
+
 
 
 

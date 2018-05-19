@@ -94,7 +94,7 @@ Route::get('requisicao/show', 'RequisicaoMaterialController@show');
 Route::get('requisicao/edit/{id}', 'RequisicaoMaterialController@edit');
 Route::post('requisicao/search_material', 'RequisicaoMaterialController@searchMaterial');
 Route::get('requisicao/pesquisa', 'RequisicaoMaterialController@pesquisarPorCriterio');
-Route::post('requisicao/delete', 'RequisicaoMaterialController@delete');
+
 
 
 
@@ -124,4 +124,12 @@ Route::get('ordem/edit/{id}', 'OrdemProducaoController@edit');
 Route::post('ordem/importar_roteiro', 'OrdemProducaoController@importarRoteiro');
 Route::post('ordem/importar_estrutura', 'OrdemProducaoController@importarEstrutura');
 Route::post('ordem/carrega_recursos', 'OrdemProducaoController@carregaRecursos');
-Route::post('ordem/delete', 'OrdemProducaoController@delete');
+
+
+
+
+Route::get('apontamento/form', 'ApontamentoController@form');
+Route::post('apontamento/store', 'ApontamentoController@store');
+Route::get('apontamento/show', 'ApontamentoController@show');
+Route::get('apontamento/find', 'ApontamentoController@find');
+

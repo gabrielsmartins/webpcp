@@ -107,8 +107,8 @@
                 
                 <li><a href="#apontamentos" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Apontamentos </a>
                     <ul id="apontamentos" class="collapse list-unstyled ">
-                          <li><a href="#">Registrar</a></li>
-                    <li><a href="#">Consulta</a></li>
+                          <li><a href="{{url('apontamento/form')}}">Registrar</a></li>
+                    <li><a href="{{url('apontamento/show')}}">Consulta</a></li>
                     <li><a href="#">Relatórios</a></li>
                     </ul>
                 </li>

@@ -97,7 +97,7 @@
                                     <th>Data Emissão</th>
                                     <th>Prazo</th>
                                     <th>Status</th>
-                                    <th colspan="2">Ação</th>
+                                    <th>Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -111,48 +111,63 @@
                                     <td>{{$programacao->getOrdemProducao()->getQuantidade()}}</td>
                                     <td>{{$programacao->getRoteiro()->getOperacao()->getDescricao()}}</td>
                                     <td>{{$programacao->getRoteiro()->getOperacao()->getSetor()->getDescricao()}}</td>
-                                     <td>{{$programacao->getRecurso()->getDescricao()}}</td>
-                                      <td>{{$programacao->getTempoTotal()}}</td>
+                                    <td>{{$programacao->getRecurso()->getDescricao()}}</td>
+                                    <td>{{$programacao->getTempoTotal()}}</td>
                                     <td>{{$programacao->getOrdemProducao()->getDataEmissao()->format('d/m/Y') }}</td>
                                     <td>{{$programacao->getOrdemProducao()->getPrazo()->format('d/m/Y')}}</td>
 
-                                    <td>{{$ordem->getStatus()}}</td>
-                                    <td  style="width: 10px;">
-                                        <a href="{{ URL::to('/requisicao/edit/'.$ordem->getId()) }}"
-                                           class="btn btn-primary"><i class="fa fa-edit fa-sm"></i>
-                                        </a> 
+
+
+                                    @switch($programacao->getOrdemProducao()->getStatus())
+                                    @case('EMITIDA')
+                                    <td>
+                                        <span class="badge badge-secondary">{{$programacao->getOrdemProducao()->getStatus()}}</span>
                                     </td>
-                                    <td style="width: 10px;">
-                                        <button type="button"class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{$ordem->getId()}}"><i class="fa fa-remove fa-sm"></i></button>
+
+                                    @break
+
+                                    @case('INICIADA')
+                                    <td>
+                                        <span class="badge badge-warning">{{$programacao->getOrdemProducao()->getStatus()}}</span>
+                                    </td>
+
+                                    @break
+
+
+                                    @case('ENCERRADA')
+                                    <td>
+                                        <span class="badge badge-success">{{$programacao->getOrdemProducao()->getStatus()}}</span>
+                                    </td>
+
+                                    @break
+
+                                    @case('CANCELADA')
+                                    <td>
+                                        <span class="badge badge-danger">{{$programacao->getOrdemProducao()->getStatus()}}</span>
+                                    </td>
+
+                                    @break
+
+                                    @default
+                                    <td>
+                                        <span class="badge badge-info">{{$programacao->getOrdemProducao()->getStatus()}}</span>
+                                    </td>
+
+                                    @endswitch
+
+
+
+                                    <td  style="width: 10px;">
+                                        <a href="{{ URL::to('/ordem/edit/'.$programacao->getOrdemProducao()->getId()) }}"
+                                           class="btn btn-primary"><i class="fa fa-search-plus fa-sm"></i>
+                                        </a> 
                                     </td>
                                 </tr>
 
-                                <!-- Modal -->
-                            <div class="modal fade" id="myModal{{$ordem->getId()}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Atenção</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Deseja realmente excluir?
-                                        </div>
-                                        <form action="{{ action('OrdemProducaoController@delete') }}" method="post">
-                                            <div class="modal-footer">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <input type="hidden" name="id" value="{{$ordem->getId() }}"/>
-                                                <button type="submit" class="btn btn-success">Confirmar</button>
-                                            </div>
-                                        </form>
 
-                                    </div>
-                                </div>
-                            </div>
 
-                            @endforeach
-                            @endforeach
+                                @endforeach
+                                @endforeach
 
                             </tbody>
                         </table>

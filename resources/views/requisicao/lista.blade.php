@@ -93,7 +93,7 @@
                                     <th>Data Emissão</th>
                                     <th>Prazo</th>
                                     <th>Status</th>
-                                    <th colspan="2">Ação</th>
+                                    <th>Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -107,43 +107,56 @@
                                     <td>{{$item->getQuantidade()}}</td>
                                     <td>{{$item->getRequisicao()->getDataEmissao()->format('d/m/Y') }}</td>
                                     <td>{{$item->getRequisicao()->getPrazo()->format('d/m/Y')}}</td>
-                                    <td>{{$requisicao->getStatus()}}</td>
+
+
+                                    @switch($item->getRequisicao()->getStatus())
+                                    @case('EMITIDA')
+                                    <td>
+                                        <span class="badge badge-secondary">{{$item->getRequisicao()->getStatus()}}</span>
+                                    </td>
+
+                                    @break
+
+                                    @case('CONCLUIDA PARCIAL')
+                                    <td>
+                                        <span class="badge badge-warning">{{$item->getRequisicao()->getStatus()}}</span>
+                                    </td>
+
+                                    @break
+
+
+                                    @case('CONCLUIDA TOTAL')
+                                    <td>
+                                        <span class="badge badge-success">{{$item->getRequisicao()->getStatus()}}</span>
+                                    </td>
+
+                                    @break
+
+                                    @case('CANCELADA')
+                                    <td>
+                                        <span class="badge badge-danger">{{$item->getRequisicao()->getStatus()}}</span>
+                                    </td>
+
+                                    @break
+
+                                    @default
+                                    <td>
+                                        <span class="badge badge-info">{{$item->getRequisicao()->getStatus()}}</span>
+                                    </td>
+
+                                    @endswitch
+
                                     <td  style="width: 10px;">
                                         <a href="{{ URL::to('/requisicao/edit/'.$requisicao->getId()) }}"
-                                           class="btn btn-primary"><i class="fa fa-edit fa-sm"></i>
+                                           class="btn btn-primary"><i class="fa fa-search-plus fa-sm"></i>
                                         </a> 
-                                    </td>
-                                    <td style="width: 10px;">
-                                        <button type="button"class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{$requisicao->getId()}}"><i class="fa fa-remove fa-sm"></i></button>
                                     </td>
                                 </tr>
 
-                                <!-- Modal -->
-                            <div class="modal fade" id="myModal{{$requisicao->getId()}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Atenção</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Deseja realmente excluir?
-                                        </div>
-                                        <form action="{{ action('RequisicaoMaterialController@delete') }}" method="post">
-                                            <div class="modal-footer">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <input type="hidden" name="id" value="{{$requisicao->getId() }}"/>
-                                                <button type="submit" class="btn btn-success">Confirmar</button>
-                                            </div>
-                                        </form>
 
-                                    </div>
-                                </div>
-                            </div>
 
-                            @endforeach
-                            @endforeach
+                                @endforeach
+                                @endforeach
 
                             </tbody>
                         </table>

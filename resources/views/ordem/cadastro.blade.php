@@ -90,40 +90,6 @@
 
                             <div class="box">
                                 <div class="box-header">
-                                    <h3 class="box-title">Programação</h3>
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body no-padding">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 10px">#</th>
-                                                    <th style="width: 20px">ID</th>
-                                                    <th>Descrição</th>
-                                                    <th>Setor</th>
-                                                    <th>Recurso</th>
-                                                    <th style="width: 150px">Tempo Setup</th>
-                                                    <th style="width: 150px">Tempo Produção</th>
-                                                    <th style="width: 150px">Tempo Finalização</th>
-                                                    <th style="width: 50px">Qntd</th>
-                                                    <th style="width: 150px">Tempo Total</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tabela_roteiro">
-
-
-                                            </tbody>
-
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="box">
-                                <div class="box-header">
                                     <h3 class="box-title">Estrutura</h3>
                                 </div>
                                 <!-- /.box-header -->
@@ -145,6 +111,39 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="tabela_estrutura">
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                             <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title">Programação</h3>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body no-padding">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 10px">#</th>
+                                                    <th style="width: 20px">ID</th>
+                                                    <th>Descrição</th>
+                                                    <th>Setor</th>
+                                                    <th>Recurso</th>
+                                                    <th style="width: 150px">Tempo Setup</th>
+                                                    <th style="width: 150px">Tempo Produção</th>
+                                                    <th style="width: 150px">Tempo Finalização</th>
+                                                    <th style="width: 50px">Qntd</th>
+                                                    <th style="width: 150px">Tempo Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tabela_roteiro">
 
 
                                             </tbody>
