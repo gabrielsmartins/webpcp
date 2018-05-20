@@ -131,5 +131,5 @@ Route::post('ordem/carrega_recursos', 'OrdemProducaoController@carregaRecursos')
 Route::get('apontamento/form', 'ApontamentoController@form');
 Route::post('apontamento/store', 'ApontamentoController@store');
 Route::get('apontamento/show', 'ApontamentoController@show');
-Route::get('apontamento/find', 'ApontamentoController@find');
+Route::post('apontamento/find', 'ApontamentoController@find');
 

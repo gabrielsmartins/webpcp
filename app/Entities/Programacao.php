@@ -4,12 +4,13 @@ namespace App\Entities;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="programacao")
  */
-class Programacao {
+class Programacao implements JsonSerializable {
 
     /**
      * @ORM\Id 
@@ -49,6 +50,12 @@ class Programacao {
      * @ORM\JoinColumn(name="prog_rec_id", referencedColumnName="recr_id")
      * */
     private $recurso;
+    
+    
+     /**
+     * @ORM\Column(type="decimal",name="prog_qntd_prod")
+     */
+    private $quantidadeProduzida;
 
     function __construct(OrdemProducao $ordemProducao, $sequencia,Roteiro $roteiro, Recurso $recurso) {
         $this->ordemProducao = $ordemProducao;
@@ -106,7 +113,16 @@ class Programacao {
     function setRecurso($recurso) {
         $this->recurso = $recurso;
     }
+    
+    function getQuantidadeProduzida() {
+        return $this->quantidadeProduzida;
+    }
 
+    function setQuantidadeProduzida($quantidadeProduzida) {
+        $this->quantidadeProduzida = $quantidadeProduzida;
+    }
+
+    
     function adicionarApontamento(Programacao $programacao) {
         if (!$this->programacoes->contains($programacao)) {
             $this->programacoes->add($programacao);
@@ -132,6 +148,32 @@ class Programacao {
         $minute = intval($minute + $second / 60);
         $second = intval($second % 60);
         $this->tempoTotal = $hour . ":" . $minute . ":" . $second;
+    }
+    
+    
+    
+    public function jsonSerialize() {
+        return array(
+            'ordemProducao' => $this->ordemProducao->getId(),
+            'ordemQuantidade' => $this->ordemProducao->getQuantidade(),
+            'ordemDataEmissao' => $this->ordemProducao->getDataEmissao()->format('d/m/Y'),
+            'ordemPrazo' => $this->ordemProducao->getPrazo()->format('d/m/Y'),
+            'ordemStatus' => $this->ordemProducao->getStatus(),
+            'ordemResponsavel' => $this->ordemProducao->getResponsavel()->getNome(),
+            'ordemQuantidade' => $this->ordemProducao->getQuantidade(),
+            'quantidadeProduzida' => $this->quantidadeProduzida,
+            'sequencia' => $this->sequencia,
+            'operacaoID' => $this->roteiro->getOperacao()->getId(),
+            'operacaoDesricao' => $this->roteiro->getOperacao()->getDescricao(),
+            'produtoID' => $this->ordemProducao->getProduto()->getId(),
+            'produtoCodigoInterno' => $this->ordemProducao->getProduto()->getCodigoInterno(),
+            'produtoDescricao' => $this->ordemProducao->getProduto()->getDescricao(),
+            'setorID' => $this->recurso->getSetor()->getId(),
+            'setorDescricao' => $this->recurso->getSetor()->getDescricao(),
+            'recursoID' => $this->recurso->getId(),
+            'recursoDescricao' => $this->recurso->getDescricao(),
+            'tempoTotal' => $this->tempoTotal,  
+        );
     }
 
 }

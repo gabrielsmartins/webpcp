@@ -140,6 +140,7 @@ CREATE TABLE programacao(
              prog_rot_oper_id BIGINT NOT NULL,
              prog_rot_seq INT NOT NULL,
              prog_rec_id BIGINT NOT NULL,
+             prog_qntd_prod NUMERIC(15,4) DEFAULT 0.0,
              CONSTRAINT PK_programacao PRIMARY KEY(prog_ord_id,prog_seq),
 			 CONSTRAINT FK_programacao_ordem FOREIGN KEY(prog_ord_id) REFERENCES ordem_producao(ord_id),
              CONSTRAINT FK_programacao_roteiro FOREIGN KEY(prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq) REFERENCES roteiro(rot_prod_id,rot_oper_id,rot_seq),
@@ -336,7 +337,8 @@ INSERT INTO setor (setr_desc) VALUES
 ('ESTAMPARIA'),
 ('FERRAMENTARIA'),
 ('MONTAGEM'),
-('USINAGEM');
+('USINAGEM'),
+('PINTURA');
 
 
 
@@ -346,11 +348,11 @@ INSERT INTO operacao (oper_desc, oper_instr, oper_setr_id) VALUES
 ('MONTAR', 'MONTAR', 6),
 ('EMBALAR', 'EMBALAR', 3),
 ('CORTE A LASER', 'Cortar conforme desenho', 2),
-('PINTAR', 'PINTAR CONFORME ESPECIFICAÇÃO', 15);
+('PINTAR', 'PINTAR CONFORME ESPECIFICAÇÃO', 8);
 
 
 
-INSERT INTO recurso (recr_id,recr_desc,recr_setr_id) VALUES
+INSERT INTO recurso (recr_desc,recr_setr_id) VALUES
 ('TORNO HORIZONTAL', 7),
 ('PRENSA 500T', 4),
 ('PRENSA 1000T', 4),
@@ -400,23 +402,6 @@ INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog
 (1, 2, '10:00:00', 4, 5, 1, 5);
 
 
-INSERT INTO recebimento_material (receb_id, receb_dt, receb_usr_id) VALUES
-(1, '2018-05-18 22:00:00', 1),
-(2, '2018-05-18 22:00:00', 1),
-(3, '2018-05-18 22:00:00', 1),
-(4, '2018-05-18 22:00:00', 1);
-
-
-
-INSERT INTO recebimento_material_detalhe (receb_id,receb_rm_det_id,receb_prod_qntd) VALUES
-(1, 1, '3.00'),
-(2, 1, '3.00'),
-(2, 2, '2.00'),
-(3, 1, '3.00'),
-(3, 2, '2.00'),
-(3, 3, '7.00'),
-(4, 4, '2.00');
-
 
 
 
@@ -433,6 +418,23 @@ INSERT INTO requisicao_material_detalhe (rm_det_id, rm_id, rm_prod_id, rm_prod_q
 (4, 2, 2, '5.00'),
 (5, 2, 3, '7.00');
 
+
+INSERT INTO recebimento_material (receb_id, receb_dt, receb_usr_id) VALUES
+(1, '2018-05-18 22:00:00', 1),
+(2, '2018-05-18 22:00:00', 1),
+(3, '2018-05-18 22:00:00', 1),
+(4, '2018-05-18 22:00:00', 1);
+
+
+
+INSERT INTO recebimento_material_detalhe (receb_id,receb_rm_det_id,receb_prod_qntd) VALUES
+(1, 1, '3.00'),
+(2, 1, '3.00'),
+(2, 2, '2.00'),
+(3, 1, '3.00'),
+(3, 2, '2.00'),
+(3, 3, '7.00'),
+(4, 4, '2.00');
 
 
 

@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/webpcp/app/Http/Controllers/RequisicaoMaterialController.php</file>
-            <file>file:/C:/xampp/htdocs/webpcp/app/Entities/Operacao.php</file>
-            <file>file:/C:/xampp/htdocs/webpcp/app/Http/Controllers/OrdemProducaoController.php</file>
-            <file>file:/C:/xampp/htdocs/webpcp/resources/views/ordem/lista.blade.php</file>
-            <file>file:/C:/xampp/htdocs/webpcp/.env</file>
-            <file>file:/C:/xampp/htdocs/webpcp/app/Entities/OrdemProducao.php</file>
+            <file>file:/C:/xampp/htdocs/webpcp/app/Http/Controllers/ApontamentoController.php</file>
+            <file>file:/C:/xampp/htdocs/webpcp/resources/views/ordem/cadastro.blade.php</file>
+            <file>file:/C:/xampp/htdocs/webpcp/resources/views/apontamento/cadastro.blade.php</file>
+            <file>file:/C:/xampp/htdocs/webpcp/routes/web.php</file>
             <file>file:/C:/xampp/htdocs/webpcp/app/Entities/Programacao.php</file>
         </group>
     </open-files>

@@ -13,14 +13,12 @@ use App\DAO\OrdemProducaoDAO;
 use App\DAO\UsuarioDAO;
 use App\Entities\OrdemProducao;
 use App\Entities\Programacao;
-use App\Entities\UnidadeMedida;
 use DateTime;
 use Exception;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Request;
 use function redirect;
-use function response;
 use function view;
 
 /**
@@ -54,10 +52,10 @@ class ApontamentoController extends Controller {
         $recursos = $request->input('recurso');
 
         $ordemProducao = new OrdemProducao($produto, $quantidade, $prazo, $responsavel);
-         $roteiros = $produto->getRoteiros();
+        $roteiros = $produto->getRoteiros();
         for ($i = 0; $i < $roteiros->count(); $i++) {
             $recurso = $this->recursoDAO->pesquisar($recursos[$i]);
-            $programacao = new Programacao($ordemProducao,($i+1), $roteiros[$i], $recurso);
+            $programacao = new Programacao($ordemProducao, ($i + 1), $roteiros[$i], $recurso);
             $ordemProducao->adicionarProgramacao($programacao);
         }
 
@@ -70,103 +68,43 @@ class ApontamentoController extends Controller {
         }
     }
 
-    public function cancel(Request $request) {
-        $id = $request->input('id');
-        $descricao = $request->input('descricao');
-        $sigla = $request->input('sigla');
-
-        $unidade = new UnidadeMedida($descricao, $sigla);
-        $unidade->setId($id);
-
-        try {
-            $this->ordemProducaoDAO->alterar($unidade);
-            return redirect()->action('OrdemProducaoController@edit', ['id' => $unidade->getId()])->with('success', 'Ordem de Produção Cancelada com Sucesso !!!');
-        } catch (Exception $ex) {
-            return redirect()->action('OrdemProducaoController@edit', ['id' => $unidade->getId()])->with('error', 'Falha Ao Cancelar Ordem de Produção !!!' . $ex->getMessage());
-        }
-    }
+ 
 
     public function edit($id) {
-        $ordemProducao = $this->ordemProducaoDAO->pesquisar($id);
-        return view('ordem.editar')->with('ordem', $ordemProducao);
+        $apontamento = $this->apontamentoDAO->pesquisar($id);
+        return view('apontamento.editar')->with('apontamento', $apontamento);
+    }
+
+    public function find(Request $request) {
+        $ordemProducao = $this->ordemProducaoDAO->pesquisar($request->input('id'));
+
+
+        $programacoes = array();
+
+        foreach ($ordemProducao->getProgramacoes() as $programacao) {
+            array_push($programacoes, $programacao);
+        }
+
+        return json_encode($programacoes, JSON_PRETTY_PRINT);
     }
 
     public function show(Request $request) {
-         $page = (int)  $request->input('page');
-        if($page!=0){
-            $requisicoes = $this->ordemProducaoDAO->listarComPaginacao(10,$page);
-        }else{
-            $requisicoes = $this->ordemProducaoDAO->listarComPaginacao();
+        $page = (int) $request->input('page');
+        if ($page != 0) {
+            $apontamentos = $this->apontamentoDAO->listarComPaginacao(10, $page);
+        } else {
+            $apontamentos = $this->apontamentoDAO->listarComPaginacao();
         }
-        return view('ordem.lista')->with('ordens', $requisicoes);
+        return view('apontamento.lista')->with('apontamentos', $apontamentos);
     }
 
-    public function delete(Request $request){
-        $setor = $this->ordemProducaoDAO->pesquisar($request->input('id'));
 
-       try{
-             $this->ordemProducaoDAO->remover($setor);
-             return redirect()->action('OrdemProducaoController@show')->with('success', 'Ordem de Produção Excluída com Sucesso !!!');
-        } catch (Exception $ex) {
-             return redirect()->action('OrdemProducaoController@show')->with('error', 'Não foi possível excluir, Ordem de Produção já Iniciada');
-        }
-    }
-    
-    public function searchProduto(Request $request) {
-        $id = $request->input('id');
-
-        $produto = $this->produtoDAO->pesquisar($id);
-
-        return response()->json($produto);
-    }
 
     public function pesquisarPorCriterio(Request $request) {
         $criterio = $request->input('criterio');
         $valor = $request->input('valor');
-        $ordens = $this->ordemProducaoDAO->pesquisarPorCriterio($criterio, $valor);
-        return view('ordem.lista')->with('ordens', $ordens);
-    }
-
-    public function importarRoteiro(Request $request) {
-        $produto = $this->produtoDAO->pesquisar($request->input('id'));
-
-        $roteiros = array();
-
-
-
-        foreach ($produto->getRoteiros() as $roteiro) {
-            array_push($roteiros, $roteiro);
-        }
-
-        return json_encode($roteiros, JSON_PRETTY_PRINT);
-    }
-
-    public function importarEstrutura(Request $request) {
-        $produto = $this->produtoDAO->pesquisar($request->input('id'));
-
-        $itens = array();
-
-
-
-        foreach ($produto->getItens() as $item) {
-            array_push($itens, $item);
-        }
-
-        return json_encode($itens, JSON_PRETTY_PRINT);
-    }
-
-    public function carregaRecursos(Request $request) {
-        $setor = $this->setorDAO->pesquisar($request->input('id'));
-
-        $recursos = array();
-
-
-
-        foreach ($setor->getRecursos() as $recurso) {
-            array_push($recursos, $recurso);
-        }
-
-        return json_encode($recursos, JSON_PRETTY_PRINT);
+        $apontamentos= $this->apontamentoDAO->pesquisarPorCriterio($criterio, $valor);
+        return view('apontamento.lista')->with('apontamentos', $apontamentos);
     }
 
 }
