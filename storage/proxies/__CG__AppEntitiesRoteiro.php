@@ -200,6 +200,10 @@ class Roteiro extends \App\Entities\Roteiro implements \Doctrine\ORM\Proxy\Proxy
      */
     public function getSequencia()
     {
+        if ($this->__isInitialized__ === false) {
+            return (int)  parent::getSequencia();
+        }
+
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSequencia', []);
 
@@ -303,6 +307,17 @@ class Roteiro extends \App\Entities\Roteiro implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTempoFinalizacao', [$tempoFinalizacao]);
 
         return parent::setTempoFinalizacao($tempoFinalizacao);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function jsonSerialize()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'jsonSerialize', []);
+
+        return parent::jsonSerialize();
     }
 
 }

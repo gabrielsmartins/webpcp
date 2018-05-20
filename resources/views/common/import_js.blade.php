@@ -29,3 +29,12 @@
 
 <!-- Loader Ajax -->
 <script src="{{ asset('dashboard/vendor/holdOn/js/HoldOn.js') }}" type="text/javascript"></script>
+
+
+<!-- DateTimePicker -->
+<script type="text/javascript" src="{{ asset('dashboard/vendor/tempus_dominus/js/moment.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('dashboard/vendor/tempus_dominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
+
+
+

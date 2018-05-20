@@ -64,10 +64,10 @@ class ItemRequisicao extends \App\Entities\ItemRequisicao implements \Doctrine\O
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'requisicao', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'material', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'quantidade'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'id', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'requisicao', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'material', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'quantidade'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'requisicao', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'material', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'quantidade'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'id', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'requisicao', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'material', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'quantidade'];
     }
 
     /**
@@ -173,6 +173,32 @@ class ItemRequisicao extends \App\Entities\ItemRequisicao implements \Doctrine\O
     }
 
     
+    /**
+     * {@inheritDoc}
+     */
+    public function getId()
+    {
+        if ($this->__isInitialized__ === false) {
+            return (int)  parent::getId();
+        }
+
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', []);
+
+        return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setId($id)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setId', [$id]);
+
+        return parent::setId($id);
+    }
+
     /**
      * {@inheritDoc}
      */

@@ -37,19 +37,23 @@
                                 <div class="col-sm-2">
                                     <div class="input-group date">
                                         <input class="form-control pull-right" id="dataEmissao" type="text" name="dataEmissao" value="{{date('d/m/Y')}}" disabled="true">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
+                                        <div class="input-group-append" >
+                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
                                     </div>
                                 </div>
+                                
+                                
+                                
+                            
 
                                 <label for="descricao" class="col-sm-1 control-label">Prazo:</label>
 
                                 <div class="col-sm-2">
                                     <div class="input-group date">
                                         <input class="form-control pull-right" id="prazo" type="text" name="prazo">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
+                                        <div class="input-group-append" >
+                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
                                     </div>
                                 </div>

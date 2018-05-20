@@ -36,3 +36,7 @@
 
 <!-- Loader Ajax -->
 <link rel="stylesheet" href="{{ asset('dashboard/vendor/holdOn/css/HoldOn.css') }}">
+
+<!-- DateTimePicker -->
+<link rel="stylesheet" href="{{ asset('dashboard/vendor/tempus_dominus/css/tempusdominus-bootstrap-4.min.css') }}" />
+

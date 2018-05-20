@@ -264,6 +264,17 @@ class Produto extends \App\Entities\Produto implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function jsonSerialize()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'jsonSerialize', []);
+
+        return parent::jsonSerialize();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getId()
     {
         if ($this->__isInitialized__ === false) {
@@ -549,17 +560,6 @@ class Produto extends \App\Entities\Produto implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAltura', [$altura]);
 
         return parent::setAltura($altura);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function jsonSerialize()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'jsonSerialize', []);
-
-        return parent::jsonSerialize();
     }
 
 }

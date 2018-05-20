@@ -15,7 +15,7 @@ class Apontamento {
     /**
      * @ORM\Id 
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer",name="prog_id")
+     * @ORM\Column(type="integer",name="apont_id")
      * */
     private $id;
     

@@ -64,10 +64,10 @@ class OrdemProducao extends \App\Entities\OrdemProducao implements \Doctrine\ORM
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\OrdemProducao' . "\0" . 'id', '' . "\0" . 'App\\Entities\\OrdemProducao' . "\0" . 'produto', '' . "\0" . 'App\\Entities\\OrdemProducao' . "\0" . 'quantidade', 'dataEmissao', 'prazo', 'dataConclusao', 'responsavel'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\OrdemProducao' . "\0" . 'id', '' . "\0" . 'App\\Entities\\OrdemProducao' . "\0" . 'produto', '' . "\0" . 'App\\Entities\\OrdemProducao' . "\0" . 'quantidade', '' . "\0" . 'App\\Entities\\OrdemProducao' . "\0" . 'programacoes', '' . "\0" . 'App\\Entities\\OrdemProducao' . "\0" . 'status', 'dataEmissao', 'prazo', 'dataConclusao', 'responsavel'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\OrdemProducao' . "\0" . 'id', '' . "\0" . 'App\\Entities\\OrdemProducao' . "\0" . 'produto', '' . "\0" . 'App\\Entities\\OrdemProducao' . "\0" . 'quantidade', 'dataEmissao', 'prazo', 'dataConclusao', 'responsavel'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\OrdemProducao' . "\0" . 'id', '' . "\0" . 'App\\Entities\\OrdemProducao' . "\0" . 'produto', '' . "\0" . 'App\\Entities\\OrdemProducao' . "\0" . 'quantidade', '' . "\0" . 'App\\Entities\\OrdemProducao' . "\0" . 'programacoes', '' . "\0" . 'App\\Entities\\OrdemProducao' . "\0" . 'status', 'dataEmissao', 'prazo', 'dataConclusao', 'responsavel'];
     }
 
     /**
@@ -241,6 +241,72 @@ class OrdemProducao extends \App\Entities\OrdemProducao implements \Doctrine\ORM
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setQuantidade', [$quantidade]);
 
         return parent::setQuantidade($quantidade);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getProgramacoes()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProgramacoes', []);
+
+        return parent::getProgramacoes();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setProgramacoes($programacoes)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setProgramacoes', [$programacoes]);
+
+        return parent::setProgramacoes($programacoes);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getStatus()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getStatus', []);
+
+        return parent::getStatus();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setStatus($status)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setStatus', [$status]);
+
+        return parent::setStatus($status);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function adicionarProgramacao(\App\Entities\Programacao $programacao)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'adicionarProgramacao', [$programacao]);
+
+        return parent::adicionarProgramacao($programacao);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removerProgramacao(\App\Entities\Programacao $programacao)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removerProgramacao', [$programacao]);
+
+        return parent::removerProgramacao($programacao);
     }
 
     /**

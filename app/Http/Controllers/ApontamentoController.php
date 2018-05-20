@@ -11,12 +11,12 @@ namespace App\Http\Controllers;
 use App\DAO\ApontamentoDAO;
 use App\DAO\OrdemProducaoDAO;
 use App\DAO\UsuarioDAO;
-use App\Entities\OrdemProducao;
-use App\Entities\Programacao;
+use App\Entities\Apontamento;
+use App\Entities\ApontamentoTipo;
 use DateTime;
 use Exception;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Request;
 use function redirect;
 use function view;
@@ -38,37 +38,50 @@ class ApontamentoController extends Controller {
         $this->apontamentoDAO = new ApontamentoDAO();
     }
 
-    public function form() {
-        $ordens = $this->ordemProducaoDAO->listar();
-        $data = array('ordens' => $ordens);
+    public function form($op, $seq) {
+        $ordem = $this->ordemProducaoDAO->pesquisar($op);
+
+        $programacao = $ordem->getProgramacoes()->get($seq-1);
+        $data = array('programacao' => $programacao);
         return view('apontamento.cadastro')->with($data);
     }
 
     public function store(Request $request) {
-        $produto = $this->produtoDAO->pesquisar($request->input('produto'));
-        $quantidade = $request->input('quantidade');
-        $prazo = new DateTime(date('Y-m-d', strtotime(str_replace("/", "-", $request->input('prazo')))));
-        $responsavel = $this->usuarioDAO->pesquisar(Session::get('idUsuarioLogado'));
-        $recursos = $request->input('recurso');
+        $ordem = $request->input('op');
+        $sequencia = $request->input('seq');
+        switch ($request->input('tipo')) {
+            case 'PRODUCAO':
+                $tipo = ApontamentoTipo::PRODUCAO;
+                break;
 
-        $ordemProducao = new OrdemProducao($produto, $quantidade, $prazo, $responsavel);
-        $roteiros = $produto->getRoteiros();
-        for ($i = 0; $i < $roteiros->count(); $i++) {
-            $recurso = $this->recursoDAO->pesquisar($recursos[$i]);
-            $programacao = new Programacao($ordemProducao, ($i + 1), $roteiros[$i], $recurso);
-            $ordemProducao->adicionarProgramacao($programacao);
+            case 'MANUTENCAO':
+                $tipo = ApontamentoTipo::MANUTENCAO;
+                break;
+
+            case 'PARADA':
+                $tipo = ApontamentoTipo::PARADA;
+                break;
+
+            case 'DESCARTE':
+                $tipo = ApontamentoTipo::DESCARTE;
+                break;
         }
+
+        $quantidade = $request->input('quantidade');
+
+        $dataInicio = new DateTime(date('Y-m-d H:i:s', strtotime(str_replace("/", "-", $request->input('dataInicio')))));
+        $dataFim = new DateTime(date('Y-m-d H:i:s', strtotime(str_replace("/", "-", $request->input('dataFim')))));
+        $programacao = $this->ordemProducaoDAO->pesquisar($ordem)->getProgramacoes()->get($sequencia-1);
+        $apontamento = new Apontamento($programacao, $tipo, $quantidade, $dataInicio, $dataFim);
 
 
         try {
-            $this->ordemProducaoDAO->salvar($ordemProducao);
-            return redirect('ordem/form')->with('success', 'Ordem de Produção nº' . $ordemProducao->getId() . ' Emitida com Sucesso !!!');
+            $this->apontamentoDAO->salvar($apontamento);
+            return redirect()->action('ApontamentoController@form', ['op' => $ordem, 'seq' => $sequencia])->with('success', 'Apontamento de Produção nº Registrado com Sucesso !!!');
         } catch (Exception $ex) {
-            return redirect('ordem/form')->with('error', 'Erro ao Emitir Ordem de Produção ' . $ex->getMessage());
+            return redirect()->action('ApontamentoController@form', ['op' => $ordem, 'seq' => $sequencia])->with('error', 'Erro ao Registrar Apontamento de Produção ' . $ex->getMessage());
         }
     }
-
- 
 
     public function edit($id) {
         $apontamento = $this->apontamentoDAO->pesquisar($id);
@@ -77,15 +90,8 @@ class ApontamentoController extends Controller {
 
     public function find(Request $request) {
         $ordemProducao = $this->ordemProducaoDAO->pesquisar($request->input('id'));
-
-
-        $programacoes = array();
-
-        foreach ($ordemProducao->getProgramacoes() as $programacao) {
-            array_push($programacoes, $programacao);
-        }
-
-        return json_encode($programacoes, JSON_PRETTY_PRINT);
+        $data = array('ordem' => $ordemProducao);
+        return view('apontamento.cadastro')->with($data);
     }
 
     public function show(Request $request) {
@@ -98,12 +104,10 @@ class ApontamentoController extends Controller {
         return view('apontamento.lista')->with('apontamentos', $apontamentos);
     }
 
-
-
     public function pesquisarPorCriterio(Request $request) {
         $criterio = $request->input('criterio');
         $valor = $request->input('valor');
-        $apontamentos= $this->apontamentoDAO->pesquisarPorCriterio($criterio, $valor);
+        $apontamentos = $this->apontamentoDAO->pesquisarPorCriterio($criterio, $valor);
         return view('apontamento.lista')->with('apontamentos', $apontamentos);
     }
 

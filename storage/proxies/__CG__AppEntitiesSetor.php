@@ -243,4 +243,26 @@ class Setor extends \App\Entities\Setor implements \Doctrine\ORM\Proxy\Proxy
         return parent::setOperacoes($operacoes);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function getRecursos()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRecursos', []);
+
+        return parent::getRecursos();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setRecursos($recursos)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRecursos', [$recursos]);
+
+        return parent::setRecursos($recursos);
+    }
+
 }

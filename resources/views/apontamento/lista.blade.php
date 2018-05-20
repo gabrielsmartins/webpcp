@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
-@section('page', 'Recurso - Consulta')
+@section('page', 'Apontamento - Consulta')
 
-@section('title','Consultar - Recurso')
+@section('title','Consultar - Apontamento')
 
 
 @section('content')
@@ -12,7 +12,7 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <h4>Recursos</h4>
+            <h4>Apontamentos</h4>
         </div>
         <div class="card-body">
 
@@ -42,7 +42,7 @@
 
                 <div class="card-body">
                     <div class="col-md-12">
-                        <form method="get" action="{{ action('RecursoController@pesquisarPorCriterio') }}" class="form-inline">
+                        <form method="get" action="{{ action('ApontamentoController@pesquisarPorCriterio') }}" class="form-inline">
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label for="inlineFormInput" class="sr-only">Pesquisar por:</label>
@@ -87,55 +87,34 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
+                                <th>Nº OP</th>
                                 <th>ID</th>
-                                <th>Descrição</th>
+                                <th>Prog</th>
+                                <th>Operação</th>
                                 <th>Setor</th>
-                                <th colspan="2">Ação</th>
+                                <th>Recurso</th>
+                                <th>Tipo</th>
+                                <th>Quantidade</th>
+                                <th>Data Início</th>
+                                <th>Data Fim</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @foreach ($recursos as $recurso)
+                            @foreach ($apontamentos as $apontamento)
                             <tr>
-                                <td>{{$recurso->getId() }}</td>
-                                <td>{{$recurso->getDescricao() }}</td>
-                                <td>{{$recurso->getSetor()->getDescricao()}}</td>
-                                <td  style="width: 10px;">
-                                    <a href="{{ URL::to('/recurso/edit/'.$recurso->getId()) }}"
-                                       class="btn btn-primary"><i class="fa fa-edit fa-sm"></i>
-                                    </a> 
-                                </td>
-                                <td  style="width: 10px;">
-                                    <button type="button"class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{$recurso->getId()}}"><i class="fa fa-remove fa-sm"></i></button>
-                                </td>
+
+                                <td>{{$apontamento->getProgramacao()->getOrdemProducao()->getId()}}</td>
+                                <td>{{$apontamento->getId() }}</td>
+                                <td>{{$apontamento->getProgramacao()->getSequencia() }}</td>
+                                <td>{{$apontamento->getProgramacao()->getRoteiro()->getOperacao()->getDescricao() }}</td>
+                                <td>{{$apontamento->getProgramacao()->getRoteiro()->getOperacao()->getSetor()->getDescricao() }}</td>
+                                <td>{{$apontamento->getProgramacao()->getRecurso()->getDescricao() }}</td>
+                                <td>{{$apontamento->getTipo()}}</td>
+                                <td>{{$apontamento->getQuantidade()}}</td>
+                                <td>{{$apontamento->getDataInicio()->format('d/m/Y H:i:s')}}</td>
+                                <td>{{$apontamento->getDataFim()->format('d/m/Y H:i:s')}}</td>
                             </tr>
-
-                            <!-- Modal -->
-                        <div class="modal fade" id="myModal{{$recurso->getId()}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title" id="myModalLabel">Atenção</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
-                                    </div>
-                                    <div class="modal-body">
-                                        Deseja realmente excluir?
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <form action="{{ action('RecursoController@delete') }}" method="post">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                            <input type="hidden" name="id" value="{{$recurso->getId() }}"/>
-                                            <button type="submit" class="btn btn-success">Confirmar</button>
-                                        </form>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
                         @endforeach
 
                         </tbody>
@@ -151,9 +130,9 @@
             </div>
             <div class="col-sm-7">
                 @if(! empty($criterio))
-                {{ $recursos->appends(['criterio'=>$criterio,'valor'=>$valor,'limit'=>$limit])->links() }}
+                {{ $apontamentos->appends(['criterio'=>$criterio,'valor'=>$valor,'limit'=>$limit])->links() }}
                 @else
-                {{ $recursos->links() }}
+                {{ $apontamentos->links() }}
                 @endif
 
             </div>

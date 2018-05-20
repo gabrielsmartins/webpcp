@@ -239,4 +239,15 @@ class ItemEstrutura extends \App\Entities\ItemEstrutura implements \Doctrine\ORM
         return parent::setQuantidade($quantidade);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function jsonSerialize()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'jsonSerialize', []);
+
+        return parent::jsonSerialize();
+    }
+
 }

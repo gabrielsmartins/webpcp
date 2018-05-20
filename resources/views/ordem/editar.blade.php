@@ -142,7 +142,6 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 10px">#</th>
-                                                    <th style="width: 20px">Prog</th>
                                                     <th>Descrição</th>
                                                     <th>Setor</th>
                                                     <th>Recurso</th>
@@ -151,14 +150,14 @@
                                                     <th style="width: 150px">Tempo Finalização</th>
                                                     <th style="width: 50px">Qntd</th>
                                                     <th style="width: 150px">Tempo Total</th>
+                                                    <th style="width: 150px">Ação</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 
                                                 @foreach($ordem->getProgramacoes() as $programacao)
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{$programacao->getOrdemProducao()->getId()}}.{{ $programacao->getSequencia() }}</td>
+                                                    <td>{{ $programacao->getSequencia() }}</td>
                                                     <td>{{$programacao->getRoteiro()->getOperacao()->getDescricao()}}</td>
                                                     <td>{{$programacao->getRoteiro()->getOperacao()->getSetor()->getDescricao()}}</td>
                                                     <td>{{$programacao->getRecurso()->getDescricao()}}</td>
@@ -167,6 +166,11 @@
                                                     <td>{{$programacao->getRoteiro()->getTempoFinalizacao()}}</td>
                                                     <td>{{$programacao->getOrdemProducao()->getQuantidade()}}</td>
                                                     <td>{{$programacao->getTempoTotal()}}</td>
+                                                    <td>
+                                                        <a href="{{ URL::to('/apontamento/form/'.$programacao->getOrdemProducao()->getId() . '/'.$programacao->getSequencia()) }}">
+                                                             <button class="btn btn-success" type="button">Registrar Apontamento</button>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                                 @endforeach
 

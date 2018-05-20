@@ -86,14 +86,10 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>OP</th>
-                                    <th>Prog</th>
+                                    <th>Nº</th>
                                     <th>Produto</th>
                                     <th>Quantidade</th>
-                                    <th>Operação</th>
-                                    <th>Setor</th>
-                                    <th>Recurso</th>
-                                    <th>Tempo Total Previsto</th>
+                                    <th>Responsável</th>
                                     <th>Data Emissão</th>
                                     <th>Prazo</th>
                                     <th>Status</th>
@@ -103,32 +99,26 @@
                             <tbody>
 
                                 @foreach($ordens as $ordem)
-                                @foreach($ordem->getProgramacoes() as $programacao)
                                 <tr>
-                                    <td>{{$programacao->getOrdemProducao()->getId()}}</td>
-                                    <td>{{$programacao->getOrdemProducao()->getId()}}.{{ $programacao->getSequencia() }}</td>
-                                    <td>{{$programacao->getOrdemProducao()->getProduto()->getDescricao()}}</td>
-                                    <td>{{$programacao->getOrdemProducao()->getQuantidade()}}</td>
-                                    <td>{{$programacao->getRoteiro()->getOperacao()->getDescricao()}}</td>
-                                    <td>{{$programacao->getRoteiro()->getOperacao()->getSetor()->getDescricao()}}</td>
-                                    <td>{{$programacao->getRecurso()->getDescricao()}}</td>
-                                    <td>{{$programacao->getTempoTotal()}}</td>
-                                    <td>{{$programacao->getOrdemProducao()->getDataEmissao()->format('d/m/Y') }}</td>
-                                    <td>{{$programacao->getOrdemProducao()->getPrazo()->format('d/m/Y')}}</td>
+                                    <td>{{$ordem->getId()}}</td>
+                                    <td>{{$ordem->getProduto()->getDescricao()}}</td>
+                                    <td>{{$ordem->getQuantidade()}}</td>
+                                    <td>{{$ordem->getResponsavel()->getNome()}}</td>
+                                    <td>{{$ordem->getDataEmissao()->format('d/m/Y') }}</td>
+                                    <td>{{$ordem->getPrazo()->format('d/m/Y')}}</td>
 
-
-
-                                    @switch($programacao->getOrdemProducao()->getStatus())
+ 
+                                    @switch($ordem->getStatus())
                                     @case('EMITIDA')
                                     <td>
-                                        <span class="badge badge-secondary">{{$programacao->getOrdemProducao()->getStatus()}}</span>
+                                        <span class="badge badge-secondary">{{$ordem->getStatus()}}</span>
                                     </td>
 
                                     @break
 
                                     @case('INICIADA')
                                     <td>
-                                        <span class="badge badge-warning">{{$programacao->getOrdemProducao()->getStatus()}}</span>
+                                        <span class="badge badge-warning">{{$ordem->getStatus()}}</span>
                                     </td>
 
                                     @break
@@ -136,21 +126,21 @@
 
                                     @case('ENCERRADA')
                                     <td>
-                                        <span class="badge badge-success">{{$programacao->getOrdemProducao()->getStatus()}}</span>
+                                        <span class="badge badge-success">{{$ordem->getStatus()}}</span>
                                     </td>
 
                                     @break
 
                                     @case('CANCELADA')
                                     <td>
-                                        <span class="badge badge-danger">{{$programacao->getOrdemProducao()->getStatus()}}</span>
+                                        <span class="badge badge-danger">{{$ordem->getStatus()}}</span>
                                     </td>
 
                                     @break
 
                                     @default
                                     <td>
-                                        <span class="badge badge-info">{{$programacao->getOrdemProducao()->getStatus()}}</span>
+                                        <span class="badge badge-info">{{$ordem->getStatus()}}</span>
                                     </td>
 
                                     @endswitch
@@ -158,15 +148,11 @@
 
 
                                     <td  style="width: 10px;">
-                                        <a href="{{ URL::to('/ordem/edit/'.$programacao->getOrdemProducao()->getId()) }}"
+                                        <a href="{{ URL::to('/ordem/edit/'.$ordem->getId()) }}"
                                            class="btn btn-primary"><i class="fa fa-search-plus fa-sm"></i>
                                         </a> 
                                     </td>
                                 </tr>
-
-
-
-                                @endforeach
                                 @endforeach
 
                             </tbody>
