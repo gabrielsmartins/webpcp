@@ -133,3 +133,9 @@ Route::post('apontamento/store', 'ApontamentoController@store');
 Route::get('apontamento/show', 'ApontamentoController@show');
 Route::get('apontamento/find', 'ApontamentoController@find');
 Route::get('apontamento/pesquisa', 'ApontamentoController@pesquisarPorCriterio');
+
+
+Route::get('report/filter_reportstock', 'ReportController@filterStockReport');
+Route::get('report/filter_reportproduction', 'ReportController@filterProductionReport');
+Route::get('report/stock', 'ReportController@stock');
+Route::get('report/production', 'ReportController@production');

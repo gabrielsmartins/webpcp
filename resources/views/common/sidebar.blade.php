@@ -21,7 +21,6 @@
                     <ul id="produtos" class="collapse list-unstyled ">
                         <li><a href="{{url('produto/form')}}">Novo</a></li>
                     <li><a href="{{url('produto/show')}}">Consulta</a></li>
-                    <li><a href="#">Relatórios</a></li>
                     </ul>
                 </li>
                 
@@ -29,7 +28,6 @@
                     <ul id="materiais" class="collapse list-unstyled ">
                         <li><a href="{{url('material/form')}}">Novo</a></li>
                     <li><a href="{{url('material/show')}}">Consulta</a></li>
-                    <li><a href="#">Relatórios</a></li>
                     </ul>
                 </li>
                 
@@ -39,7 +37,6 @@
                     <ul id="unidades" class="collapse list-unstyled ">
                          <li><a href="{{url('unidade/form')}}">Novo</a></li>
                     <li><a href="{{url('unidade/show')}}">Consulta</a></li>
-                    <li><a href="#">Relatórios</a></li>
                     </ul>
                 </li>
                 
@@ -49,7 +46,6 @@
                     <ul id="operacoes" class="collapse list-unstyled ">
                         <li><a href="{{url('operacao/form')}}">Novo</a></li>
                     <li><a href="{{url('operacao/show')}}">Consulta</a></li>
-                    <li><a href="#">Relatórios</a></li>
                     </ul>
                 </li>
 
@@ -65,7 +61,6 @@
                     <ul id="op" class="collapse list-unstyled ">
                          <li><a href="{{url('ordem/form')}}">Novo</a></li>
                     <li><a href="{{url('ordem/show')}}">Consulta</a></li>
-                    <li><a href="#">Relatórios</a></li>
                     </ul>
                 </li>
                 
@@ -73,10 +68,16 @@
                     <ul id="rm" class="collapse list-unstyled ">
                          <li><a href="{{url('requisicao/form')}}">Novo</a></li>
                     <li><a href="{{url('requisicao/show')}}">Consulta</a></li>
-                    <li><a href="#">Relatórios</a></li>
                     </ul>
                 </li>
                 
+                
+                 <li><a href="#report" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Relatórios </a>
+                    <ul id="report" class="collapse list-unstyled ">
+                         <li><a href="{{url('report/filter_reportstock')}}">Estoque</a></li>
+                    <li><a href="{{url('requisicao/filter_reportproduction')}}">Produção</a></li>
+                    </ul>
+                </li>
 
             </ul>
         </div>
@@ -91,7 +92,6 @@
                     <ul id="recursos" class="collapse list-unstyled ">
                          <li><a href="{{url('recurso/form')}}">Novo</a></li>
                     <li><a href="{{url('recurso/show')}}">Consulta</a></li>
-                    <li><a href="#">Relatórios</a></li>
                     </ul>
                 </li>
                 
@@ -99,7 +99,6 @@
                     <ul id="setores" class="collapse list-unstyled ">
                           <li><a href="{{url('setor/form')}}">Novo</a></li>
                     <li><a href="{{url('setor/show')}}">Consulta</a></li>
-                    <li><a href="#">Relatórios</a></li>
                     </ul>
                 </li>
                 
@@ -109,7 +108,6 @@
                     <ul id="apontamentos" class="collapse list-unstyled ">
                           <li><a href="{{url('ordem/show')}}">Registrar</a></li>
                     <li><a href="{{url('apontamento/show')}}">Consulta</a></li>
-                    <li><a href="#">Relatórios</a></li>
                     </ul>
                 </li>
                
@@ -127,7 +125,6 @@
                     <ul id="saidas" class="collapse list-unstyled ">
                       <li><a href="{{url('retirada/form')}}">Registrar</a></li>
                     <li><a href="{{url('retirada/show')}}">Consulta</a></li>
-                    <li><a href="#">Relatórios</a></li>
                     </ul>
                 </li>
             </ul>
@@ -143,7 +140,6 @@
                     <ul id="entradas" class="collapse list-unstyled ">
                        <li><a href="{{url('recebimento/form')}}">Registrar</a></li>
                     <li><a href="{{url('recebimento/show')}}">Consulta</a></li>
-                    <li><a href="#">Relatórios</a></li>
                     </ul>
                 </li>
             </ul>
