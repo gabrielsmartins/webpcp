@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AcuseCancelacion" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="041fd329-b27d-44e2-9712-5d45bbb4cabd">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQLAdapter.xml"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -116,7 +116,7 @@ WHERE P.prod_tipo = 'Material']]>
 				<reportElement key="" mode="Opaque" x="0" y="0" width="60" height="20" forecolor="#FFFFFF" backcolor="#7D7D7D" uuid="dc86011d-dcf2-4392-aafa-aa30d3872226">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d9df0e5c-f81e-4ca6-aa25-01e1f7659a49"/>
 				</reportElement>
-				<box padding="3">
+				<box topPadding="3" leftPadding="25" bottomPadding="3" rightPadding="3">
 					<pen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement rotation="None">
@@ -128,7 +128,7 @@ WHERE P.prod_tipo = 'Material']]>
 				<reportElement key="" mode="Opaque" x="65" y="0" width="61" height="20" forecolor="#FFFFFF" backcolor="#7D7D7D" uuid="f977d003-e3ff-4637-a61b-c7c7129b5d8b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5ca4c25a-1609-4c48-8675-5a7e2f03e05c"/>
 				</reportElement>
-				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+				<box topPadding="3" leftPadding="16" bottomPadding="3" rightPadding="3">
 					<pen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement rotation="None">
@@ -207,16 +207,19 @@ WHERE P.prod_tipo = 'Material']]>
 	</columnHeader>
 	<detail>
 		<band height="35" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout"/>
 			<textField isBlankWhenNull="true">
 				<reportElement x="0" y="0" width="60" height="30" uuid="739d1850-484d-4b6b-8bc3-179d694328cf">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d9df0e5c-f81e-4ca6-aa25-01e1f7659a49"/>
 				</reportElement>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{prod_id}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="65" y="0" width="61" height="30" uuid="08b93f6e-3113-4e5e-861c-562264ea151a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5ca4c25a-1609-4c48-8675-5a7e2f03e05c"/>
 				</reportElement>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{prod_cod_intr}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
@@ -261,18 +264,18 @@ WHERE P.prod_tipo = 'Material']]>
 	<pageFooter>
 		<band height="44" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="572" height="30" backcolor="#C2C2C2" uuid="206b362c-f3a3-40ac-a07d-5e6dc82c24e9"/>
+				<reportElement x="0" y="12" width="572" height="20" backcolor="#C2C2C2" uuid="206b362c-f3a3-40ac-a07d-5e6dc82c24e9"/>
 			</rectangle>
 			<textField>
-				<reportElement x="357" y="0" width="100" height="30" uuid="d9912ee3-1068-42d7-aebe-8079c49afa34"/>
-				<textElement textAlignment="Right">
+				<reportElement x="409" y="7" width="100" height="30" uuid="d9912ee3-1068-42d7-aebe-8079c49afa34"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="462" y="0" width="100" height="30" uuid="8d7a52d0-5690-4880-a6d8-d3d3c60e4b59"/>
-				<textElement textAlignment="Left">
+				<reportElement x="510" y="7" width="60" height="30" uuid="8d7a52d0-5690-4880-a6d8-d3d3c60e4b59"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>

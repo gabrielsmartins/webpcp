@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/webpcp/app/Http/Controllers/ApontamentoController.php</file>
-            <file>file:/C:/xampp/htdocs/webpcp/app/Entities/Apontamento.php</file>
-            <file>file:/C:/xampp/htdocs/webpcp/resources/views/apontamento/lista.blade.php</file>
+            <file>file:/C:/xampp/htdocs/webpcp/resources/views/common/sidebar.blade.php</file>
+            <file>file:/C:/xampp/htdocs/webpcp/app/Http/Controllers/ReportController.php</file>
+            <file>file:/C:/xampp/htdocs/webpcp/resources/views/report/report_stock.blade.php</file>
+            <file>file:/C:/xampp/htdocs/webpcp/routes/web.php</file>
+            <file>file:/C:/xampp/htdocs/webpcp/app/Http/Controllers/MaterialController.php</file>
         </group>
     </open-files>
 </project-private>
