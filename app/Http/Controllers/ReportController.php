@@ -16,28 +16,33 @@ class ReportController extends Controller {
 
     public function getDatabaseConfig() {
         return [
-            'driver' => env('DB_CONNECTION'),
-            'host' => env('DB_HOST'),
-            'port' => env('DB_PORT'),
-            'username' => env('DB_USERNAME'),
-            'password' => env('DB_PASSWORD'),
-            'database' => env('DB_DATABASE'),
-            'jdbc_dir' => base_path() . env('JDBC_DIR', '/vendor/lavela/phpjasper/src/JasperStarter/jdbc'),
-        ];
+            'format' => ['pdf'],
+            'locale' => 'en',
+            'params' => [],
+            'db_connection' => [
+                'driver' => env('DB_CONNECTION'),
+                'host' => env('DB_HOST'),
+                'port' => env('DB_PORT'),
+                'username' => env('DB_USERNAME'),
+                'password' => env('DB_PASSWORD'),
+                'database' => env('DB_DATABASE'),
+                //'jdbc_driver' => 'com.mysql.cj.jdbc.Driver',
+                //'jdbc_url' => 'jdbc:mysql://' . env('DB_HOST') . ':' . env('DB_PORT') . '/' . env('DB_DATABASE'),
+                'jdbc_dir' => base_path() . env('JDBC_DIR', '/vendor/lavela/phpjasper/src/JasperStarter/jdbc'),
+        ]
+            ];
     }
-    
-    
-    public function filterStockReport(){
+
+    public function filterStockReport() {
         return view('report.report_stock');
     }
-    
-    public function filterProductionReport(){
+
+    public function filterProductionReport() {
         return view('report.report_production');
     }
 
-    
     public function stock(Request $request) {
-        
+
         $tipo = $request->input('tipo');
 
         $output = public_path() . '/reports/' . time() . '_Estoque';
@@ -45,8 +50,8 @@ class ReportController extends Controller {
         $report = new PHPJasper();
 
 
-  
-        $report->process(public_path() . '/reports/Material.jrxml', $output, ['pdf'], [], $this->getDatabaseConfig())->execute();
+
+        $report->process(public_path() . '/reports/Material.jrxml', $output, $this->getDatabaseConfig())->execute();
 
         $file = $output . '.pdf';
         $path = $file;
@@ -59,12 +64,12 @@ class ReportController extends Controller {
 
         unlink($path);
 
+        // return response(var_dump($this->getDatabaseConfig()));
         return response($file, 200)
                         ->header('Content-Type', 'application/pdf')
                         ->header('Content-Disposition', 'inline; filename="cliente.pdf"');
     }
-    
-    
+
     public function production(Request $request) {
 
         $output = public_path() . '/reports/' . time() . '_Clientes';
@@ -91,6 +96,5 @@ class ReportController extends Controller {
                         ->header('Content-Type', 'application/pdf')
                         ->header('Content-Disposition', 'inline; filename="cliente.pdf"');
     }
-    
 
 }
