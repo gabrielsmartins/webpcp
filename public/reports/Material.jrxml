@@ -5,13 +5,22 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="situacao" class="java.lang.String"/>
+	<parameter name="id" class="java.lang.String"/>
+	<parameter name="codigoInterno" class="java.lang.String"/>
+	<parameter name="descricao" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT P.*,
               U.unid_desc,
               U.unid_sig
  FROM produto P 
 INNER JOIN unidade U ON P.prod_unid_id = U.unid_id
-WHERE P.prod_tipo = 'Material']]>
+WHERE P.prod_tipo = 'Material'
+AND (UPPER(P.prod_sit) LIKE  UPPER('$P!{situacao}%')  OR $P{situacao}   IS NULL)
+AND (P.prod_id =  $P{id}  OR $P{id}   IS NULL)
+AND (UPPER(P.prod_cod_intr) LIKE UPPER('$P!{codigoInterno}%')  OR $P{codigoInterno}   IS NULL)
+AND (UPPER(P.prod_desc) LIKE UPPER('$P!{descricao} %')  OR $P{descricao}   IS NULL)]]>
 	</queryString>
 	<field name="prod_id" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.label" value="prod_id"/>
@@ -82,22 +91,26 @@ WHERE P.prod_tipo = 'Material']]>
 	</background>
 	<title>
 		<band height="50" splitType="Stretch">
-			<rectangle>
-				<reportElement mode="Opaque" x="0" y="0" width="572" height="50" backcolor="#000000" uuid="3b9b01c9-617e-4940-b143-514c0d5967aa"/>
-			</rectangle>
 			<staticText>
-				<reportElement x="140" y="10" width="292" height="30" forecolor="#FFFFFF" uuid="c07a00ff-ded1-4493-87e0-a1366ffea14a"/>
+				<reportElement mode="Opaque" x="0" y="0" width="572" height="50" forecolor="#FFFFFF" backcolor="#545454" uuid="c07a00ff-ded1-4493-87e0-a1366ffea14a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="20" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Relatório de Estoque]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="460" y="10" width="100" height="30" forecolor="#08C738" uuid="f4f1c858-9489-4e9e-8d52-c5364bb26e99"/>
+				<reportElement x="530" y="0" width="42" height="50" forecolor="#08C738" uuid="f4f1c858-9489-4e9e-8d52-c5364bb26e99"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[WEB]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="0" width="30" height="50" forecolor="#FFFFFF" uuid="096b8acc-bbfb-4625-966e-f5cd5e4744eb"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[PCP-WEB]]></text>
+				<text><![CDATA[PCP]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -105,7 +118,9 @@ WHERE P.prod_tipo = 'Material']]>
 		<band height="44" splitType="Stretch">
 			<textField pattern="dd/MM/YYY">
 				<reportElement x="300" y="10" width="256" height="16" uuid="7641b7d2-988e-445d-a450-34a12b0d59d0"/>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>

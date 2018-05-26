@@ -14,11 +14,11 @@ use function view;
 
 class ReportController extends Controller {
 
-    public function getDatabaseConfig() {
+    public function getDatabaseConfig($formato, $params) {
         return [
-            'format' => ['pdf'],
-            'locale' => 'en',
-            'params' => [],
+            'format' => [$formato],
+            'locale' => 'pt_BR',
+            'params' => $params,
             'db_connection' => [
                 'driver' => env('DB_CONNECTION'),
                 'host' => env('DB_HOST'),
@@ -29,8 +29,8 @@ class ReportController extends Controller {
                 //'jdbc_driver' => 'com.mysql.cj.jdbc.Driver',
                 //'jdbc_url' => 'jdbc:mysql://' . env('DB_HOST') . ':' . env('DB_PORT') . '/' . env('DB_DATABASE'),
                 'jdbc_dir' => base_path() . env('JDBC_DIR', '/vendor/lavela/phpjasper/src/JasperStarter/jdbc'),
-        ]
-            ];
+            ]
+        ];
     }
 
     public function filterStockReport() {
@@ -43,17 +43,21 @@ class ReportController extends Controller {
 
     public function stock(Request $request) {
 
+        $formato = $request->input('formato');
+        $situacao = $request->input('situacao');
+        $criterio = $request->input('criterio');
+        $valor =  $request->input('valor') ;
         $tipo = $request->input('tipo');
 
-        $output = public_path() . '/reports/' . time() . '_Estoque';
+        $params = array('situacao' => $situacao,
+            $criterio => $valor
+        );
+
+        $output = public_path() . '/reports/output/' . time() . '_Estoque';
 
         $report = new PHPJasper();
-
-
-
-        $report->process(public_path() . '/reports/Material.jrxml', $output, $this->getDatabaseConfig())->execute();
-
-        $file = $output . '.pdf';
+        $report->process(public_path() . '/reports/'.$tipo.'.jrxml', $output, $this->getDatabaseConfig($formato, $params))->execute();
+        $file = $output . '.' . $formato;
         $path = $file;
 
         if (!file_exists($file)) {
@@ -66,8 +70,8 @@ class ReportController extends Controller {
 
         // return response(var_dump($this->getDatabaseConfig()));
         return response($file, 200)
-                        ->header('Content-Type', 'application/pdf')
-                        ->header('Content-Disposition', 'inline; filename="cliente.pdf"');
+                        ->header('Content-Type', 'application/' . $formato)
+                        ->header('Content-Disposition', 'inline; filename="relatorio_material.' . $formato . '"');
     }
 
     public function production(Request $request) {
