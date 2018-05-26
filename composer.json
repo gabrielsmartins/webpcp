@@ -50,11 +50,17 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ],
-        "post-install-cmd":  [
-            "chmod -R 777 public/"
+        "post-install-cmd": [
+            "chmod -R 777 public/",
+            "chmod +x public/",
+            "chmod -R 777 vendor/lavela/phpjasper/",
+            "chmod +x vendor/lavela/phpjasper/"
         ],
-        "post-update-cmd":  [
-            "chmod -R 777 public/"
+        "post-update-cmd": [
+            "chmod -R 777 public/",
+            "chmod +x public/",
+            "chmod -R 777 vendor/lavela/phpjasper/",
+            "chmod +x vendor/lavela/phpjasper/"
         ]
     },
     "config": {
