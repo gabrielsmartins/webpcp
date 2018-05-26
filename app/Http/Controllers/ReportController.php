@@ -68,7 +68,7 @@ class ReportController extends Controller {
 
         unlink($path);
 
-        // return response(var_dump($this->getDatabaseConfig()));
+       //  return response(var_dump($this->getDatabaseConfig($formato, $params)));
         return response($file, 200)
                         ->header('Content-Type', 'application/' . $formato)
                         ->header('Content-Disposition', 'inline; filename="relatorio_material.' . $formato . '"');

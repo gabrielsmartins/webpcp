@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AcuseCancelacion" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="041fd329-b27d-44e2-9712-5d45bbb4cabd">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQLAdapter.xml"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -18,7 +20,7 @@
 INNER JOIN unidade U ON P.prod_unid_id = U.unid_id
 WHERE P.prod_tipo = 'Material'
 AND (UPPER(P.prod_sit) LIKE  UPPER('$P!{situacao}%')  OR $P{situacao}   IS NULL)
-AND (P.prod_id =  $P{id}  OR $P{id}   IS NULL)
+AND (P.prod_id = $P{id} OR $P{id} IS NULL)
 AND (UPPER(P.prod_cod_intr) LIKE UPPER('$P!{codigoInterno}%')  OR $P{codigoInterno}   IS NULL)
 AND (UPPER(P.prod_desc) LIKE UPPER('$P!{descricao} %')  OR $P{descricao}   IS NULL)]]>
 	</queryString>
@@ -128,7 +130,7 @@ AND (UPPER(P.prod_desc) LIKE UPPER('$P!{descricao} %')  OR $P{descricao}   IS NU
 	<columnHeader>
 		<band height="28" splitType="Stretch">
 			<staticText>
-				<reportElement key="" mode="Opaque" x="0" y="0" width="60" height="20" forecolor="#FFFFFF" backcolor="#7D7D7D" uuid="dc86011d-dcf2-4392-aafa-aa30d3872226">
+				<reportElement key="" mode="Opaque" x="0" y="0" width="50" height="20" forecolor="#FFFFFF" backcolor="#7D7D7D" uuid="dc86011d-dcf2-4392-aafa-aa30d3872226">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d9df0e5c-f81e-4ca6-aa25-01e1f7659a49"/>
 				</reportElement>
 				<box topPadding="3" leftPadding="25" bottomPadding="3" rightPadding="3">
@@ -140,7 +142,7 @@ AND (UPPER(P.prod_desc) LIKE UPPER('$P!{descricao} %')  OR $P{descricao}   IS NU
 				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="" mode="Opaque" x="65" y="0" width="61" height="20" forecolor="#FFFFFF" backcolor="#7D7D7D" uuid="f977d003-e3ff-4637-a61b-c7c7129b5d8b">
+				<reportElement key="" mode="Opaque" x="50" y="0" width="61" height="20" forecolor="#FFFFFF" backcolor="#7D7D7D" uuid="f977d003-e3ff-4637-a61b-c7c7129b5d8b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5ca4c25a-1609-4c48-8675-5a7e2f03e05c"/>
 				</reportElement>
 				<box topPadding="3" leftPadding="16" bottomPadding="3" rightPadding="3">
@@ -152,7 +154,7 @@ AND (UPPER(P.prod_desc) LIKE UPPER('$P!{descricao} %')  OR $P{descricao}   IS NU
 				<text><![CDATA[COD INTER.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="" mode="Opaque" x="131" y="0" width="140" height="20" forecolor="#FFFFFF" backcolor="#7D7D7D" uuid="f9f65a69-352c-4a42-a0e0-3c6474ec68f5">
+				<reportElement key="" mode="Opaque" x="110" y="0" width="140" height="20" forecolor="#FFFFFF" backcolor="#7D7D7D" uuid="f9f65a69-352c-4a42-a0e0-3c6474ec68f5">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6f1ba34f-dd65-4545-a9fa-14eb44f82028"/>
 				</reportElement>
 				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
@@ -164,7 +166,7 @@ AND (UPPER(P.prod_desc) LIKE UPPER('$P!{descricao} %')  OR $P{descricao}   IS NU
 				<text><![CDATA[DESCRIÇÃO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="" mode="Opaque" x="276" y="0" width="81" height="20" forecolor="#FFFFFF" backcolor="#7D7D7D" uuid="10aba550-9a1b-44c5-9360-eba9bb251753">
+				<reportElement key="" mode="Opaque" x="250" y="0" width="81" height="20" forecolor="#FFFFFF" backcolor="#7D7D7D" uuid="10aba550-9a1b-44c5-9360-eba9bb251753">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9fdf052e-0013-4599-b3f1-888d047c73fd"/>
 				</reportElement>
 				<box topPadding="3" leftPadding="10" bottomPadding="3" rightPadding="3">
@@ -176,7 +178,7 @@ AND (UPPER(P.prod_desc) LIKE UPPER('$P!{descricao} %')  OR $P{descricao}   IS NU
 				<text><![CDATA[SITUAÇÃO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="" mode="Opaque" x="363" y="0" width="61" height="20" forecolor="#FFFFFF" backcolor="#7D7D7D" uuid="9fc41738-1985-4526-934d-a724ca809937">
+				<reportElement key="" mode="Opaque" x="330" y="0" width="92" height="20" forecolor="#FFFFFF" backcolor="#7D7D7D" uuid="9fc41738-1985-4526-934d-a724ca809937">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="45864529-6a7b-4c9a-91bd-0dc8fb11cba7"/>
 				</reportElement>
 				<box topPadding="3" leftPadding="17" bottomPadding="3" rightPadding="3">
@@ -189,7 +191,7 @@ AND (UPPER(P.prod_desc) LIKE UPPER('$P!{descricao} %')  OR $P{descricao}   IS NU
 				<text><![CDATA[QNTD ESTQ.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="" mode="Opaque" x="429" y="0" width="61" height="20" forecolor="#FFFFFF" backcolor="#7D7D7D" uuid="4d9317b4-482f-4fb6-adae-a5a6f51e7bf7">
+				<reportElement key="" mode="Opaque" x="422" y="0" width="89" height="20" forecolor="#FFFFFF" backcolor="#7D7D7D" uuid="4d9317b4-482f-4fb6-adae-a5a6f51e7bf7">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6c47498e-a052-4c6d-8021-dcd039c754f1"/>
 				</reportElement>
 				<box topPadding="3" leftPadding="17" bottomPadding="3" rightPadding="3">
@@ -201,7 +203,7 @@ AND (UPPER(P.prod_desc) LIKE UPPER('$P!{descricao} %')  OR $P{descricao}   IS NU
 				<text><![CDATA[QNTD MIN.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="" mode="Opaque" x="495" y="0" width="61" height="20" forecolor="#FFFFFF" backcolor="#7D7D7D" uuid="b5ec1e1f-7f5e-41f2-81e2-92e89876a0f4">
+				<reportElement key="" mode="Opaque" x="511" y="0" width="61" height="20" forecolor="#FFFFFF" backcolor="#7D7D7D" uuid="b5ec1e1f-7f5e-41f2-81e2-92e89876a0f4">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="80fd5a79-8cf3-4f47-b502-aafe4e8009b9"/>
 				</reportElement>
 				<box topPadding="3" leftPadding="17" bottomPadding="3" rightPadding="3">
@@ -213,7 +215,7 @@ AND (UPPER(P.prod_desc) LIKE UPPER('$P!{descricao} %')  OR $P{descricao}   IS NU
 				<text><![CDATA[U.M]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="25" width="555" height="1" uuid="0687052f-dc19-42d0-8b7d-578016898d5e"/>
+				<reportElement x="0" y="25" width="572" height="1" uuid="0687052f-dc19-42d0-8b7d-578016898d5e"/>
 				<graphicElement>
 					<pen lineWidth="2.0"/>
 				</graphicElement>
@@ -224,48 +226,48 @@ AND (UPPER(P.prod_desc) LIKE UPPER('$P!{descricao} %')  OR $P{descricao}   IS NU
 		<band height="35" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout"/>
 			<textField isBlankWhenNull="true">
-				<reportElement x="0" y="0" width="60" height="30" uuid="739d1850-484d-4b6b-8bc3-179d694328cf">
+				<reportElement x="0" y="0" width="50" height="30" uuid="739d1850-484d-4b6b-8bc3-179d694328cf">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d9df0e5c-f81e-4ca6-aa25-01e1f7659a49"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{prod_id}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="65" y="0" width="61" height="30" uuid="08b93f6e-3113-4e5e-861c-562264ea151a">
+				<reportElement x="50" y="0" width="61" height="30" uuid="08b93f6e-3113-4e5e-861c-562264ea151a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5ca4c25a-1609-4c48-8675-5a7e2f03e05c"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{prod_cod_intr}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="131" y="0" width="140" height="30" uuid="858df4f8-d929-453a-8537-e87f46a500d4">
+				<reportElement x="110" y="0" width="140" height="30" uuid="858df4f8-d929-453a-8537-e87f46a500d4">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6f1ba34f-dd65-4545-a9fa-14eb44f82028"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{prod_desc}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="276" y="0" width="81" height="30" uuid="6977eba4-844b-4b5f-8907-86a3a2f5fe12">
+				<reportElement x="250" y="-3" width="81" height="30" uuid="6977eba4-844b-4b5f-8907-86a3a2f5fe12">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9fdf052e-0013-4599-b3f1-888d047c73fd"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Top"/>
 				<textFieldExpression><![CDATA[$F{prod_sit}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="363" y="0" width="61" height="30" uuid="22e8ea6d-27da-442c-bbe6-100ccdb76259">
+				<reportElement x="330" y="0" width="92" height="30" uuid="22e8ea6d-27da-442c-bbe6-100ccdb76259">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="45864529-6a7b-4c9a-91bd-0dc8fb11cba7"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{prod_qntd_estq}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="429" y="0" width="61" height="30" uuid="3aeccbc1-cbfa-4b85-874b-5af910cdf1db">
+				<reportElement x="422" y="0" width="89" height="30" uuid="3aeccbc1-cbfa-4b85-874b-5af910cdf1db">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6c47498e-a052-4c6d-8021-dcd039c754f1"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{prod_qntd_min}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="495" y="0" width="61" height="30" uuid="4ac109ab-516d-40e6-9a2a-20494e0508e1">
+				<reportElement x="510" y="0" width="61" height="30" uuid="4ac109ab-516d-40e6-9a2a-20494e0508e1">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="80fd5a79-8cf3-4f47-b502-aafe4e8009b9"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
