@@ -51,8 +51,10 @@
             "@php artisan package:discover"
         ],
         "post-install-cmd":  [
-            "php artisan optimize",
-                        "chmod -R 777 public/reports"
+            "sudo chmod -R 777 public/reports"
+        ],
+        "post-update-cmd":  [
+            "sudo chmod -R 777 public/reports"
         ]
     },
     "config": {
