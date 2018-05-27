@@ -8,7 +8,7 @@
                 <h2 class="h5">@if(Session::has('usuarioLogado')){{Session::get('usuarioLogado')}} @endif</h2><span>@if(Session::has('usuarioLogadoPerfil')){{Session::get('usuarioLogadoPerfil')}} @endif</span>
             </div>
             <!-- Small Brand information, appears on minimized sidebar-->
-            <div class="sidenav-header-logo"><a href="index.html" class="brand-small text-center"> <strong>P</strong><strong class="text-primary">W</strong></a></div>
+            <div class="sidenav-header-logo"><a href="{{url('/')}}" class="brand-small text-center"> <strong>P</strong><strong class="text-primary">W</strong></a></div>
         </div>
         <!-- Sidebar Navigation Menus-->
 
