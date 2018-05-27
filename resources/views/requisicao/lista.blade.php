@@ -87,9 +87,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Item</th>
-                                    <th>Descrição</th>
-                                    <th>Quantidade</th>
+                                    <th>Responsável</th>
                                     <th>Data Emissão</th>
                                     <th>Prazo</th>
                                     <th>Status</th>
@@ -99,27 +97,25 @@
                             <tbody>
 
                                 @foreach($requisicoes as $requisicao)
-                                @foreach($requisicao->getItens() as $item)
+       
                                 <tr>
-                                    <td>{{$item->getRequisicao()->getId()}}</td>
-                                    <td>{{$item->getRequisicao()->getId()}}.{{ $loop->iteration }}</td>
-                                    <td>{{$item->getMaterial()->getDescricao()}}</td>
-                                    <td>{{$item->getQuantidade()}}</td>
-                                    <td>{{$item->getRequisicao()->getDataEmissao()->format('d/m/Y') }}</td>
-                                    <td>{{$item->getRequisicao()->getPrazo()->format('d/m/Y')}}</td>
+                                    <td>{{$requisicao->getId()}}</td>
+                                    <td>{{$requisicao->getResponsavel()->getNome()}}</td>
+                                    <td>{{$requisicao->getDataEmissao()->format('d/m/Y') }}</td>
+                                    <td>{{$requisicao->getPrazo()->format('d/m/Y')}}</td>
 
 
-                                    @switch($item->getRequisicao()->getStatus())
+                                    @switch($requisicao->getStatus())
                                     @case('EMITIDA')
                                     <td>
-                                        <span class="badge badge-secondary">{{$item->getRequisicao()->getStatus()}}</span>
+                                        <span class="badge badge-secondary">{{$requisicao->getStatus()}}</span>
                                     </td>
 
                                     @break
 
                                     @case('CONCLUIDA PARCIAL')
                                     <td>
-                                        <span class="badge badge-warning">{{$item->getRequisicao()->getStatus()}}</span>
+                                        <span class="badge badge-warning">{{$requisicao->getStatus()}}</span>
                                     </td>
 
                                     @break
@@ -127,21 +123,21 @@
 
                                     @case('CONCLUIDA TOTAL')
                                     <td>
-                                        <span class="badge badge-success">{{$item->getRequisicao()->getStatus()}}</span>
+                                        <span class="badge badge-success">{{$requisicao->getStatus()}}</span>
                                     </td>
 
                                     @break
 
                                     @case('CANCELADA')
                                     <td>
-                                        <span class="badge badge-danger">{{$item->getRequisicao()->getStatus()}}</span>
+                                        <span class="badge badge-danger">{{$requisicao->getStatus()}}</span>
                                     </td>
 
                                     @break
 
                                     @default
                                     <td>
-                                        <span class="badge badge-info">{{$item->getRequisicao()->getStatus()}}</span>
+                                        <span class="badge badge-info">{{$requisicao->getStatus()}}</span>
                                     </td>
 
                                     @endswitch
@@ -155,7 +151,6 @@
 
 
 
-                                @endforeach
                                 @endforeach
 
                             </tbody>
