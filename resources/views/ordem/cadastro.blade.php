@@ -67,7 +67,7 @@
 
                                 <div class="col-sm-2">
                                     <div class="input-group date">
-                                        <input class="form-control pull-right" id="prazo" type="text" name="prazo">
+                                        <input class="form-control pull-right" id="prazo" type="text" name="prazo" value="{{old('prazo')}}">
                                         <div class="input-group-append" >
                                              <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
@@ -88,7 +88,7 @@
                                         <option value="" disabled selected>Escolha um Produto</option>
 
                                         @foreach($produtos as $produto)
-                                        <option value="{{$produto->getId()}}">{{$produto->getId()}} - {{$produto->getCodigoInterno()}} - {{$produto->getDescricao()}} - {{$produto->getSituacao()}} - Qntd ({{$produto->getQuantidadeEstoque()}})</option>
+                                        <option value="{{$produto->getId()}}" @if ($produto->getId() == old('produto')) selected='true' @endif>{{$produto->getId()}} - {{$produto->getCodigoInterno()}} - {{$produto->getDescricao()}} - {{$produto->getSituacao()}} - Qntd ({{$produto->getQuantidadeEstoque()}})</option>
                                         @endforeach
 
 
@@ -99,7 +99,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-1 control-label">Quantidade:</label>
                                 <div class="col-sm-1">
-                                    <input id="quantidade" name="quantidade" type="number"  pattern="[0-9]+([\.,][0-9]+)?" step="0.01" class="form-control" required="true">
+                                    <input id="quantidade" name="quantidade" type="number"  pattern="[0-9]+([\.,][0-9]+)?" step="0.01" class="form-control" required="true" value="{{old('quantidade')}}"/>
                                 </div>
                                 <div class="col-sm-1">
                                     <button type="button" class="btn btn-primary" id="btnImportarRoteiro">Importar Roteiro</button>

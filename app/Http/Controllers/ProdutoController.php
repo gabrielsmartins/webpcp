@@ -100,7 +100,7 @@ class ProdutoController extends Controller {
             $this->produtoDAO->salvar($produto);
             return redirect('produto/form')->with('success', 'Produto Salvo com Sucesso !!!');
         } catch (Exception $ex) {
-            return redirect('produto/form')->with('error', 'Produto Já Cadastrado !!!' . $ex->getMessage());
+            return redirect('produto/form')->with('error', 'Produto Já Cadastrado !!!' . $ex->getMessage())->withInput();
         }
     }
 

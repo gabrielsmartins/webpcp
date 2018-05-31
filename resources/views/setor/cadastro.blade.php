@@ -36,7 +36,7 @@
                         <div class="form-group row">
                             <label class="col-sm-1 control-label">Descrição:</label>
                             <div class="form-group col-sm-3">  
-                                <input placeholder="Descrição" class="form-control" type="text" name="descricao" required="true"/>
+                                <input placeholder="Descrição" class="form-control" type="text" name="descricao" required="true" value="{{old('descricao')}}"/>
                             </div>
                         </div>
                         <div class="box-footer">             

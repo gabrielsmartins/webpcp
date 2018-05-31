@@ -44,7 +44,7 @@ class RecursoController extends Controller {
              $this->recursoDAO->salvar($recurso);
              return redirect('recurso/form')->with('success', 'Recurso Salvo com Sucesso !!!');
         } catch (Exception $ex) {
-              return redirect('recurso/form')->with('error', 'Recurso Já Cadastrado !!!');
+              return redirect('recurso/form')->with('error', 'Recurso Já Cadastrado !!!')->withInput();
         }
     }
     

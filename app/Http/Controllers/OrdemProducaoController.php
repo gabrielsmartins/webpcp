@@ -74,7 +74,7 @@ class OrdemProducaoController extends Controller {
             $this->ordemProducaoDAO->salvar($ordemProducao);
             return redirect('ordem/form')->with('success', 'Ordem de Produção nº' . $ordemProducao->getId() . ' Emitida com Sucesso !!!');
         } catch (Exception $ex) {
-            return redirect('ordem/form')->with('error', 'Erro ao Emitir Ordem de Produção ' . $ex->getMessage());
+            return redirect('ordem/form')->with('error', 'Erro ao Emitir Ordem de Produção ' . $ex->getMessage())->withInput();
         }
     }
 

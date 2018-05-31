@@ -27,7 +27,7 @@
                             <div class="card-body">
                                 <form action="{{ action('UsuarioController@login') }}"  class="text-left form-validate"  role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
                                     <div class="form-group-material">
-                                        <input id="login-username" type="text" name="login" required data-msg="Please enter your username" class="input-material">
+                                        <input id="login-username" type="text" name="login" required data-msg="Please enter your username" class="input-material" value="{{ old('login')}}">
                                 <label for="login-username" class="label-material">Username</label>
                                     </div>
                                     <div class="form-group-material">

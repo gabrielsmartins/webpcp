@@ -45,7 +45,7 @@ class OperacaoController extends Controller {
              $this->operacaoDAO->salvar($operacao);
              return redirect('operacao/form')->with('success', 'Operação Salva com Sucesso !!!');
         } catch (Exception $ex) {
-              return redirect('operacao/form')->with('error', 'Operação Já Cadastrada !!!');
+              return redirect('operacao/form')->with('error', 'Operação Já Cadastrada !!!')->withInput();
         }
     }
     

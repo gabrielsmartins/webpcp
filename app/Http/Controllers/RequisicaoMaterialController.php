@@ -63,7 +63,7 @@ class RequisicaoMaterialController extends Controller {
              $this->requisicaoDAO->salvar($requisicao);
              return redirect('requisicao/form')->with('success', 'Requisição de Material nº' . $requisicao->getId() . ' Emitida com Sucesso !!!');
         } catch (Exception $ex) {
-              return redirect('requisicao/form')->with('error', 'Erro ao Emitir Requisicao ' . $ex->getMessage());
+              return redirect('requisicao/form')->with('error', 'Erro ao Emitir Requisicao ' . $ex->getMessage())->withInput();
         }
     }
     

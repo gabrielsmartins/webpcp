@@ -64,7 +64,7 @@ class RetiradaProdutoController extends Controller {
              $this->retiradaDAO->salvar($retirada);
              return redirect('retirada/form')->with('success', 'Retirada de Produto nº' . $retirada->getId() . ' Registrada com Sucesso !!!');
         } catch (Exception $ex) {
-              return redirect('retirada/form')->with('error', 'Erro ao Registrar Retirada do Estoque ' . $ex->getMessage());
+              return redirect('retirada/form')->with('error', 'Erro ao Registrar Retirada do Estoque ' . $ex->getMessage())->withInput();
         }
     }
     

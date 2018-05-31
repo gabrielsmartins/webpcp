@@ -39,7 +39,7 @@
                             <label for="descricao" class="col-sm-1 control-label">Descrição:</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="descricao" placeholder="Descrição" name="descricao" required="true">
+                                <input type="text" class="form-control" id="descricao" placeholder="Descrição" name="descricao" required="true" value="{{old('descricao')}}"/>
                             </div>
 
 
@@ -51,7 +51,7 @@
                                 <select name="setor" class="form-control" required="true">
                                     <option value="" disabled selected>Escolha um setor</option>
                                     @foreach($setores as $setor)
-                                    <option value="{{$setor->getId()}}">{{$setor->getDescricao()}}</option>
+                                    <option value="{{$setor->getId()}}" @if ($setor->getId() == old('setor')) selected='true' @endif>{{$setor->getDescricao()}}</option>
                                     @endforeach
                                 </select>
                             </div>

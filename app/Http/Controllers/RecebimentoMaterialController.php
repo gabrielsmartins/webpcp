@@ -75,7 +75,7 @@ class RecebimentoMaterialController extends Controller {
              $this->recebimentoDAO->salvar($recebimento);
              return redirect('recebimento/form')->with('success', 'Recebimento de Material nº' . $recebimento->getId() . ' Registrado com Sucesso !!!');
         } catch (Exception $ex) {
-              return redirect('recebimento/form')->with('error', 'Erro ao Registrar Recebimento de Material ' . $ex->getMessage());
+              return redirect('recebimento/form')->with('error', 'Erro ao Registrar Recebimento de Material ' . $ex->getMessage())->withInput();
         }
     }
     

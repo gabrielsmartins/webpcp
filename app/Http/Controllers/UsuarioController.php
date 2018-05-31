@@ -34,7 +34,7 @@ class UsuarioController extends Controller {
             
             return redirect('home');
         } else {
-            return redirect("/")->with('error', 'Usuario ou Senha Inválidos !!!');
+            return redirect("/")->with('error', 'Usuario ou Senha Inválidos !!!')->withInput($request->except('senha'));
         }
     }
 
@@ -70,7 +70,7 @@ class UsuarioController extends Controller {
              $this->usuarioDAO->salvar($usuario);
              return redirect('usuario/form')->with('success', 'Usuário Salvo com Sucesso !!!');
         } catch (Exception $ex) {
-              return redirect('usuario/form')->with('error', 'Usuário Já Cadastrado !!!');
+              return redirect('usuario/form')->with('error', 'Usuário Já Cadastrado !!!')->withInput($request->except(['senha','confirmacao_senha']));
         }
     }
     

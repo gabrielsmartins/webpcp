@@ -39,7 +39,7 @@ class UnidadeMedidaController extends Controller {
              $this->unidadeDAO->salvar($unidade);
              return redirect('unidade/form')->with('success', 'Unidade Salva com Sucesso !!!');
         } catch (Exception $ex) {
-              return redirect('unidade/form')->with('error', 'Unidade Já Cadastrada !!!');
+              return redirect('unidade/form')->with('error', 'Unidade Já Cadastrada !!!')->withInput();
         }
     }
     

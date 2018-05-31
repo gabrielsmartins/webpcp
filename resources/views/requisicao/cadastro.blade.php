@@ -60,7 +60,7 @@
                             <label for="descricao" class="col-sm-1 control-label">Prazo:</label>
                             <div class="col-sm-2">
                                 <div class="input-group date">
-                                    <input class="form-control pull-right" id="datepicker" type="text" name="prazo">
+                                    <input class="form-control pull-right" id="datepicker" type="text" name="prazo" value="{{old('prazo')}}">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>

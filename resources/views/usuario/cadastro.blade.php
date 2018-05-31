@@ -37,14 +37,14 @@
                             <label for="descricao" class="col-sm-1 control-label">Nome:</label>
 
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="nome" placeholder="Nome" name="nome" required="required">
+                                <input type="text" class="form-control" id="nome" placeholder="Nome" name="nome" required="required" value="{{old('nome')}}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="descricao" class="col-sm-1 control-label">Login:</label>
 
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" id="login" placeholder="Login" name="login" required="required">
+                                <input type="text" class="form-control" id="login" placeholder="Login" name="login" required="required" value="{{old('login')}}">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -54,7 +54,7 @@
                                 <select name="perfil" class="form-control">
                                     <option value="" disabled selected>Escolha um perfil:</option>
                                     @foreach($perfis as $perfil)
-                                    <option value="{{$perfil->getId()}}">{{$perfil->getDescricao()}}</option>
+                                    <option value="{{$perfil->getId()}}" @if($perfil->getId() == old('perfil')) selected='true' @endif>{{$perfil->getDescricao()}}</option>
                                     @endforeach
                                 </select>
                             </div>

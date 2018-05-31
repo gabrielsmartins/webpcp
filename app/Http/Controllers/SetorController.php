@@ -38,7 +38,7 @@ class SetorController extends Controller {
              $this->setorDAO->salvar($setor);
              return redirect('setor/form')->with('success', 'Setor Salvo com Sucesso !!!');
         } catch (Exception $ex) {
-              return redirect('setor/form')->with('error', 'Setor Já Cadastrado !!!');
+              return redirect('setor/form')->with('error', 'Setor Já Cadastrado !!!')->withInput();
         }
     }
     

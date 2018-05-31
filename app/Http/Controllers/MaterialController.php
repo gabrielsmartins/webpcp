@@ -63,7 +63,7 @@ class MaterialController extends Controller {
              $this->materialDAO->salvar($material);
              return redirect('material/form')->with('success', 'Material Salvo com Sucesso !!!');
         } catch (Exception $ex) {
-              return redirect('material/form')->with('error', 'Material Já Cadastrado !!!');
+              return redirect('material/form')->with('error', 'Material Já Cadastrado !!!')->withInput();
         }
     }
     

@@ -9,11 +9,13 @@
 namespace App\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use Illuminate\Contracts\Auth\Authenticatable;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="usuario")
  */
-class Usuario {
+class Usuario implements Authenticatable {
   
     
     /**
@@ -107,8 +109,28 @@ class Usuario {
         $this->ativo = $ativo;
     }
 
+    public function getAuthIdentifier() {
+         return $this->id;
+    }
 
+    public function getAuthIdentifierName(): string {
+         return $this->nome;
+    }
 
+    public function getAuthPassword(): string {
+        return $this->senha;
+    }
 
+    public function getRememberToken(): string {
+        
+    }
+
+    public function getRememberTokenName(): string {
+        
+    }
+
+    public function setRememberToken($value): void {
+        
+    }
 
 }

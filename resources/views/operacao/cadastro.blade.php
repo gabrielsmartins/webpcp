@@ -35,14 +35,14 @@
                         <div class="form-group row">
                             <label class="col-sm-1 control-label">Descrição:</label>
                             <div class="form-group col-sm-3">  
-                            <input placeholder="Descrição" class="form-control" type="text" name="descricao" required="true">
+                            <input placeholder="Descrição" class="form-control" type="text" name="descricao" required="true" value="{{old('descricao')}}"/>
                             </div>
                         </div>
                         
                         <div class="form-group row">
                             <label for="descricao" class="col-sm-1 control-label">Instrução:</label>
                             <div class="form-group col-sm-6">       
-                                <textarea name="instrucao" placeholder="Instrução" class="form-control" required="true"></textarea>
+                                <textarea name="instrucao" placeholder="Instrução" class="form-control" required="true">{{old('instrucao')}}</textarea>
                             </div>
                         </div>
 
@@ -54,7 +54,7 @@
                                 <select name="setor" class="form-control" required="true">
                                     <option value="" disabled selected>Escolha um setor</option>
                                     @foreach($setores as $setor)
-                                    <option value="{{$setor->getId()}}">{{$setor->getDescricao()}}</option>
+                                    <option value="{{$setor->getId()}}" @if ($setor->getId() == old('setor')) selected='true' @endif>{{$setor->getDescricao()}}</option>
                                     @endforeach
                                 </select>
                             </div>

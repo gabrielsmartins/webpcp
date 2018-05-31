@@ -79,7 +79,7 @@ class ApontamentoController extends Controller {
             $this->apontamentoDAO->salvar($apontamento);
             return redirect()->action('ApontamentoController@form', ['op' => $ordem, 'seq' => $sequencia])->with('success', 'Apontamento de Produção nº Registrado com Sucesso !!!');
         } catch (Exception $ex) {
-            return redirect()->action('ApontamentoController@form', ['op' => $ordem, 'seq' => $sequencia])->with('error', 'Erro ao Registrar Apontamento de Produção ' . $ex->getMessage());
+            return redirect()->action('ApontamentoController@form', ['op' => $ordem, 'seq' => $sequencia])->with('error', 'Erro ao Registrar Apontamento de Produção ' . $ex->getMessage())->withInput();
         }
     }
 
