@@ -252,7 +252,6 @@ SELECT * FROM apontamento;
 
 
 INSERT INTO perfil(perf_desc)VALUES('PCP');
-INSERT INTO perfil(perf_desc)VALUES('PROGRAMADOR PCP');
 INSERT INTO perfil(perf_desc)VALUES('GERENTE PCP');
 INSERT INTO perfil(perf_desc)VALUES('PRODUCAO');
 INSERT INTO perfil(perf_desc)VALUES('ALMOXARIFADO');
@@ -260,7 +259,16 @@ INSERT INTO perfil(perf_desc)VALUES('EXPEDICAO');
 INSERT INTO perfil(perf_desc)VALUES('ENGENHARIA');
 INSERT INTO perfil(perf_desc)VALUES('ADMINISTRADOR');
 
-INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(1,'PCP - User','admin',MD5('12345'));
+INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(1,'PCP','pcp',MD5('12345'));
+INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(2,'GER PCP','gerpcp',MD5('12345'));
+INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(3,'PRODUCAO','producao',MD5('12345'));
+INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(4,'ALMOXARIFADO','almoxarifado',MD5('12345'));
+INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(5,'EXPEDICAO','expedicao',MD5('12345'));
+INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(6,'ENGENHARIA','engenharia',MD5('12345'));
+INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(7,'ADMIN','admin',MD5('12345'));
+
+
+
 
 
 
@@ -436,6 +444,58 @@ INSERT INTO recebimento_material_detalhe (receb_id,receb_rm_det_id,receb_prod_qn
 (3, 3, '7.00'),
 (4, 4, '2.00');
 
+
+
+SELECT P.*,
+              U.unid_desc,
+              U.unid_sig,
+              EP.prod_sub_id,
+              EP.prod_sub_qntd,
+              SP.prod_desc AS sub_prod_desc,
+              SP.prod_tipo AS sub_prod_tipo,
+              SP.prod_sit AS sub_prod_sit,
+              SP.prod_qntd_estq AS sub_prod_qntd_estq,
+              SP.prod_qntd_min AS sub_prod_qntd_min,
+              US.unid_sig AS sub_prod_unid_sig
+ FROM produto P 
+INNER JOIN unidade U ON P.prod_unid_id = U.unid_id
+LEFT JOIN estrutura_produto EP ON P.prod_id = EP.prod_id
+LEFT JOIN produto SP ON EP.prod_sub_id = SP.prod_id
+LEFT JOIN unidade US ON SP.prod_unid_id = US.unid_id
+WHERE P.prod_tipo = 'Produto';
+
+
+SELECT OP.*,
+	   P.prod_id,
+	   P.prod_cod_intr,
+	   P.prod_desc,
+	   U.unid_sig,
+	   PG.*,
+       RT.*,
+       O.oper_desc,
+	   RC.*,
+       S.setr_desc,
+       A.*
+FROM ordem_producao OP
+LEFT JOIN produto P
+		  ON OP.ord_prod_id = P.prod_id
+LEFT JOIN unidade U
+		  ON P.prod_unid_id =U.unid_id
+LEFT JOIN programacao PG
+		  ON OP.ord_id = PG.prog_ord_id
+LEFT JOIN roteiro  RT
+		  ON RT.rot_prod_id = PG.prog_rot_prod_id
+		     AND RT.rot_seq = PG.prog_rot_seq
+			  AND RT.rot_oper_id = PG.prog_rot_oper_id
+LEFT JOIN operacao O
+         ON RT.rot_oper_id = O.oper_id
+LEFT JOIN recurso RC
+	         ON RC.recr_id = PG.prog_rec_id
+LEFT JOIN setor S
+			ON RC.recr_setr_id = S.setr_id
+LEFT JOIN apontamento A
+          ON A.apont_prog_ord_id = PG.prog_ord_id
+             AND A.apont_prog_seq = PG.prog_seq;
 
 
 
