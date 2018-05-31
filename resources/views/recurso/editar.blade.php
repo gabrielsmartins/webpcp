@@ -5,10 +5,22 @@
 @section('title','Editar - Recurso')
 
 
+@section('breadcrumb')
+<!-- Breadcrumb-->
+      <div class="breadcrumb-holder">
+        <div class="container-fluid">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{url('/recurso/show')}}">Recursos</a></li>
+            <li class="breadcrumb-item active">Editar</li>
+          </ul>
+        </div>
+      </div>
+@stop
+
+
+
 @section('content')
-
-
-
 <div class="container-fluid">
     <div class="row">
 

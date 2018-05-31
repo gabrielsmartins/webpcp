@@ -5,6 +5,22 @@
 @section('title','Retirada Estoque Produto')
 
 
+@section('breadcrumb')
+<!-- Breadcrumb-->
+      <div class="breadcrumb-holder">
+        <div class="container-fluid">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{url('/retirada/show')}}">Retiradas</a></li>
+            <li class="breadcrumb-item active">Cadastro</li>
+          </ul>
+        </div>
+      </div>
+@stop
+
+
+
+
 @section('content')
 
 <div class="container-fluid">

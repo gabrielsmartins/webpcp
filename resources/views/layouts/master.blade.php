@@ -21,7 +21,9 @@
 
 
             <!-- Breacrumb -->
-            @include('common.breadcrumb')
+            @section('breadcrumb')
+
+            @show
 
 
             <section>

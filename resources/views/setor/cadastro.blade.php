@@ -4,6 +4,21 @@
 
 @section('title','Cadastro')
 
+@section('breadcrumb')
+<!-- Breadcrumb-->
+      <div class="breadcrumb-holder">
+        <div class="container-fluid">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{url('/setor/show')}}">Setores</a></li>
+            <li class="breadcrumb-item active">Cadastro</li>
+          </ul>
+        </div>
+      </div>
+@stop
+
+
+
 
 @section('content')
 
