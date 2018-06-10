@@ -12,5 +12,22 @@ class RetiradaProdutoDAO extends GenericDAO {
         parent::__construct();
          $this->className = RetiradaProduto::class;
     }
+    
+    public function salvar($retirada) {
+        
+        $produtoDAO = new ProdutoDAO();
+        foreach ($retirada->getItens() as $item){
+            $produto = $item->getProduto();
+            $quantidadeEstoque = $produto->getQuantidadeEstoque();
+            $quantidadeRetirada = $item->getQuantidade();
+            $saldo = $quantidadeEstoque-$quantidadeRetirada;
+            $produto->setQuantidadeEstoque($saldo);
+            $produtoDAO->salvar($produto);
+        }
+        
+        $this->em->persist($retirada);
+        $this->em->flush();
+        return $retirada;
+    }
 
 }

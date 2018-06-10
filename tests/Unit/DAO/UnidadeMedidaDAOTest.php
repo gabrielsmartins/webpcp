@@ -14,11 +14,7 @@ use LaravelDoctrine\ORM\Facades\EntityManager;
 use Tests\TestCase;
 
 
-/**
- * Description of PerfilTest
- *
- * @author HOME-PC
- */
+
 class UnidadeMedidaDAOTest extends TestCase {
     
 
@@ -28,7 +24,6 @@ class UnidadeMedidaDAOTest extends TestCase {
                                     SET FOREIGN_KEY_CHECKS = 1;";
         EntityManager::getConnection()->prepare($sql)->execute();
     }
-
    
     public function testInserirUnidadeMedida() {
        self::reset();
