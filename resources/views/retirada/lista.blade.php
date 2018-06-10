@@ -103,61 +103,29 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Item</th>
-                                    <th>Descrição</th>
-                                    <th>Quantidade</th>
                                     <th>Data Retirada</th>
                                     <th>Responsável</th>
-                                    <th>Status</th>
+                                    <th>Qntd Itens</th>
                                     <th colspan="2">Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 @foreach($retiradas as $retirada)
-                                @foreach($retirada->getItens() as $item)
                                 <tr>
-                                    <td>{{$item->getRetirada()->getId()}}</td>
-                                    <td>{{$item->getRetirada()->getId()}}.{{ $loop->iteration }}</td>
-                                    <td>{{$item->getProduto()->getDescricao()}}</td>
-                                    <td>{{$item->getQuantidade()}}</td>
-                                    <td>{{$item->getRetirada()->getData()->format('d/m/Y') }}</td>
-                                    <td>{{$item->getRetirada()->getResponsavel()->getNome()}}</td>
+                                    <td>{{$retirada->getId()}}</td>
+                                    <td>{{$retirada->getData()->format('d/m/Y') }}</td>
+                                    <td>{{$retirada->getResponsavel()->getNome()}}</td>
+                                    <td>{{$retirada->getItens()->count()}}</td>
                                     <td  style="width: 10px;">
                                         <a href="{{ URL::to('/retirada/edit/'.$retirada->getId()) }}"
-                                           class="btn btn-primary"><i class="fa fa-edit fa-sm"></i>
+                                           class="btn btn-primary"><i class="fa fa-search-plus fa-sm"></i>
                                         </a> 
-                                    </td>
-                                    <td style="width: 10px;">
-                                        <button type="button"class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{$retirada->getId()}}"><i class="fa fa-remove fa-sm"></i></button>
                                     </td>
                                 </tr>
 
-                                <!-- Modal -->
-                            <div class="modal fade" id="myModal{{$retirada->getId()}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Atenção</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Deseja realmente excluir?
-                                        </div>
-                                        <form>
-                                            <div class="modal-footer">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <input type="hidden" name="id" value="{{$retirada->getId() }}"/>
-                                                <button type="submit" class="btn btn-success">Confirmar</button>
-                                            </div>
-                                        </form>
 
-                                    </div>
-                                </div>
-                            </div>
-
-                            @endforeach
+  
                             @endforeach
 
                             </tbody>

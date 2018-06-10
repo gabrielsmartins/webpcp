@@ -86,8 +86,8 @@ class RetiradaProdutoController extends Controller {
     }
     
     public function edit($id){
-        $unidade = $this->retiradaDAO->pesquisar($id);
-        return view('unidade.editar')->with('unidade', $unidade);
+        $retirada = $this->retiradaDAO->pesquisar($id);
+        return view('retirada.editar')->with('retirada', $retirada);
     }
     
     

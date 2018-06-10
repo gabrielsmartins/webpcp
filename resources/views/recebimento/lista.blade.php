@@ -7,14 +7,14 @@
 
 @section('breadcrumb')
 <!-- Breadcrumb-->
-      <div class="breadcrumb-holder">
-        <div class="container-fluid">
-          <ul class="breadcrumb">
+<div class="breadcrumb-holder">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
             <li class="breadcrumb-item active">Recebimentos de Material</li>
-          </ul>
-        </div>
-      </div>
+        </ul>
+    </div>
+</div>
 @stop
 
 
@@ -101,63 +101,29 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Item</th>
-                                    <th>Descrição</th>
-                                    <th>Quantidade</th>
                                     <th>Data Recebimento</th>
                                     <th>Responsável</th>
-                                    <th>Status</th>
+                                    <th>Qntd Itens</th>
                                     <th colspan="2">Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 @foreach($recebimentos as $recebimento)
-                                @foreach($recebimento->getItens() as $item)
+
                                 <tr>
-                                    <td>{{$item->getRecebimento()->getId()}}</td>
-                                    <td>{{$item->getRecebimento()->getId()}}.{{ $loop->iteration }}</td>
-                                    <td>{{$item->getItemRequisicao()->getMaterial()->getDescricao()}}</td>
-                                    <td>{{$item->getQuantidade()}}</td>
-                                    <td>{{$item->getRecebimento()->getData()->format('d/m/Y') }}</td>
-                                    <td>{{$item->getRecebimento()->getResponsavel()->getNome()}}</td>
-                                    <td  style="width: 10px;">
-                                        <a href="{{ URL::to('/retirada/edit/'.$recebimento->getId()) }}"
-                                           class="btn btn-primary"><i class="fa fa-edit fa-sm"></i>
+                                    <td>{{$recebimento->getId()}}</td>
+                                    <td>{{$recebimento->getData()->format('d/m/Y') }}</td>
+                                    <td>{{$recebimento->getResponsavel()->getNome()}}</td>
+                                    <td>{{$recebimento->getItens()->count()}}</td>
+                                     <td  style="width: 10px;">
+                                        <a href="{{ URL::to('/recebimento/edit/'.$recebimento->getId()) }}"
+                                           class="btn btn-primary"><i class="fa fa-search-plus fa-sm"></i>
                                         </a> 
-                                    </td>
-                                    <td style="width: 10px;">
-                                        <button type="button"class="btn btn-secondary" data-toggle="modal" data-target="#myModal{{$recebimento->getId()}}"><i class="fa fa-remove fa-sm"></i></button>
                                     </td>
                                 </tr>
 
-                                <!-- Modal -->
-                            <div class="modal fade" id="myModal{{$recebimento->getId()}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="myModalLabel">Atenção</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Deseja realmente excluir?
-                                        </div>
-                                        <form>
-                                            <div class="modal-footer">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                <input type="hidden" name="id" value="{{$recebimento->getId() }}"/>
-                                                <button type="submit" class="btn btn-success">Confirmar</button>
-                                            </div>
-                                        </form>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            @endforeach
-                            @endforeach
-
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

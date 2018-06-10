@@ -235,6 +235,10 @@
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
+                        <div class="box-header with-border">
+                                <h3 class="box-title">Estrutura</h3>
+                            </div>
+
 
                         <!--  ESTRUTURA  -->
                         <div class="form-group row">
@@ -351,6 +355,10 @@
 
                     </div>
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+                        <div class="box-header with-border">
+                                <h3 class="box-title">Roteiro</h3>
+                            </div>
 
 
                         <!-- ROTEIRO -->

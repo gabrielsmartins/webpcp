@@ -97,8 +97,8 @@ class RecebimentoMaterialController extends Controller {
     }
     
     public function edit($id){
-        $unidade = $this->recebimentoDAO->pesquisar($id);
-        return view('unidade.editar')->with('unidade', $unidade);
+        $recebimento = $this->recebimentoDAO->pesquisar($id);
+        return view('recebimento.editar')->with('recebimento', $recebimento);
     }
     
     

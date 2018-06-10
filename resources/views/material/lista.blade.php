@@ -130,11 +130,11 @@
                                 <td>{{$material->getAltura()}}</td>
 
                                 @if ($material->getSituacao() == 'ATIVO')
-                                <td><span class="badge bg-green">{{str_replace('_',' ',$material->getSituacao())}}</span></td>
+                                <td><span class="badge badge-success">{{str_replace('_',' ',$material->getSituacao())}}</span></td>
                                 @elseif ($material->getSituacao() == 'INATIVO')
-                                <td><span class="badge bg-gray">{{str_replace('_',' ',$material->getSituacao())}}</span></td>
+                                <td><span class="badge badge-danger">{{str_replace('_',' ',$material->getSituacao())}}</span></td>
                                 @else
-                                <td><span class="badge bg-yellow">{{str_replace('_',' ',$material->getSituacao())}}</span></td>
+                                <td><span class="badge badge-warning">{{str_replace('_',' ',$material->getSituacao())}}</span></td>
                                 @endif
 
                                 <td  style="width: 10px;">

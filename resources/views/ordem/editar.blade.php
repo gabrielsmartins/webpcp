@@ -7,15 +7,15 @@
 
 @section('breadcrumb')
 <!-- Breadcrumb-->
-      <div class="breadcrumb-holder">
-        <div class="container-fluid">
-          <ul class="breadcrumb">
+<div class="breadcrumb-holder">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{url('/ordem/show')}}">Ordens de Produção</a></li>
             <li class="breadcrumb-item active">Editar</li>
-          </ul>
-        </div>
-      </div>
+        </ul>
+    </div>
+</div>
 @stop
 
 
@@ -30,7 +30,6 @@
                 <div class="card-header d-flex align-items-center">
                     <h4>Ordem de Produção Nº {{$ordem->getId()}}</h4>
                 </div>
-                <div id="loader"></div>
                 <div class="card-body">
                     <form class="form-horizontal" action="{{ action('OrdemProducaoController@cancel') }}"
                           method="POST" accept-charset="UTF-8">
@@ -39,7 +38,7 @@
                             <div class="form-group row">
                                 <label for="responsavel" class="col-sm-1 control-label"><strong>Responsável:</strong></label>
                                 <div class="col-sm-3">
-                                    <label class="control-label">{{Session::get('usuarioLogado')}}</label>
+                                    <label class="control-label">{{$ordem->getResponsavel()->getNome()}}</label>
                                 </div>
                             </div>
 
@@ -153,52 +152,101 @@
                                 <!-- /.box-header -->
                                 <div class="box-body no-padding">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 10px">#</th>
-                                                    <th>Descrição</th>
-                                                    <th>Setor</th>
-                                                    <th>Recurso</th>
-                                                    <th style="width: 150px">Tempo Setup</th>
-                                                    <th style="width: 150px">Tempo Produção</th>
-                                                    <th style="width: 150px">Tempo Finalização</th>
-                                                    <th style="width: 50px">Qntd</th>
-                                                    <th style="width: 150px">Tempo Total</th>
-                                                    <th style="width: 150px">Ação</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                        <div id="accordion">
+                                            <table class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 10px">#</th>
+                                                        <th>Descrição</th>
+                                                        <th>Setor</th>
+                                                        <th>Recurso</th>
+                                                        <th style="width: 150px">Tempo Setup</th>
+                                                        <th style="width: 150px">Tempo Produção</th>
+                                                        <th style="width: 150px">Tempo Finalização</th>
+                                                        <th style="width: 50px">Qntd</th>
+                                                        <th style="width: 150px">Tempo Total</th>
+                                                        <th style="width: 150px" colspan="2">Ação</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
 
-                                                @foreach($ordem->getProgramacoes() as $programacao)
-                                                <tr>
-                                                    <td>{{ $programacao->getSequencia() }}</td>
-                                                    <td>{{$programacao->getRoteiro()->getOperacao()->getDescricao()}}</td>
-                                                    <td>{{$programacao->getRoteiro()->getOperacao()->getSetor()->getDescricao()}}</td>
-                                                    <td>{{$programacao->getRecurso()->getDescricao()}}</td>
-                                                    <td>{{$programacao->getRoteiro()->getTempoSetup()}}</td>
-                                                    <td>{{$programacao->getRoteiro()->getTempoProducao()}}</td>
-                                                    <td>{{$programacao->getRoteiro()->getTempoFinalizacao()}}</td>
-                                                    <td>{{$programacao->getOrdemProducao()->getQuantidade()}}</td>
-                                                    <td>{{$programacao->getTempoTotal()}}</td>
-                                                    <td>
-                                                        <a href="{{ URL::to('/apontamento/form/'.$programacao->getOrdemProducao()->getId() . '/'.$programacao->getSequencia()) }}">
-                                                             <button class="btn btn-success" type="button">Registrar Apontamento</button>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
+                                                    @foreach($ordem->getProgramacoes() as $programacao)
+                                                    <tr>
+                                                        <td>{{ $programacao->getSequencia() }}</td>
+                                                        <td>{{$programacao->getRoteiro()->getOperacao()->getDescricao()}}</td>
+                                                        <td>{{$programacao->getRoteiro()->getOperacao()->getSetor()->getDescricao()}}</td>
+                                                        <td>{{$programacao->getRecurso()->getDescricao()}}</td>
+                                                        <td>{{$programacao->getRoteiro()->getTempoSetup()}}</td>
+                                                        <td>{{$programacao->getRoteiro()->getTempoProducao()}}</td>
+                                                        <td>{{$programacao->getRoteiro()->getTempoFinalizacao()}}</td>
+                                                        <td>{{$programacao->getOrdemProducao()->getQuantidade()}}</td>
+                                                        <td>{{$programacao->getTempoTotal()}}</td>
+                                                        <td>
+                                                            @if ($ordem->getStatus() == 'EMITIDA')
+                                                            <a href="{{ URL::to('/apontamento/form/'.$programacao->getOrdemProducao()->getId() . '/'.$programacao->getSequencia()) }}">
+                                                                <button class="btn btn-success" type="button">Registrar Apontamento <i class="fa fa-check"></i></button>
+                                                            </a>
+                                                            @else
 
-                                            </tbody>
+                                                            <button class="btn btn-success" type="button" disabled>Registrar Apontamento <i class="fa fa-check"></i></button>
 
-                                        </table>
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" data-toggle="collapse" data-target="#accordion{{$programacao->getSequencia()}}" class="btn btn-success clickable">Detalhes <i class="fa fa-angle-double-down"></i></button>
+                                                        </td>
+                                                    </tr>
+
+
+                                                    <tr id="accordion{{$programacao->getSequencia()}}" class="collapse" >
+                                                        <td colspan="11">
+                                                            <table class="table table-bordered table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>ID</th>
+                                                                        <th>Prog</th>
+                                                                        <th>Operação</th>
+                                                                        <th>Setor</th>
+                                                                        <th>Recurso</th>
+                                                                        <th>Tipo</th>
+                                                                        <th>Quantidade</th>
+                                                                        <th>Data Início</th>
+                                                                        <th>Data Fim</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    @foreach($programacao->getApontamentos() as $apontamento)
+                                                                    <tr>
+                                                                        <td>{{$apontamento->getId() }}</td>
+                                                                        <td>{{$apontamento->getProgramacao()->getSequencia() }}</td>
+                                                                        <td>{{$apontamento->getProgramacao()->getRoteiro()->getOperacao()->getDescricao() }}</td>
+                                                                        <td>{{$apontamento->getProgramacao()->getRoteiro()->getOperacao()->getSetor()->getDescricao() }}</td>
+                                                                        <td>{{$apontamento->getProgramacao()->getRecurso()->getDescricao() }}</td>
+                                                                        <td>{{$apontamento->getTipo()}}</td>
+                                                                        <td>{{$apontamento->getQuantidade()}}</td>
+                                                                        <td>{{$apontamento->getDataInicio()->format('d/m/Y H:i:s')}}</td>
+                                                                        <td>{{$apontamento->getDataFim()->format('d/m/Y H:i:s')}}</td>
+                                                                    </tr>
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
+
+                                                        </td>
+                                                    </tr>
+
+
+
+
+                                                    @endforeach
+
+                                                </tbody>
+
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-
-
-
 
 
                         </div>

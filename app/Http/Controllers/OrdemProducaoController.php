@@ -97,11 +97,11 @@ class OrdemProducaoController extends Controller {
     public function show(Request $request) {
         $page = (int) $request->input('page');
         if ($page != 0) {
-            $requisicoes = $this->ordemProducaoDAO->listarComPaginacao(10, $page);
+            $ordens = $this->ordemProducaoDAO->listarComPaginacao(10, $page);
         } else {
-            $requisicoes = $this->ordemProducaoDAO->listarComPaginacao();
+            $ordens = $this->ordemProducaoDAO->listarComPaginacao();
         }
-        return view('ordem.lista')->with('ordens', $requisicoes);
+        return view('ordem.lista')->with('ordens', $ordens);
     }
 
     public function searchProduto(Request $request) {

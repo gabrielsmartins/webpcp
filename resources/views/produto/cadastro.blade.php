@@ -8,15 +8,15 @@
 
 @section('breadcrumb')
 <!-- Breadcrumb-->
-      <div class="breadcrumb-holder">
-        <div class="container-fluid">
-          <ul class="breadcrumb">
+<div class="breadcrumb-holder">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{url('/produto/show')}}">Produtos</a></li>
             <li class="breadcrumb-item active">Cadastro</li>
-          </ul>
-        </div>
-      </div>
+        </ul>
+    </div>
+</div>
 @stop
 
 
@@ -138,7 +138,7 @@
                             </div>
 
 
-                           <div class="form-group row">
+                            <div class="form-group row">
                                 <label for="comprimento" class="col-sm-1 control-label">Comprimento (mm):</label>
                                 <div class="col-sm-2">
                                     <input id="comprimento" type="number" pattern="[0-9]+([\.,][0-9]+)?"
@@ -208,6 +208,10 @@
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Estrutura</h3>
+                        </div>
+
 
                         <!--  ESTRUTURA  -->
                         <div class="form-group row">
@@ -268,34 +272,38 @@
                             <!-- /.box-header -->
                             <div class="box-body no-padding">
                                 <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 10px">#</th>
-                                            <th style="width: 20px">ID</th>
-                                            <th>Descrição</th>
-                                            <th>Tipo</th>
-                                            <th style="width: 50px">Quantidade</th>
-                                            <th style="width: 50px">Alterar</th>
-                                            <th style="width: 50px">Remover</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tabela_materiais">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 10px">#</th>
+                                                <th style="width: 20px">ID</th>
+                                                <th>Descrição</th>
+                                                <th>Tipo</th>
+                                                <th style="width: 50px">Quantidade</th>
+                                                <th style="width: 50px">Alterar</th>
+                                                <th style="width: 50px">Remover</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tabela_materiais">
 
 
-                                    </tbody>
+                                        </tbody>
 
-                                </table>
+                                    </table>
+                                </div>
                             </div>
+
                         </div>
-                            
-                    </div>
                     </div>
 
-                        <!--  FIM ESTRUTURA  -->
+                    <!--  FIM ESTRUTURA  -->
 
 
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Roteiro</h3>
+                        </div>
 
 
                         <!-- ROTEIRO -->
@@ -380,61 +388,61 @@
                             <!-- /.box-header -->
                             <div class="box-body no-padding">
                                 <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 10px">#</th>
-                                            <th style="width: 20px">ID</th>
-                                            <th style="width: 200px">Descrição</th>
-                                            <th style="width: 150px">Setor</th>
-                                            <th style="width: 100px">Tempo Setup</th>
-                                            <th style="width: 100px">Tempo Produção</th>
-                                            <th style="width: 100px">Tempo Finalização</th>
-                                            <th style="width: 50px">Alterar</th>
-                                            <th style="width: 50px">Remover</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tabela_operacoes">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 10px">#</th>
+                                                <th style="width: 20px">ID</th>
+                                                <th style="width: 200px">Descrição</th>
+                                                <th style="width: 150px">Setor</th>
+                                                <th style="width: 100px">Tempo Setup</th>
+                                                <th style="width: 100px">Tempo Produção</th>
+                                                <th style="width: 100px">Tempo Finalização</th>
+                                                <th style="width: 50px">Alterar</th>
+                                                <th style="width: 50px">Remover</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tabela_operacoes">
 
-                                    </tbody>
+                                        </tbody>
 
-                                </table>
-                                 
+                                    </table>
+
+                                </div>
                             </div>
+
+                            <!-- FIM ROTEIRO -->
+
                         </div>
-
-                        <!-- FIM ROTEIRO -->
-
                     </div>
-                </div>
 
 
 
 
 
-                <div class="box-footer">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button type="reset" class="btn btn-secondary pull-right fa fa-ban"> Cancelar</button>
-                    <button type="submit" class="btn btn-primary pull-right fa fa-save"> Salvar</button>
-                </div>
+                    <div class="box-footer">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <button type="reset" class="btn btn-secondary pull-right fa fa-ban"> Cancelar</button>
+                        <button type="submit" class="btn btn-primary pull-right fa fa-save"> Salvar</button>
+                    </div>
             </form>
         </div>
     </div>
 
-    
+
 </div>
-    @if (session('success'))
-    <div class="alert alert-success" role="alert"> 
-        {{ session('success') }}
-    </div>
-    @endif
+@if (session('success'))
+<div class="alert alert-success" role="alert"> 
+    {{ session('success') }}
+</div>
+@endif
 
 
-    @if (session('error'))
-    <div class="alert alert-danger" role="alert"> 
-        {{ session('error') }}
-    </div>
-    @endif
+@if (session('error'))
+<div class="alert alert-danger" role="alert"> 
+    {{ session('error') }}
+</div>
+@endif
 </div>
 <!-- /.box-footer -->
 
@@ -497,20 +505,20 @@
                 tipo: 'material',
                 id: $("#busca_material").val()},
             dataType: 'JSON',
-            beforeSend: function(){
+            beforeSend: function () {
                 HoldOn.open({
-                                    theme:'sk-rect',
-                                    message:"<h4>Carregando... Aguarde</h4>"
-                                });
+                    theme: 'sk-rect',
+                    message: "<h4>Carregando... Aguarde</h4>"
+                });
             },
             success: function (data) {
                 var quantidade = $("#quantidadeMaterialAdd").val();
                 adicionaComponente(data, quantidade, 'material');
-                 HoldOn.close();
+                HoldOn.close();
             },
             error: function (e) {
                 console.log(e.responseText);
-                 HoldOn.close();
+                HoldOn.close();
             }
         });
     });
@@ -527,20 +535,20 @@
                 tipo: 'produto',
                 id: $("#busca_produto").val()},
             dataType: 'JSON',
-            beforeSend: function(){
+            beforeSend: function () {
                 HoldOn.open({
-                                    theme:'sk-rect',
-                                    message:"<h4>Carregando... Aguarde</h4>"
-                                });
+                    theme: 'sk-rect',
+                    message: "<h4>Carregando... Aguarde</h4>"
+                });
             },
             success: function (data) {
                 var quantidade = $("#quantidadeProdutoAdd").val();
                 adicionaComponente(data, quantidade, 'produto');
-                  HoldOn.close();
+                HoldOn.close();
             },
             error: function (e) {
                 console.log(e.responseText);
-                  HoldOn.close();
+                HoldOn.close();
             }
         });
     });
@@ -585,22 +593,22 @@
             data: {_token: CSRF_TOKEN,
                 id: $("#busca_operacao").val()},
             dataType: 'JSON',
-            beforeSend: function(){
+            beforeSend: function () {
                 HoldOn.open({
-                                    theme:'sk-rect',
-                                    message:"<h4>Carregando... Aguarde</h4>"
-                                });
+                    theme: 'sk-rect',
+                    message: "<h4>Carregando... Aguarde</h4>"
+                });
             },
             success: function (data) {
                 var tempoSetup = $("#tempoSetup").val();
                 var tempoProducao = $("#tempoProducao").val();
                 var tempoFinalizacao = $("#tempoFinalizacao").val();
                 adicionaOperacao(data, tempoSetup, tempoProducao, tempoFinalizacao);
-                 HoldOn.close();
+                HoldOn.close();
             },
             error: function (e) {
                 console.log(e.responseText);
-                 HoldOn.close();
+                HoldOn.close();
             }
         });
     });

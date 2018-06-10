@@ -230,6 +230,32 @@ CREATE TABLE recebimento_material_detalhe(
 );
 
 
+DROP TRIGGER IF EXISTS TR_ORDEM_PRODUCAO;
+
+DELIMITER $$
+CREATE TRIGGER TR_ORDEM_PRODUCAO  BEFORE INSERT ON ordem_producao 
+	FOR EACH ROW
+    BEGIN
+		DECLARE QNTD_ESTQ NUMERIC(15,2);
+        DECLARE MSG VARCHAR(128);
+        SELECT prod_qntd_estq INTO @QNTD_ESTQ from produto where prod_id = NEW.ord_prod_id;
+        
+        IF NEW.ord_prod_qntd > @QNTD_ESTQ THEN
+			SET msg = concat('Erro: Valor informado na ordem de producao é maior que valor em estoque. Produto ID:', cast(NEW.ord_prod_id as char));
+			SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
+        END IF;
+        
+        UPDATE produto
+		       SET prod_qntd_estq = ( @QNTD_ESTQ - NEW.ord_prod_qntd) 
+        WHERE prod_id = NEW.ord_prod_id;
+    END$$
+
+
+
+
+
+
+
 
 
 SELECT * FROM usuario;
@@ -258,6 +284,7 @@ INSERT INTO perfil(perf_desc)VALUES('ALMOXARIFADO');
 INSERT INTO perfil(perf_desc)VALUES('EXPEDICAO');
 INSERT INTO perfil(perf_desc)VALUES('ENGENHARIA');
 INSERT INTO perfil(perf_desc)VALUES('ADMINISTRADOR');
+
 
 INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(1,'PCP','pcp',MD5('12345'));
 INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(2,'GER PCP','gerpcp',MD5('12345'));
@@ -446,58 +473,6 @@ INSERT INTO recebimento_material_detalhe (receb_id,receb_rm_det_id,receb_prod_qn
 
 
 
-SELECT P.*,
-              U.unid_desc,
-              U.unid_sig,
-              EP.prod_sub_id,
-              EP.prod_sub_qntd,
-              SP.prod_desc AS sub_prod_desc,
-              SP.prod_tipo AS sub_prod_tipo,
-              SP.prod_sit AS sub_prod_sit,
-              SP.prod_qntd_estq AS sub_prod_qntd_estq,
-              SP.prod_qntd_min AS sub_prod_qntd_min,
-              US.unid_sig AS sub_prod_unid_sig
- FROM produto P 
-INNER JOIN unidade U ON P.prod_unid_id = U.unid_id
-LEFT JOIN estrutura_produto EP ON P.prod_id = EP.prod_id
-LEFT JOIN produto SP ON EP.prod_sub_id = SP.prod_id
-LEFT JOIN unidade US ON SP.prod_unid_id = US.unid_id
-WHERE P.prod_tipo = 'Produto';
-
-
-SELECT OP.*,
-	   P.prod_id,
-	   P.prod_cod_intr,
-	   P.prod_desc,
-	   U.unid_sig,
-	   PG.*,
-       RT.*,
-       O.oper_desc,
-	   RC.*,
-       S.setr_desc,
-       A.*
-FROM ordem_producao OP
-LEFT JOIN produto P
-		  ON OP.ord_prod_id = P.prod_id
-LEFT JOIN unidade U
-		  ON P.prod_unid_id =U.unid_id
-LEFT JOIN programacao PG
-		  ON OP.ord_id = PG.prog_ord_id
-LEFT JOIN roteiro  RT
-		  ON RT.rot_prod_id = PG.prog_rot_prod_id
-		     AND RT.rot_seq = PG.prog_rot_seq
-			  AND RT.rot_oper_id = PG.prog_rot_oper_id
-LEFT JOIN operacao O
-         ON RT.rot_oper_id = O.oper_id
-LEFT JOIN recurso RC
-	         ON RC.recr_id = PG.prog_rec_id
-LEFT JOIN setor S
-			ON RC.recr_setr_id = S.setr_id
-LEFT JOIN apontamento A
-          ON A.apont_prog_ord_id = PG.prog_ord_id
-             AND A.apont_prog_seq = PG.prog_seq;
-
-
-
+select * from produto where prod_id = 4;
 
 
