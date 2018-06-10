@@ -7,15 +7,15 @@
 
 @section('breadcrumb')
 <!-- Breadcrumb-->
-      <div class="breadcrumb-holder">
-        <div class="container-fluid">
-          <ul class="breadcrumb">
+<div class="breadcrumb-holder">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{url('/recebimento/show')}}">Recebimentos de Material</a></li>
             <li class="breadcrumb-item active">Cadastro</li>
-          </ul>
-        </div>
-      </div>
+        </ul>
+    </div>
+</div>
 @stop
 
 
@@ -82,6 +82,8 @@
                                         <th>ID Req</th>
                                         <th>Item Nº</th>
                                         <th>Data Emissão</th>
+                                        <th>ID</th>
+                                        <th>Cód. Interno</th>
                                         <th>Descrição</th>
                                         <th>Qntd Solic.</th>
                                         <th>Prazo</th>
@@ -97,12 +99,14 @@
                                         <td><span id="req_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getId()}}</span></td>
                                         <td><span id="req_item_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getId()}}.{{ $loop->iteration }}</span></td>
                                         <td><span id="data_emissao_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getDataEmissao()->format('d/m/Y') }}</span></td>
-                                        <td><span id="material_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getMaterial()->getDescricao()}}</span></td>
+                                        <td><span id="material_id_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getMaterial()->getId()}}</span></td>
+                                        <td><span id="material_codigoInterno_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getMaterial()->getCodigoInterno()}}</span></td>
+                                        <td><span id="material_descricao_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getMaterial()->getDescricao()}}</span></td>
                                         <td><span id="quantidade_solicitada_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getQuantidade()}}</span></td>
                                         <td><span id="prazo_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getPrazo()->format('d/m/Y')}}</span></td>
                                         <td><span id="status_{{ $loop->parent->iteration }}.{{ $loop->iteration }}">{{$item->getRequisicao()->getStatus()}}</span></td>
                                         <td><input type="number"  id="quantidade_recebida_{{ $loop->parent->iteration }}.{{ $loop->iteration }}" max="{{$item->getQuantidade()}}" /></td>
-                                        <td><button class="btn btn-primary fa fa-plus" onclick="adicionaItem({{ $loop->parent->iteration }}.{{ $loop->iteration }})"></button></td>
+                                        <td><button type="button" class="btn btn-primary fa fa-plus" onclick="adicionaItem({{ $loop->parent->iteration }}.{{ $loop->iteration }})"></button></td>
                                     </tr>
                                     @endforeach
                                     @endforeach
@@ -132,6 +136,8 @@
                                             <th>ID Req</th>
                                             <th>Item Nº</th>
                                             <th>Data Emissão</th>
+                                            <th>ID</th>
+                                            <th>Cód. Interno</th>
                                             <th>Descrição</th>
                                             <th>Qntd Solic.</th>
                                             <th>Prazo</th>
@@ -195,10 +201,8 @@
             format: 'dd/mm/yyyy',
             language: 'pt-BR'
     });
-    //Timepicker
-    $('.timepicker').timepicker({
-    showInputs: false
-    });</script>
+
+</script>
 <script type="text/javascript">
     function pesquisar() {
     // Declare variables
@@ -229,7 +233,9 @@
     var req = document.getElementById("req_" + id).textContent;
     var req_item = document.getElementById("req_item_" + id).textContent;
     var data_emissao = document.getElementById("data_emissao_" + id).textContent;
-    var material = document.getElementById("material_" + id).textContent;
+    var materialId = document.getElementById("material_id_" + id).textContent;
+    var materialCodigoInterno = document.getElementById("material_codigoInterno_" + id).textContent;
+    var materialDescricao = document.getElementById("material_descricao_" + id).textContent;
     var quantidade_solicitada = document.getElementById("quantidade_solicitada_" + id).textContent;
     var prazo = document.getElementById("prazo_" + id).textContent;
     var status = document.getElementById("status_" + id).textContent;
@@ -239,21 +245,22 @@
             "<td>" + req + "</td>" +
             "<td>" + req_item + "</td>" +
             "<td>" + data_emissao + "</td>" +
-            "<td>" + material + "</td>" +
+            "<td>" + materialId + "</td>" +
+            "<td>" + materialCodigoInterno + "</td>" +
+            "<td>" + materialDescricao + "</td>" +
             "<td>" + quantidade_solicitada + "</td>" +
             "<td>" + prazo + "</td>" +
             "<td>" + status + "</td>" +
             "<td><input type='number'  value='" + quantidade_recebida + "' disabled='true' /></td>" +
-            "<td><button class='btn btn-secondary fa fa-remove' onclick='removeItem(" + id + ")'></button></td>" +
+            "<td><button type='button' class='btn btn-secondary fa fa-remove' onclick='removeItem(" + id + ")'></button></td>" +
             "</tr>";
     $("#tabelaDestino").append(row);
-    
-    document.getElementById("quantidade_recebida_"+id).disabled = true;
+    document.getElementById("quantidade_recebida_" + id).disabled = true;
     }
 
     function removeItem(id) {
     document.getElementById('row_' + id).remove();
-    document.getElementById("quantidade_recebida_"+id).disabled = false;
+    document.getElementById("quantidade_recebida_" + id).disabled = false;
     components--;
     }
 </script>

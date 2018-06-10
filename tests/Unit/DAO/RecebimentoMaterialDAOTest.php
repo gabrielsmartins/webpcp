@@ -95,5 +95,7 @@ class RecebimentoMaterialDAOTest extends TestCase{
        
  
          $this->assertNotNull($recebimentoDAO->salvar($recebimento));
+         $this->assertEquals(30.00,$material1->getQuantidadeEstoque());
+         $this->assertEquals(35.00,$material2->getQuantidadeEstoque());
     }
 }

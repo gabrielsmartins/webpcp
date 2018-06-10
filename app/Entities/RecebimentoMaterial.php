@@ -4,7 +4,7 @@
 
 namespace App\Entities;
 
-use App\Util\SaldoInsuficienteException;
+use App\Util\ValorAcimaDoSolicitadoException;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -84,6 +84,12 @@ class RecebimentoMaterial {
 
 
     function adicionarItem(ItemRecebimento $item){
+        if($item->getQuantidade() > $item->getItemRequisicao()->getQuantidade()){
+              throw new ValorAcimaDoSolicitadoException("Quantidade informada é maior que a quantidade solicitada na requisição");
+        }
+        $valor = $item->getItemRequisicao()->getMaterial()->getQuantidadeEstoque();
+        $valor+=$item->getQuantidade();
+        $item->getItemRequisicao()->getMaterial()->setQuantidadeEstoque($valor);
         $this->itens->add($item);
     }
     
