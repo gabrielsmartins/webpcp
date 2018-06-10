@@ -13,7 +13,7 @@ class RetiradaProdutoDAO extends GenericDAO {
          $this->className = RetiradaProduto::class;
     }
     
-    public function salvar($retirada) {
+    /*public function salvar($retirada) {
         
         $produtoDAO = new ProdutoDAO();
         foreach ($retirada->getItens() as $item){
@@ -28,6 +28,6 @@ class RetiradaProdutoDAO extends GenericDAO {
         $this->em->persist($retirada);
         $this->em->flush();
         return $retirada;
-    }
+    }*/
 
 }
