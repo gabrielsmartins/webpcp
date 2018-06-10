@@ -21,7 +21,7 @@ CREATE TABLE usuario(
        usr_ativo BOOLEAN DEFAULT 1 NOT NULL,
        CONSTRAINT PK_usuario PRIMARY KEY(usr_id),
        CONSTRAINT FK_usuario_perfil FOREIGN KEY(usr_perf_id) REFERENCES perfil(perf_id) ON DELETE CASCADE,
-       CONSTRAINT UNQ_usuario_nome UNIQUE(usr_nome)
+       CONSTRAINT UNQ_usuario_login UNIQUE(usr_login)
 );
 
 
@@ -251,7 +251,15 @@ CREATE TRIGGER TR_ORDEM_PRODUCAO  BEFORE INSERT ON ordem_producao
     END$$
 
 
-
+CREATE TABLE empenho(
+			 emp_ord_id BIGINT NOT NULL,
+             emp_prod_id BIGINT NOT NULL,
+             emp_prod_qntd_prev NUMERIC(15,2) NOT NULL,
+             emp_prod_qntd_rlz NUMERIC(15,2) NOT NULL,
+             emp_cancl BOOLEAN DEFAULT 0 NOT NULL,
+             emp_dt_cancl DATETIME DEFAULT NULL,
+             CONSTRAINT PK_empenho PRIMARY KEY(emp_ord_id,emp_prod_id)
+);
 
 
 

@@ -125,6 +125,19 @@
                         <li><a href="{{url('requisicao/filter_reportproduction')}}">Produção</a></li>
                     </ul>
                 </li>
+                
+                
+                <li><a href="#produtos" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Produtos </a>
+                    <ul id="produtos" class="collapse list-unstyled ">
+                        <li><a href="{{url('produto/show')}}">Consulta</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#materiais" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Materiais </a>
+                    <ul id="materiais" class="collapse list-unstyled ">
+                        <li><a href="{{url('material/show')}}">Consulta</a></li>
+                    </ul>
+                </li>
 
             </ul>
         </div>
@@ -160,6 +173,8 @@
                     </ul>
                 </li>
 
+                
+                
 
             </ul>
         </div>
