@@ -139,6 +139,18 @@
                     </ul>
                 </li>
 
+                
+                 <li><a href="#operacoes" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Operações </a>
+                    <ul id="operacoes" class="collapse list-unstyled ">
+                        <li><a href="{{url('operacao/show')}}">Consulta</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="#recursos" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Recursos </a>
+                    <ul id="recursos" class="collapse list-unstyled ">
+                        <li><a href="{{url('recurso/show')}}">Consulta</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         @endif
