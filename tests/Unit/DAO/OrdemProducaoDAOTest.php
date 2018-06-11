@@ -34,7 +34,7 @@ class OrdemProducaoDAOTest extends TestCase {
         EntityManager::getConnection()->prepare($sql)->execute();
     }
 
-    public function testOrdemProducaoPossuiDados() {
+    public function testEmitirOrdemProducao() {
         self::reset();
         $perfilDAO = new PerfilDAO();
         $usuarioDAO = new UsuarioDAO();

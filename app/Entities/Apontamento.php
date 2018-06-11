@@ -1,9 +1,8 @@
 <?php
 
-
-
 namespace App\Entities;
 
+use App\DAO\OrdemProducaoDAO;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,17 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="apontamento")
  */
 class Apontamento {
-  
+
     /**
      * @ORM\Id 
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer",name="apont_id")
      * */
     private $id;
-    
-    
 
-   
     /**
      * @ORM\ManyToOne(targetEntity="Programacao")
      * @ORM\JoinColumns({
@@ -30,47 +26,45 @@ class Apontamento {
      * })
      * */
     private $programacao;
-    
+
     /**
      * @ORM\Column(type="string",name="apont_tipo")
      */
     private $tipo;
-    
+
     /**
      * @ORM\Column(type="decimal",name="apont_qntd")
      */
     private $quantidade;
-    
-    
+
     /**
      * @ORM\Column(type="datetime",name="apont_dt_ini")
      */
     private $dataInicio;
-    
+
     /**
      * @ORM\Column(type="datetime",name="apont_dt_fim")
      */
     private $dataFim;
-    
+
     /**
      * @ORM\Column(type="boolean",name="apont_deb_estq")
      */
-
     private $debitaEstoque;
-    
-    
-    function __construct(Programacao $programacao, $tipo, $quantidade, $dataInicio, $dataFim,$debitaEstoque) {
+
+    function __construct(Programacao $programacao, $tipo, $quantidade, $dataInicio, $dataFim, $debitaEstoque) {
         $this->programacao = $programacao;
         $this->tipo = $tipo;
         $this->quantidade = $quantidade;
         $this->dataInicio = $dataInicio;
         $this->dataFim = $dataFim;
         $this->debitaEstoque = $debitaEstoque;
-        $this->atualizaStatusOrdem();
+
+
         $this->atualizaEstoqueMaterial();
+        $this->atualizaStatusOrdem();
     }
-    
-    
+
     function getId() {
         return $this->id;
     }
@@ -119,23 +113,54 @@ class Apontamento {
         $this->dataFim = $dataFim;
     }
 
-    private function atualizaStatusOrdem(){
+    private function atualizaStatusOrdem() {
         $ordem = $this->programacao->getOrdemProducao();
+
+
         if ($ordem->getStatus() == StatusOrdemProducao::EMITIDA) {
             $ordem->setStatus(StatusOrdemProducao::INICIADA);
         }
+
+
+        $programacoesConcluidas = array();
+        foreach ($ordem->getProgramacoes() as $programacao) {
+
+            $quantidadeProduzida = 0;
+
+            echo "***chegou" . $programacao->getApontamentos()->count() . "\n";
+            foreach ($programacao->getApontamentos() as $apontamento) {
+                if ($apontamento->getTipo() == TipoApontamento::PRODUCAO) {
+                    $quantidadeProduzida += $apontamento->getQuantidade();
+                }
+            }
+
+            if ($quantidadeProduzida >= $ordem->getQuantidade()) {
+                $programacoesConcluidas[] = $programacao;
+            }
+        }
+
+
+        if ($this->tipo == TipoApontamento::PRODUCAO && $this->quantidade >= $ordem->getQuantidade()) {
+            $programacoesConcluidas[] = $this->getProgramacao();
+        }
+
+        if (count($programacoesConcluidas) >= $ordem->getProgramacoes()->count()) {
+
+            $ordem->setStatus(StatusOrdemProducao::ENCERRADA);
+        }
+
+        echo "*************Prog Concluidas" . count($programacoesConcluidas) . "Prog OP" . $ordem->getProgramacoes()->count();
     }
-    
-    private function atualizaEstoqueMaterial(){
-        if($this->debitaEstoque){
+
+    private function atualizaEstoqueMaterial() {
+        if ($this->debitaEstoque) {
             $produto = $this->getProgramacao()->getOrdemProducao()->getProduto();
-            
-            foreach($produto->getItens() as $item){
+
+            foreach ($produto->getItens() as $item) {
                 $quantidadeEstoque = $item->getComponente()->getQuantidadeEstoque();
-                $item->getComponente()->setQuantidadeEstoque($quantidadeEstoque-$this->getQuantidade());
+                $item->getComponente()->setQuantidadeEstoque($quantidadeEstoque - $this->getQuantidade());
             }
         }
     }
-    
 
 }
