@@ -159,6 +159,7 @@ CREATE TABLE apontamento(
              apont_qntd DOUBLE NOT NULL,
              apont_dt_ini DATETIME NOT NULL,
              apont_dt_fim DATETIME NOT NULL,
+             apont_deb_estq BOOLEAN DEFAULT 1 NOT NULL,
              CONSTRAINT PK_apontamento PRIMARY KEY(apont_id),
              CONSTRAINT FK_apontamento_programacao FOREIGN KEY(apont_prog_ord_id,apont_prog_seq) REFERENCES programacao(prog_ord_id,prog_seq),
 			 CONSTRAINT CHK_apontamento_tipo CHECK(apont_tipo IN('PRODUCAO','MANUTENCAO','PARADA','DESCARTE'))    
@@ -230,37 +231,6 @@ CREATE TABLE recebimento_material_detalhe(
 );
 
 
-DROP TRIGGER IF EXISTS TR_ORDEM_PRODUCAO;
-
-DELIMITER $$
-CREATE TRIGGER TR_ORDEM_PRODUCAO  BEFORE INSERT ON ordem_producao 
-	FOR EACH ROW
-    BEGIN
-		DECLARE QNTD_ESTQ NUMERIC(15,2);
-        DECLARE MSG VARCHAR(128);
-        SELECT prod_qntd_estq INTO @QNTD_ESTQ from produto where prod_id = NEW.ord_prod_id;
-        
-        IF NEW.ord_prod_qntd > @QNTD_ESTQ THEN
-			SET msg = concat('Erro: Valor informado na ordem de producao é maior que valor em estoque. Produto ID:', cast(NEW.ord_prod_id as char));
-			SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
-        END IF;
-        
-        UPDATE produto
-		       SET prod_qntd_estq = ( @QNTD_ESTQ - NEW.ord_prod_qntd) 
-        WHERE prod_id = NEW.ord_prod_id;
-    END$$
-
-
-CREATE TABLE empenho(
-			 emp_ord_id BIGINT NOT NULL,
-             emp_prod_id BIGINT NOT NULL,
-             emp_prod_qntd_prev NUMERIC(15,2) NOT NULL,
-             emp_prod_qntd_rlz NUMERIC(15,2) NOT NULL,
-             emp_cancl BOOLEAN DEFAULT 0 NOT NULL,
-             emp_dt_cancl DATETIME DEFAULT NULL,
-             CONSTRAINT PK_empenho PRIMARY KEY(emp_ord_id,emp_prod_id)
-);
-
 
 
 
@@ -286,7 +256,6 @@ SELECT * FROM apontamento;
 
 
 INSERT INTO perfil(perf_desc)VALUES('PCP');
-INSERT INTO perfil(perf_desc)VALUES('GERENTE PCP');
 INSERT INTO perfil(perf_desc)VALUES('PRODUCAO');
 INSERT INTO perfil(perf_desc)VALUES('ALMOXARIFADO');
 INSERT INTO perfil(perf_desc)VALUES('EXPEDICAO');
@@ -295,12 +264,11 @@ INSERT INTO perfil(perf_desc)VALUES('ADMINISTRADOR');
 
 
 INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(1,'PCP','pcp',MD5('12345'));
-INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(2,'GER PCP','gerpcp',MD5('12345'));
-INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(3,'PRODUCAO','producao',MD5('12345'));
-INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(4,'ALMOXARIFADO','almoxarifado',MD5('12345'));
-INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(5,'EXPEDICAO','expedicao',MD5('12345'));
-INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(6,'ENGENHARIA','engenharia',MD5('12345'));
-INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(7,'ADMIN','admin',MD5('12345'));
+INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(2,'PRODUCAO','producao',MD5('12345'));
+INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(3,'ALMOXARIFADO','almoxarifado',MD5('12345'));
+INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(4,'EXPEDICAO','expedicao',MD5('12345'));
+INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(5,'ENGENHARIA','engenharia',MD5('12345'));
+INSERT INTO usuario(usr_perf_id,usr_nome,usr_login,usr_pwd)VALUES(6,'ADMIN','admin',MD5('12345'));
 
 
 

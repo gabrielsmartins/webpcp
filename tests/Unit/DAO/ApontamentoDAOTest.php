@@ -23,6 +23,7 @@ use App\Entities\Programacao;
 use App\Entities\Recurso;
 use App\Entities\Roteiro;
 use App\Entities\Setor;
+use App\Entities\StatusOrdemProducao;
 use App\Entities\UnidadeMedida;
 use App\Entities\Usuario;
 use DateTime;
@@ -136,17 +137,16 @@ class ApontamentoDAOTest extends TestCase {
         $ordemProducaoDAO->salvar($ordemProducao);
 
 
-        $apontamento1 = new Apontamento($programacao1, "PRODUCAO", 5.00, new DateTime("2018-02-27 14:30:00"), new DateTime("2018-02-27 16:30:00"));
-        $apontamento2 = new Apontamento($programacao1, "DESCARTE", 5.00, new DateTime("2018-02-27 17:00:00"), new DateTime("2018-02-27 17:15:00"));
-        $apontamento3 = new Apontamento($programacao1, "PRODUCAO", 5.00, new DateTime("2018-02-28 14:30:00"), new DateTime("2018-02-28 14:30:00"));
-        $apontamento4 = new Apontamento($programacao2, "PRODUCAO", 5.00, new DateTime("2018-02-28 15:30:00"), new DateTime("2018-02-28 16:20:00"));
-        $apontamento5 = new Apontamento($programacao2, "PRODUCAO", 5.00, new DateTime("2018-02-29 14:30:00"), new DateTime("2018-02-29 13:10:00"));
+        $apontamento1 = new Apontamento($programacao1, "PRODUCAO", 5.00, new DateTime("2018-02-27 14:30:00"), new DateTime("2018-02-27 16:30:00"),true);
+        $apontamento2 = new Apontamento($programacao1, "DESCARTE", 5.00, new DateTime("2018-02-27 17:00:00"), new DateTime("2018-02-27 17:15:00"),true);
+
+
         
         $this->assertNotNull($apontamentoDAO->salvar($apontamento1));
         $this->assertNotNull($apontamentoDAO->salvar($apontamento2));
-        $this->assertNotNull($apontamentoDAO->salvar($apontamento3));
-        $this->assertNotNull($apontamentoDAO->salvar($apontamento4));
-       $this->assertNotNull( $apontamentoDAO->salvar($apontamento5));
+       $this->assertEquals(StatusOrdemProducao::INICIADA, $ordemProducao->getStatus());
+       $this->assertEquals(10.00,$material1->getQuantidadeEstoque());
+       $this->assertEquals(20.00,$material2->getQuantidadeEstoque());
     }
 
 }

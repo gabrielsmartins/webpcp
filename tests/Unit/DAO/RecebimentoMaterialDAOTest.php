@@ -15,6 +15,7 @@ use App\Entities\Material;
 use App\Entities\Perfil;
 use App\Entities\RecebimentoMaterial;
 use App\Entities\RequisicaoMaterial;
+use App\Entities\StatusRequisicaoMaterial;
 use App\Entities\UnidadeMedida;
 use App\Entities\Usuario;
 use DateTime;
@@ -97,5 +98,6 @@ class RecebimentoMaterialDAOTest extends TestCase{
          $this->assertNotNull($recebimentoDAO->salvar($recebimento));
          $this->assertEquals(30.00,$material1->getQuantidadeEstoque());
          $this->assertEquals(35.00,$material2->getQuantidadeEstoque());
+         $this->assertEquals(StatusRequisicaoMaterial::CONCLUIDA_PARCIAL,$requisicao->getStatus());
     }
 }

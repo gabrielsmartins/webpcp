@@ -7,15 +7,15 @@
 
 @section('breadcrumb')
 <!-- Breadcrumb-->
-      <div class="breadcrumb-holder">
-        <div class="container-fluid">
-          <ul class="breadcrumb">
+<div class="breadcrumb-holder">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{url('/apontamento/show')}}">Apontamentos</a></li>
             <li class="breadcrumb-item active">Cadastro</li>
-          </ul>
-        </div>
-      </div>
+        </ul>
+    </div>
+</div>
 @stop
 
 
@@ -37,6 +37,16 @@
                         <div class="form-group row">
                             <label class="control-label col-md-2"><strong>Nª Ordem de Produção: </strong></label>
                             <input type="text" name="op" class="form-control col-md-1" value="{{$programacao->getOrdemProducao()->getId()}}" readonly="true"/>
+
+                            <label class="control-label col-md-2"><strong>Data Emissão:</strong></label>
+                            <div class="col-md-2">
+                                <div class="input-group date"  data-target-input="nearest">
+                                    <input type="text" class="form-control datetimepicker-input" value="{{$programacao->getOrdemProducao()->getDataEmissao()->format('d/m/Y')}}" readonly="true"/>
+                                    <div class="input-group-append" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group row">
@@ -54,13 +64,14 @@
 
                         <div class="form-group row">
                             <label class="control-label col-md-2"><strong>Setor:</strong></label>
+
                             <input type="text" class="form-control col-md-3" value="{{$programacao->getRoteiro()->getOperacao()->getSetor()->getId()}} - {{$programacao->getRoteiro()->getOperacao()->getSetor()->getDescricao()}}" readonly="true"/>
-                        </div>
 
 
-                        <div class="form-group row">
                             <label class="control-label col-md-2"><strong>Operação:</strong></label>
+
                             <input type="text" class="form-control col-md-3" value="{{$programacao->getRoteiro()->getOperacao()->getId()}} - {{$programacao->getRoteiro()->getOperacao()->getDescricao()}}" readonly="true"/>
+
                         </div>
 
                         <div class="form-group row">
@@ -77,17 +88,10 @@
 
 
 
-
                         <div class="form-group row">
-                            <label class="control-label col-md-2"><strong>Data Emissão:</strong></label>
-                            <div class="col-md-2">
-                                <div class="input-group date"  data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" value="{{$programacao->getOrdemProducao()->getDataEmissao()->format('d/m/Y')}}" readonly="true"/>
-                                    <div class="input-group-append" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                            </div>
+
+                            <label class="control-label col-md-2"><strong>Responsável:</strong></label>
+                            <input type="text" class="form-control col-md-3" value="{{$programacao->getOrdemProducao()->getResponsavel()->getNome()}}" readonly="true"/>
 
 
                             <label class="control-label col-md-2"><strong>Prazo:</strong></label>
@@ -99,13 +103,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2"><strong>Responsável:</strong></label>
-                            <input type="text" class="form-control col-md-3" value="{{$programacao->getOrdemProducao()->getResponsavel()->getNome()}}" readonly="true"/>
                         </div>
 
 
@@ -176,6 +173,16 @@
                                     <div class="input-group-append" data-target="#datetimepicker_fim" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                             <label class="control-label col-md-2"><strong>Baixa Estoque:</strong></label>
+                            <div class="col-md-2">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" value="true" name="debitaEstoque">
+                                    <label class="form-check-label" ></label>
                                 </div>
                             </div>
                         </div>

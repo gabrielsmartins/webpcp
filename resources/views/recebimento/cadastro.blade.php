@@ -45,10 +45,12 @@
 
                             <label for="descricao" class="col-sm-2 control-label">Data Recebimento:</label>
                             <div class="col-sm-2">
+                                
+
                                 <div class="input-group date">
-                                    <input class="form-control pull-right" id="datepicker" type="text" name="dataRetirada" value="{{date('d/m/Y')}}">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
+                                    <input class="form-control pull-right" id="dataRetirada" type="text" name="dataRetirada" value="{{date('d/m/Y')}}">
+                                    <div class="input-group-append" >
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
                                 </div>
                             </div>
@@ -196,13 +198,11 @@
 
 <script type="text/javascript">
 //Date picker
-    $('#datepicker').datepicker({
+    $('#dataRetirada').datepicker({
     autoclose: true,
             format: 'dd/mm/yyyy',
             language: 'pt-BR'
-    });
-
-</script>
+    });</script>
 <script type="text/javascript">
     function pesquisar() {
     // Declare variables

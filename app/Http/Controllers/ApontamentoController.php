@@ -49,6 +49,8 @@ class ApontamentoController extends Controller {
     public function store(Request $request) {
         $ordem = $request->input('op');
         $sequencia = $request->input('seq');
+        $debitaEstoque = $request->input('debitaEstoque') == "true" ? true : false;
+
         switch ($request->input('tipo')) {
             case 'PRODUCAO':
                 $tipo = ApontamentoTipo::PRODUCAO;
@@ -72,7 +74,7 @@ class ApontamentoController extends Controller {
         $dataInicio = new DateTime(date('Y-m-d H:i:s', strtotime(str_replace("/", "-", $request->input('dataInicio')))));
         $dataFim = new DateTime(date('Y-m-d H:i:s', strtotime(str_replace("/", "-", $request->input('dataFim')))));
         $programacao = $this->ordemProducaoDAO->pesquisar($ordem)->getProgramacoes()->get($sequencia-1);
-        $apontamento = new Apontamento($programacao, $tipo, $quantidade, $dataInicio, $dataFim);
+        $apontamento = new Apontamento($programacao, $tipo, $quantidade, $dataInicio, $dataFim,$debitaEstoque);
 
 
         try {

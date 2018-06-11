@@ -13,8 +13,10 @@ use App\Entities\Material;
 use App\Entities\OrdemProducao;
 use App\Entities\Perfil;
 use App\Entities\Produto;
+use App\Entities\StatusOrdemProducao;
 use App\Entities\UnidadeMedida;
 use App\Entities\Usuario;
+use DateTime;
 use LaravelDoctrine\ORM\Facades\EntityManager;
 use Tests\TestCase;
 
@@ -67,9 +69,11 @@ class OrdemProducaoDAOTest extends TestCase {
         
         $produtoDAO->salvar($produto);
         
-        $ordemProducao = new OrdemProducao($produto,10.00,new \DateTime( '2018-03-01' ), $responsavel);
+        $ordemProducao = new OrdemProducao($produto,10.00,new DateTime( '2018-03-01' ), $responsavel);
         
         $this->assertNotNull($ordemProducaoDAO->salvar($ordemProducao));
+        $this->assertEquals(StatusOrdemProducao::EMITIDA, $ordemProducao->getStatus());
+        
 
 
         

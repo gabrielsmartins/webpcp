@@ -90,12 +90,20 @@ class RecebimentoMaterial {
         $valor = $item->getItemRequisicao()->getMaterial()->getQuantidadeEstoque();
         $valor+=$item->getQuantidade();
         $item->getItemRequisicao()->getMaterial()->setQuantidadeEstoque($valor);
+        $this->atualizaStatusRequisicao($item);
         $this->itens->add($item);
     }
     
     function removerItem(ItemRecebimento $item){
        if ($this->itens->contains($item)){
            $this->itens->remove($item);
+        }
+    }
+    
+    private function atualizaStatusRequisicao(ItemRecebimento $item){
+        $requisicao = $item->getItemRequisicao()->getRequisicao();
+        if($requisicao->getStatus() == StatusRequisicaoMaterial::EMITIDA){
+            $requisicao->setStatus(StatusRequisicaoMaterial::CONCLUIDA_PARCIAL);
         }
     }
 

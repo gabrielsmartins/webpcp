@@ -52,13 +52,22 @@ class Apontamento {
      */
     private $dataFim;
     
+    /**
+     * @ORM\Column(type="boolean",name="apont_deb_estq")
+     */
+
+    private $debitaEstoque;
     
-    function __construct($programacao, $tipo, $quantidade, $dataInicio, $dataFim) {
+    
+    function __construct(Programacao $programacao, $tipo, $quantidade, $dataInicio, $dataFim,$debitaEstoque) {
         $this->programacao = $programacao;
         $this->tipo = $tipo;
         $this->quantidade = $quantidade;
         $this->dataInicio = $dataInicio;
         $this->dataFim = $dataFim;
+        $this->debitaEstoque = $debitaEstoque;
+        $this->atualizaStatusOrdem();
+        $this->atualizaEstoqueMaterial();
     }
     
     
@@ -110,6 +119,23 @@ class Apontamento {
         $this->dataFim = $dataFim;
     }
 
+    private function atualizaStatusOrdem(){
+        $ordem = $this->programacao->getOrdemProducao();
+        if ($ordem->getStatus() == StatusOrdemProducao::EMITIDA) {
+            $ordem->setStatus(StatusOrdemProducao::INICIADA);
+        }
+    }
+    
+    private function atualizaEstoqueMaterial(){
+        if($this->debitaEstoque){
+            $produto = $this->getProgramacao()->getOrdemProducao()->getProduto();
+            
+            foreach($produto->getItens() as $item){
+                $quantidadeEstoque = $item->getComponente()->getQuantidadeEstoque();
+                $item->getComponente()->setQuantidadeEstoque($quantidadeEstoque-$this->getQuantidade());
+            }
+        }
+    }
     
 
 }
