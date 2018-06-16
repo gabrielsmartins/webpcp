@@ -34,6 +34,7 @@ class ItemRecebimento {
         $this->recebimento = $recebimento;
         $this->itemRequisicao = $itemRequisicao;
         $this->quantidade = $quantidade;
+        $this->itemRequisicao->adicionarItemRecebimento($this);
     }
     
     function getRecebimento() {

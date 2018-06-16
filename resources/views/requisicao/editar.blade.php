@@ -32,8 +32,8 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">Requisição de Material Nº {{$requisicao->getId()}}</h3>
                         </div>
-                        
-      
+
+
                         <!-- /.box-header -->
                         <!-- form start -->
                         <form class="form-horizontal" action="{{ action('RequisicaoMaterialController@cancel') }}"
@@ -107,7 +107,9 @@
                                                     <tr>
                                                         <th style="width: 10px">#</th>
                                                         <th style="width: 20px">ID</th>
+                                                        <th style="width: 20px">Código Interno</th>
                                                         <th>Descrição</th>
+                                                        <th>Situação</th>
                                                         <th style="width: 50px">Quantidade</th>
                                                     </tr>
                                                 </thead>
@@ -116,7 +118,15 @@
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{$item->getMaterial()->getId()}}</td>
+                                                        <td>{{$item->getMaterial()->getCodigoInterno()}}</td>
                                                         <td>{{$item->getMaterial()->getDescricao()}}</td>
+                                                        @if ($item->getMaterial()->getSituacao() == 'ATIVO')
+                                                        <td><span class="badge badge-success">{{str_replace('_',' ',$item->getMaterial()->getSituacao())}}</span></td>
+                                                        @elseif ($item->getMaterial()->getSituacao() == 'INATIVO')
+                                                        <td><span class="badge badge-danger">{{str_replace('_',' ',$item->getMaterial()->getSituacao())}}</span></td>
+                                                        @else
+                                                        <td><span class="badge badge-warning">{{str_replace('_',' ',$item->getMaterial()->getSituacao())}}</span></td>
+                                                        @endif
                                                         <td>{{$item->getQuantidade()}}</td>
                                                     </tr>
                                                     @endforeach
@@ -126,6 +136,55 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Itens Recebidos</h3>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body no-padding">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 10px">#</th>
+                                                        <th style="width: 20px">ID</th>
+                                                        <th style="width: 20px">Código Interno</th>
+                                                        <th>Descrição</th>
+                                                         <th>Situação</th>
+                                                        <th>Data Recebimento</th>
+                                                        <th style="width: 50px">Quantidade</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach($requisicao->getItens() as $itemRequisicao)
+                                                    @foreach($itemRequisicao->getItensRecebimento() as $itemRecebimento)
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{$itemRecebimento->getItemRequisicao()->getMaterial()->getId()}}</td>
+                                                        <td>{{$itemRecebimento->getItemRequisicao()->getMaterial()->getCodigoInterno()}}</td>
+                                                        <td>{{$itemRecebimento->getItemRequisicao()->getMaterial()->getDescricao()}}</td>
+                                                         @if ($item->getMaterial()->getSituacao() == 'ATIVO')
+                                                        <td><span class="badge badge-success">{{str_replace('_',' ',$item->getMaterial()->getSituacao())}}</span></td>
+                                                        @elseif ($item->getMaterial()->getSituacao() == 'INATIVO')
+                                                        <td><span class="badge badge-danger">{{str_replace('_',' ',$item->getMaterial()->getSituacao())}}</span></td>
+                                                        @else
+                                                        <td><span class="badge badge-warning">{{str_replace('_',' ',$item->getMaterial()->getSituacao())}}</span></td>
+                                                        @endif
+                                                        <td>{{$itemRecebimento->getRecebimento()->getData()->format('d/m/Y')}}</td>
+                                                        <td>{{$itemRecebimento->getQuantidade()}}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                    @endforeach
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
 
                             <!-- /.box-body -->

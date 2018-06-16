@@ -250,22 +250,6 @@ class ApontamentoDAOTest extends TestCase {
         $this->assertNotNull($apontamentoDAO->salvar($apontamento5));
 
 
-       /* $programacao1->adicionarApontamento($apontamento1);
-        $programacao1->adicionarApontamento($apontamento2);
-        $programacao2->adicionarApontamento($apontamento4);
-        $programacao2->adicionarApontamento($apontamento5);*/
-
-
-
-        echo "\nProgramacoes: " . $ordemProducao->getProgramacoes()->count() . "\n";
-        echo "\nProg 1: " . $programacao1->getApontamentos()->count() . "\n";
-        /* $ordemProducao->getProgramacoes()->get($apontamento2->getProgramacao())->adicionarApontamento($apontamento2);
-          $ordemProducao->getProgramacoes()->get($apontamento3->getProgramacao())->adicionarApontamento($apontamento3);
-          $ordemProducao->getProgramacoes()->get($apontamento4->getProgramacao())->adicionarApontamento($apontamento4);
-          $ordemProducao->getProgramacoes()->get($apontamento5->getProgramacao())->adicionarApontamento($apontamento5); */
-
-
-
 
 
         $this->assertEquals(5.00, $material1->getQuantidadeEstoque());

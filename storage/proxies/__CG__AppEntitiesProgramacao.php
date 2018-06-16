@@ -334,12 +334,12 @@ class Programacao extends \App\Entities\Programacao implements \Doctrine\ORM\Pro
     /**
      * {@inheritDoc}
      */
-    public function adicionarApontamento(\App\Entities\Programacao $programacao)
+    public function adicionarApontamento(\App\Entities\Apontamento $apontamento)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'adicionarApontamento', [$programacao]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'adicionarApontamento', [$apontamento]);
 
-        return parent::adicionarApontamento($programacao);
+        return parent::adicionarApontamento($apontamento);
     }
 
     /**

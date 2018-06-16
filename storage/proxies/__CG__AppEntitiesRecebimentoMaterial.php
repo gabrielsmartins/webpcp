@@ -64,10 +64,10 @@ class RecebimentoMaterial extends \App\Entities\RecebimentoMaterial implements \
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\RecebimentoMaterial' . "\0" . 'id', '' . "\0" . 'App\\Entities\\RecebimentoMaterial' . "\0" . 'data', '' . "\0" . 'App\\Entities\\RecebimentoMaterial' . "\0" . 'responsavel', '' . "\0" . 'App\\Entities\\RecebimentoMaterial' . "\0" . 'itens'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\RecebimentoMaterial' . "\0" . 'id', '' . "\0" . 'App\\Entities\\RecebimentoMaterial' . "\0" . 'data', '' . "\0" . 'App\\Entities\\RecebimentoMaterial' . "\0" . 'responsavel', '' . "\0" . 'App\\Entities\\RecebimentoMaterial' . "\0" . 'itensRecebimento'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\RecebimentoMaterial' . "\0" . 'id', '' . "\0" . 'App\\Entities\\RecebimentoMaterial' . "\0" . 'data', '' . "\0" . 'App\\Entities\\RecebimentoMaterial' . "\0" . 'responsavel', '' . "\0" . 'App\\Entities\\RecebimentoMaterial' . "\0" . 'itens'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\RecebimentoMaterial' . "\0" . 'id', '' . "\0" . 'App\\Entities\\RecebimentoMaterial' . "\0" . 'data', '' . "\0" . 'App\\Entities\\RecebimentoMaterial' . "\0" . 'responsavel', '' . "\0" . 'App\\Entities\\RecebimentoMaterial' . "\0" . 'itensRecebimento'];
     }
 
     /**
@@ -263,6 +263,17 @@ class RecebimentoMaterial extends \App\Entities\RecebimentoMaterial implements \
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setItens', [$itens]);
 
         return parent::setItens($itens);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getItensRecebimento()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getItensRecebimento', []);
+
+        return parent::getItensRecebimento();
     }
 
     /**

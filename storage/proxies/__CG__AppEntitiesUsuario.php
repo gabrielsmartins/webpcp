@@ -309,4 +309,70 @@ class Usuario extends \App\Entities\Usuario implements \Doctrine\ORM\Proxy\Proxy
         return parent::setAtivo($ativo);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function getAuthIdentifier()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAuthIdentifier', []);
+
+        return parent::getAuthIdentifier();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAuthIdentifierName(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAuthIdentifierName', []);
+
+        return parent::getAuthIdentifierName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAuthPassword(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAuthPassword', []);
+
+        return parent::getAuthPassword();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRememberToken(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRememberToken', []);
+
+        return parent::getRememberToken();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRememberTokenName(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRememberTokenName', []);
+
+        return parent::getRememberTokenName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setRememberToken($value): void
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRememberToken', [$value]);
+
+        parent::setRememberToken($value);
+    }
+
 }

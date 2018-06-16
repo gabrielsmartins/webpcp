@@ -64,10 +64,10 @@ class ItemRequisicao extends \App\Entities\ItemRequisicao implements \Doctrine\O
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'id', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'requisicao', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'material', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'quantidade'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'id', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'requisicao', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'material', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'quantidade', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'itensRecebimento'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'id', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'requisicao', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'material', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'quantidade'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'id', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'requisicao', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'material', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'quantidade', '' . "\0" . 'App\\Entities\\ItemRequisicao' . "\0" . 'itensRecebimento'];
     }
 
     /**
@@ -263,6 +263,28 @@ class ItemRequisicao extends \App\Entities\ItemRequisicao implements \Doctrine\O
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setQuantidade', [$quantidade]);
 
         return parent::setQuantidade($quantidade);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getItensRecebimento()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getItensRecebimento', []);
+
+        return parent::getItensRecebimento();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function adicionarItemRecebimento(\App\Entities\ItemRecebimento $itemRecebimento)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'adicionarItemRecebimento', [$itemRecebimento]);
+
+        return parent::adicionarItemRecebimento($itemRecebimento);
     }
 
 }

@@ -64,10 +64,10 @@ class Apontamento extends \App\Entities\Apontamento implements \Doctrine\ORM\Pro
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'programacao', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'tipo', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'quantidade', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'dataInicio', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'dataFim'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'programacao', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'tipo', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'quantidade', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'dataInicio', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'dataFim', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'debitaEstoque'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'programacao', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'tipo', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'quantidade', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'dataInicio', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'dataFim'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'programacao', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'tipo', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'quantidade', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'dataInicio', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'dataFim', '' . "\0" . 'App\\Entities\\Apontamento' . "\0" . 'debitaEstoque'];
     }
 
     /**

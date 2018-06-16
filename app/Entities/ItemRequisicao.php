@@ -3,6 +3,7 @@
 
 namespace App\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,10 +36,17 @@ class ItemRequisicao {
      */
     private $quantidade;
     
+ 
+    /**
+     * @ORM\OneToMany(targetEntity="ItemRecebimento", mappedBy="itemRequisicao",cascade={"all"})
+     */
+    private $itensRecebimento;
+    
     function __construct($requisicao, $material, $quantidade) {
         $this->requisicao = $requisicao;
         $this->material = $material;
         $this->quantidade = $quantidade;
+        $this->itensRecebimento = new ArrayCollection();
     }
     
     
@@ -73,6 +81,20 @@ class ItemRequisicao {
 
     function setQuantidade($quantidade) {
         $this->quantidade = $quantidade;
+    }
+    
+    
+    function getItensRecebimento() {
+        return $this->itensRecebimento;
+    }
+
+        
+    function adicionarItemRecebimento(ItemRecebimento $itemRecebimento){
+        if (!$this->itensRecebimento->contains($itemRecebimento)) {
+            $this->itensRecebimento->add($itemRecebimento);
+        }
+
+        return $this->itensRecebimento;
     }
 
 

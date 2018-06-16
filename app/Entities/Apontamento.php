@@ -132,9 +132,7 @@ class Apontamento {
                 $programacoesConcluidas[] = $programacao;
             }
         }
-        if ($this->tipo == TipoApontamento::PRODUCAO && $this->quantidade >= $ordem->getQuantidade()) {
-            $programacoesConcluidas[] = $this->getProgramacao();
-        }
+        
         if (count($programacoesConcluidas) >= $ordem->getProgramacoes()->count()) {
             $ordem->setStatus(StatusOrdemProducao::ENCERRADA);
         }
