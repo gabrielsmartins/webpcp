@@ -59,10 +59,10 @@ class Apontamento {
         $this->dataInicio = $dataInicio;
         $this->dataFim = $dataFim;
         $this->debitaEstoque = $debitaEstoque;
-
-
+        $this->programacao->adicionarApontamento($this);
         $this->atualizaEstoqueMaterial();
         $this->atualizaStatusOrdem();
+       
     }
 
     function getId() {
@@ -115,41 +115,31 @@ class Apontamento {
 
     private function atualizaStatusOrdem() {
         $ordem = $this->programacao->getOrdemProducao();
-
-
+        
         if ($ordem->getStatus() == StatusOrdemProducao::EMITIDA) {
             $ordem->setStatus(StatusOrdemProducao::INICIADA);
         }
-
-
+        
         $programacoesConcluidas = array();
         foreach ($ordem->getProgramacoes() as $programacao) {
-
             $quantidadeProduzida = 0;
-
-            echo "***chegou" . $programacao->getApontamentos()->count() . "\n";
             foreach ($programacao->getApontamentos() as $apontamento) {
                 if ($apontamento->getTipo() == TipoApontamento::PRODUCAO) {
                     $quantidadeProduzida += $apontamento->getQuantidade();
                 }
             }
-
             if ($quantidadeProduzida >= $ordem->getQuantidade()) {
                 $programacoesConcluidas[] = $programacao;
             }
         }
-
-
         if ($this->tipo == TipoApontamento::PRODUCAO && $this->quantidade >= $ordem->getQuantidade()) {
             $programacoesConcluidas[] = $this->getProgramacao();
         }
-
         if (count($programacoesConcluidas) >= $ordem->getProgramacoes()->count()) {
-
             $ordem->setStatus(StatusOrdemProducao::ENCERRADA);
         }
 
-        echo "*************Prog Concluidas" . count($programacoesConcluidas) . "Prog OP" . $ordem->getProgramacoes()->count();
+        
     }
 
     private function atualizaEstoqueMaterial() {

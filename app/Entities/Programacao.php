@@ -123,12 +123,12 @@ class Programacao implements JsonSerializable {
     }
 
     
-    function adicionarApontamento(Programacao $programacao) {
-        if (!$this->programacoes->contains($programacao)) {
-            $this->programacoes->add($programacao);
+    function adicionarApontamento(Apontamento $apontamento) {
+        if (!$this->apontamentos->contains($apontamento)) {
+            $this->apontamentos->add($apontamento);
         }
 
-        return $this->programacoes;
+        return $this->apontamentos;
     }
 
     function removerApontamento(Programacao $programacao) {
