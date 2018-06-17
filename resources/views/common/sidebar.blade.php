@@ -127,6 +127,8 @@
                 </li>
                 
                 
+                 @if(Session::get('usuarioLogadoPerfil') != 'ADMINISTRADOR' )
+                
                 <li><a href="#produtos" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Produtos </a>
                     <ul id="produtos" class="collapse list-unstyled ">
                         <li><a href="{{url('produto/show')}}">Consulta</a></li>
@@ -151,6 +153,8 @@
                         <li><a href="{{url('recurso/show')}}">Consulta</a></li>
                     </ul>
                 </li>
+                
+                @endif
             </ul>
         </div>
         @endif

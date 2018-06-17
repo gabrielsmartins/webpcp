@@ -23,6 +23,7 @@ class Produto extends Componente {
 
     /**
      * @ORM\OneToMany(targetEntity="Roteiro", mappedBy="produto",cascade={"all"})
+     * @ORM\OrderBy({"sequencia" = "ASC"})
      */
     private $roteiros;
 

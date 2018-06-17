@@ -370,65 +370,199 @@ INSERT INTO recurso (recr_desc,recr_setr_id) VALUES
 ('OPERADOR 1', 6),
 ('MÁQUINA 1', 2),
 ('MÁQUINA 2', 2),
-('MONTADOR 1', 6);
+('MONTADOR 1', 6),
+('EMBALADOR', 3);
 
 
 
 
 
-INSERT INTO produto (prod_cod_intr, prod_unid_id, prod_desc,prod_sit,prod_peso_kg,prod_comp_mm, prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq, prod_qntd_min, prod_tipo) VALUES
-('CHI-500', 59, 'CHAPA ACO INOX 500MM', 'ATIVO', '5.7500', '500.0000', '500.0000', '0.2000', '500.75', 2, '10.0000', '5.0000', 'material'),
-('CHI-300', 59, 'CHAPA ACO INOX 300MM', 'ATIVO', '5.5000', '300.0000', '300.0000', '1.5000', '75.25', 5, '20.0000', '10.0000', 'material'),
-('CHI-200', 59, 'CHAPA ACO INOX 200MM', 'ATIVO', '2.5000', '200.0000', '200.0000', '0.5000', '25.75', 2, '15.0000', '5.0000', 'material'),
-('PTR-500', 59, 'PORTA REFRIGERADOR 500 MM', 'ATIVO', '50.0000', '500.0000', '500.0000', '2000.0000', '25.75', 5, '10.0000', '5.0000', 'produto'),
-('RFR-500', 59, 'REFRIGERADOR VERTICAL 500MM', 'ATIVO', '5.0000', '500.0000', '500.0000', '2000.0000', '2750.00', 10, '50.0000', '25.0000', 'produto');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (1,'CHI-200-20',59,'CHAPA DE ACO INOX (#20) 200MM X 200MM','ATIVO',0.5000,200.0000,200.0000,0.8000,75.25,2,20.0000,10.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (2,'CHI-300-20',59,'CHAPA DE ACO INOX (#20) 300MM X 300MM','ATIVO',0.6000,300.0000,300.0000,0.8000,95.75,3,16.0000,5.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (3,'CHI-400-20',59,'CHAPA DE ACO INOX (#20) 400MM X 400MM','INATIVO',0.7000,400.0000,400.0000,0.8000,125.50,4,20.0000,10.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (4,'CHI-500-20',59,'CHAPA DE ACO INOX (#20) 500MM X 500MM','ATIVO',0.8000,500.0000,500.0000,0.8000,150.00,5,19.0000,15.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (5,'CHI-600-20',59,'CHAPA DE ACO INOX (#20) 600MM X 600MM','FORA_DE_LINHA',0.9000,600.0000,600.0000,0.8000,165.10,7,30.0000,20.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (6,'CHI-700-20',59,'CHAPA DE ACO INOX (#20) 700MM X 700MM','ATIVO',1.0000,700.0000,700.0000,0.8000,175.50,6,15.0000,5.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (7,'CHA-200-20',59,'CHAPA DE ALUMINIO (#20) 200MM X 200MM','ATIVO',0.5000,200.0000,200.0000,0.8000,82.77,2,20.0000,10.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (8,'CHA-300-20',59,'CHAPA DE ALUMINIO (#20) 300MM X 300MM','INATIVO',0.6000,300.0000,300.0000,0.8000,105.32,3,20.0000,5.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (9,'CHA-400-20',59,'CHAPA DE ALUMINIO (#20) 400MM X 400MM','ATIVO',0.7000,400.0000,400.0000,0.8000,138.05,4,20.0000,10.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (10,'CHA-500-20',59,'CHAPA DE ALUMINIO (#20) 500MM X 500MM','ATIVO',0.8000,500.0000,500.0000,0.8000,165.00,5,25.0000,15.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (11,'CHA-600-20',59,'CHAPA DE ALUMINIO (#20) 600MM X 600MM','FORA_DE_LINHA',0.9000,600.0000,600.0000,0.8000,181.61,7,30.0000,20.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (12,'CHA-700-20',59,'CHAPA DE ALUMINIO (#20) 700MM X 700MM','ATIVO',1.0000,700.0000,700.0000,0.8000,193.05,6,15.0000,5.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (13,'TBI-1/2-200-1.5',59,'TUBO ACO INOX 1/2\" X 200MM X 1,5MM\"','ATIVO',0.3000,200.0000,12.7000,12.7000,45.15,2,14.0000,11.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (14,'TBI-1/2-300-1.5',59,'TUBO ACO INOX 1/2\" X 300MM X 1,5MM\"','INATIVO',0.4000,300.0000,12.7000,12.7000,57.45,3,10.0000,11.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (15,'TBI-1/2-400-1.5',59,'TUBO ACO INOX 1/2\" X 400MM X 1,5MM\"','ATIVO',0.5000,400.0000,12.7000,12.7000,75.30,4,14.0000,11.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (16,'TBI-1/2-500-1.5',59,'TUBO ACO INOX 1/2\" X 500MM X 1,5MM\"','ATIVO',0.6000,500.0000,12.7000,12.7000,90.00,5,11.0000,13.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (17,'TBI-1/2-600-1.5',59,'TUBO ACO INOX 1/2\" X 600MM X 1,5MM\"','FORA_DE_LINHA',0.7000,600.0000,12.7000,12.7000,99.06,7,21.0000,16.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (18,'TBI-1/2-700-1.5',59,'TUBO ACO INOX 1/2\" X 700MM X 1,5MM\"','ATIVO',0.8000,700.0000,12.7000,12.7000,105.30,6,10.5000,8.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (19,'TBA-1/2-200-1.5',59,'TUBO ALUMINIO 1/2\" X 200MM X 1,5MM\"','ATIVO',0.2400,200.0000,12.7000,12.7000,45.15,2,14.0000,11.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (20,'TBA-1/2-300-1.5',59,'TUBO ALUMINIO 1/2\" X 300MM X 1,5MM\"','INATIVO',0.3200,300.0000,12.7000,12.7000,57.45,3,14.0000,11.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (21,'TBA-1/2-400-1.5',59,'TUBO ALUMINIO 1/2\" X 400MM X 1,5MM\"','ATIVO',0.4000,400.0000,12.7000,12.7000,75.30,4,14.0000,11.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (22,'TBA-1/2-500-1.5',59,'TUBO ALUMINIO 1/2\" X 500MM X 1,5MM\"','ATIVO',0.4800,500.0000,12.7000,12.7000,90.00,5,17.0000,13.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (23,'TBA-1/2-600-1.5',59,'TUBO ALUMINIO 1/2\" X 600MM X 1,5MM\"','FORA_DE_LINHA',0.5600,600.0000,12.7000,12.7000,99.06,7,21.0000,16.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (24,'TBA-1/2-700-1.5',59,'TUBO ALUMINIO 1/2\" X 700MM X 1,5MM\"','ATIVO',0.6400,700.0000,12.7000,12.7000,105.30,6,10.5000,8.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (25,'PRFS-1/2-50',59,'PARAFUSO SEXTADO 1/2\"\"\" X 50MM\"','ATIVO',0.1200,50.0000,12.7000,12.7000,0.10,2,50.0000,35.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (26,'PRFS-1/2-75',59,'PARAFUSO SEXTADO 1/2\"\"\" X 75MM\"','INATIVO',0.1600,75.0000,12.7000,12.7000,0.15,3,100.0000,70.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (27,'PRFS-1/2-100',59,'PARAFUSO SEXTADO 1/2\"\"\" X 100MM\"','ATIVO',0.2000,100.0000,12.7000,12.7000,0.20,4,125.0000,87.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (28,'PRFS-1/2-125',59,'PARAFUSO SEXTADO 1/2\"\"\" X 125MM\"','ATIVO',0.2400,125.0000,12.7000,12.7000,0.25,5,150.0000,105.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (29,'PRFS-1/2-150',59,'PARAFUSO SEXTADO 1/2\"\"\" X 150MM\"','FORA_DE_LINHA',0.2800,150.0000,12.7000,12.7000,0.30,7,200.0000,140.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (30,'PRFS-1/2-200',59,'PARAFUSO SEXTADO 1/2\"\"\" X 200MM\"','ATIVO',0.3200,200.0000,12.7000,12.7000,0.35,6,250.0000,175.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (31,'FRRC-1/2-1/4-500',59,'FERRO CHATO 1/2\" X 1/4\"\" X 500MM\"','ATIVO',0.5000,500.0000,12.7000,6.3500,1.25,2,25.0000,17.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (32,'FRRC-1/2-1/4-600',59,'FERRO CHATO 1/2\" X 1/4\"\" X 600MM\"','INATIVO',0.6000,600.0000,12.7000,6.3500,2.25,3,50.0000,35.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (33,'FRRC-1/2-1/4-700',59,'FERRO CHATO 1/2\" X 1/4\"\" X 700MM\"','ATIVO',0.7000,700.0000,12.7000,6.3500,3.25,4,62.0000,43.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (34,'FRRC-1/2-1/4-800',59,'FERRO CHATO 1/2\" X 1/4\"\" X 800MM\"','ATIVO',0.8000,800.0000,12.7000,6.3500,4.25,5,75.0000,52.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (35,'FRRC-1/2-1/4-900',59,'FERRO CHATO 1/2\" X 1/4\"\" X 900MM\"','FORA_DE_LINHA',0.9000,900.0000,12.7000,6.3500,5.25,7,100.0000,70.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (36,'FRRC-1/2-1/4-1000',59,'FERRO CHATO 1/2\" X 1/4\"\" X 1000MM\"','ATIVO',1.0000,1000.0000,12.7000,6.3500,6.25,6,125.0000,87.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (37,'CNT-1/2-1/8-500',59,'CANTONEIRA 1/2\" X 1/8\"\" 500MM\"','ATIVO',0.5000,500.0000,12.7000,3.2000,1.40,3,20.0000,14.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (38,'CNT-1/2-1/8-600',59,'CANTONEIRA 1/2\" X 1/8\"\" 600MM\"','INATIVO',0.6000,600.0000,12.7000,3.2000,2.45,4,40.0000,28.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (39,'CNT-1/2-1/8-700',59,'CANTONEIRA 1/2\" X 1/8\"\" 700MM\"','ATIVO',0.7000,700.0000,12.7000,3.2000,3.50,4,49.0000,34.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (40,'CNT-1/2-1/8-800',59,'CANTONEIRA 1/2\" X 1/8\"\" 800MM\"','ATIVO',0.8000,800.0000,12.7000,3.2000,4.65,5,60.0000,42.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (41,'CNT-1/2-1/8-900',59,'CANTONEIRA 1/2\" X 1/8\"\" 900MM\"','FORA_DE_LINHA',0.9000,900.0000,12.7000,3.2000,5.75,7,80.0000,56.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (42,'CNT-1/2-1/8-1000',59,'CANTONEIRA 1/2\" X 1/8\"\" 1000MM\"','ATIVO',1.0000,1000.0000,12.7000,3.2000,6.85,7,100.0000,70.0000,'material');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (43,'MI-300',59,'MESA INOX TUBULAR 300MM','ATIVO',5.5000,300.0000,300.0000,300.0000,500.50,2,10.0000,20.0000,'produto');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (44,'MI-500',59,'MESA INOX TUBULAR 500MM','ATIVO',20.0000,500.0000,500.0000,1000.0000,75.50,5,20.0000,10.0000,'produto');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (45,'PTR-500',59,'PORTA REFRIGERADOR RFR-500','ATIVO',10.5000,500.0000,500.0000,50.0000,250.00,5,20.0000,20.0000,'produto');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (46,'RFR-500',59,'REFRIGERADOR VERTICAL 500MM','ATIVO',20.0000,500.0000,500.0000,2000.0000,2500.00,5,20.0000,10.0000,'produto');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (47,'FGI-500',59,'FOGAO ACO INOX 500MM','ATIVO',20.0000,500.0000,500.0000,500.0000,255.50,5,20.0000,7.0000,'produto');
+INSERT INTO produto (prod_id,prod_cod_intr,prod_unid_id,prod_desc,prod_sit,prod_peso_kg,prod_comp_mm,prod_larg_mm,prod_alt_mm,prod_vlr_unit,prod_lead_time,prod_qntd_estq,prod_qntd_min,prod_tipo) VALUES (48,'FGI-700',59,'FOGAO ACO INOX 700MM','ATIVO',20.0000,700.0000,700.0000,500.0000,250.00,20,15.0000,5.0000,'produto');
+
+
+
+INSERT INTO estrutura_produto (prod_id,prod_sub_id,prod_sub_qntd) VALUES (43,2,2.0000);
+INSERT INTO estrutura_produto (prod_id,prod_sub_id,prod_sub_qntd) VALUES (43,14,2.0000);
+INSERT INTO estrutura_produto (prod_id,prod_sub_id,prod_sub_qntd) VALUES (44,4,2.0000);
+INSERT INTO estrutura_produto (prod_id,prod_sub_id,prod_sub_qntd) VALUES (44,16,2.0000);
+INSERT INTO estrutura_produto (prod_id,prod_sub_id,prod_sub_qntd) VALUES (45,4,1.0000);
+INSERT INTO estrutura_produto (prod_id,prod_sub_id,prod_sub_qntd) VALUES (45,25,5.0000);
+INSERT INTO estrutura_produto (prod_id,prod_sub_id,prod_sub_qntd) VALUES (46,4,3.0000);
+INSERT INTO estrutura_produto (prod_id,prod_sub_id,prod_sub_qntd) VALUES (46,45,2.0000);
+INSERT INTO estrutura_produto (prod_id,prod_sub_id,prod_sub_qntd) VALUES (47,4,2.0000);
+INSERT INTO estrutura_produto (prod_id,prod_sub_id,prod_sub_qntd) VALUES (47,14,1.0000);
+INSERT INTO estrutura_produto (prod_id,prod_sub_id,prod_sub_qntd) VALUES (48,6,2.0000);
+INSERT INTO estrutura_produto (prod_id,prod_sub_id,prod_sub_qntd) VALUES (48,15,3.0000);
+
+
+
+
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (43,2,2,'00:00:00','00:30:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (43,3,3,'00:00:00','01:30:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (43,4,4,'00:00:00','00:30:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (43,5,1,'00:00:00','01:30:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (44,2,2,'00:00:00','00:10:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (44,3,3,'00:00:00','00:20:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (44,4,4,'00:00:00','00:15:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (44,5,1,'00:00:00','00:30:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (45,2,2,'00:00:00','00:20:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (45,3,3,'00:00:00','00:10:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (45,4,4,'00:00:00','00:15:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (45,5,1,'00:00:00','00:30:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (46,2,2,'00:00:00','00:30:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (46,3,3,'00:00:00','00:40:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (46,4,4,'00:00:00','00:20:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (46,5,1,'00:00:00','01:00:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (47,1,2,'00:00:00','00:30:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (47,2,3,'00:00:00','00:20:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (47,4,4,'00:00:00','00:10:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (47,5,1,'00:00:00','01:30:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (48,2,2,'00:00:00','00:35:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (48,3,3,'00:00:00','00:45:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (48,4,4,'00:00:00','00:25:00','00:00:00');
+INSERT INTO roteiro (rot_prod_id,rot_oper_id,rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES (48,5,1,'00:00:00','01:35:00','00:00:00');
+
+
+
+INSERT INTO ordem_producao (ord_id,ord_prod_id,ord_prod_qntd,ord_dt_emi,ord_prazo,ord_usr_id,ord_dt_concl,ord_status) VALUES (1,43,2.00,'2018-06-17 15:15:49','2018-06-30',6,NULL,'INICIADA');
+INSERT INTO ordem_producao (ord_id,ord_prod_id,ord_prod_qntd,ord_dt_emi,ord_prazo,ord_usr_id,ord_dt_concl,ord_status) VALUES (2,44,3.00,'2018-06-17 15:20:20','2018-07-06',6,NULL,'ENCERRADA');
+INSERT INTO ordem_producao (ord_id,ord_prod_id,ord_prod_qntd,ord_dt_emi,ord_prazo,ord_usr_id,ord_dt_concl,ord_status) VALUES (3,45,2.00,'2018-06-17 15:25:36','2018-07-05',6,NULL,'EMITIDA');
+INSERT INTO ordem_producao (ord_id,ord_prod_id,ord_prod_qntd,ord_dt_emi,ord_prazo,ord_usr_id,ord_dt_concl,ord_status) VALUES (4,46,1.00,'2018-06-17 15:25:48','2018-06-17',6,NULL,'EMITIDA');
+INSERT INTO ordem_producao (ord_id,ord_prod_id,ord_prod_qntd,ord_dt_emi,ord_prazo,ord_usr_id,ord_dt_concl,ord_status) VALUES (5,47,4.00,'2018-06-17 15:26:04','2018-07-12',6,NULL,'EMITIDA');
+INSERT INTO ordem_producao (ord_id,ord_prod_id,ord_prod_qntd,ord_dt_emi,ord_prazo,ord_usr_id,ord_dt_concl,ord_status) VALUES (6,48,2.00,'2018-06-17 15:26:43','2018-06-28',6,NULL,'EMITIDA');
 
 
 
 
 
-INSERT INTO estrutura_produto (prod_id,prod_sub_id,prod_sub_qntd) VALUES
-(4, 1, '5.0000'),
-(4, 2, '2.0000'),
-(5, 2, '2.0000'),
-(5, 4, '1.0000');
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (1,1,'03:00:00',43,5,1,5,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (1,2,'01:00:00',43,2,2,2,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (1,3,'03:00:00',43,3,3,4,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (1,4,'01:00:00',43,4,4,8,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (2,1,'01:30:00',44,5,1,5,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (2,2,'00:30:00',44,2,2,2,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (2,3,'01:00:00',44,3,3,4,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (2,4,'00:45:00',44,4,4,8,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (3,1,'01:00:00',45,5,1,5,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (3,2,'00:40:00',45,2,2,2,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (3,3,'00:20:00',45,3,3,4,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (3,4,'00:30:00',45,4,4,8,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (4,1,'01:00:00',46,5,1,5,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (4,2,'00:30:00',46,2,2,2,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (4,3,'00:40:00',46,3,3,4,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (4,4,'00:20:00',46,4,4,8,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (5,1,'06:00:00',47,5,1,5,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (5,2,'02:00:00',47,1,2,1,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (5,3,'01:20:00',47,2,3,2,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (5,4,'00:40:00',47,4,4,8,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (6,1,'03:10:00',48,5,1,5,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (6,2,'01:10:00',48,2,2,3,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (6,3,'01:30:00',48,3,3,4,NULL);
+INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id,prog_qntd_prod) VALUES (6,4,'00:50:00',48,4,4,8,NULL);
+
+
+
+
+INSERT INTO apontamento (apont_id,apont_prog_ord_id,apont_prog_seq,apont_tipo,apont_qntd,apont_dt_ini,apont_dt_fim,apont_deb_estq) VALUES (1,1,1,'PRODUCAO',2,'2018-06-27 12:27:03','2018-06-18 12:27:06',1);
+INSERT INTO apontamento (apont_id,apont_prog_ord_id,apont_prog_seq,apont_tipo,apont_qntd,apont_dt_ini,apont_dt_fim,apont_deb_estq) VALUES (2,1,1,'DESCARTE',2,'2018-06-17 12:27:25','2018-06-17 15:27:27',1);
+INSERT INTO apontamento (apont_id,apont_prog_ord_id,apont_prog_seq,apont_tipo,apont_qntd,apont_dt_ini,apont_dt_fim,apont_deb_estq) VALUES (3,2,1,'PRODUCAO',3,'2018-06-17 12:27:57','2018-06-17 15:27:57',1);
+INSERT INTO apontamento (apont_id,apont_prog_ord_id,apont_prog_seq,apont_tipo,apont_qntd,apont_dt_ini,apont_dt_fim,apont_deb_estq) VALUES (4,2,2,'PRODUCAO',3,'2018-06-18 09:28:25','2018-06-18 10:28:25',0);
+INSERT INTO apontamento (apont_id,apont_prog_ord_id,apont_prog_seq,apont_tipo,apont_qntd,apont_dt_ini,apont_dt_fim,apont_deb_estq) VALUES (5,2,3,'PRODUCAO',3,'2018-06-17 12:28:52','2018-06-17 13:28:54',1);
+INSERT INTO apontamento (apont_id,apont_prog_ord_id,apont_prog_seq,apont_tipo,apont_qntd,apont_dt_ini,apont_dt_fim,apont_deb_estq) VALUES (6,2,4,'PRODUCAO',3,'2018-06-17 12:29:14','2018-06-17 14:29:14',0);
+
+
+INSERT INTO requisicao_material (rm_id,rm_dt_emi,rm_prazo,rm_usr_id,rm_dt_concl,rm_status) VALUES (1,'2018-06-17 15:37:58','2018-06-29',6,'2018-06-17 12:37:58','CONCLUIDA TOTAL');
+INSERT INTO requisicao_material (rm_id,rm_dt_emi,rm_prazo,rm_usr_id,rm_dt_concl,rm_status) VALUES (2,'2018-06-17 15:39:23','2018-07-06',6,'2018-06-17 12:39:23','EMITIDA');
+INSERT INTO requisicao_material (rm_id,rm_dt_emi,rm_prazo,rm_usr_id,rm_dt_concl,rm_status) VALUES (3,'2018-06-17 15:39:52','2018-06-28',6,'2018-06-17 12:39:52','CONCLUIDA PARCIAL');
+
+
+INSERT INTO requisicao_material_detalhe (rm_det_id,rm_id,rm_prod_id,rm_prod_qntd) VALUES (1,1,1,5.00);
+INSERT INTO requisicao_material_detalhe (rm_det_id,rm_id,rm_prod_id,rm_prod_qntd) VALUES (2,1,2,5.00);
+INSERT INTO requisicao_material_detalhe (rm_det_id,rm_id,rm_prod_id,rm_prod_qntd) VALUES (3,1,3,2.00);
+INSERT INTO requisicao_material_detalhe (rm_det_id,rm_id,rm_prod_id,rm_prod_qntd) VALUES (4,1,5,5.00);
+INSERT INTO requisicao_material_detalhe (rm_det_id,rm_id,rm_prod_id,rm_prod_qntd) VALUES (5,2,24,2.00);
+INSERT INTO requisicao_material_detalhe (rm_det_id,rm_id,rm_prod_id,rm_prod_qntd) VALUES (6,2,21,5.00);
+INSERT INTO requisicao_material_detalhe (rm_det_id,rm_id,rm_prod_id,rm_prod_qntd) VALUES (7,2,19,3.00);
+INSERT INTO requisicao_material_detalhe (rm_det_id,rm_id,rm_prod_id,rm_prod_qntd) VALUES (8,2,25,2.00);
+INSERT INTO requisicao_material_detalhe (rm_det_id,rm_id,rm_prod_id,rm_prod_qntd) VALUES (9,3,32,2.00);
+INSERT INTO requisicao_material_detalhe (rm_det_id,rm_id,rm_prod_id,rm_prod_qntd) VALUES (10,3,33,3.00);
+
+
+INSERT INTO recebimento_material (receb_id,receb_dt,receb_usr_id) VALUES (1,'2018-06-17 00:00:00',6);
+INSERT INTO recebimento_material (receb_id,receb_dt,receb_usr_id) VALUES (2,'2018-06-17 00:00:00',6);
+INSERT INTO recebimento_material (receb_id,receb_dt,receb_usr_id) VALUES (3,'2018-06-17 00:00:00',6);
+
+
+INSERT INTO recebimento_material_detalhe (receb_id,receb_rm_det_id,receb_prod_qntd) VALUES (1,1,5.00);
+INSERT INTO recebimento_material_detalhe (receb_id,receb_rm_det_id,receb_prod_qntd) VALUES (1,3,2.00);
+INSERT INTO recebimento_material_detalhe (receb_id,receb_rm_det_id,receb_prod_qntd) VALUES (2,9,2.00);
+INSERT INTO recebimento_material_detalhe (receb_id,receb_rm_det_id,receb_prod_qntd) VALUES (2,10,3.00);
+INSERT INTO recebimento_material_detalhe (receb_id,receb_rm_det_id,receb_prod_qntd) VALUES (3,2,5.00);
+INSERT INTO recebimento_material_detalhe (receb_id,receb_rm_det_id,receb_prod_qntd) VALUES (3,3,2.00);
+INSERT INTO recebimento_material_detalhe (receb_id,receb_rm_det_id,receb_prod_qntd) VALUES (3,4,5.00);
+
+
+
+INSERT INTO retirada_produto (retr_id,retr_dt,retr_usr_id) VALUES (1,'2018-06-17 00:00:00',6);
+INSERT INTO retirada_produto (retr_id,retr_dt,retr_usr_id) VALUES (2,'2018-06-17 00:00:00',6);
+
+
+INSERT INTO retirada_produto_detalhe (retr_id,retr_prod_id,retr_prod_qntd) VALUES (1,43,2.00);
+INSERT INTO retirada_produto_detalhe (retr_id,retr_prod_id,retr_prod_qntd) VALUES (1,44,10.00);
+INSERT INTO retirada_produto_detalhe (retr_id,retr_prod_id,retr_prod_qntd) VALUES (2,46,5.00);
+INSERT INTO retirada_produto_detalhe (retr_id,retr_prod_id,retr_prod_qntd) VALUES (2,47,10.00);
 
 
 
 
 
-INSERT INTO roteiro (rot_prod_id, rot_oper_id, rot_seq,rot_tmp_stp,rot_tmp_prd,rot_tmp_fnl) VALUES
-(4, 3, 2, '00:00:00', '02:10:00', '00:00:00'),
-(4, 5, 1, '00:00:00', '05:00:00', '00:00:00'),
-(5, 3, 1, '00:00:00', '03:00:00', '00:00:00'),
-(5, 4, 2, '00:00:00', '01:00:00', '00:00:00'),
-(5, 5, 3, '00:30:00', '01:20:00', '00:10:00');
-
-
-
-INSERT INTO ordem_producao (ord_prod_id,ord_prod_qntd,ord_dt_emi,ord_prazo,ord_usr_id,ord_dt_concl,ord_status) VALUES
-(4, '2.00', '2018-05-13 20:09:21', '2018-05-30', 1, NULL, 'EMITIDA');
-
-
-
-INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog_rot_oper_id,prog_rot_seq,prog_rec_id) VALUES
-(1, 1, '10:00:00', 4, 5, 1, 5),
-(1, 2, '04:20:00', 4, 3, 2, 4);
-
-
-
-
-INSERT INTO requisicao_material (rm_id, rm_dt_emi, rm_prazo, rm_usr_id, rm_dt_concl, rm_status) VALUES
-(1, '2018-05-19 11:13:47', '2018-05-31', 1, NULL, 'EMITIDA'),
-(2, '2018-05-19 11:14:42', '2018-06-08', 1, NULL, 'EMITIDA');
-
-
-INSERT INTO requisicao_material_detalhe (rm_det_id, rm_id, rm_prod_id, rm_prod_qntd) VALUES
-(1, 1, 1, '5.00'),
-(2, 1, 2, '3.00'),
-(3, 1, 3, '10.00'),
-(4, 2, 2, '5.00'),
-(5, 2, 3, '7.00');
 
 
 

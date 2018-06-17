@@ -250,8 +250,8 @@
     console.log(apontamentos);
     var producao = 0;
     var descarte = 0;
-    var manutencao;
-    var parada;
+    var manutencao=0;
+    var parada=0;
     for (var i = 0; i < apontamentos.length; i++) {
     switch (apontamentos[i].tipo) {
     case "PRODUCAO":
@@ -294,6 +294,7 @@
     }
 
 
+console.log(labelApontamentos);
 
     var ctx = document.getElementById("apontamentoChart").getContext('2d');
     var apontamentoChart = new Chart(ctx, {
@@ -411,15 +412,15 @@
             labels: labelSetores,
                     datasets: [{
                     label: '(#) Pecas Produzidas',
-                            backgroundColor: 'rgba(255, 0, 0, 0.55)',
-                            borderColor: 'rgba(255,0,0,1)',
+                            backgroundColor: 'rgba(153, 153, 153, 0.55)',
+                            borderColor: 'rgba(153, 153, 153, 1)',
                             borderWidth: 1,
                             data: producao
                     },
                     {
                     label: '(#) Pecas Descartadas',
-                            backgroundColor: 'rgba(153, 153, 153, 0.55)',
-                            borderColor: 'rgba(153, 153, 153, 1)',
+                            backgroundColor: 'rgba(255, 0, 0, 0.55)',
+                            borderColor: 'rgba(255,0,0,1)',
                             borderWidth: 1,
                             data: descarte
                     }],

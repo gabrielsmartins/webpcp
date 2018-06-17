@@ -125,16 +125,25 @@
 
                                                 @foreach($ordem->getProduto()->getItens() as $item)
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{$item->getProduto()->getId()}}</td>
-                                                    <td>{{$item->getProduto()->getCodigoInterno()}}</td>
-                                                    <td>{{$item->getProduto()->getDescricao()}}</td>
-                                                    <td>{{$item->getProduto()->getSituacao()}}</td>
-                                                    <td>{{$item->getProduto()->getQuantidadeEstoque()}}</td>
+                                                    <td>{{$loop->iteration}}</td>
+                                                    <td>{{$item->getComponente()->getId()}}</td>
+                                                    <td>{{$item->getComponente()->getCodigoInterno()}}</td>
+                                                    <td>{{$item->getComponente()->getDescricao()}}</td>
+                                                    <td>{{$item->getComponente()->getSituacao()}}</td>
+                                                    <td>{{$item->getComponente()->getQuantidadeEstoque()}}</td>
                                                     <td>{{$item->getQuantidade()}}</td>
                                                     <td>{{$ordem->getQuantidade()}}</td>
                                                     <td>{{$item->getQuantidade()*$ordem->getQuantidade()}}</td>
-                                                    <td>{{$item->getProduto()->getSituacao()}}</td>
+
+
+                                                    @if ($item->getComponente()->getSituacao()== 'ATIVO')
+                                                    <td><span class="badge badge-success">{{str_replace('_',' ',$item->getComponente()->getSituacao())}}</span></td>
+                                                    @elseif ($item->getComponente()->getSituacao() == 'INATIVO')
+                                                    <td><span class="badge badge-danger">{{str_replace('_',' ',$item->getComponente()->getSituacao())}}</span></td>
+                                                    @else
+                                                    <td><span class="badge badge-warning">{{str_replace('_',' ',$item->getComponente()->getSituacao())}}</span></td>
+                                                    @endif
+
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -172,7 +181,7 @@
 
                                                     @foreach($ordem->getProgramacoes() as $programacao)
                                                     <tr>
-                                                        <td>{{ $programacao->getSequencia() }}</td>
+                                                        <td>{{$programacao->getSequencia() }}</td>
                                                         <td>{{$programacao->getRoteiro()->getOperacao()->getDescricao()}}</td>
                                                         <td>{{$programacao->getRoteiro()->getOperacao()->getSetor()->getDescricao()}}</td>
                                                         <td>{{$programacao->getRecurso()->getDescricao()}}</td>

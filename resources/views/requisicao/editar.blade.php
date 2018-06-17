@@ -165,12 +165,12 @@
                                                         <td>{{$itemRecebimento->getItemRequisicao()->getMaterial()->getId()}}</td>
                                                         <td>{{$itemRecebimento->getItemRequisicao()->getMaterial()->getCodigoInterno()}}</td>
                                                         <td>{{$itemRecebimento->getItemRequisicao()->getMaterial()->getDescricao()}}</td>
-                                                         @if ($item->getMaterial()->getSituacao() == 'ATIVO')
-                                                        <td><span class="badge badge-success">{{str_replace('_',' ',$item->getMaterial()->getSituacao())}}</span></td>
-                                                        @elseif ($item->getMaterial()->getSituacao() == 'INATIVO')
-                                                        <td><span class="badge badge-danger">{{str_replace('_',' ',$item->getMaterial()->getSituacao())}}</span></td>
+                                                         @if ($itemRecebimento->getItemRequisicao()->getMaterial()->getSituacao() == 'ATIVO')
+                                                        <td><span class="badge badge-success">{{str_replace('_',' ',$itemRecebimento->getItemRequisicao()->getMaterial()->getSituacao())}}</span></td>
+                                                        @elseif ($itemRecebimento->getItemRequisicao()->getMaterial()->getSituacao() == 'INATIVO')
+                                                        <td><span class="badge badge-danger">{{str_replace('_',' ',$itemRecebimento->getItemRequisicao()->getMaterial()->getSituacao())}}</span></td>
                                                         @else
-                                                        <td><span class="badge badge-warning">{{str_replace('_',' ',$item->getMaterial()->getSituacao())}}</span></td>
+                                                        <td><span class="badge badge-warning">{{str_replace('_',' ',$itemRecebimento->getItemRequisicao()->getMaterial()->getSituacao())}}</span></td>
                                                         @endif
                                                         <td>{{$itemRecebimento->getRecebimento()->getData()->format('d/m/Y')}}</td>
                                                         <td>{{$itemRecebimento->getQuantidade()}}</td>

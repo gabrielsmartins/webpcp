@@ -63,9 +63,11 @@ class OrdemProducaoController extends Controller {
 
         $ordemProducao = new OrdemProducao($produto, $quantidade, $prazo, $responsavel);
         $roteiros = $produto->getRoteiros();
+        
+        
         for ($i = 0; $i < $roteiros->count(); $i++) {
             $recurso = $this->recursoDAO->pesquisar($recursos[$i]);
-            $programacao = new Programacao($ordemProducao, ($i + 1), $roteiros[$i], $recurso);
+            $programacao = new Programacao($ordemProducao, $roteiros[$i]->getSequencia(), $roteiros[$i], $recurso);
             $ordemProducao->adicionarProgramacao($programacao);
         }
 

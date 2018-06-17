@@ -43,6 +43,7 @@ class OrdemProducao extends Documento {
 
     /**
      * @ORM\OneToMany(targetEntity="Programacao", mappedBy="ordemProducao",cascade={"persist"})
+     * @ORM\OrderBy({"sequencia" = "ASC"})
      */
     private $programacoes;
     
