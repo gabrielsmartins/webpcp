@@ -27,7 +27,7 @@ Route::post('login', 'UsuarioController@login');
 Route::get('logout', 'UsuarioController@logout');
 
 Route::get('home', 'MainController@home');
-
+Route::get('home/pesquisa', 'MainController@pesquisarPorCriterio');
 
 
 Route::get('unidade/form', 'UnidadeMedidaController@form');

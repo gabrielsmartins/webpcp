@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DAO\ApontamentoDAO;
 use App\DAO\OrdemProducaoDAO;
 use App\DAO\RequisicaoMaterialDAO;
+use DateTime;
 use Illuminate\Http\Request;
 use function redirect;
 use function view;
@@ -12,11 +14,12 @@ class MainController extends Controller {
 
     private $ordemProducaoDAO;
     private $requisicaoDAO;
-    
+    private $apontamentoDAO;
 
     public function __construct() {
         $this->ordemProducaoDAO = new OrdemProducaoDAO();
-         $this->requisicaoDAO = new RequisicaoMaterialDAO();
+        $this->requisicaoDAO = new RequisicaoMaterialDAO();
+        $this->apontamentoDAO = new ApontamentoDAO();
     }
 
     public function index(Request $request) {
@@ -25,6 +28,8 @@ class MainController extends Controller {
         if ($user == null) {
             return view('usuario.login');
         } else {
+
+
             return redirect('home');
         }
     }
@@ -36,22 +41,31 @@ class MainController extends Controller {
         }
 
         $page = (int) $request->input('page');
+        $dataInicio =  $request->input('dataInicio') == null? null : new DateTime(date('Y-m-d H:i:s', strtotime(str_replace("/", "-", $request->input('dataInicio')))));
+        $dataFim =   $request->input('dataFim') == null? null :  new DateTime(date('Y-m-d H:i:s', strtotime(str_replace("/", "-", $request->input('dataFim')))));
+        
+
         if ($page != 0) {
             $ordens = $this->ordemProducaoDAO->listarComPaginacao(10, $page);
         } else {
             $ordens = $this->ordemProducaoDAO->listarComPaginacao();
         }
 
-        
+
         $ordens = $this->ordemProducaoDAO->listarComPaginacao();
-        $data = array('ordens' => $ordens);
+
+        $apontamentos = $this->apontamentoDAO->obterApontamentosPorPeriodo($dataInicio, $dataFim);
+        
+        $producao = $this->apontamentoDAO->obterApontamentoPorSetor($dataInicio, $dataFim);
+
+        $data = array('ordens' => $ordens,
+                      'apontamentos'=> json_encode($apontamentos),
+                      'producao' => json_encode($producao));
 
         return view('main.home')->with($data);
     }
-    
-    
-    
-     public function pesquisarPorCriterio(Request $request) {
+
+    public function pesquisarPorCriterio(Request $request) {
         $criterio = $request->input('criterio');
         $valor = $request->input('valor');
         $ordens = $this->ordemProducaoDAO->pesquisarPorCriterio($criterio, $valor);

@@ -13,4 +13,6 @@ class OrdemProducaoDAO extends GenericDAO {
         parent::__construct();
         $this->className = OrdemProducao::class;
     }
+    
+   
 }

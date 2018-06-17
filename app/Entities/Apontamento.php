@@ -2,14 +2,14 @@
 
 namespace App\Entities;
 
-use App\DAO\OrdemProducaoDAO;
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="apontamento")
  */
-class Apontamento {
+class Apontamento implements JsonSerializable  {
 
     /**
      * @ORM\Id 
@@ -151,4 +151,15 @@ class Apontamento {
         }
     }
 
+    public function jsonSerialize() {
+        
+        return array(
+            'id' => $this->id,
+            'tipo' =>$this->tipo,
+            'quantidade' =>$this->quantidade,
+            'dataInicio' =>$this->dataInicio->format('d-m-Y'),
+             'dataFim' =>$this->dataFim->format('d-m-Y'),
+        );
+        
+    }
 }

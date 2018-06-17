@@ -11,7 +11,7 @@
     <!-- Custom Scrollbar-->
     <link rel="stylesheet" href="{{ asset('dashboard/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css') }}">
     <!-- theme stylesheet-->
-    <link rel="stylesheet" href="{{ asset('dashboard/css/style.default.css') }}" id="theme-stylesheet">
+    <link rel="stylesheet" href="{{ asset('dashboard/css/style.red2.css') }}" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="{{ asset('dashboard/css/custom.css') }}">
   

@@ -36,5 +36,7 @@
 <script type="text/javascript" src="{{ asset('dashboard/vendor/tempus_dominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 
 
+<!-- ChartJS -->
+<script src="{{ asset('dashboard/vendor/chart.js/Chart.js') }}" type="text/javascript"></script>
 
 

@@ -64,7 +64,7 @@
                             <option value="codigoInterno" @if(! empty($criterio)) {{  $criterio == 'codigoInterno' ? 'selected' : '' }}@endif>Código Interno</option>
                         </select>
                         <input class="form-control input-sm" placeholder=""  type="search" name="valor" @if(! empty($valor)) value=" {{ $valor }}" @endif>
-                               <button class="btn btn-success fa fa-search" type="submit"></button>
+                               <button class="btn btn-primary fa fa-search" type="submit"></button>
                         </div>
                          </div>
                    <div class="col-md-2">

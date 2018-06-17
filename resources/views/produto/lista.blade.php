@@ -65,7 +65,7 @@
                             <option value="codigoInterno" @if(! empty($criterio)) {{  $criterio == 'codigoInterno' ? 'selected' : '' }}@endif>Código Interno</option>
                         </select>
                         <input class="form-control input-sm" placeholder=""  type="search" name="valor" @if(! empty($valor)) value=" {{ $valor }}" @endif>
-                               <button class="btn btn-success fa fa-search" type="submit"></button>
+                               <button class="btn btn-primary fa fa-search" type="submit"></button>
                         </div>
                          </div>
                          <div class="col-md-2">
@@ -140,7 +140,7 @@
 
                                 <td  style="width: 10px;">
                                     <a href="{{ URL::to('/produto/edit/'.$produto->getId()) }}"
-                                       class="btn btn-success"><i class="fa fa-edit fa-sm"></i>
+                                       class="btn btn-primary"><i class="fa fa-edit fa-sm"></i>
                                     </a> 
                                 </td>
                                 <td  style="width: 10px;">
@@ -165,7 +165,7 @@
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                             <input type="hidden" name="id" value="{{$produto->getId() }}"/>
-                                            <button type="submit" class="btn btn-success">Confirmar</button>
+                                            <button type="submit" class="btn btn-primary">Confirmar</button>
                                                </form>
                                         </div>
                                  

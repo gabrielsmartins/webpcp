@@ -71,7 +71,7 @@ class ApontamentoController extends Controller {
 
         $quantidade = $request->input('quantidade');
 
-        $dataInicio = new DateTime(date('Y-m-d H:i:s', strtotime(str_replace("/", "-", $request->input('dataInicio')))));
+        $dataInicio =  new DateTime(date('Y-m-d H:i:s', strtotime(str_replace("/", "-", $request->input('dataInicio')))));
         $dataFim = new DateTime(date('Y-m-d H:i:s', strtotime(str_replace("/", "-", $request->input('dataFim')))));
         $programacao = $this->ordemProducaoDAO->pesquisar($ordem)->getProgramacoes()->get($sequencia-1);
         $apontamento = new Apontamento($programacao, $tipo, $quantidade, $dataInicio, $dataFim,$debitaEstoque);

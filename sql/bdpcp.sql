@@ -418,8 +418,6 @@ INSERT INTO programacao (prog_ord_id,prog_seq,prog_tmp_tot,prog_rot_prod_id,prog
 
 
 
-
-
 INSERT INTO requisicao_material (rm_id, rm_dt_emi, rm_prazo, rm_usr_id, rm_dt_concl, rm_status) VALUES
 (1, '2018-05-19 11:13:47', '2018-05-31', 1, NULL, 'EMITIDA'),
 (2, '2018-05-19 11:14:42', '2018-06-08', 1, NULL, 'EMITIDA');
@@ -433,24 +431,7 @@ INSERT INTO requisicao_material_detalhe (rm_det_id, rm_id, rm_prod_id, rm_prod_q
 (5, 2, 3, '7.00');
 
 
-/*
-INSERT INTO recebimento_material (receb_id, receb_dt, receb_usr_id) VALUES
-(1, '2018-05-18 22:00:00', 1),
-(2, '2018-05-18 22:00:00', 1),
-(3, '2018-05-18 22:00:00', 1),
-(4, '2018-05-18 22:00:00', 1);
 
-
-
-INSERT INTO recebimento_material_detalhe (receb_id,receb_rm_det_id,receb_prod_qntd) VALUES
-(1, 1, '3.00'),
-(2, 1, '3.00'),
-(2, 2, '2.00'),
-(3, 1, '3.00'),
-(3, 2, '2.00'),
-(3, 3, '7.00'),
-(4, 4, '2.00');
-*/
 
 
 

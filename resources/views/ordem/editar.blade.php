@@ -184,16 +184,16 @@
                                                         <td>
                                                             @if ($ordem->getStatus() == 'EMITIDA' || $ordem->getStatus() == 'INICIADA')
                                                             <a href="{{ URL::to('/apontamento/form/'.$programacao->getOrdemProducao()->getId() . '/'.$programacao->getSequencia()) }}">
-                                                                <button class="btn btn-success" type="button">Registrar Apontamento <i class="fa fa-check"></i></button>
+                                                                <button class="btn btn-primary" type="button">Registrar Apontamento <i class="fa fa-check"></i></button>
                                                             </a>
                                                             @else
 
-                                                            <button class="btn btn-success" type="button" disabled>Registrar Apontamento <i class="fa fa-check"></i></button>
+                                                            <button class="btn btn-primary" type="button" disabled>Registrar Apontamento <i class="fa fa-check"></i></button>
 
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            <button type="button" data-toggle="collapse" data-target="#accordion{{$programacao->getSequencia()}}" class="btn btn-success clickable">Detalhes <i class="fa fa-angle-double-down"></i></button>
+                                                            <button type="button" data-toggle="collapse" data-target="#accordion{{$programacao->getSequencia()}}" class="btn btn-primary clickable">Detalhes <i class="fa fa-angle-double-down"></i></button>
                                                         </td>
                                                     </tr>
 

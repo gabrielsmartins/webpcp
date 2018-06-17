@@ -91,7 +91,7 @@
 
 
                             <div class="col-sm-1">
-                                <button type="button" class="btn btn-success fa fa-plus" id="btnAddMaterial" ></button>
+                                <button type="button" class="btn btn-primary fa fa-plus" id="btnAddMaterial" ></button>
                             </div>
                         </div>
 
@@ -128,7 +128,7 @@
                     <div class="box-footer">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <button type="reset" class="btn btn-secondary pull-right fa fa-ban"> Cancelar</button>
-                        <button type="submit" class="btn btn-success pull-right fa fa-save"> Emitir</button>
+                        <button type="submit" class="btn btn-primary pull-right fa fa-save"> Emitir</button>
                     </div>
 
 
