@@ -191,7 +191,8 @@
                                                         <td>{{$programacao->getOrdemProducao()->getQuantidade()}}</td>
                                                         <td>{{$programacao->getTempoTotal()}}</td>
                                                         <td>
-                                                            @if ($ordem->getStatus() == 'EMITIDA' || $ordem->getStatus() == 'INICIADA')
+                             
+                                                            @if (($ordem->getStatus() == 'EMITIDA' || $ordem->getStatus() == 'INICIADA') && Session::get('usuarioLogadoPerfil') == 'PRODUCAO')
                                                             <a href="{{ URL::to('/apontamento/form/'.$programacao->getOrdemProducao()->getId() . '/'.$programacao->getSequencia()) }}">
                                                                 <button class="btn btn-primary" type="button">Registrar Apontamento <i class="fa fa-check"></i></button>
                                                             </a>
