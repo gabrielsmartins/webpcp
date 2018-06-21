@@ -314,6 +314,7 @@ console.log(labelApontamentos);
             display: true,
                     text: 'Apontamentos'
             },
+            responsive: true,
                     legend: {
                     display: true,
                             position: 'bottom'
@@ -430,6 +431,7 @@ console.log(labelApontamentos);
             display: true,
                     text: 'Producao e Descarte por Setor'
             },
+            responsive: true,
                     legend: {
                     display: true,
                             position: 'bottom'
