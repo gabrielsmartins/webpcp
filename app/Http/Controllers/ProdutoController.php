@@ -16,9 +16,9 @@ use App\Entities\ItemEstrutura;
 use App\Entities\Produto;
 use App\Entities\Roteiro;
 use App\Http\Controllers\Controller;
-use Doctrine\Common\Collections\ArrayCollection;
 use Exception;
 use Illuminate\Http\Request;
+use function mb_strtoupper;
 use function redirect;
 use function response;
 use function view;
@@ -48,8 +48,8 @@ class ProdutoController extends Controller {
     }
 
     public function store(Request $request) {
-        $codigoInterno = mb_strtoupper($request->input('codigoInterno'),'UTF-8');
-        $descricao = mb_strtoupper($request->input('descricao'),'UTF-8');
+        $codigoInterno = mb_strtoupper($request->input('codigoInterno'), 'UTF-8');
+        $descricao = mb_strtoupper($request->input('descricao'), 'UTF-8');
         $situacao = $request->input('situacao');
         $unidadeMedida = $this->unidadeDAO->pesquisar($request->input('unidadeMedida'));
         $valorUnitario = $request->input('valorUnitario');
@@ -72,10 +72,10 @@ class ProdutoController extends Controller {
 
         $componentes = $request->input('item');
         $operacoes = $request->input('operacao');
-        
-        
-        if($operacoes==null || $componentes=null){
-             return redirect('produto/form')->with('error', 'Estrutura ou Roteiro Não Informados')->withInput();
+
+
+        if ($operacoes == null || $componentes = null) {
+            return redirect('produto/form')->with('error', 'Estrutura ou Roteiro Não Informados')->withInput();
         }
 
         foreach ($componentes as $comp) {
@@ -100,8 +100,8 @@ class ProdutoController extends Controller {
             $roteiro = new Roteiro($produto, $sequencia, $operacao, $tempoSetup, $tempoProducao, $tempoFinalizacao);
             $produto->adicionarRoteiro($roteiro);
         }
-    
-        
+
+
 
         try {
             $this->produtoDAO->salvar($produto);
@@ -113,8 +113,8 @@ class ProdutoController extends Controller {
 
     public function update(Request $request) {
         $id = $request->input('id');
-        $codigoInterno = mb_strtoupper($request->input('codigoInterno'),'UTF-8');
-        $descricao = mb_strtoupper($request->input('descricao'),'UTF-8');
+        $codigoInterno = mb_strtoupper($request->input('codigoInterno'), 'UTF-8');
+        $descricao = mb_strtoupper($request->input('descricao'), 'UTF-8');
         $situacao = $request->input('situacao');
         $unidadeMedida = $this->unidadeDAO->pesquisar($request->input('unidadeMedida'));
         $valorUnitario = $request->input('valorUnitario');
@@ -128,7 +128,6 @@ class ProdutoController extends Controller {
 
         $produto = $this->produtoDAO->pesquisar($id);
 
-        $produto->setId($id);
         $produto->setDescricao($descricao);
         $produto->setUnidadeMedida($unidadeMedida);
         $produto->setCodigoInterno($codigoInterno);
@@ -142,38 +141,47 @@ class ProdutoController extends Controller {
         $produto->setQuantidadeEstoque($quantidadeEstoque);
         $produto->setQuantidadeMinima($quantidadeMinima);
 
-        $produto->setItens(new ArrayCollection());
-        $produto->setRoteiros(new ArrayCollection());
+        $produto->getItens()->clear();
+        $produto->getRoteiros()->clear();
 
-
+        $this->produtoDAO->alterar($produto);
 
         $componentes = $request->input('item');
         $operacoes = $request->input('operacao');
 
 
 
-        foreach ($componentes as $comp) {
-            list($idComp, $quantidade, $tipo) = explode(';', $comp);
-
-            if ($tipo == 'material') {
-                $componente = $this->materialDAO->pesquisar($idComp);
-            } else {
-                $componente = $this->produtoDAO->pesquisar($idComp);
-            }
-
-                $itemEstrutura = new ItemEstrutura($produto, $componente, $quantidade);
-                $produto->adicionarComponente($itemEstrutura);
+        if ($operacoes == null || $componentes = null) {
+            return redirect()->action('ProdutoController@edit', ['id' => $produto->getId()])->with('error', 'Estrutura ou Roteiro Não Informados')->withInput();
         }
 
 
-       $sequencia = 0;
-        foreach ($operacoes as $oper) {
-            $sequencia++;
-            list($idOper, $tempoSetup, $tempoProducao, $tempoFinalizacao) = explode(';', $oper);
-            $operacao = $this->operacaoDAO->pesquisar($idOper);
-           
-            $roteiro = new Roteiro($produto, $sequencia, $operacao, $tempoSetup, $tempoProducao, $tempoFinalizacao);
-            $produto->adicionarRoteiro($roteiro);
+
+        if (is_array($componentes) || is_object($componentes)) {
+            foreach ($componentes as $comp) {
+                list($idComp, $quantidade, $tipo) = explode(';', $comp);
+
+                if ($tipo == 'material') {
+                    $componente = $this->materialDAO->pesquisar($idComp);
+                } else {
+                    $componente = $this->produtoDAO->pesquisar($idComp);
+                }
+                $itemEstrutura = new ItemEstrutura($produto, $componente, $quantidade);
+                $produto->adicionarComponente($itemEstrutura);
+            }
+        }
+
+
+        $sequencia = 0;
+        if (is_array($componentes) || is_object($componentes)) {
+            foreach ($operacoes as $oper) {
+                $sequencia++;
+                list($idOper, $tempoSetup, $tempoProducao, $tempoFinalizacao) = explode(';', $oper);
+                $operacao = $this->operacaoDAO->pesquisar($idOper);
+
+                $roteiro = new Roteiro($produto, $sequencia, $operacao, $tempoSetup, $tempoProducao, $tempoFinalizacao);
+                $produto->adicionarRoteiro($roteiro);
+            }
         }
 
 
@@ -196,40 +204,37 @@ class ProdutoController extends Controller {
         return view('produto.editar')->with($data);
     }
 
-    public function show(Request $request){
-        $page = (int)  $request->input('page');
-        if($page!=0){
-            $materiais = $this->produtoDAO->listarComPaginacao(10,$page);
-        }else{
+    public function show(Request $request) {
+        $page = (int) $request->input('page');
+        if ($page != 0) {
+            $materiais = $this->produtoDAO->listarComPaginacao(10, $page);
+        } else {
             $materiais = $this->produtoDAO->listarComPaginacao();
         }
         return view('produto.lista')->with('produtos', $materiais);
     }
-    
-    
-    public function delete(Request $request){
+
+    public function delete(Request $request) {
         $material = $this->produtoDAO->pesquisar($request->input('id'));
 
-       try{
-             $this->produtoDAO->remover($material);
-             return redirect()->action('ProdutoController@show')->with('success', 'Produto Excluído com Sucesso !!!');
+        try {
+            $this->produtoDAO->remover($material);
+            return redirect()->action('ProdutoController@show')->with('success', 'Produto Excluído com Sucesso !!!');
         } catch (Exception $ex) {
-             return redirect()->action('ProdutoController@show')->with('error', 'Falha Ao Excluir Produto. Produto já está sendo utilizado');
+            return redirect()->action('ProdutoController@show')->with('error', 'Falha Ao Excluir Produto. Produto já está sendo utilizado');
         }
     }
-    
-    public function pesquisarPorCriterio(Request $request){
+
+    public function pesquisarPorCriterio(Request $request) {
         $criterio = $request->input('criterio');
         $valor = $request->input('valor');
         $limit = (int) $request->input('limit');
         $page = (int) $request->input('page');
-        $produtos = $this->produtoDAO->pesquisarPorCriterio($criterio,$valor,$limit,$page);
-        
-        $data = array('produtos'=>$produtos,'criterio'=>$criterio,'valor'=>$valor,'limit'=>$limit,'page'=>$page);
+        $produtos = $this->produtoDAO->pesquisarPorCriterio($criterio, $valor, $limit, $page);
+
+        $data = array('produtos' => $produtos, 'criterio' => $criterio, 'valor' => $valor, 'limit' => $limit, 'page' => $page);
         return view('produto.lista')->with($data);
     }
-    
-    
 
     public function searchComponente(Request $request) {
         $id = $request->input('id');

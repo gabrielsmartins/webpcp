@@ -28,18 +28,18 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header d-flex align-items-center">
-                    <h4>Relatório de Estoque</h4>
+                    <h4>Relatório de Produção</h4>
                 </div>
                 <div class="card-body">
-                    <form class="form-horizontal" action="{{ action('ReportController@stock') }}" method="GET" accept-charset="UTF-8">
+                    <form class="form-horizontal" action="{{ action('ReportController@production') }}" method="GET" accept-charset="UTF-8">
                         
                          <div class="form-group row">       
                             <label class="col-sm-1 control-label"><strong>Pesquisar por:</strong></label>
                             <div class="form-group col-sm-2"> 
                                 <select class="form-control" name="criterio">
-                                    <option value="id">ID</option>
-                                    <option value="codigoInterno">Código Interno</option>
-                                    <option value="descricao">Descrição</option>
+                                    <option value="op">Nº OP</option>
+                                    <option value="produto">Produto ID</option>
+                                    <option value="data">Data</option>
                                 </select>
                             </div>
                             <div class="form-group col-sm-6"> 
@@ -48,27 +48,14 @@
 
                         </div>
                         
-                        <div class="form-group row">
-                            <label class="col-sm-1 control-label"><strong>Tipo:</strong></label>
-                            <div class="form-group col-sm-3">  
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="tipo" value="Produto" checked="true">
-                                    <label class="form-check-label">Produto</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="tipo"  value="Material">
-                                    <label class="form-check-label">Material</label>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-1 control-label"><strong>Situação:</strong></label>
+                            <label class="col-sm-1 control-label"><strong>Status:</strong></label>
                             <div class="form-group col-sm-2">  
                                 <select class="form-control" name="situacao">
-                                    <option value="ATIVO">Ativo</option>
-                                    <option value="INATIVO">Inativo</option>
-                                    <option value="FORA_DE_LINHA">Fora de Linha</option>
+                                    <option value="EMITIDA">EMITIDA</option>
+                                    <option value="INICIADA">INICIADA</option>
+                                    <option value="ENCERRADA">ENCERRADA</option>
                                     <option>Todos</option>
                                 </select>
                             </div>

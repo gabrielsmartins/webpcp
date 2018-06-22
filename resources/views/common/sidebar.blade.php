@@ -122,7 +122,7 @@
                 <li><a href="#report" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Relatórios </a>
                     <ul id="report" class="collapse list-unstyled ">
                         <li><a href="{{url('report/filter_reportstock')}}">Estoque</a></li>
-                        <li><a href="{{url('requisicao/filter_reportproduction')}}">Produção</a></li>
+                        <li><a href="{{url('report/filter_reportproduction')}}">Produção</a></li>
                     </ul>
                 </li>
                 
