@@ -61,7 +61,7 @@
                                     <select class="form-control input-sm" name="criterio">
                                         <option value="id" @if(! empty($criterio)) {{ $criterio == 'id' ? 'selected' : '' }} @endif>ID</option>
                                         <option value="data" @if(! empty($criterio)) {{  $criterio == 'descricao' ? 'selected' : '' }}@endif>Data</option>
-                                        <option value="status" @if(! empty($criterio)) {{  $criterio == 'sigla' ? 'selected' : '' }} @endif>Status</option>
+                                        <option value="requisicao" @if(! empty($criterio)) {{  $criterio == 'requisicao' ? 'selected' : '' }} @endif>Requisição</option>
                                     </select>
                                     <input class="form-control input-sm" placeholder=""  type="search" name="valor" @if(! empty($valor)) value=" {{ $valor }}" @endif>
                                            <button class="btn btn-primary fa fa-search" type="submit"></button>

@@ -121,6 +121,7 @@ Route::post('ordem/store', 'OrdemProducaoController@store');
 Route::post('ordem/cancel', 'OrdemProducaoController@cancel');
 Route::get('ordem/show', 'OrdemProducaoController@show');
 Route::get('ordem/edit/{id}', 'OrdemProducaoController@edit');
+Route::get('ordem/pesquisa', 'OrdemProducaoController@pesquisarPorCriterio');
 Route::post('ordem/importar_roteiro', 'OrdemProducaoController@importarRoteiro');
 Route::post('ordem/importar_estrutura', 'OrdemProducaoController@importarEstrutura');
 Route::post('ordem/carrega_recursos', 'OrdemProducaoController@carregaRecursos');

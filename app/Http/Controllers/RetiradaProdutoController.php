@@ -113,8 +113,8 @@ class RetiradaProdutoController extends Controller {
     public function pesquisarPorCriterio(Request $request){
         $criterio = $request->input('criterio');
         $valor = $request->input('valor');
-        $unidades = $this->retiradaDAO->pesquisarPorCriterio($criterio, $valor);
-        return view('unidade.lista')->with('unidades', $unidades);
+        $retiradas = $this->retiradaDAO->pesquisarPorCriterio($criterio, $valor);
+        return view('retirada.lista')->with('retiradas', $retiradas);
     }
     
     

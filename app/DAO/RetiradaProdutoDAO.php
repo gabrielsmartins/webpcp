@@ -4,6 +4,8 @@
 namespace App\DAO;
 
 use App\Entities\RetiradaProduto;
+use Illuminate\Database\QueryException;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 class RetiradaProdutoDAO extends GenericDAO {
@@ -13,6 +15,8 @@ class RetiradaProdutoDAO extends GenericDAO {
          $this->className = RetiradaProduto::class;
     }
     
+    
+  
     
 
 }

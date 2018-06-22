@@ -90,12 +90,12 @@
                                         <div class="card-header d-flex align-items-center">
                                             <h5>Pesquisar por Status:</h5>
                                         </div>
-                                        <select class="form-control input-sm" name="criterio">
-                                            <option>Todas</option>
+                                        <input type="hidden" name="criterio" value="status"/>
+                                        <select class="form-control input-sm" name="valor">
+                                            <option value="">Todas</option>
                                             <option value="EMITIDA">Emitida</option>
                                             <option value="INICIADA">Iniciada</option>
                                             <option value="ENCERRADA">Encerrada</option>
-                                            <option value="ENCERRADA">Concluída</option>
                                         </select>
                                         <button class="btn btn-primary fa fa-search" type="submit"></button>
                                     </div>

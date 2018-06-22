@@ -54,7 +54,7 @@
 
                 <div class="card-body">
                     <div class="col-md-12">
-                        <form method="get" action="{{('RequisicaoMaterialController@pesquisarPorCriterio') }}" class="form-inline">
+                        <form method="get" action="{{action('RequisicaoMaterialController@pesquisarPorCriterio') }}" class="form-inline">
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label for="inlineFormInput" class="sr-only">Pesquisar por:</label>

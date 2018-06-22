@@ -109,8 +109,8 @@ class RequisicaoMaterialController extends Controller {
     public function pesquisarPorCriterio(Request $request){
         $criterio = $request->input('criterio');
         $valor = $request->input('valor');
-        $unidades = $this->requisicaoDAO->pesquisarPorCriterio($criterio, $valor);
-        return view('unidade.lista')->with('unidades', $unidades);
+        $requisicoes = $this->requisicaoDAO->pesquisarPorCriterio($criterio, $valor);
+        return view('requisicao.lista')->with('requisicoes', $requisicoes);
     }
     
     

@@ -5,6 +5,7 @@ namespace App\DAO;
 use App\Entities\Apontamento;
 use App\Entities\TipoApontamento;
 use Illuminate\Database\QueryException;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ApontamentoDAO extends GenericDAO {
 
@@ -12,6 +13,33 @@ class ApontamentoDAO extends GenericDAO {
         parent::__construct();
         $this->className = Apontamento::class;
     }
+    
+    
+    
+    public function pesquisarPorCriterio($criterio, $valor,int $limit = 10, int $page = 1) : LengthAwarePaginator {
+  
+        if ($criterio != 'ordem') {
+            return parent::pesquisarPorCriterio($criterio, $valor, $limit, $page);
+        }
+
+        try{
+         $query = $this->em->getRepository($this->className)->createQueryBuilder('a')
+                ->innerJoin('a.programacao', 'p')
+                ->innerJoin('p.ordemProducao', 'o')
+                ->where('o.id LIKE :ordem')
+                ->setParameter('ordem',$valor.'%')
+                ->getQuery();
+
+         return $this->paginate($query, $limit, $page);
+
+        } catch (QueryException $ex) {
+             return $ex->getMessage() . $ex->getTrace();
+        }
+
+    }
+    
+    
+    
 
     public function obterApontamentosPorPeriodo($dataInicio = null, $dataFim = null) {
         try {

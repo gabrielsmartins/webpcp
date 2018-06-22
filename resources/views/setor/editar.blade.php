@@ -32,6 +32,7 @@
                     <form class="form-horizontal" action="{{ action('SetorController@update') }}" method="POST" accept-charset="UTF-8">
                         <div class="form-group row">
                             <label class="col-sm-1 control-label">Descrição:</label>
+                            <input type="hidden" naem="id" value="{{$setor->getId()}}"/>
                              <div class="form-group col-sm-3">  
                             <input placeholder="Descrição" class="form-control" type="text" name="descricao" value="{{ $setor->getDescricao()}}" required="true"/>
                              </div>

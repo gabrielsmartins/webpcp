@@ -140,7 +140,7 @@
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                             <input type="hidden" name="id" value="{{$unidade->getId() }}"/>
-                                            <button type="submit" class="btn btn-success">Confirmar</button>
+                                            <button type="submit" class="btn btn-primary">Confirmar</button>
                                         </div>
                                     </form>
 

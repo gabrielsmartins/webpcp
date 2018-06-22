@@ -72,6 +72,11 @@ class ProdutoController extends Controller {
 
         $componentes = $request->input('item');
         $operacoes = $request->input('operacao');
+        
+        
+        if($operacoes==null || $componentes=null){
+             return redirect('produto/form')->with('error', 'Estrutura ou Roteiro Não Informados')->withInput();
+        }
 
         foreach ($componentes as $comp) {
             list($idComp, $quantidade, $tipo) = explode(';', $comp);
@@ -95,6 +100,8 @@ class ProdutoController extends Controller {
             $roteiro = new Roteiro($produto, $sequencia, $operacao, $tempoSetup, $tempoProducao, $tempoFinalizacao);
             $produto->adicionarRoteiro($roteiro);
         }
+    
+        
 
         try {
             $this->produtoDAO->salvar($produto);

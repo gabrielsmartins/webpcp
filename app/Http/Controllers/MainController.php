@@ -66,10 +66,23 @@ class MainController extends Controller {
     }
 
     public function pesquisarPorCriterio(Request $request) {
+        $page = (int) $request->input('page');
         $criterio = $request->input('criterio');
         $valor = $request->input('valor');
+        
+        if ($page != 0 || $valor ==null) {
+            $ordens = $this->ordemProducaoDAO->listarComPaginacao(10, $page);
+        } else {
+            $ordens = $this->ordemProducaoDAO->listarComPaginacao();
+        }
+        
         $ordens = $this->ordemProducaoDAO->pesquisarPorCriterio($criterio, $valor);
-        return view('main.home')->with('ordens', $ordens);
+        $apontamentos = $this->apontamentoDAO->obterApontamentosPorPeriodo(null, null);
+        $producao = $this->apontamentoDAO->obterApontamentoPorSetor(null, null);
+        $data = array('ordens' => $ordens,
+                      'apontamentos'=> json_encode($apontamentos),
+                      'producao' => json_encode($producao));
+        return view('main.home')->with($data);
     }
 
 }

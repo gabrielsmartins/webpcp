@@ -126,8 +126,8 @@ class RecebimentoMaterialController extends Controller {
     public function pesquisarPorCriterio(Request $request){
         $criterio = $request->input('criterio');
         $valor = $request->input('valor');
-        $unidades = $this->recebimentoDAO->pesquisarPorCriterio($criterio, $valor);
-        return view('unidade.lista')->with('unidades', $unidades);
+        $recebimentos = $this->recebimentoDAO->pesquisarPorCriterio($criterio, $valor);
+        return view('recebimento.lista')->with('recebimentos', $recebimentos);
     }
     
     

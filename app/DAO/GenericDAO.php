@@ -62,7 +62,9 @@ abstract class GenericDAO extends EntityRepository{
 
         
          $query = $this->em->getRepository($this->className)->createQueryBuilder('u')
-                ->getQuery();
+                  ->orderBy('u.id','asc')
+                ->getQuery()
+                ;
         
         
         
